@@ -146,6 +146,7 @@ export function RequestsChart({ data }: { data: Point[] }) {
                 height={innerH}
                 fill="transparent"
                 tabIndex={0}
+                role="img"
                 aria-label={`${d.label}: ${d.count} booking request${d.count === 1 ? "" : "s"}`}
                 className="cursor-crosshair outline-none focus-visible:fill-[color:var(--brand-turquoise-soft)]"
                 onPointerMove={() => setActive(i)}

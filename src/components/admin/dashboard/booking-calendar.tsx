@@ -102,7 +102,7 @@ export function BookingCalendar({
                       aria-label={`${cell.day}${count ? `, ${count} booking request${count === 1 ? "" : "s"}` : ""}${isToday ? ", today" : ""}`}
                       className={cn(
                         "mx-auto flex size-8 items-center justify-center rounded-full tabular-nums",
-                        !cell.inMonth && "text-white/30",
+                        !cell.inMonth && "text-white/60",
                         count > 0 &&
                           cell.inMonth &&
                           "bg-gold font-semibold text-ocean-deep",

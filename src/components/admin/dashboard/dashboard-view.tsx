@@ -110,11 +110,11 @@ function StatTile({
         <Icon className="size-6" aria-hidden="true" />
       </span>
       <span>
-        <span className="block text-xs font-medium opacity-85">{label}</span>
+        <span className="block text-xs font-medium">{label}</span>
         <span className="block font-display text-3xl leading-tight tabular-nums">
           {value.toLocaleString("en-US")}
         </span>
-        <span className="block text-xs opacity-75">{hint}</span>
+        <span className="block text-xs">{hint}</span>
       </span>
     </Link>
   );
@@ -438,7 +438,12 @@ export function DashboardView({
                 {view.recent.length === 0 ? (
                   <Empty>Booking requests from the website will appear here.</Empty>
                 ) : (
-                  <div className="overflow-x-auto">
+                  <div
+                    className="overflow-x-auto"
+                    tabIndex={0}
+                    role="region"
+                    aria-label="Recent booking requests (scrolls sideways)"
+                  >
                     <table className="w-full min-w-[40rem] text-sm">
                       <thead className="bg-sand-soft text-left text-xs text-muted-foreground">
                         <tr>

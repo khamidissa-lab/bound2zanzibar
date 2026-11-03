@@ -8,6 +8,7 @@ import { formValues, type FormState } from "@/lib/forms";
 import { getSiteUrl } from "@/lib/site-url";
 import { isSupabaseConfigured } from "@/lib/supabase/env";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
+import { logStaffEvent } from "@/services/activity";
 import {
   fieldErrors,
   forgotPasswordSchema,
@@ -47,11 +48,14 @@ export async function signIn(_prev: FormState, formData: FormData): Promise<Form
     return { status: "error", message, values };
   }
 
+  await logStaffEvent("signed_in");
   redirect(safeAdminPath(parsed.data.next));
 }
 
 export async function signOut(): Promise<void> {
   if (isSupabaseConfigured()) {
+    // Logged first, while the session is still valid.
+    await logStaffEvent("signed_out");
     const supabase = await createSupabaseServerClient();
     await supabase.auth.signOut();
   }
@@ -110,5 +114,6 @@ export async function updatePassword(
             : "We couldn't update your password. Please try again.",
     };
   }
+  await logStaffEvent("password_changed");
   return { status: "success", message: "Your password has been updated." };
 }

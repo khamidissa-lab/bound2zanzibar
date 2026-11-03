@@ -27,7 +27,10 @@ export default async function TravelGuidePage() {
         <SampleBadge label="Sample articles — owner to review" />
       </PageHeader>
 
-      <section className="container-page py-16">
+      <section aria-labelledby="all-articles" className="container-page py-16">
+        <h2 id="all-articles" className="sr-only">
+          All articles
+        </h2>
         {articles.length > 0 ? (
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {articles.map((article) => (

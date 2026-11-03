@@ -15,6 +15,7 @@ import {
   getTours,
   staticSlugParams,
 } from "@/services/content";
+import { shareImages } from "@/lib/seo";
 
 export async function generateStaticParams() {
   return staticSlugParams(await getPackages());
@@ -33,6 +34,7 @@ export async function generateMetadata({
     openGraph: {
       title: pkg.seo.title,
       description: pkg.seo.description,
+      images: shareImages(pkg.coverImage),
       type: "article",
     },
   };
@@ -113,15 +115,15 @@ export default async function PackageDetailPage({
           <div className="space-y-12">
             <dl className="grid gap-4 rounded-2xl bg-sand-soft p-5 sm:grid-cols-2">
               {facts.map(({ icon: Icon, label, value }) => (
-                <div key={label} className="flex gap-3">
-                  <Icon
-                    className="mt-0.5 size-5 shrink-0 text-turquoise-deep"
-                    aria-hidden="true"
-                  />
-                  <div>
-                    <dt className="text-xs text-muted-foreground">{label}</dt>
-                    <dd className="text-sm font-medium text-ocean-deep">{value}</dd>
-                  </div>
+                <div key={label}>
+                  <dt className="flex items-center gap-3 text-xs text-muted-foreground">
+                    <Icon
+                      className="size-5 shrink-0 text-turquoise-deep"
+                      aria-hidden="true"
+                    />
+                    {label}
+                  </dt>
+                  <dd className="pl-8 text-sm font-medium text-ocean-deep">{value}</dd>
                 </div>
               ))}
             </dl>
@@ -186,7 +188,12 @@ export default async function PackageDetailPage({
           </div>
 
           <div className="order-first lg:sticky lg:top-[calc(var(--header-height)+1.5rem)] lg:order-none lg:self-start">
-            <EnquiryPanel itemName={pkg.name} prices={pkg.prices} />
+            <EnquiryPanel
+              itemName={pkg.name}
+              itemType="package"
+              slug={pkg.slug}
+              prices={pkg.prices}
+            />
           </div>
         </div>
       </article>

@@ -17,6 +17,7 @@ import {
   getTours,
   staticSlugParams,
 } from "@/services/content";
+import { shareImages } from "@/lib/seo";
 
 export async function generateStaticParams() {
   return staticSlugParams(await getTours());
@@ -35,6 +36,7 @@ export async function generateMetadata({
     openGraph: {
       title: tour.seo.title,
       description: tour.seo.description,
+      images: shareImages(tour.coverImage),
       type: "article",
     },
   };
@@ -106,7 +108,8 @@ export default async function TourDetailPage({ params }: PageProps<"/tours/[slug
         <div
           className={cn(
             "mt-8 grid gap-3",
-            gallery.length > 0 && "sm:grid-cols-[2fr_1fr]",
+            // Equal rows so side photos get a real height (they have none of their own).
+            gallery.length > 0 && "sm:auto-rows-fr sm:grid-cols-[2fr_1fr]",
           )}
         >
           <SceneImage
@@ -125,7 +128,10 @@ export default async function TourDetailPage({ params }: PageProps<"/tours/[slug
               key={image.alt}
               image={image}
               sizes="33vw"
-              className="hidden aspect-[4/3] rounded-2xl sm:block sm:aspect-auto"
+              className={cn(
+                "hidden aspect-[4/3] rounded-2xl sm:block sm:aspect-auto",
+                gallery.length === 1 && "sm:row-span-2",
+              )}
             />
           ))}
         </div>
@@ -134,15 +140,15 @@ export default async function TourDetailPage({ params }: PageProps<"/tours/[slug
           <div className="min-w-0 space-y-12">
             <dl className="grid gap-4 rounded-2xl bg-sand-soft p-5 sm:grid-cols-2">
               {facts.map(({ icon: Icon, label, value }) => (
-                <div key={label} className="flex gap-3">
-                  <Icon
-                    className="mt-0.5 size-5 shrink-0 text-turquoise-deep"
-                    aria-hidden="true"
-                  />
-                  <div>
-                    <dt className="text-xs text-muted-foreground">{label}</dt>
-                    <dd className="text-sm font-medium text-ocean-deep">{value}</dd>
-                  </div>
+                <div key={label}>
+                  <dt className="flex items-center gap-3 text-xs text-muted-foreground">
+                    <Icon
+                      className="size-5 shrink-0 text-turquoise-deep"
+                      aria-hidden="true"
+                    />
+                    {label}
+                  </dt>
+                  <dd className="pl-8 text-sm font-medium text-ocean-deep">{value}</dd>
                 </div>
               ))}
             </dl>
@@ -151,7 +157,12 @@ export default async function TourDetailPage({ params }: PageProps<"/tours/[slug
           </div>
 
           <div className="order-first lg:sticky lg:top-[calc(var(--header-height)+1.5rem)] lg:order-none lg:self-start">
-            <EnquiryPanel itemName={tour.name} prices={tour.prices} />
+            <EnquiryPanel
+              itemName={tour.name}
+              itemType="tour"
+              slug={tour.slug}
+              prices={tour.prices}
+            />
           </div>
         </div>
       </article>

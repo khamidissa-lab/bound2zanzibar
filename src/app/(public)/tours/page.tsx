@@ -45,7 +45,10 @@ export default async function ToursPage() {
         </div>
       </PageHeader>
 
-      <section className="container-page py-12 sm:py-16">
+      <section aria-labelledby="all-tours" className="container-page py-12 sm:py-16">
+        <h2 id="all-tours" className="sr-only">
+          All tours
+        </h2>
         <Suspense
           fallback={
             <TourGrid>

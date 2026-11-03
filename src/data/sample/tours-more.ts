@@ -531,28 +531,28 @@ export const moreTours: TourBase[] = [
     isSample: true,
   },
   {
-    slug: "jet-ski-parasailing",
-    name: "Jet Ski & Parasailing Experience",
+    slug: "jet-ski-experience",
+    name: "Jet Ski Experience",
     shortDescription:
-      "Ride a jet ski along the coast and fly high above the turquoise water on a parasail.",
+      "Ride a jet ski along Zanzibar's north coast, with a safety briefing and an instructor nearby.",
     description: [
-      "Get your adrenaline going on Zanzibar's north coast. Take a jet ski out with a safety briefing and an instructor nearby, then go parasailing for a bird's-eye view of the beaches and reef.",
-      "Book either activity on its own or combine both. Activities depend on wind, sea conditions and safety checks on the day.",
+      "Feel the speed on the turquoise water off Nungwi and Kendwa. After a safety briefing, take a jet ski out along the coast within a safe riding area, with an instructor nearby the whole time.",
+      "Choose the length of your ride when you book. Rides depend on sea conditions and safety checks on the day.",
     ],
     categorySlug: "adventure",
     destinationSlug: "nungwi-kendwa",
-    duration: "Approx. 1–2 hours (depending on activities)",
+    duration: "Approx. 30–60 minutes (as booked)",
     highlights: [
-      "Jet ski ride",
-      "Parasailing over the ocean",
-      "Views of the northern beaches",
-      "Safety briefing and equipment",
+      "Jet ski ride on turquoise water",
+      "Views of the Nungwi and Kendwa beaches",
+      "Safety briefing before you ride",
+      "Instructor nearby throughout",
     ],
     included: [
       "Jet ski session (time as booked)",
-      "Parasailing flight",
-      "Life jackets and safety equipment",
-      "Instructor",
+      "Life jacket and safety equipment",
+      "Safety briefing",
+      "Instructor supervision",
     ],
     excluded: [
       ...standardExclusions,
@@ -569,7 +569,7 @@ export const moreTours: TourBase[] = [
       "Water sports centre on Nungwi or Kendwa beach. Exact place and time confirmed on booking.",
     difficulty: "moderate",
     suitability:
-      "Age, weight and health requirements apply — we'll confirm them when you book.",
+      "Age and health requirements apply for drivers — we'll confirm them when you book.",
     coverImage: {
       src: "/images/photos/jetski.jpg",
       alt: "Jet ski carving a curved wake across open water",
@@ -577,15 +577,80 @@ export const moreTours: TourBase[] = [
     },
     gallery: [],
     prices: illustrativePrices(
-      { adult: 90, child: null },
-      { adult: 160000, child: null },
+      { adult: 60, child: null },
+      { adult: 110000, child: null },
     ),
     featured: false,
     status: "published",
     seo: {
-      title: "Jet Ski & Parasailing in Zanzibar",
+      title: "Jet Ski Experience in Zanzibar",
       description:
-        "Jet ski and parasailing on Zanzibar's northern beaches at Nungwi and Kendwa.",
+        "Jet ski rides on Zanzibar's northern coast at Nungwi and Kendwa, with a safety briefing and instructor.",
+    },
+    isSample: true,
+  },
+  {
+    slug: "parasailing-experience",
+    name: "Parasailing Experience",
+    shortDescription:
+      "Fly high above the turquoise water on a parasail towed by a boat — no experience needed.",
+    description: [
+      "See Zanzibar's north coast from the sky. A boat takes you out from the beach, you're clipped into the harness, and the parasail lifts you gently into the air for a bird's-eye view of the beaches and the reef below.",
+      "Fly on your own or as a tandem with a friend or partner. Flights depend on wind, sea conditions and safety checks on the day.",
+    ],
+    categorySlug: "adventure",
+    destinationSlug: "nungwi-kendwa",
+    duration: "Approx. 1 hour including the boat trip",
+    highlights: [
+      "Parasailing flight over the ocean",
+      "Bird's-eye view of the beaches and reef",
+      "Solo or tandem flights",
+      "No experience needed",
+    ],
+    included: [
+      "Boat trip to the launch area",
+      "Parasailing flight (solo or tandem)",
+      "Harness, life jacket and safety equipment",
+      "Crew and safety briefing",
+    ],
+    excluded: [
+      ...standardExclusions,
+      "Transfers (available on request)",
+      "Photos and videos",
+    ],
+    whatToBring: [
+      "Swimwear or light clothes that can get wet",
+      "Sun protection",
+      "Strap for sunglasses",
+      "A change of clothes",
+    ],
+    meetingPoint:
+      "Water sports centre on Nungwi or Kendwa beach. Exact place and time confirmed on booking.",
+    difficulty: "easy",
+    suitability:
+      "No experience needed. Age, weight and health requirements apply — we'll confirm them when you book.",
+    coverImage: {
+      src: "/images/photos/parasailing.jpg",
+      alt: "Two people parasailing above turquoise water with the tow boat below",
+      theme: "ocean",
+    },
+    gallery: [
+      {
+        src: "/images/photos/parasailing-aerial.jpg",
+        alt: "Aerial view of a boat towing a parasail across deep blue sea",
+        theme: "ocean",
+      },
+    ],
+    prices: illustrativePrices(
+      { adult: 70, child: null },
+      { adult: 130000, child: null },
+    ),
+    featured: false,
+    status: "published",
+    seo: {
+      title: "Parasailing in Zanzibar",
+      description:
+        "Parasailing flights over the turquoise water off Nungwi and Kendwa — solo or tandem, no experience needed.",
     },
     isSample: true,
   },
@@ -665,12 +730,25 @@ export const moreTours: TourBase[] = [
     difficulty: "moderate",
     suitability:
       "Beginners welcome. Age and weight limits apply — we'll confirm them when you book.",
+    // Main and first gallery images supplied by the owner (2026-11-02); see
+    // docs/PHOTO_CREDITS.md.
     coverImage: {
-      src: "/images/photos/horse.jpg",
-      alt: "Rider walking a white horse along a beach at dusk",
-      theme: "sunset",
+      src: "/images/tours/horse-riding-sea.jpg",
+      alt: "A rider on a bay horse wading through clear turquoise water under a blue sky",
+      theme: "ocean",
     },
-    gallery: [],
+    gallery: [
+      {
+        src: "/images/tours/horse-riding-beach.jpg",
+        alt: "A group of riders on horseback crossing a white-sand beach beside turquoise water",
+        theme: "sunset",
+      },
+      {
+        src: "/images/photos/horse.jpg",
+        alt: "Rider walking a white horse along a beach at dusk",
+        theme: "sunset",
+      },
+    ],
     prices: illustrativePrices({ adult: 75, child: 55 }, { adult: 130000, child: 95000 }),
     featured: false,
     status: "published",

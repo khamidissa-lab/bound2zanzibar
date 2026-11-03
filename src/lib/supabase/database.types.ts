@@ -15,6 +15,49 @@ export type Database = {
   };
   public: {
     Tables: {
+      activity_log: {
+        Row: {
+          id: number;
+          occurred_at: string;
+          actor_id: string | null;
+          actor_name: string | null;
+          actor_role: Database["public"]["Enums"]["staff_role"] | null;
+          action: string;
+          entity: string;
+          entity_id: string | null;
+          entity_label: string | null;
+          changed_fields: string[];
+          details: Json | null;
+        };
+        Insert: {
+          id: number;
+          occurred_at?: string;
+          actor_id?: string | null;
+          actor_name?: string | null;
+          actor_role?: Database["public"]["Enums"]["staff_role"] | null;
+          action: string;
+          entity: string;
+          entity_id?: string | null;
+          entity_label?: string | null;
+          changed_fields?: string[];
+          details?: Json | null;
+        };
+        Update: {
+          id?: number;
+          occurred_at?: string;
+          actor_id?: string | null;
+          actor_name?: string | null;
+          actor_role?: Database["public"]["Enums"]["staff_role"] | null;
+          action?: string;
+          entity?: string;
+          entity_id?: string | null;
+          entity_label?: string | null;
+          changed_fields?: string[];
+          details?: Json | null;
+        };
+        Relationships: [
+        ];
+      };
       blog_posts: {
         Row: {
           id: string;
@@ -922,6 +965,13 @@ export type Database = {
       [_ in never]: never;
     };
     Functions: {
+      log_staff_event: {
+        Args: {
+          p_action: string;
+          p_details?: Json;
+        };
+        Returns: undefined;
+      };
       set_package_details: {
         Args: {
           p_package_id: string;

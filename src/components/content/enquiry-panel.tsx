@@ -1,21 +1,26 @@
-import { Mail, Phone } from "lucide-react";
+import Link from "next/link";
+import { CalendarCheck, Mail, MessageCircle, Phone } from "lucide-react";
 
 import { MarketSwitcher } from "@/components/pricing/market-switcher";
 import { PriceDisplay } from "@/components/pricing/price-display";
 import { buttonVariants } from "@/components/ui/button";
-import { contact, enquiryMailto } from "@/config/site";
+import { contact, enquiryMailto, whatsappLink } from "@/config/site";
 import type { PriceRecord } from "@/types/content";
 
 /**
- * Pricing and enquiry actions for a tour or package. Online booking requests
- * arrive in Phase 6; until then visitors enquire by email or phone, and we
- * never imply a booking is confirmed.
+ * Pricing and booking actions for a tour or package. "Request to book" opens
+ * the booking request form with this item selected; we never imply a booking
+ * is confirmed.
  */
 export function EnquiryPanel({
   itemName,
+  itemType,
+  slug,
   prices,
 }: {
   itemName: string;
+  itemType: "tour" | "package";
+  slug: string;
   prices: PriceRecord[];
 }) {
   return (
@@ -28,9 +33,34 @@ export function EnquiryPanel({
       <PriceDisplay prices={prices} variant="detailed" className="mt-4" />
 
       <div className="mt-6 space-y-3 border-t pt-6">
+        <Link
+          href={`/book?${itemType}=${slug}`}
+          className={buttonVariants({ size: "lg", variant: "gold", className: "w-full" })}
+        >
+          <CalendarCheck aria-hidden="true" data-icon="inline-start" />
+          Request to book
+        </Link>
+        <a
+          href={whatsappLink(`Hello! I'm interested in the ${itemName}.`)}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={buttonVariants({
+            size: "lg",
+            variant: "outline",
+            className: "w-full",
+          })}
+        >
+          <MessageCircle aria-hidden="true" data-icon="inline-start" />
+          Chat on WhatsApp
+          <span className="sr-only">(opens WhatsApp)</span>
+        </a>
         <a
           href={enquiryMailto(`Enquiry: ${itemName}`)}
-          className={buttonVariants({ size: "lg", className: "w-full" })}
+          className={buttonVariants({
+            size: "lg",
+            variant: "outline",
+            className: "w-full",
+          })}
         >
           <Mail aria-hidden="true" data-icon="inline-start" />
           Enquire by email
@@ -47,8 +77,8 @@ export function EnquiryPanel({
           Call {contact.phoneDisplay}
         </a>
         <p className="text-xs leading-relaxed text-muted-foreground">
-          Online booking requests are coming soon. Availability and final prices are
-          always confirmed by our team before anything is booked.
+          A request isn&apos;t a confirmed booking. Our team confirms availability and the
+          final price before anything is booked, and no payment is taken online.
         </p>
       </div>
     </aside>

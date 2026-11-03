@@ -10,6 +10,7 @@ import {
 import { DiscoveryPanel } from "@/components/content/discovery-panel";
 import { WhyTravel } from "@/components/content/why-travel";
 import { HeroSlideshow } from "@/components/home/hero-slideshow";
+import { OrganizationJsonLd } from "@/components/seo/organization-json-ld";
 import { SceneImage } from "@/components/media/scene-image";
 import { MarketSwitcher } from "@/components/pricing/market-switcher";
 import { EmptyState } from "@/components/shared/empty-state";
@@ -53,6 +54,7 @@ export default async function HomePage() {
 
   return (
     <>
+      <OrganizationJsonLd />
       {/* Hero */}
       <section className="relative isolate overflow-hidden bg-ocean-deep">
         <HeroSlideshow />

@@ -16,6 +16,7 @@ import {
   getTours,
   staticSlugParams,
 } from "@/services/content";
+import { shareImages } from "@/lib/seo";
 
 export async function generateStaticParams() {
   return staticSlugParams(await getDestinations());
@@ -31,7 +32,11 @@ export async function generateMetadata({
     title: destination.seo.title,
     description: destination.seo.description,
     alternates: { canonical: `/destinations/${destination.slug}` },
-    openGraph: { title: destination.seo.title, description: destination.seo.description },
+    openGraph: {
+      title: destination.seo.title,
+      description: destination.seo.description,
+      images: shareImages(destination.coverImage),
+    },
   };
 }
 

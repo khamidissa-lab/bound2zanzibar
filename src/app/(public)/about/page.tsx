@@ -42,13 +42,13 @@ export default function AboutPage() {
           </p>
         </div>
 
-        <aside className="space-y-4 rounded-2xl border border-dashed border-gold bg-card p-6 lg:self-start">
+        <div className="space-y-4 rounded-2xl border border-dashed border-gold bg-card p-6 lg:self-start">
           <h2 className="font-display text-xl">Company details</h2>
           <p className="text-sm text-muted-foreground">
             Our founding story, team, business registration and licence details will be
             published here once supplied and verified.
           </p>
-        </aside>
+        </div>
       </section>
 
       <div className="border-y bg-sand-soft">

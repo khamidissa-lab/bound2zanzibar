@@ -4,7 +4,7 @@ Tourism and travel website for **Bound to Zanzibar** — Zanzibar tours, Tanzani
 
 > _Your Journey Begins in Zanzibar._
 
-**Status:** Phase 5 (content management) complete. Staff manage tours, destinations, packages, prices, articles and images in the admin; the website reads published content from Supabase once it is configured (sample content until then). See [Build phases](#build-phases).
+**Status:** Phase 7 (communications and polish) complete — WhatsApp contact, contact-form enquiries with an admin inbox, sitemap/robots/structured data, and an accessibility pass. Phase 6 (booking requests) before it: Visitors send booking requests for tours and packages and get a reference number; staff review, filter, update and export them in the admin. Content is managed in the admin and read from Supabase once it is configured (sample content until then). See [Build phases](#build-phases).
 
 ## Stack
 
@@ -55,6 +55,7 @@ See [`.env.example`](.env.example).
 | `NEXT_PUBLIC_SUPABASE_URL`             | public      | Phase 5       | Supabase project URL.                                                 |
 | `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` | public      | Phase 5       | Publishable (or legacy anon) key; safe in the browser because of RLS. |
 | `SUPABASE_SERVICE_ROLE_KEY`            | server-only | If needed     | Never expose to the browser or commit it.                             |
+| `ANTHROPIC_API_KEY`                    | server-only | Optional      | Turns on the visitor AI assistant ("Ask AI"). Set a spend limit.      |
 
 ## Project structure
 
@@ -102,7 +103,7 @@ Tokens live in [`src/app/globals.css`](src/app/globals.css) as CSS variables (`-
 - **Data access** goes through `src/services/content.ts`: published content from Supabase (cached, refreshed on every admin save) when it is configured, otherwise the sample data. Pages never import either source directly. Admin editing is described in [docs/SUPABASE_SETUP.md](docs/SUPABASE_SETUP.md#5c-managing-content-phase-5).
 - **Images:** no licensed photos yet. `SceneImage` renders a labelled brand illustration when `src` is `null`, and switches to `next/image` once a photo URL is set.
 - **Prices** are shown per market (International · USD / Tanzania resident · TZS) and never converted between currencies. The visitor's choice is remembered in their browser.
-- **Booking:** online booking requests arrive in Phase 6. Until then, tour and package pages offer email and phone enquiries; nothing implies a booking is confirmed.
+- **Booking:** `/book` sends a booking **request** (status pending) through the `submit_booking_request` database function and shows a reference number. Nothing is confirmed or charged online; staff confirm in Admin → Bookings. Without Supabase configured, the form explains that online requests open soon and points to email/phone.
 - Privacy and Terms pages remain "being built" placeholders (`noindex`) until the owner supplies approved text.
 
 ## Build phases
@@ -114,8 +115,8 @@ Defined in [`docs/IMPLEMENTATION_PLAN.md`](docs/IMPLEMENTATION_PLAN.md); prompts
 3. ✅ Supabase foundation — migrations, RLS, types, dev seed, policy tests
 4. ✅ Admin authentication and authorization — login, password reset, staff invites and roles, protected admin
 5. ✅ Content management (CMS) — tours, categories, prices, destinations, packages + itineraries, travel guide, media
-6. Booking management
-7. Communications and polish
+6. ✅ Booking management — request form, reference numbers, admin list/detail/status, restricted CSV export
+7. ✅ Communications and polish — WhatsApp links, contact form + Enquiries inbox, sitemap, robots, share images, TravelAgency structured data, axe accessibility fixes (email alerts deferred until the owner chooses a provider)
 8. Quality and deployment
 
 ## Security notes
@@ -123,3 +124,6 @@ Defined in [`docs/IMPLEMENTATION_PLAN.md`](docs/IMPLEMENTATION_PLAN.md); prompts
 - Never commit `.env.local`, service-role keys, passwords, payment secrets or customer data.
 - RLS on every exposed Supabase table; the service-role key stays server-only.
 - Bookings are **requests** until an authorized admin confirms them.
+- Every staff change, price save, sign-in and booking export is written to a tamper-proof **activity log** (Admin → Activity log; admins only). See [docs/SUPABASE_SETUP.md](docs/SUPABASE_SETUP.md#5f-activity-log).
+- Security headers on every response: no framing (clickjacking), `nosniff`, a strict referrer policy, camera/microphone/location disabled, and HSTS in production. Admin pages are `noindex` and never cached.
+- **Not built yet:** two-factor sign-in for staff. Supabase supports it, but the admin needs its own enrol and verify screens before it protects anything. Until then: long unique passwords, and give each person the lowest role they need.

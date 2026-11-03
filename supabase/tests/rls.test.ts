@@ -107,7 +107,7 @@ describe("schema", () => {
 
   it("loads the development seed with sample flags and illustrative prices", async () => {
     await as(db, superuser, async (tx) => {
-      expect(await count(tx, "select 1 from public.tours where is_sample")).toBe(25);
+      expect(await count(tx, "select 1 from public.tours where is_sample")).toBe(26);
       expect(await count(tx, "select 1 from public.packages where is_sample")).toBe(4);
       expect(
         await count(tx, "select 1 from public.tour_prices where not is_illustrative"),
@@ -119,7 +119,7 @@ describe("schema", () => {
 describe("visitors (anon)", () => {
   it("see only published content", async () => {
     await as(db, anon, async (tx) => {
-      expect(await count(tx, "select 1 from public.tours")).toBe(25);
+      expect(await count(tx, "select 1 from public.tours")).toBe(26);
       expect(
         await count(tx, "select 1 from public.tours where slug = 'draft-tour'"),
       ).toBe(0);
@@ -390,5 +390,170 @@ describe("staff roles", () => {
         ),
       ),
     ).rejects.toThrow(RLS_VIOLATION);
+  });
+});
+
+describe("activity log", () => {
+  type Entry = {
+    actor_id: string | null;
+    actor_name: string | null;
+    action: string;
+    entity: string;
+    entity_label: string | null;
+    changed_fields: string[];
+    details: Record<string, unknown> | null;
+  };
+  const latest = (tx: Transaction) =>
+    tx.query<Entry>("select * from public.activity_log order by id desc");
+
+  it("records staff edits with who made them and what changed", async () => {
+    await as(db, user(ids.admin), async (tx) => {
+      await tx.query(
+        "update public.tours set name = 'Stone Town Walk', status = 'draft' where slug = 'stone-town-city-tour'",
+      );
+      const { rows } = await latest(tx);
+      expect(rows[0]).toMatchObject({
+        actor_id: ids.admin,
+        actor_name: "Admin",
+        action: "updated",
+        entity: "tours",
+        entity_label: "Stone Town Walk",
+      });
+      expect(rows[0].changed_fields.sort()).toEqual(["name", "status"]);
+      expect(rows[0].details).toMatchObject({
+        status: { from: "published", to: "draft" },
+      });
+    });
+  });
+
+  it("records each price save once, with before and after values", async () => {
+    await as(db, user(ids.admin), async (tx) => {
+      const tour = "(select id from public.tours where slug = 'draft-tour')";
+      const save = (amount: number) =>
+        tx.query(`select public.set_tour_prices(${tour}, $1::jsonb)`, [
+          JSON.stringify([
+            { market: "international", customer_type: "adult", currency: "USD", amount },
+          ]),
+        ]);
+      await save(25);
+      await save(25); // no change: nothing logged
+      const { rows } = await latest(tx);
+      const priceRows = rows.filter((r) => r.entity === "tour_prices");
+      expect(priceRows).toHaveLength(1);
+      expect(priceRows[0].entity_label).toBe("Draft Tour");
+      const details = priceRows[0].details as {
+        before: { amount: number }[];
+        after: { amount: number }[];
+      };
+      expect(details.before[0].amount).toBe(10);
+      expect(details.after[0].amount).toBe(25);
+    });
+  });
+
+  it("keeps customer details out of booking entries", async () => {
+    await as(db, user(ids.bookingStaff), async (tx) => {
+      await tx.query(
+        "update public.bookings set status = 'confirmed', internal_notes = 'Called back' where email = 'guest@example.com'",
+      );
+      const { rows } = await tx.query<{ n: number }>(
+        "select count(*)::int as n from public.activity_log",
+      );
+      // Booking staff cannot read the log…
+      expect(rows[0].n).toBe(0);
+    });
+    await as(db, user(ids.bookingStaff), async (tx) => {
+      await tx.query(
+        "update public.bookings set status = 'confirmed', internal_notes = 'Called back' where email = 'guest@example.com'",
+      );
+      // …so inspect the entry as the database owner, in the same transaction.
+      await tx.exec("reset role");
+      const { rows } = await latest(tx);
+      expect(rows[0].entity).toBe("bookings");
+      expect(rows[0].changed_fields.sort()).toEqual(["internal_notes", "status"]);
+      expect(rows[0].details).toEqual({ status: { from: "pending", to: "confirmed" } });
+      expect(JSON.stringify(rows[0])).not.toContain("Called back");
+      expect(JSON.stringify(rows[0])).not.toContain("guest@example.com");
+    });
+  });
+
+  it("is readable by admins only", async () => {
+    for (const id of [ids.editor, ids.bookingStaff, ids.inactiveAdmin, ids.noProfile]) {
+      await as(db, user(id), async (tx) => {
+        await tx
+          .query("select public.set_tour_prices(gen_random_uuid(), '[]'::jsonb)")
+          .catch(() => {});
+        expect(await count(tx, "select 1 from public.activity_log")).toBe(0);
+      });
+    }
+    await as(db, anon, async (tx) => {
+      await expect(tx.query("select * from public.activity_log")).resolves.toMatchObject({
+        rows: [],
+      });
+    });
+  });
+
+  it("cannot be written, changed or deleted through the API", async () => {
+    await expect(
+      as(db, user(ids.superAdmin), (tx) =>
+        tx.query(
+          "insert into public.activity_log (action, entity) values ('updated', 'tours')",
+        ),
+      ),
+    ).rejects.toThrow(PERMISSION_DENIED);
+    await as(db, user(ids.superAdmin), async (tx) => {
+      await tx.query("update public.tours set name = 'Logged' where slug = 'draft-tour'");
+      await expect(tx.query("delete from public.activity_log")).rejects.toThrow(
+        PERMISSION_DENIED,
+      );
+    });
+    await as(db, user(ids.superAdmin), async (tx) => {
+      await tx.query("update public.tours set name = 'Logged' where slug = 'draft-tour'");
+      await tx.exec("reset role");
+      await expect(
+        tx.query("update public.activity_log set actor_name = 'Someone else'"),
+      ).rejects.toThrow("activity_log_is_append_only");
+    });
+  });
+
+  it("lets staff log sign-ins and exports, but nothing else", async () => {
+    await as(db, user(ids.admin), async (tx) => {
+      await tx.query("select public.log_staff_event('signed_in')");
+      await tx.query(
+        `select public.log_staff_event('bookings_exported', '{"rows": 3}'::jsonb)`,
+      );
+      const { rows } = await latest(tx);
+      expect(rows.slice(0, 2).map((r) => [r.action, r.entity])).toEqual([
+        ["bookings_exported", "bookings"],
+        ["signed_in", "account"],
+      ]);
+    });
+    await expect(
+      as(db, user(ids.admin), (tx) =>
+        tx.query("select public.log_staff_event('deleted')"),
+      ),
+    ).rejects.toThrow("invalid_action");
+    await expect(
+      as(db, user(ids.noProfile), (tx) =>
+        tx.query("select public.log_staff_event('signed_in')"),
+      ),
+    ).rejects.toThrow("not_staff");
+    await expect(
+      as(db, anon, (tx) => tx.query("select public.log_staff_event('signed_in')")),
+    ).rejects.toThrow(PERMISSION_DENIED);
+  });
+
+  it("ignores seeds and visitors' booking requests", async () => {
+    await as(db, anon, async (tx) => {
+      await submitBooking(tx, { email: "logcheck@example.com" });
+    });
+    expect(
+      Number(
+        (
+          await db.query<{ n: number }>(
+            "select count(*)::int as n from public.activity_log",
+          )
+        ).rows[0].n,
+      ),
+    ).toBe(0);
   });
 });

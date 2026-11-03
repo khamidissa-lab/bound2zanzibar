@@ -110,6 +110,33 @@ Once `NEXT_PUBLIC_SUPABASE_URL` and the publishable key are set, **the public we
 - **Sample content:** anything saved through the admin is marked as real (`is_sample = false`). If you loaded the development seed into a project, replace or archive the sample items before launch.
 - **Empty database:** if a hosted project has no content yet, the public pages show their "coming soon" empty states.
 
+## 5d. Booking requests (Phase 6)
+
+- **Visitors** fill in `/book` (or click **Request to book** on a tour or package). The server validates the form with Zod, then calls `public.submit_booking_request`, which re-validates, snapshots the matching price and saves a **pending** request. The visitor sees a reference like `BTZ-2611-7F3A9C1E` on `/book/received`; that page only echoes the reference and never looks anything up.
+- **Spam:** a hidden honeypot field, plus the function's limits (5 requests per email per hour, 100 site-wide per 10 minutes).
+- **Staff** (super admin, admin, booking staff) use **Admin → Bookings**: filter by status, tour/package, travel dates or search by reference, name, email or phone; open a booking to change its status and keep internal notes. Allowed changes: pending → confirmed / rejected / cancelled; confirmed → completed / cancelled; finished bookings can be reopened. Every status change is logged with who made it.
+- **CSV export** (Export CSV button) is limited to super admins and admins and exports the current filters. Cells are protected against spreadsheet formula injection. Treat exported files as customer data: don't email or share them unnecessarily.
+- **Privacy:** visitors can't read any booking, status history or internal notes — the tables have no public read policy (covered by `supabase/tests/rls.test.ts`).
+- **Development preview:** `/admin/preview/bookings` shows the booking screens with clearly labelled example data, in `npm run dev` only (404 in production).
+
+## 5e. Enquiries and WhatsApp (Phase 7)
+
+- **Contact form** (`/contact`) saves messages through `public.submit_inquiry` (validated with Zod first; honeypot field; 5 per email per hour). Staff read and answer them in **Admin → Enquiries**: filter by New / In progress / Closed, search, reply by email or WhatsApp, and keep internal notes.
+- **WhatsApp:** the owner confirmed on 2026-11-02 that +255 622 341 233 is the business WhatsApp number. It is set once in `src/config/site.ts` (`contact.whatsapp`) and used for every "Chat on WhatsApp" link.
+- **No email alerts yet:** new requests and enquiries are not emailed to the team. Check the admin, or add an email provider later (Phase 7 follow-up once a domain and sender address exist).
+- **SEO:** `/sitemap.xml` and `/robots.txt` are generated from published content. Set `NEXT_PUBLIC_SITE_URL` to the live domain so they (and share links) use it.
+
+## 5f. Activity log
+
+Migration `20261103000100_activity_log.sql` adds `public.activity_log`, shown in **Admin → Activity log** to admins and super admins only.
+
+- **What is recorded:** creating, editing and deleting tours, packages, destinations, tour categories, guide articles, reviews, settings and staff accounts; every price save (one entry with the before and after prices); booking and enquiry updates; sign-ins, sign-outs, password changes and booking CSV exports. Each entry stores who did it, their role at the time, when, and which fields changed.
+- **How:** database triggers and `SECURITY DEFINER` functions write the entries, so the app cannot skip or fake them. Staff-only events the database cannot see (sign-in, sign-out, password change, export) go through `public.log_staff_event`, which accepts only those four actions from active staff.
+- **Tamper-proof:** no role can insert, edit or delete entries through the API, and an update trigger blocks edits even for the database owner.
+- **Privacy:** booking and enquiry entries store only the names of changed fields and status values, never customer names, contact details or notes. Export entries store the row count and status filter, not the search text.
+- **Not recorded:** failed sign-in attempts (see **Authentication → Logs** in the Supabase dashboard), visitors' booking requests and enquiries (they appear in their own inboxes), and changes made directly in the Supabase dashboard's SQL editor.
+- **Retention:** entries are kept indefinitely. To trim, run as the owner in the SQL editor, for example: `delete from public.activity_log where occurred_at < now() - interval '2 years';`
+
 ## 6. Security model
 
 Visitors use the `anon` role. Staff are `authenticated` users with an **active** row in `profiles`.
@@ -132,6 +159,7 @@ Key points:
 - `internal_notes` on bookings and enquiries is readable only by booking staff and admins.
 - Booking references and creation times cannot be changed. Every status change is recorded in `booking_status_events` with the staff member who made it.
 - Prices are stored **per currency** (`TZS`, `USD`, extendable via the `currencies` table) and never converted. Markets: `resident`, `east_african`, `international`. Customer types: `adult`, `child`, `group`.
+- Every staff change is recorded in the append-only `activity_log` (section 5f).
 - Helper functions live in the `private` schema, which is not exposed over the Data API.
 - The service-role key bypasses RLS. It is only used by `src/lib/supabase/admin.ts`, which imports `server-only`, so it cannot be bundled into browser code.
 

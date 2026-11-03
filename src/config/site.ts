@@ -60,12 +60,26 @@ export const footerNav: readonly { title: string; items: readonly NavItem[] }[] 
   },
 ];
 
-/** Owner-supplied contact details (provided 2026-10-31). */
+/**
+ * Owner-supplied contact details (provided 2026-10-31). The owner confirmed on
+ * 2026-11-02 that the phone number is also the business WhatsApp number.
+ */
 export const contact = {
   email: "khamidissa@gmail.com",
   phone: "+255622341233",
   phoneDisplay: "+255 622 341 233",
+  /** International format without "+", as wa.me expects. */
+  whatsapp: "255622341233",
 } as const;
+
+/** WhatsApp chat link, optionally with a pre-filled message. */
+export function whatsappLink(
+  message?: string,
+  number: string = contact.whatsapp,
+): string {
+  const digits = number.replace(/\D/g, "");
+  return `https://wa.me/${digits}${message ? `?text=${encodeURIComponent(message)}` : ""}`;
+}
 
 export type ContactField = {
   label: string;
@@ -76,6 +90,7 @@ export type ContactField = {
 /** `null` values are still awaiting verified details from the owner. */
 export const contactDetails: readonly ContactField[] = [
   { label: "Phone", value: contact.phoneDisplay, href: `tel:${contact.phone}` },
+  { label: "WhatsApp", value: contact.phoneDisplay, href: whatsappLink() },
   { label: "Email", value: contact.email, href: `mailto:${contact.email}` },
   { label: "Office address", value: null, href: null },
 ];

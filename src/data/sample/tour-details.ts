@@ -722,19 +722,16 @@ export const tourDetails: Record<string, TourDetails> = {
       },
     ],
   },
-  "jet-ski-parasailing": {
+  "jet-ski-experience": {
     whatToExpect: [
       {
         title: "Check-in and briefing",
-        description: "Meet the team on the beach for a safety briefing and equipment.",
+        description:
+          "Meet the team on the beach, get your life jacket and learn the controls and safety rules.",
       },
       {
-        title: "Jet ski",
-        description: "Ride along the coast within the safe zone set by your instructor.",
-      },
-      {
-        title: "Parasailing",
-        description: "Lift off from the boat and enjoy the view from above.",
+        title: "Your ride",
+        description: "Ride along the coast within the safe area set by your instructor.",
       },
       {
         title: "Back to the beach",
@@ -742,24 +739,70 @@ export const tourDetails: Record<string, TourDetails> = {
       },
     ],
     goodToKnow: [
-      "Activities depend on wind, sea conditions and safety checks on the day.",
+      "Rides depend on sea conditions and safety checks on the day.",
       "Life jackets must be worn at all times.",
-      "Age, weight and health requirements apply; we'll confirm them when you book.",
-      "No previous experience is needed for parasailing.",
+      "Age and health requirements apply for drivers; we'll confirm them when you book.",
+      "Stay within the riding area your instructor shows you.",
     ],
     faqs: [
       {
-        question: "Can I do only one activity?",
-        answer: "Yes — book the jet ski or parasailing on its own, or both together.",
+        question: "Do I need a licence or experience?",
+        answer:
+          "A licence isn't usually needed for a supervised ride, and you'll get a safety briefing first. We'll confirm the requirements when you book.",
       },
       {
-        question: "Can two people parasail together?",
+        question: "Can two people share a jet ski?",
+        answer:
+          "Often, yes — a passenger can ride behind the driver, depending on the jet ski and conditions.",
+      },
+      {
+        question: "Can I combine it with parasailing?",
+        answer:
+          "Yes — parasailing is a separate experience at the same beaches. Ask us and we'll arrange both on the same day.",
+      },
+    ],
+  },
+  "parasailing-experience": {
+    whatToExpect: [
+      {
+        title: "Check-in and briefing",
+        description: "Meet the crew on the beach for a safety briefing.",
+      },
+      {
+        title: "Boat out",
+        description:
+          "Ride the boat out to the launch area and get clipped into the harness.",
+      },
+      {
+        title: "Take off",
+        description:
+          "The parasail lifts you gently from the boat — enjoy the view of the coast and reef from above.",
+      },
+      {
+        title: "Landing and return",
+        description: "The crew brings you back down and the boat returns to the beach.",
+      },
+    ],
+    goodToKnow: [
+      "Flights depend on wind, sea conditions and safety checks on the day.",
+      "No previous experience is needed.",
+      "Age, weight and health requirements apply; we'll confirm them when you book.",
+      "Secure loose items such as hats and sunglasses before take-off.",
+    ],
+    faqs: [
+      {
+        question: "Can two people fly together?",
         answer: "Often, yes — tandem flights depend on combined weight and conditions.",
       },
       {
-        question: "Do I need a licence for the jet ski?",
+        question: "Will I get wet?",
         answer:
-          "A licence isn't usually needed for a guided ride; you'll get a safety briefing first.",
+          "You may get splashed, so wear swimwear or clothes that can get wet. The crew explains the launch and landing before you fly.",
+      },
+      {
+        question: "Can I combine it with a jet ski ride?",
+        answer:
+          "Yes — the jet ski is a separate experience at the same beaches. Ask us and we'll arrange both on the same day.",
       },
     ],
   },

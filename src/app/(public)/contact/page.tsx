@@ -1,8 +1,17 @@
 import type { Metadata } from "next";
-import { AtSign, Mail, MapPin, Phone } from "lucide-react";
+import Link from "next/link";
+import { AtSign, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
 
+import { EnquiryForm } from "@/components/contact/enquiry-form";
 import { PageHeader } from "@/components/shared/page-header";
-import { contact, enquiryMailto, siteConfig, socialLinks } from "@/config/site";
+import {
+  contact,
+  enquiryMailto,
+  siteConfig,
+  socialLinks,
+  whatsappLink,
+} from "@/config/site";
+import { isSupabaseConfigured } from "@/lib/supabase/env";
 
 export const metadata: Metadata = {
   title: "Contact Us",
@@ -27,6 +36,13 @@ export default function ContactPage() {
       href: `tel:${contact.phone}`,
       note: "Call us to talk through your plans.",
     },
+    {
+      icon: MessageCircle,
+      title: "WhatsApp",
+      detail: contact.phoneDisplay,
+      href: whatsappLink("Hello! I'd like to ask about a trip."),
+      note: "Send us a message on WhatsApp.",
+    },
     ...(instagram?.href && instagram.handle
       ? [
           {
@@ -50,7 +66,7 @@ export default function ContactPage() {
       />
 
       <section className="container-page py-16">
-        <ul className="grid gap-5 md:grid-cols-3">
+        <ul className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {channels.map(({ icon: Icon, title, detail, href, note }) => (
             <li key={title}>
               <a
@@ -73,8 +89,31 @@ export default function ContactPage() {
           ))}
         </ul>
 
-        <div className="mt-8 grid gap-5 md:grid-cols-2">
-          <div className="flex gap-4 rounded-2xl border border-dashed bg-card p-6">
+        <div className="mt-10 grid gap-6 lg:grid-cols-[minmax(0,1fr)_20rem]">
+          <div className="min-w-0 rounded-2xl border bg-card p-5 shadow-card sm:p-8">
+            <h2 className="font-display text-2xl">Send us a message</h2>
+            <p className="mt-1 mb-6 text-sm text-muted-foreground">
+              Ask anything about tours, safaris or packages. To book a specific trip, use
+              the{" "}
+              <Link
+                href="/book"
+                className="text-turquoise-deep underline underline-offset-2"
+              >
+                booking request form
+              </Link>
+              .
+            </p>
+            {isSupabaseConfigured() ? null : (
+              <p
+                role="note"
+                className="mb-6 rounded-xl border border-dashed border-gold bg-gold/10 px-4 py-3 text-sm text-ocean-deep"
+              >
+                The online form opens soon. Until then, please email, call or WhatsApp us.
+              </p>
+            )}
+            <EnquiryForm available={isSupabaseConfigured()} />
+          </div>
+          <div className="flex gap-4 self-start rounded-2xl border border-dashed bg-card p-6">
             <MapPin className="size-5 shrink-0 text-gold" aria-hidden="true" />
             <div>
               <h2 className="font-display text-lg">Office address</h2>
@@ -82,13 +121,6 @@ export default function ContactPage() {
                 Zanzibar, Tanzania. Full address to be supplied by the owner.
               </p>
             </div>
-          </div>
-          <div className="rounded-2xl bg-sand-soft p-6">
-            <h2 className="font-display text-lg">Online enquiry form</h2>
-            <p className="mt-1 text-sm text-muted-foreground">
-              Coming soon. Until then, email or call us and we will reply as soon as we
-              can.
-            </p>
           </div>
         </div>
       </section>

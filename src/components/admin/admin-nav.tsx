@@ -7,6 +7,7 @@ import {
   BookOpen,
   CalendarCheck,
   Compass,
+  History,
   Images,
   Inbox,
   LayoutDashboard,
@@ -108,6 +109,12 @@ const groups: { title: string | null; items: NavItem[] }[] = [
       },
       { label: "Staff", href: "/admin/staff", icon: Users, permission: "staff.manage" },
       {
+        label: "Activity log",
+        href: "/admin/activity",
+        icon: History,
+        permission: "activity.view",
+      },
+      {
         label: "My account",
         href: "/admin/account",
         icon: UserCog,
@@ -118,8 +125,10 @@ const groups: { title: string | null; items: NavItem[] }[] = [
 ];
 
 function isActive(pathname: string, href: string) {
-  if (href === "/admin") return pathname === "/admin" || pathname === "/admin/preview";
-  return pathname.startsWith(href);
+  // Development previews mirror the real sections under /admin/preview.
+  const path = pathname.replace(/^\/admin\/preview(?=\/|$)/, "/admin");
+  if (href === "/admin") return path === "/admin";
+  return path.startsWith(href);
 }
 
 function NavList({ role, onNavigate }: { role: StaffRole; onNavigate?: () => void }) {

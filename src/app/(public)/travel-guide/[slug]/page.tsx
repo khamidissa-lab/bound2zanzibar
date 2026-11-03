@@ -9,6 +9,7 @@ import { Breadcrumbs } from "@/components/shared/breadcrumbs";
 import { SampleBadge } from "@/components/shared/sample-badge";
 import { formatDate } from "@/lib/format";
 import { getArticleBySlug, getArticles, staticSlugParams } from "@/services/content";
+import { shareImages } from "@/lib/seo";
 
 export async function generateStaticParams() {
   return staticSlugParams(await getArticles());
@@ -27,6 +28,7 @@ export async function generateMetadata({
     openGraph: {
       title: article.seo.title,
       description: article.seo.description,
+      images: shareImages(article.coverImage),
       type: "article",
       publishedTime: article.publishedOn,
     },

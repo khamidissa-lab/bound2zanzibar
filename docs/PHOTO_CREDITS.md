@@ -46,7 +46,9 @@ All under the [Unsplash License](https://unsplash.com/license). Each photo page 
 | `dolphins.jpg` | Ting Ting | Not stated | [wWZN3N12izE](https://unsplash.com/photos/wWZN3N12izE) | Kizimkazi dolphin tour |
 | `turtle.jpg` | Oleksandr Sushko | Not stated | [hIwUjL7jJRw](https://unsplash.com/photos/hIwUjL7jJRw) | Mnarani turtle tour |
 | `turtle2.jpg` | Stephan van de Schootbrugge | Not stated (tagged Bonaire) | [0PlrCmt8iI0](https://unsplash.com/photos/0PlrCmt8iI0) | Salaam Cave tour |
-| `jetski.jpg` | Cai Fang | Shenzhen, China | [96OCo2BxEaM](https://unsplash.com/photos/96OCo2BxEaM) | Jet ski & parasailing tour |
+| `jetski.jpg` | Cai Fang | Shenzhen, China | [96OCo2BxEaM](https://unsplash.com/photos/96OCo2BxEaM) | Jet Ski Experience |
+| `parasailing.jpg` | Joe deSousa | Punta Cana, Dominican Republic | [kUvMjq3ETuQ](https://unsplash.com/photos/kUvMjq3ETuQ) | Parasailing Experience (main) |
+| `parasailing-aerial.jpg` | Nabit Photos | Raa Atoll, Maldives | [GFORPUwDshI](https://unsplash.com/photos/GFORPUwDshI) | Parasailing Experience (gallery) |
 | `horse.jpg` | Uran Wang | Not stated | [-YdOH0BR-Ss](https://unsplash.com/photos/-YdOH0BR-Ss) | Horse riding tour |
 | `pilau.jpg` | Keesha's Kitchen | Not stated | [_VixlesGVIc](https://unsplash.com/photos/_VixlesGVIc) | Cooking class |
 | `baobab.jpg` | Slava Auchynnikau | Tanzania | [okKZu-IR4gY](https://unsplash.com/photos/okKZu-IR4gY) | Kwale Island tour |
@@ -58,6 +60,17 @@ All under the [Unsplash License](https://unsplash.com/license). Each photo page 
 | `selous-giraffe.jpg` | Leila Boujnane | Selous (Nyerere), Tanzania | [8gmu38VGKRY](https://unsplash.com/photos/8gmu38VGKRY) | Nyerere gallery and destination |
 
 Some pages reuse photos listed above: the Stone Town photos appear on the food tour, the Stone Town destination, the Highlights package and the culture article, and the hero photos on the Sunset Dhow tour, Safari Blue tour and two packages.
+
+## Horse Riding & Swimming tour (`public/images/tours/`)
+
+Both **supplied by the owner** on 2026-11-02. Source and licence not yet recorded: confirm each is your own photo or properly licensed, and note the source here.
+
+| File | Use | Notes |
+| --- | --- | --- |
+| `horse-riding-sea.jpg` | Main image | Rider wading through turquoise water; original 5833×3889, optimised to 2400px wide |
+| `horse-riding-beach.jpg` | Gallery | Group of riders on a white-sand beach; only 474×316, so kept to the small gallery slot |
+
+The Unsplash photo `/images/photos/horse.jpg` (Uran Wang) remains as the second gallery image.
 
 ## Notes
 

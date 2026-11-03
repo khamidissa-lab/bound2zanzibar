@@ -31,7 +31,7 @@ export function MarketSwitcher({ className }: { className?: string }) {
           className="rounded-full px-3.5 py-1.5 font-medium text-ocean-deep/75 transition-colors hover:text-ocean-deep aria-pressed:bg-ocean-deep aria-pressed:text-white"
         >
           {marketLabels[option.market].short}
-          <span className="ml-1 opacity-70">· {option.currency}</span>
+          <span className="ml-1 font-normal">· {option.currency}</span>
         </button>
       ))}
     </div>
