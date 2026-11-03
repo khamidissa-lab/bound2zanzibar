@@ -485,11 +485,9 @@ describe("activity log", () => {
         expect(await count(tx, "select 1 from public.activity_log")).toBe(0);
       });
     }
-    await as(db, anon, async (tx) => {
-      await expect(tx.query("select * from public.activity_log")).resolves.toMatchObject({
-        rows: [],
-      });
-    });
+    await expect(
+      as(db, anon, (tx) => tx.query("select * from public.activity_log")),
+    ).rejects.toThrow(PERMISSION_DENIED);
   });
 
   it("cannot be written, changed or deleted through the API", async () => {

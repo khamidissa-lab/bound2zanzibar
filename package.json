@@ -14,7 +14,8 @@
     "test": "vitest run",
     "pretest": "npm run db:seed:generate",
     "db:seed:generate": "tsx scripts/generate-seed.ts",
-    "db:types": "tsx scripts/db-types.ts"
+    "db:types": "tsx scripts/db-types.ts",
+    "db:photos": "tsx --env-file=.env.local scripts/upload-sample-photos.ts"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^1.3.0",

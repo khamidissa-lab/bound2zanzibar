@@ -62,6 +62,7 @@ Alternatively, paste each file in `supabase/migrations/` into the dashboard **SQ
 | `…000400_storage_media.sql`      | Public `media` bucket for images (5 MB, JPEG/PNG/WebP/AVIF)   |
 | `…20261102000100_admin_content_functions.sql` | Atomic save helpers for prices, itineraries and galleries |
 | `…20261102000200_tour_more_details.sql` | Tour "More details": what to expect, good to know, FAQs |
+| `…20261103000100_activity_log.sql` | Append-only staff activity log (see 5f) |
 
 ## 4. (Development only) load sample content
 
@@ -69,6 +70,11 @@ Alternatively, paste each file in `supabase/migrations/` into the dashboard **SQ
 
 - Local development: `npx supabase db reset` applies migrations and the seed.
 - A hosted **staging** project: run `seed.sql` in the SQL Editor if you want sample content.
+  The seed has no photos (it only stores alt text). Run `npm run db:photos` afterwards: it
+  uploads the photos in `public/images` (credited in `docs/PHOTO_CREDITS.md`) to the `media`
+  bucket under `sample/` and links them to the sample items by slug. It only touches rows
+  still flagged `is_sample`, so photos set in the admin are kept. Public pages cache content
+  for a few hours; restart the server (or save any item in the admin) to see the change.
 - **Never load the seed into production.** Real content is entered through the admin (Phase 5).
 
 ## 5. Create the first super admin
