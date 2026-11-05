@@ -107,7 +107,7 @@ describe("schema", () => {
 
   it("loads the development seed with sample flags and illustrative prices", async () => {
     await as(db, superuser, async (tx) => {
-      expect(await count(tx, "select 1 from public.tours where is_sample")).toBe(26);
+      expect(await count(tx, "select 1 from public.tours where is_sample")).toBe(35);
       expect(await count(tx, "select 1 from public.packages where is_sample")).toBe(4);
       expect(
         await count(tx, "select 1 from public.tour_prices where not is_illustrative"),
@@ -119,7 +119,7 @@ describe("schema", () => {
 describe("visitors (anon)", () => {
   it("see only published content", async () => {
     await as(db, anon, async (tx) => {
-      expect(await count(tx, "select 1 from public.tours")).toBe(26);
+      expect(await count(tx, "select 1 from public.tours")).toBe(35);
       expect(
         await count(tx, "select 1 from public.tours where slug = 'draft-tour'"),
       ).toBe(0);
@@ -553,5 +553,78 @@ describe("activity log", () => {
         ).rows[0].n,
       ),
     ).toBe(0);
+  });
+});
+
+describe("content translations", () => {
+  const save = (tx: Transaction, slug: string, fields: object, machine = false) =>
+    tx.query(
+      `select public.set_content_translation('tours',
+         (select id from public.tours where slug = $1), 'fr', $2::jsonb, $3)`,
+      [slug, JSON.stringify(fields), machine],
+    );
+
+  it("lets editors save a translation and logs it once against the tour", async () => {
+    await as(db, user(ids.editor), async (tx) => {
+      await save(tx, "stone-town-city-tour", { name: "Visite de Stone Town" }, true);
+      await save(tx, "stone-town-city-tour", { name: "Visite de Stone Town" }, true);
+      const { rows } = await tx.query<{ fields: { name: string }; is_machine: boolean }>(
+        "select fields, is_machine from public.content_translations where locale = 'fr'",
+      );
+      expect(rows).toEqual([
+        { fields: { name: "Visite de Stone Town" }, is_machine: true },
+      ]);
+      await tx.exec("reset role"); // editors can't read the log; inspect as owner
+      const log = await tx.query<{ entity: string; changed_fields: string[] }>(
+        "select entity, changed_fields from public.activity_log where changed_fields = array['translation (fr)']",
+      );
+      expect(log.rows).toEqual([
+        { entity: "tours", changed_fields: ["translation (fr)"] },
+      ]);
+    });
+  });
+
+  it("shows visitors translations of published content only", async () => {
+    await as(db, user(ids.editor), async (tx) => {
+      await save(tx, "stone-town-city-tour", { name: "Publié" });
+      await save(tx, "draft-tour", { name: "Brouillon" });
+      // Switch to a visitor within the same transaction.
+      await tx.exec(
+        "reset role; select set_config('request.jwt.claims', '{\"role\":\"anon\"}', true); set local role anon",
+      );
+      const { rows } = await tx.query<{ name: string }>(
+        "select fields->>'name' as name from public.content_translations order by 1",
+      );
+      expect(rows.map((r) => r.name)).toEqual(["Publié"]);
+    });
+  });
+
+  it("does not let visitors or booking staff write translations", async () => {
+    await as(db, anon, async (tx) => {
+      await expect(save(tx, "stone-town-city-tour", { name: "x" })).rejects.toThrow(
+        PERMISSION_DENIED,
+      );
+    });
+    await as(db, user(ids.bookingStaff), async (tx) => {
+      await expect(save(tx, "stone-town-city-tour", { name: "x" })).rejects.toThrow(
+        RLS_VIOLATION,
+      );
+    });
+  });
+
+  it("only accepts supported languages and object fields", async () => {
+    await as(db, user(ids.editor), async (tx) => {
+      await expect(
+        tx.query(
+          `select public.set_content_translation('tours',
+             (select id from public.tours where slug = 'stone-town-city-tour'), 'xx', '{}'::jsonb)`,
+        ),
+      ).rejects.toThrow(/content_translations_locale_check/);
+    });
+    await as(db, user(ids.editor), async (tx) => {
+      await expect(
+        save(tx, "stone-town-city-tour", [] as unknown as object),
+      ).rejects.toThrow(/fields_must_be_object/);
+    });
   });
 });

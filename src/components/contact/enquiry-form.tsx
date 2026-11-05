@@ -1,14 +1,15 @@
 "use client";
 
 import { useActionState, useState, type ReactNode } from "react";
-import Link from "next/link";
 import { useFormStatus } from "react-dom";
 import { CircleAlert, CircleCheck, Loader2, Send } from "lucide-react";
 
-import { sendEnquiry } from "@/app/(public)/contact/actions";
+import { sendEnquiry } from "@/app/[locale]/(public)/contact/actions";
+import { LocaleLink as Link } from "@/components/i18n/locale-link";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { useI18n } from "@/i18n/client";
 import { initialFormState } from "@/lib/forms";
 
 function Field({
@@ -55,6 +56,7 @@ function Field({
 
 function SubmitButton({ disabled }: { disabled: boolean }) {
   const { pending } = useFormStatus();
+  const { t } = useI18n();
   return (
     <Button
       type="submit"
@@ -67,7 +69,7 @@ function SubmitButton({ disabled }: { disabled: boolean }) {
       ) : (
         <Send aria-hidden="true" data-icon="inline-start" />
       )}
-      {pending ? "Sending…" : "Send message"}
+      {pending ? t.enquiryForm.sending : t.enquiryForm.send}
     </Button>
   );
 }
@@ -75,20 +77,26 @@ function SubmitButton({ disabled }: { disabled: boolean }) {
 export function EnquiryForm({ available }: { available: boolean }) {
   const [state, action] = useActionState(sendEnquiry, initialFormState);
   const [dismissedSuccess, setDismissed] = useState<typeof state | null>(null);
+  const { t } = useI18n();
+  const f = t.enquiryForm;
+  // Server messages come back in English; show them in the visitor's language.
+  const tr = (msg?: string) => (msg ? (t.errors[msg] ?? msg) : msg);
   const v = state.values ?? {};
-  const e = state.fieldErrors ?? {};
+  const e = Object.fromEntries(
+    Object.entries(state.fieldErrors ?? {}).map(([k, m]) => [k, tr(m)]),
+  ) as Record<string, string | undefined>;
 
   if (state.status === "success" && dismissedSuccess !== state) {
     return (
       <div role="status" className="rounded-2xl bg-turquoise-soft p-6 text-ocean-deep">
         <CircleCheck className="size-8 text-turquoise-deep" aria-hidden="true" />
-        <p className="mt-3 font-medium">{state.message}</p>
+        <p className="mt-3 font-medium">{tr(state.message)}</p>
         <button
           type="button"
           onClick={() => setDismissed(state)}
           className="mt-4 text-sm text-turquoise-deep underline underline-offset-2"
         >
-          Send another message
+          {f.sendAnother}
         </button>
       </div>
     );
@@ -104,16 +112,16 @@ export function EnquiryForm({ available }: { available: boolean }) {
           className="flex items-start gap-2 rounded-xl bg-destructive/10 px-4 py-3 text-sm text-destructive"
         >
           <CircleAlert className="mt-0.5 size-4 shrink-0" aria-hidden="true" />
-          {state.message}
+          {tr(state.message)}
         </p>
       ) : null}
 
       {/* Honeypot: hidden from people and assistive tech. */}
       <div
         aria-hidden="true"
-        className="absolute -left-[9999px] h-px w-px overflow-hidden"
+        className="absolute -start-[9999px] h-px w-px overflow-hidden"
       >
-        <label htmlFor="enquiry-website">Leave this field empty</label>
+        <label htmlFor="enquiry-website">{f.honeypot}</label>
         <input
           id="enquiry-website"
           name="website"
@@ -124,7 +132,7 @@ export function EnquiryForm({ available }: { available: boolean }) {
       </div>
 
       <div className="grid gap-5 sm:grid-cols-2">
-        <Field id="enquiry-name" label="Name" error={e.name}>
+        <Field id="enquiry-name" label={f.name} error={e.name}>
           {(aria) => (
             <Input
               {...aria}
@@ -137,7 +145,7 @@ export function EnquiryForm({ available }: { available: boolean }) {
             />
           )}
         </Field>
-        <Field id="enquiry-email" label="Email" error={e.email}>
+        <Field id="enquiry-email" label={f.email} error={e.email}>
           {(aria) => (
             <Input
               {...aria}
@@ -151,12 +159,7 @@ export function EnquiryForm({ available }: { available: boolean }) {
             />
           )}
         </Field>
-        <Field
-          id="enquiry-phone"
-          label="Phone or WhatsApp (optional)"
-          error={e.phone}
-          hint="Include your country code."
-        >
+        <Field id="enquiry-phone" label={f.phone} error={e.phone} hint={f.phoneHint}>
           {(aria) => (
             <Input
               {...aria}
@@ -169,20 +172,20 @@ export function EnquiryForm({ available }: { available: boolean }) {
             />
           )}
         </Field>
-        <Field id="enquiry-subject" label="Subject (optional)" error={e.subject}>
+        <Field id="enquiry-subject" label={f.subject} error={e.subject}>
           {(aria) => (
             <Input
               {...aria}
               name="subject"
               defaultValue={v.subject}
               maxLength={200}
-              placeholder="e.g. Safari in March"
+              placeholder={f.subjectPlaceholder}
               className={fieldClass}
             />
           )}
         </Field>
       </div>
-      <Field id="enquiry-message" label="Message" error={e.message}>
+      <Field id="enquiry-message" label={f.message} error={e.message}>
         {(aria) => (
           <textarea
             {...aria}
@@ -191,8 +194,8 @@ export function EnquiryForm({ available }: { available: boolean }) {
             maxLength={4000}
             defaultValue={v.message}
             required
-            placeholder="Your dates, group size and what you'd like to do."
-            className="w-full rounded-xl border border-input bg-background px-3 py-2.5 text-base text-ink outline-none placeholder:text-muted-foreground focus-visible:border-turquoise focus-visible:ring-2 focus-visible:ring-turquoise/30 aria-invalid:border-destructive md:text-sm"
+            placeholder={f.messagePlaceholder}
+            className="w-full rounded-xl border border-input bg-background px-3 py-2.5 text-base text-ink outline-none placeholder:text-muted-foreground focus-visible:border-turquoise-deep focus-visible:ring-2 focus-visible:ring-turquoise-deep/25 aria-invalid:border-destructive md:text-sm"
           />
         )}
       </Field>
@@ -209,13 +212,12 @@ export function EnquiryForm({ available }: { available: boolean }) {
             className="mt-0.5 size-4 accent-turquoise-deep"
           />
           <span>
-            I agree that Bound to Zanzibar may use these details to reply to me, as
-            described in the{" "}
+            {f.consentBefore}{" "}
             <Link
               href="/privacy"
               className="text-turquoise-deep underline underline-offset-2"
             >
-              privacy policy
+              {f.privacyPolicy}
             </Link>
             .
           </span>

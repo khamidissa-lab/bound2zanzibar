@@ -1,11 +1,16 @@
-import Link from "next/link";
 import { CalendarCheck, Mail, MessageCircle, Phone } from "lucide-react";
 
+import { LocaleLink as Link } from "@/components/i18n/locale-link";
 import { MarketSwitcher } from "@/components/pricing/market-switcher";
 import { PriceDisplay } from "@/components/pricing/price-display";
 import { buttonVariants } from "@/components/ui/button";
 import { contact, enquiryMailto, whatsappLink } from "@/config/site";
+import type { Locale } from "@/i18n/config";
+import { getI18n } from "@/i18n/server";
 import type { PriceRecord } from "@/types/content";
+
+const secondary =
+  "flex items-center gap-3 border-b border-ocean-deep/10 py-3 text-sm font-medium text-ocean-deep transition-colors last:border-b-0 hover:text-turquoise-deep";
 
 /**
  * Pricing and booking actions for a tour or package. "Request to book" opens
@@ -17,69 +22,61 @@ export function EnquiryPanel({
   itemType,
   slug,
   prices,
+  locale,
 }: {
+  locale: Locale;
   itemName: string;
   itemType: "tour" | "package";
   slug: string;
   prices: PriceRecord[];
 }) {
+  const { t, fmt } = getI18n(locale);
   return (
     <aside
-      aria-label="Prices and enquiries"
-      className="rounded-2xl border bg-card p-5 shadow-card sm:p-6"
+      aria-label={t.enquiry.label}
+      className="border border-ocean-deep/15 bg-ivory shadow-card"
     >
-      <h2 className="font-display text-xl">Prices</h2>
-      <MarketSwitcher className="mt-3" />
-      <PriceDisplay prices={prices} variant="detailed" className="mt-4" />
+      <div className="border-b border-ocean-deep/15 p-5 sm:p-6">
+        <p className="eyebrow text-gold-deep">
+          {itemType === "tour" ? t.enquiry.planTour : t.enquiry.planPackage}
+        </p>
+        <h2 className="mt-2 font-display text-3xl">{t.enquiry.prices}</h2>
+        <MarketSwitcher className="mt-4" />
+        <PriceDisplay prices={prices} variant="detailed" className="mt-5" />
+      </div>
 
-      <div className="mt-6 space-y-3 border-t pt-6">
+      <div className="space-y-4 p-5 sm:p-6">
         <Link
           href={`/book?${itemType}=${slug}`}
-          className={buttonVariants({ size: "lg", variant: "gold", className: "w-full" })}
+          className={buttonVariants({ size: "lg", className: "w-full" })}
         >
           <CalendarCheck aria-hidden="true" data-icon="inline-start" />
-          Request to book
+          {t.enquiry.requestToBook}
         </Link>
-        <a
-          href={whatsappLink(`Hello! I'm interested in the ${itemName}.`)}
-          target="_blank"
-          rel="noopener noreferrer"
-          className={buttonVariants({
-            size: "lg",
-            variant: "outline",
-            className: "w-full",
-          })}
-        >
-          <MessageCircle aria-hidden="true" data-icon="inline-start" />
-          Chat on WhatsApp
-          <span className="sr-only">(opens WhatsApp)</span>
-        </a>
-        <a
-          href={enquiryMailto(`Enquiry: ${itemName}`)}
-          className={buttonVariants({
-            size: "lg",
-            variant: "outline",
-            className: "w-full",
-          })}
-        >
-          <Mail aria-hidden="true" data-icon="inline-start" />
-          Enquire by email
-        </a>
-        <a
-          href={`tel:${contact.phone}`}
-          className={buttonVariants({
-            size: "lg",
-            variant: "outline",
-            className: "w-full",
-          })}
-        >
-          <Phone aria-hidden="true" data-icon="inline-start" />
-          Call {contact.phoneDisplay}
-        </a>
-        <p className="text-xs leading-relaxed text-muted-foreground">
-          A request isn&apos;t a confirmed booking. Our team confirms availability and the
-          final price before anything is booked, and no payment is taken online.
-        </p>
+        <div>
+          <a
+            href={whatsappLink(fmt(t.enquiry.whatsappMessage, { item: itemName }))}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={secondary}
+          >
+            <MessageCircle className="size-4 text-turquoise-deep" aria-hidden="true" />
+            {t.enquiry.whatsapp}
+            <span className="sr-only">{t.nav.opensWhatsApp}</span>
+          </a>
+          <a
+            href={enquiryMailto(fmt(t.enquiry.emailSubject, { item: itemName }))}
+            className={secondary}
+          >
+            <Mail className="size-4 text-turquoise-deep" aria-hidden="true" />
+            {t.enquiry.email}
+          </a>
+          <a href={`tel:${contact.phone}`} className={secondary}>
+            <Phone className="size-4 text-turquoise-deep" aria-hidden="true" />
+            {fmt(t.enquiry.call, { phone: contact.phoneDisplay })}
+          </a>
+        </div>
+        <p className="text-xs leading-relaxed text-muted-foreground">{t.enquiry.note}</p>
       </div>
     </aside>
   );

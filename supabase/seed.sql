@@ -7,12 +7,13 @@
 begin;
 
 -- Tour categories
-insert into public.tour_categories (name, slug, description, sort_order) values ('Culture & history', 'culture-history', 'Old town walks, markets, spice farms and the stories behind them.', 0);
-insert into public.tour_categories (name, slug, description, sort_order) values ('Sea & islands', 'sea-islands', 'Boat trips, sandbanks, snorkelling and traditional dhows.', 1);
-insert into public.tour_categories (name, slug, description, sort_order) values ('Nature & wildlife', 'nature-wildlife', 'Forests, mangroves and the island''s wildlife.', 2);
-insert into public.tour_categories (name, slug, description, sort_order) values ('Beach & leisure', 'beach-leisure', 'Slow days on the coast, sunsets and village life.', 3);
+insert into public.tour_categories (name, slug, description, sort_order) values ('Island & boat excursions', 'sea-islands', 'Boat trips, sandbanks, snorkelling and the islands off the coast.', 0);
+insert into public.tour_categories (name, slug, description, sort_order) values ('Cultural experiences', 'culture-history', 'Old town walks, markets, spice farms and the stories behind them.', 1);
+insert into public.tour_categories (name, slug, description, sort_order) values ('Nature & wildlife', 'nature-wildlife', 'Forests, caves, mangroves and the island''s wildlife.', 2);
+insert into public.tour_categories (name, slug, description, sort_order) values ('Beach experiences', 'beach-leisure', 'Slow days on the coast, sunsets and village life.', 3);
 insert into public.tour_categories (name, slug, description, sort_order) values ('Adventure & water sports', 'adventure', 'Jet skis, parasailing, horse riding and other active experiences.', 4);
-insert into public.tour_categories (name, slug, description, sort_order) values ('Safari', 'safari', 'Mainland Tanzania wildlife experiences, combined with the islands.', 5);
+insert into public.tour_categories (name, slug, description, sort_order) values ('Cruises & marine experiences', 'cruises-marine', 'Dhow cruises on the Indian Ocean and time with its marine life.', 5);
+insert into public.tour_categories (name, slug, description, sort_order) values ('Tanzania wildlife safaris', 'safari', 'Mainland Tanzania wildlife experiences, combined with the islands.', 6);
 
 -- Destinations
 insert into public.destinations
@@ -91,7 +92,7 @@ Short flights from Zanzibar make it practical for day trips and short safaris, d
 -- Tours
 insert into public.tours
   (category_id, destination_id, name, slug, short_description, description, duration_text,
-   highlights, inclusions, exclusions, what_to_bring, meeting_point, difficulty, suitability,
+   length, travel_styles, highlights, inclusions, exclusions, what_to_bring, meeting_point, difficulty, suitability,
    what_to_expect, good_to_know, faqs,
    cover_image_alt, is_featured, status, seo_title, seo_description, is_sample, sort_order)
 values (
@@ -100,7 +101,7 @@ values (
   'Stone Town City Tour', 'stone-town-city-tour', 'A guided walk through Stone Town''s lanes, markets and landmarks with a local guide.', 'Discover the old quarter of Zanzibar City on foot. Your guide leads you through narrow lanes lined with carved doors, past historic buildings, mosques, churches and busy markets.
 
 Along the way you will hear how trade across the Indian Ocean shaped the town — including the painful history of the East African slave trade, remembered at the site of the former slave market.', 'Half day (approx. 3–4 hours)',
-  array['Carved Zanzibari doors and coral-stone architecture', 'Darajani market', 'Former slave market site and memorial', 'Old Fort and Forodhani Gardens waterfront']::text[], array['Local English-speaking guide', 'Entrance fees listed in the itinerary']::text[], array['Personal expenses and tips', 'Drinks unless stated', 'Travel insurance', 'Hotel pickup outside Stone Town (on request)']::text[], array['Comfortable walking shoes', 'Clothing that covers shoulders and knees', 'Water', 'Sun protection']::text[],
+  'half_day', array['family', 'cultural']::text[], array['Carved Zanzibari doors and coral-stone architecture', 'Darajani market', 'Former slave market site and memorial', 'Old Fort and Forodhani Gardens waterfront']::text[], array['Local English-speaking guide', 'Entrance fees listed in the itinerary']::text[], array['Personal expenses and tips', 'Drinks unless stated', 'Travel insurance', 'Hotel pickup outside Stone Town (on request)']::text[], array['Comfortable walking shoes', 'Clothing that covers shoulders and knees', 'Water', 'Sun protection']::text[],
   'Hotel pickup in Stone Town or an agreed meeting point. Exact time confirmed on booking.', 'easy', 'Suitable for most ages. Involves walking on uneven streets.',
   '[{"title":"Meet your guide","description":"Pickup from your Stone Town hotel or an agreed meeting point."},{"title":"The waterfront","description":"Start near the Old Fort and Forodhani Gardens, where the town meets the sea."},{"title":"Lanes and carved doors","description":"Walk the narrow streets, stopping at historic buildings and famous Zanzibari doors."},{"title":"Darajani market","description":"See the busy market for spices, fruit, fish and everyday goods."},{"title":"Former slave market","description":"Visit the memorial site and learn this painful part of the island''s history."},{"title":"Finish","description":"End in the old town, or ask your guide for recommendations to keep exploring."}]'::jsonb, array['Mornings and late afternoons are cooler for walking.', 'Clothing that covers shoulders and knees is respectful in town.', 'Streets are narrow and uneven, which can be difficult for wheelchairs and pushchairs.', 'Ask before photographing people, especially in the market.']::text[], '[{"question":"Is it suitable for children?","answer":"Yes. The pace is relaxed and the guide can adapt the route for families."},{"question":"Can I combine it with another tour?","answer":"Many travellers pair it with the Spice Farm Tour or a Prison Island trip on the same day. Ask our team."}]'::jsonb, 'A man cycling through a narrow lane between old Stone Town buildings',
   true, 'published', 'Stone Town City Tour', 'Guided walking tour of Stone Town''s lanes, markets and history.', true, 0);
@@ -114,7 +115,7 @@ insert into public.tour_prices (tour_id, market, customer_type, currency, amount
 values ((select id from public.tours where slug = 'stone-town-city-tour'), 'resident', 'child', 'TZS', 30000, 'per person', true);
 insert into public.tours
   (category_id, destination_id, name, slug, short_description, description, duration_text,
-   highlights, inclusions, exclusions, what_to_bring, meeting_point, difficulty, suitability,
+   length, travel_styles, highlights, inclusions, exclusions, what_to_bring, meeting_point, difficulty, suitability,
    what_to_expect, good_to_know, faqs,
    cover_image_alt, is_featured, status, seo_title, seo_description, is_sample, sort_order)
 values (
@@ -123,7 +124,7 @@ values (
   'Prison Island Tour', 'prison-island-tour', 'A short boat trip from Stone Town to Changuu Island and its giant tortoises.', 'Take a boat from the Stone Town shore to Changuu, known as Prison Island. The island is home to a colony of giant Aldabra tortoises and historic buildings from the colonial era.
 
 Time permitting, there is a chance to swim or snorkel near the island before returning.', 'Half day (approx. 3 hours)',
-  array['Boat ride from Stone Town', 'Giant Aldabra tortoises', 'Historic island buildings', 'Swimming or snorkelling stop']::text[], array['Boat transfer', 'Guide', 'Snorkelling equipment (subject to availability)']::text[], array['Personal expenses and tips', 'Drinks unless stated', 'Travel insurance', 'Island entrance fee (if not stated as included)']::text[], array['Swimwear and towel', 'Sun protection', 'Water', 'Waterproof bag for phones']::text[],
+  'half_day', array['family', 'cultural', 'wildlife']::text[], array['Boat ride from Stone Town', 'Giant Aldabra tortoises', 'Historic island buildings', 'Swimming or snorkelling stop']::text[], array['Boat transfer', 'Guide', 'Snorkelling equipment (subject to availability)']::text[], array['Personal expenses and tips', 'Drinks unless stated', 'Travel insurance', 'Island entrance fee (if not stated as included)']::text[], array['Swimwear and towel', 'Sun protection', 'Water', 'Waterproof bag for phones']::text[],
   'Stone Town beach near the waterfront. Exact point and time confirmed on booking.', 'easy', 'Suitable for families. Boat trips depend on sea conditions.',
   '[{"title":"Boat from Stone Town","description":"A short boat ride from the Stone Town shore to Changuu Island."},{"title":"Giant tortoises","description":"Meet the colony of giant Aldabra tortoises at the island''s sanctuary."},{"title":"Island history","description":"See the historic buildings and hear how the island has been used over the years."},{"title":"Swim or snorkel","description":"Time permitting, cool off in the clear water around the island."},{"title":"Return","description":"Boat back to Stone Town."}]'::jsonb, array['Boat trips depend on sea and weather conditions.', 'The island charges an entrance fee — check whether it is included in your booking.', 'Bring a waterproof bag for phones and cameras.']::text[], '[{"question":"How long is the boat ride?","answer":"Usually around 20–30 minutes each way, depending on conditions."},{"question":"Can I touch the tortoises?","answer":"Your guide explains how to interact with them gently and respectfully."}]'::jsonb, 'Giant Aldabra tortoise on Prison Island',
   true, 'published', 'Prison Island Tour', 'Boat trip to Prison Island to see giant tortoises.', true, 1);
@@ -137,7 +138,7 @@ insert into public.tour_prices (tour_id, market, customer_type, currency, amount
 values ((select id from public.tours where slug = 'prison-island-tour'), 'resident', 'child', 'TZS', 35000, 'per person', true);
 insert into public.tours
   (category_id, destination_id, name, slug, short_description, description, duration_text,
-   highlights, inclusions, exclusions, what_to_bring, meeting_point, difficulty, suitability,
+   length, travel_styles, highlights, inclusions, exclusions, what_to_bring, meeting_point, difficulty, suitability,
    what_to_expect, good_to_know, faqs,
    cover_image_alt, is_featured, status, seo_title, seo_description, is_sample, sort_order)
 values (
@@ -146,7 +147,7 @@ values (
   'Spice Farm Tour', 'spice-farm-tour', 'See, smell and taste the spices that made Zanzibar the ''Spice Island''.', 'Visit a working spice farm outside Stone Town. A local guide shows you cloves, nutmeg, cinnamon, vanilla and other plants, and explains how they are grown and used.
 
 Many visits include tasting seasonal tropical fruit and an optional local lunch.', 'Half day (approx. 3–4 hours)',
-  array['Guided walk through a spice farm', 'Seasonal fruit tasting', 'Optional Swahili lunch']::text[], array['Return transfer from Stone Town', 'Farm guide']::text[], array['Personal expenses and tips', 'Drinks unless stated', 'Travel insurance', 'Lunch (optional extra)']::text[], array['Comfortable shoes', 'Insect repellent', 'Cash for optional spice purchases']::text[],
+  'half_day', array['family', 'cultural']::text[], array['Guided walk through a spice farm', 'Seasonal fruit tasting', 'Optional Swahili lunch']::text[], array['Return transfer from Stone Town', 'Farm guide']::text[], array['Personal expenses and tips', 'Drinks unless stated', 'Travel insurance', 'Lunch (optional extra)']::text[], array['Comfortable shoes', 'Insect repellent', 'Cash for optional spice purchases']::text[],
   'Hotel pickup in or near Stone Town. Exact time confirmed on booking.', 'easy', 'Suitable for all ages.',
   '[{"title":"Drive out of town","description":"Transfer from Stone Town to a working spice farm in the countryside."},{"title":"Guided farm walk","description":"See, smell and taste cloves, nutmeg, cinnamon, vanilla, pepper and more."},{"title":"Fruit tasting","description":"Try seasonal tropical fruits grown on the farm."},{"title":"Optional lunch","description":"Enjoy a Swahili meal cooked with local spices (optional extra)."},{"title":"Return","description":"Transfer back to your accommodation."}]'::jsonb, array['Spices and fruits on show vary with the season.', 'Farm paths can be muddy after rain — wear closed shoes.', 'Spices and oils are usually available to buy; bring some cash.']::text[], '[{"question":"Is it suitable for children?","answer":"Yes — it''s a gentle walk and children usually enjoy guessing the spices."},{"question":"Can it be combined with Stone Town?","answer":"Yes, it''s a popular half-day pairing with the Stone Town City Tour."}]'::jsonb, 'Fresh nutmeg wrapped in red mace, held at a Zanzibar spice farm',
   false, 'published', 'Spice Farm Tour', 'Guided spice farm visit near Stone Town.', true, 2);
@@ -160,7 +161,7 @@ insert into public.tour_prices (tour_id, market, customer_type, currency, amount
 values ((select id from public.tours where slug = 'spice-farm-tour'), 'resident', 'child', 'TZS', 25000, 'per person', true);
 insert into public.tours
   (category_id, destination_id, name, slug, short_description, description, duration_text,
-   highlights, inclusions, exclusions, what_to_bring, meeting_point, difficulty, suitability,
+   length, travel_styles, highlights, inclusions, exclusions, what_to_bring, meeting_point, difficulty, suitability,
    what_to_expect, good_to_know, faqs,
    cover_image_alt, is_featured, status, seo_title, seo_description, is_sample, sort_order)
 values (
@@ -169,7 +170,7 @@ values (
   'Jozani Forest Tour', 'jozani-forest-tour', 'Walk the forest trails of Jozani to look for the endemic red colobus monkey.', 'Jozani Chwaka Bay National Park protects Zanzibar''s largest remaining natural forest. A park guide leads you along trails where the Zanzibar red colobus — found only on this island — is often seen.
 
 The visit usually includes the mangrove boardwalk, where you can learn about the role mangroves play along the coast.', 'Half day (approx. 3–4 hours including travel)',
-  array['Zanzibar red colobus monkeys', 'Forest trail with park guide', 'Mangrove boardwalk']::text[], array['Return transfer', 'Park guide']::text[], array['Personal expenses and tips', 'Drinks unless stated', 'Travel insurance', 'Park entrance fee (if not stated as included)']::text[], array['Closed shoes', 'Insect repellent', 'Water', 'Camera']::text[],
+  'half_day', array['family', 'wildlife']::text[], array['Zanzibar red colobus monkeys', 'Forest trail with park guide', 'Mangrove boardwalk']::text[], array['Return transfer', 'Park guide']::text[], array['Personal expenses and tips', 'Drinks unless stated', 'Travel insurance', 'Park entrance fee (if not stated as included)']::text[], array['Closed shoes', 'Insect repellent', 'Water', 'Camera']::text[],
   'Hotel pickup. Exact time confirmed on booking.', 'easy', 'Suitable for most ages. Wildlife sightings cannot be guaranteed.',
   '[{"title":"Drive to Jozani","description":"Transfer to Jozani Chwaka Bay National Park in the centre-south of the island."},{"title":"Forest walk","description":"Follow trails with a park guide to look for the Zanzibar red colobus monkey."},{"title":"Mangrove boardwalk","description":"Walk the raised boardwalk and learn why mangroves matter to the coast."},{"title":"Return or continue","description":"Head back, or combine with a south-coast activity."}]'::jsonb, array['Wildlife sightings cannot be guaranteed, though the colobus are often seen.', 'Keep a respectful distance from the monkeys and never feed them.', 'Insect repellent is recommended.']::text[], '[{"question":"Can I combine Jozani with another tour?","answer":"Yes. It pairs well with the Kizimkazi Dolphin Experience or Kuza Cave. Ask our team."},{"question":"How much walking is involved?","answer":"Easy trails, usually around an hour of gentle walking in total."}]'::jsonb, 'Zanzibar red colobus monkey climbing through the trees',
   true, 'published', 'Jozani Forest Tour', 'See the Zanzibar red colobus monkey in Jozani Forest.', true, 3);
@@ -183,7 +184,7 @@ insert into public.tour_prices (tour_id, market, customer_type, currency, amount
 values ((select id from public.tours where slug = 'jozani-forest-tour'), 'resident', 'child', 'TZS', 35000, 'per person', true);
 insert into public.tours
   (category_id, destination_id, name, slug, short_description, description, duration_text,
-   highlights, inclusions, exclusions, what_to_bring, meeting_point, difficulty, suitability,
+   length, travel_styles, highlights, inclusions, exclusions, what_to_bring, meeting_point, difficulty, suitability,
    what_to_expect, good_to_know, faqs,
    cover_image_alt, is_featured, status, seo_title, seo_description, is_sample, sort_order)
 values (
@@ -192,7 +193,7 @@ values (
   'Mnemba Island Snorkelling', 'mnemba-island-snorkelling', 'A boat trip to snorkel the reef around the protected Mnemba Atoll.', 'Head out by boat from the north-east coast to the waters around Mnemba Atoll, part of a marine conservation area.
 
 Snorkel over the reef with your guide. Marine life varies by day and season, and boat trips depend on weather and sea conditions.', 'Half day to full day (depending on pickup location)',
-  array['Snorkelling around Mnemba Atoll', 'Clear water and coral reef', 'Boat trip along the coast']::text[], array['Boat trip', 'Snorkelling equipment', 'Guide', 'Drinking water']::text[], array['Personal expenses and tips', 'Drinks unless stated', 'Travel insurance', 'Marine conservation fee (if not stated as included)']::text[], array['Swimwear and towel', 'Reef-safe sunscreen', 'Light cover-up for the boat']::text[],
+  'half_day', array['adventure', 'wildlife']::text[], array['Snorkelling around Mnemba Atoll', 'Clear water and coral reef', 'Boat trip along the coast']::text[], array['Boat trip', 'Snorkelling equipment', 'Guide', 'Drinking water']::text[], array['Personal expenses and tips', 'Drinks unless stated', 'Travel insurance', 'Marine conservation fee (if not stated as included)']::text[], array['Swimwear and towel', 'Reef-safe sunscreen', 'Light cover-up for the boat']::text[],
   'Departure from the north-east coast. Pickup options confirmed on booking.', 'moderate', 'Best for confident swimmers. Life jackets available on request.',
   '[{"title":"Pickup and boat","description":"Transfer to the north-east coast and board the boat towards Mnemba Atoll."},{"title":"Snorkelling","description":"Snorkel over the reef with your guide. Marine life varies by day and season."},{"title":"Time on the water","description":"A break on the boat with drinking water and fruit (where included)."},{"title":"Return","description":"Boat back to shore and transfer to your accommodation."}]'::jsonb, array['Mnemba Island itself is private; the trip visits the waters around the atoll.', 'Trips depend on weather and sea conditions and may be rescheduled.', 'Use reef-safe sunscreen and avoid touching or standing on coral.']::text[], '[{"question":"Do I need to be a strong swimmer?","answer":"You should be comfortable in open water. Life jackets are available on request."},{"question":"Will we see dolphins?","answer":"Sometimes, but sightings can''t be guaranteed."}]'::jsonb, 'Fish swimming over a colourful coral reef',
   true, 'published', 'Mnemba Island Snorkelling', 'Snorkelling boat trip to Mnemba Atoll.', true, 4);
@@ -206,7 +207,7 @@ insert into public.tour_prices (tour_id, market, customer_type, currency, amount
 values ((select id from public.tours where slug = 'mnemba-island-snorkelling'), 'resident', 'child', 'TZS', 60000, 'per person', true);
 insert into public.tours
   (category_id, destination_id, name, slug, short_description, description, duration_text,
-   highlights, inclusions, exclusions, what_to_bring, meeting_point, difficulty, suitability,
+   length, travel_styles, highlights, inclusions, exclusions, what_to_bring, meeting_point, difficulty, suitability,
    what_to_expect, good_to_know, faqs,
    cover_image_alt, is_featured, status, seo_title, seo_description, is_sample, sort_order)
 values (
@@ -215,7 +216,7 @@ values (
   'Safari Blue — Menai Bay', 'safari-blue-menai-bay', 'A full day on a traditional dhow: sandbanks, snorkelling and a seafood lunch.', 'Spend a day exploring Menai Bay by traditional dhow. Typical stops include a sandbank, a snorkelling spot and a mangrove lagoon.
 
 The day usually includes a seafood lunch on one of the islands. The exact route depends on tides and conditions.', 'Full day',
-  array['Traditional dhow sailing', 'Sandbank stop', 'Snorkelling', 'Seafood lunch']::text[], array['Dhow trip', 'Snorkelling equipment', 'Lunch', 'Guide']::text[], array['Personal expenses and tips', 'Drinks unless stated', 'Travel insurance', 'Transfers (available on request)']::text[], array['Swimwear and towel', 'Sun protection', 'Hat', 'Waterproof bag']::text[],
+  'full_day', array['family', 'relaxation']::text[], array['Traditional dhow sailing', 'Sandbank stop', 'Snorkelling', 'Seafood lunch']::text[], array['Dhow trip', 'Snorkelling equipment', 'Lunch', 'Guide']::text[], array['Personal expenses and tips', 'Drinks unless stated', 'Travel insurance', 'Transfers (available on request)']::text[], array['Swimwear and towel', 'Sun protection', 'Hat', 'Waterproof bag']::text[],
   'Departure from Fumba area. Transfer options confirmed on booking.', 'easy', 'Suitable for families. Long day in the sun.',
   '[{"title":"Set sail from Fumba","description":"Board a traditional dhow in Menai Bay."},{"title":"Sandbank","description":"Stop at a sandbank to swim and relax."},{"title":"Snorkelling","description":"Snorkel at a reef spot chosen by the crew for the day''s conditions."},{"title":"Seafood lunch","description":"Enjoy a seafood lunch on one of the islands."},{"title":"Lagoon and sail back","description":"Visit a mangrove lagoon, then sail back in the afternoon."}]'::jsonb, array['The route depends on tides and weather.', 'There is little shade on sandbanks — bring a hat and sunscreen.', 'Menai Bay is a conservation area; a fee may apply.']::text[], '[{"question":"Are vegetarian meals available?","answer":"Usually yes — tell us when you book."},{"question":"Is it suitable for non-swimmers?","answer":"Yes. Non-swimmers can relax on the dhow and sandbank; life jackets are available."}]'::jsonb, 'Traditional dhow on the water at golden hour off Nungwi',
   true, 'published', 'Safari Blue — Menai Bay', 'Full-day dhow trip in Menai Bay with lunch.', true, 5);
@@ -229,7 +230,7 @@ insert into public.tour_prices (tour_id, market, customer_type, currency, amount
 values ((select id from public.tours where slug = 'safari-blue-menai-bay'), 'resident', 'child', 'TZS', 70000, 'per person', true);
 insert into public.tours
   (category_id, destination_id, name, slug, short_description, description, duration_text,
-   highlights, inclusions, exclusions, what_to_bring, meeting_point, difficulty, suitability,
+   length, travel_styles, highlights, inclusions, exclusions, what_to_bring, meeting_point, difficulty, suitability,
    what_to_expect, good_to_know, faqs,
    cover_image_alt, is_featured, status, seo_title, seo_description, is_sample, sort_order)
 values (
@@ -238,7 +239,7 @@ values (
   'Nakupenda Sandbank', 'nakupenda-sandbank', 'A short boat trip from Stone Town to a white sandbank for swimming and lunch.', 'Nakupenda is a sandbank a short boat ride from Stone Town. It appears and changes shape with the tide.
 
 Enjoy swimming, snorkelling and a beach lunch before returning to town. Timing depends on tides.', 'Half day (approx. 4 hours)',
-  array['White sandbank', 'Swimming and snorkelling', 'Beach lunch']::text[], array['Boat transfer', 'Lunch', 'Snorkelling equipment']::text[], array['Personal expenses and tips', 'Drinks unless stated', 'Travel insurance']::text[], array['Swimwear', 'Sun protection — there is little shade', 'Hat']::text[],
+  'half_day', array['romantic', 'family', 'relaxation']::text[], array['White sandbank', 'Swimming and snorkelling', 'Beach lunch']::text[], array['Boat transfer', 'Lunch', 'Snorkelling equipment']::text[], array['Personal expenses and tips', 'Drinks unless stated', 'Travel insurance']::text[], array['Swimwear', 'Sun protection — there is little shade', 'Hat']::text[],
   'Stone Town beach. Exact time depends on tides and is confirmed on booking.', 'easy', 'Suitable for families.',
   '[{"title":"Boat from Stone Town","description":"A short boat ride to the Nakupenda sandbank."},{"title":"Swim and snorkel","description":"Enjoy the clear water around the sandbank."},{"title":"Beach lunch","description":"Fresh fruit and a seafood lunch on the sand (as included)."},{"title":"Return","description":"Boat back before the tide covers the sandbank."}]'::jsonb, array['The sandbank appears with the tide, so timing changes daily.', 'There is very little shade — sunscreen and a hat are essential.']::text[], '[{"question":"Can I combine it with Prison Island?","answer":"Yes, this is a popular combination. Ask our team about timings."}]'::jsonb, 'Aerial view of a narrow white sandbank in turquoise water off Zanzibar',
   false, 'published', 'Nakupenda Sandbank', 'Boat trip to the Nakupenda sandbank from Stone Town.', true, 6);
@@ -252,16 +253,16 @@ insert into public.tour_prices (tour_id, market, customer_type, currency, amount
 values ((select id from public.tours where slug = 'nakupenda-sandbank'), 'resident', 'child', 'TZS', 40000, 'per person', true);
 insert into public.tours
   (category_id, destination_id, name, slug, short_description, description, duration_text,
-   highlights, inclusions, exclusions, what_to_bring, meeting_point, difficulty, suitability,
+   length, travel_styles, highlights, inclusions, exclusions, what_to_bring, meeting_point, difficulty, suitability,
    what_to_expect, good_to_know, faqs,
    cover_image_alt, is_featured, status, seo_title, seo_description, is_sample, sort_order)
 values (
-  (select id from public.tour_categories where slug = 'sea-islands'),
+  (select id from public.tour_categories where slug = 'cruises-marine'),
   (select id from public.destinations where slug = 'stone-town'),
   'Sunset Dhow Cruise', 'sunset-dhow-cruise', 'Sail along the Stone Town coast on a traditional dhow as the sun goes down.', 'Board a traditional wooden dhow for an evening sail along the Stone Town waterfront.
 
 Watch the sunset over the Indian Ocean with light refreshments. Sailing depends on weather.', 'Approx. 2 hours',
-  array['Traditional dhow', 'Sunset over the ocean', 'Views of the Stone Town skyline']::text[], array['Dhow cruise', 'Soft drinks and snacks']::text[], array['Personal expenses and tips', 'Drinks unless stated', 'Travel insurance']::text[], array['Light jacket', 'Camera']::text[],
+  'hours', array['romantic', 'relaxation']::text[], array['Traditional dhow', 'Sunset over the ocean', 'Views of the Stone Town skyline']::text[], array['Dhow cruise', 'Soft drinks and snacks']::text[], array['Personal expenses and tips', 'Drinks unless stated', 'Travel insurance']::text[], array['Light jacket', 'Camera']::text[],
   'Stone Town waterfront. Exact point confirmed on booking.', 'easy', 'Suitable for all ages, couples and groups.',
   '[{"title":"Board at the waterfront","description":"Meet the crew on the Stone Town waterfront in the late afternoon."},{"title":"Sail the coast","description":"Sail gently along the coast as the light turns golden."},{"title":"Sunset","description":"Watch the sun set over the Indian Ocean with light refreshments."},{"title":"Return","description":"Back on shore shortly after sunset."}]'::jsonb, array['Sailing depends on wind and weather.', 'A light jacket is useful once the sun goes down.']::text[], '[{"question":"Is it good for couples and groups?","answer":"Yes — it''s a popular choice for couples, families and small groups."}]'::jsonb, 'Dhow sailing at sunset off Nungwi',
   true, 'published', 'Sunset Dhow Cruise', 'Evening dhow cruise along the Stone Town coast.', true, 7);
@@ -275,7 +276,7 @@ insert into public.tour_prices (tour_id, market, customer_type, currency, amount
 values ((select id from public.tours where slug = 'sunset-dhow-cruise'), 'resident', 'child', 'TZS', 30000, 'per person', true);
 insert into public.tours
   (category_id, destination_id, name, slug, short_description, description, duration_text,
-   highlights, inclusions, exclusions, what_to_bring, meeting_point, difficulty, suitability,
+   length, travel_styles, highlights, inclusions, exclusions, what_to_bring, meeting_point, difficulty, suitability,
    what_to_expect, good_to_know, faqs,
    cover_image_alt, is_featured, status, seo_title, seo_description, is_sample, sort_order)
 values (
@@ -284,7 +285,7 @@ values (
   'Nungwi & Kendwa Beach Experience', 'nungwi-kendwa-beach-experience', 'A relaxed day on the north coast: beaches, dhow builders and sunset.', 'Travel to Zanzibar''s northern tip for a day by the sea. Visit Nungwi''s traditional dhow-building yards and spend time on the beaches of Nungwi and Kendwa.
 
 Stay for the sunset before returning to your accommodation.', 'Full day',
-  array['Nungwi village and dhow builders', 'Beach time at Kendwa', 'Sunset on the north coast']::text[], array['Return transfer', 'Driver-guide']::text[], array['Personal expenses and tips', 'Drinks unless stated', 'Travel insurance', 'Meals']::text[], array['Swimwear and towel', 'Sun protection', 'Cash for meals']::text[],
+  'full_day', array['romantic', 'relaxation']::text[], array['Nungwi village and dhow builders', 'Beach time at Kendwa', 'Sunset on the north coast']::text[], array['Return transfer', 'Driver-guide']::text[], array['Personal expenses and tips', 'Drinks unless stated', 'Travel insurance', 'Meals']::text[], array['Swimwear and towel', 'Sun protection', 'Cash for meals']::text[],
   'Hotel pickup. Exact time confirmed on booking.', 'easy', 'Suitable for everyone.',
   '[{"title":"Drive north","description":"Transfer to Nungwi at Zanzibar''s northern tip."},{"title":"Dhow builders","description":"See traditional wooden dhows being built and repaired on the beach."},{"title":"Beach time","description":"Swim and relax at Kendwa, where the beach is good for swimming at most tides."},{"title":"Sunset","description":"Stay for the sunset before heading back."}]'::jsonb, array['The north coast is less affected by tides than the east coast.', 'Meals are not included, so bring cash or a card.']::text[], '[{"question":"Can I add the turtle aquarium?","answer":"Yes — Mnarani Turtle Aquarium is in Nungwi and easy to add."}]'::jsonb, 'Aerial view of a white-sand beach and turquoise water in Zanzibar',
   false, 'published', 'Nungwi & Kendwa Beach Experience', 'Day trip to Zanzibar''s northern beaches.', true, 8);
@@ -298,16 +299,16 @@ insert into public.tour_prices (tour_id, market, customer_type, currency, amount
 values ((select id from public.tours where slug = 'nungwi-kendwa-beach-experience'), 'resident', 'child', 'TZS', 40000, 'per person', true);
 insert into public.tours
   (category_id, destination_id, name, slug, short_description, description, duration_text,
-   highlights, inclusions, exclusions, what_to_bring, meeting_point, difficulty, suitability,
+   length, travel_styles, highlights, inclusions, exclusions, what_to_bring, meeting_point, difficulty, suitability,
    what_to_expect, good_to_know, faqs,
    cover_image_alt, is_featured, status, seo_title, seo_description, is_sample, sort_order)
 values (
-  (select id from public.tour_categories where slug = 'sea-islands'),
+  (select id from public.tour_categories where slug = 'cruises-marine'),
   (select id from public.destinations where slug = 'menai-bay-kizimkazi'),
   'Kizimkazi Dolphin Experience', 'kizimkazi-dolphin-experience', 'An early boat trip from Kizimkazi to look for dolphins — responsibly.', 'Set out early from the fishing village of Kizimkazi in search of the dolphins that are often seen off the south coast.
 
 Responsible dolphin watching means keeping a respectful distance and never chasing or crowding the animals. Sightings are never guaranteed. The trip can be combined with Jozani Forest.', 'Half day (early morning)',
-  array['Dolphin watching', 'Kizimkazi fishing village', 'Option to combine with Jozani Forest']::text[], array['Boat trip', 'Guide', 'Snorkelling equipment']::text[], array['Personal expenses and tips', 'Drinks unless stated', 'Travel insurance', 'Transfers (available on request)']::text[], array['Swimwear', 'Light jacket for the early start', 'Sun protection']::text[],
+  'half_day', array['family', 'wildlife']::text[], array['Dolphin watching', 'Kizimkazi fishing village', 'Option to combine with Jozani Forest']::text[], array['Boat trip', 'Guide', 'Snorkelling equipment']::text[], array['Personal expenses and tips', 'Drinks unless stated', 'Travel insurance', 'Transfers (available on request)']::text[], array['Swimwear', 'Light jacket for the early start', 'Sun protection']::text[],
   'Kizimkazi beach or hotel pickup. Exact time confirmed on booking.', 'easy', 'Suitable for families. Wildlife sightings cannot be guaranteed.',
   '[{"title":"Early start","description":"Travel to Kizimkazi on the south coast for an early-morning boat trip."},{"title":"Dolphin watching","description":"Look for dolphins from the boat, keeping a respectful distance."},{"title":"Snorkelling","description":"Snorkel at a nearby reef if conditions allow."},{"title":"Village and return","description":"Optional time in Kizimkazi village before returning."}]'::jsonb, array['Sightings are never guaranteed.', 'Responsible viewing means not chasing, crowding or touching the dolphins.', 'Mornings are usually calmer.']::text[], '[{"question":"Can we swim with the dolphins?","answer":"We don''t encourage it — viewing from the boat is kinder to the animals."},{"question":"Can I combine it with Jozani Forest?","answer":"Yes, it''s a popular combination on the way back."}]'::jsonb, 'Dolphins swimming just below the surface of blue water',
   false, 'published', 'Kizimkazi Dolphin Experience', 'Responsible dolphin-watching trip from Kizimkazi.', true, 9);
@@ -321,7 +322,7 @@ insert into public.tour_prices (tour_id, market, customer_type, currency, amount
 values ((select id from public.tours where slug = 'kizimkazi-dolphin-experience'), 'resident', 'child', 'TZS', 40000, 'per person', true);
 insert into public.tours
   (category_id, destination_id, name, slug, short_description, description, duration_text,
-   highlights, inclusions, exclusions, what_to_bring, meeting_point, difficulty, suitability,
+   length, travel_styles, highlights, inclusions, exclusions, what_to_bring, meeting_point, difficulty, suitability,
    what_to_expect, good_to_know, faqs,
    cover_image_alt, is_featured, status, seo_title, seo_description, is_sample, sort_order)
 values (
@@ -330,7 +331,7 @@ values (
   'Mikumi Day Safari from Zanzibar', 'mikumi-day-safari', 'A long but rewarding day: fly to the mainland for a game drive in Mikumi.', 'For travellers short on time, a day safari to Mikumi National Park is a way to experience the mainland''s wildlife from a Zanzibar base.
 
 The day combines flights and road transfers with a game drive. It is subject to flight availability and schedules, which are confirmed when booking.', 'Full day (early start, late return)',
-  array['Game drive in Mikumi', 'Flight from Zanzibar', 'Lunch in the park']::text[], array['Return flights (subject to availability)', 'Game drive with guide', 'Lunch', 'Park fees']::text[], array['Personal expenses and tips', 'Drinks unless stated', 'Travel insurance', 'Airport transfers in Zanzibar (on request)']::text[], array['Passport or ID for the flight', 'Neutral-coloured clothing', 'Hat and sunglasses', 'Camera']::text[],
+  'full_day', array['adventure', 'wildlife']::text[], array['Game drive in Mikumi', 'Flight from Zanzibar', 'Lunch in the park']::text[], array['Return flights (subject to availability)', 'Game drive with guide', 'Lunch', 'Park fees']::text[], array['Personal expenses and tips', 'Drinks unless stated', 'Travel insurance', 'Airport transfers in Zanzibar (on request)']::text[], array['Passport or ID for the flight', 'Neutral-coloured clothing', 'Hat and sunglasses', 'Camera']::text[],
   'Zanzibar airport. Times depend on flight schedules.', 'moderate', 'Long day with flights and driving. Wildlife sightings cannot be guaranteed.',
   '[{"title":"Early flight","description":"Fly from Zanzibar to the mainland in the early morning."},{"title":"Game drive","description":"Explore Mikumi National Park with your driver-guide."},{"title":"Lunch","description":"Lunch in or near the park."},{"title":"Afternoon drive and return","description":"More wildlife viewing, then fly back to Zanzibar."}]'::jsonb, array['Flights and timings depend on availability and are confirmed when booking.', 'It''s a long day — consider a 2-day option for a more relaxed safari.', 'Wildlife sightings cannot be guaranteed.']::text[], '[{"question":"What should I wear?","answer":"Neutral-coloured, comfortable clothing, a hat and sunglasses."},{"question":"Is there a luggage limit on the flight?","answer":"Small aircraft often have strict luggage limits — we''ll confirm when you book."}]'::jsonb, 'Safari vehicles on the grassy plains of Mikumi National Park',
   false, 'published', 'Mikumi Day Safari from Zanzibar', 'Fly-in day safari to Mikumi from Zanzibar.', true, 10);
@@ -344,7 +345,7 @@ insert into public.tour_prices (tour_id, market, customer_type, currency, amount
 values ((select id from public.tours where slug = 'mikumi-day-safari'), 'resident', 'child', 'TZS', 1050000, 'per person', true);
 insert into public.tours
   (category_id, destination_id, name, slug, short_description, description, duration_text,
-   highlights, inclusions, exclusions, what_to_bring, meeting_point, difficulty, suitability,
+   length, travel_styles, highlights, inclusions, exclusions, what_to_bring, meeting_point, difficulty, suitability,
    what_to_expect, good_to_know, faqs,
    cover_image_alt, is_featured, status, seo_title, seo_description, is_sample, sort_order)
 values (
@@ -353,7 +354,7 @@ values (
   'Stone Town Evening Food Tour', 'stone-town-food-tour', 'Taste Zanzibar''s street food at Forodhani Gardens and in the old town''s lanes with a local guide.', 'As the sun sets, Stone Town''s waterfront comes alive. Join a local guide to discover the food stalls of Forodhani Gardens and small eateries in the surrounding lanes.
 
 Try local favourites such as Zanzibar pizza, grilled seafood, mishkaki skewers and fresh sugarcane juice, and hear how Swahili, Arab and Indian influences shaped the island''s cooking.', 'Evening (approx. 2–3 hours)',
-  array['Forodhani Gardens night food market', 'Zanzibar pizza and grilled seafood', 'Sugarcane juice and local sweets', 'Sunset over the Stone Town waterfront']::text[], array['Local guide', 'Tastings listed in the itinerary']::text[], array['Personal expenses and tips', 'Drinks unless stated', 'Travel insurance', 'Extra food and drinks you order']::text[], array['Cash in small notes', 'Light clothing covering shoulders and knees', 'Hand sanitiser']::text[],
+  'hours', array['cultural']::text[], array['Forodhani Gardens night food market', 'Zanzibar pizza and grilled seafood', 'Sugarcane juice and local sweets', 'Sunset over the Stone Town waterfront']::text[], array['Local guide', 'Tastings listed in the itinerary']::text[], array['Personal expenses and tips', 'Drinks unless stated', 'Travel insurance', 'Extra food and drinks you order']::text[], array['Cash in small notes', 'Light clothing covering shoulders and knees', 'Hand sanitiser']::text[],
   'Meeting point near Forodhani Gardens, Stone Town. Exact time confirmed on booking.', 'easy', 'Suitable for most ages. Tell us about any allergies or dietary needs.',
   '[{"title":"Meet at sunset","description":"Meet your guide near Forodhani Gardens as the stalls set up."},{"title":"Forodhani Gardens","description":"Taste Zanzibar pizza, grilled seafood and mishkaki skewers."},{"title":"Into the lanes","description":"Visit small eateries and snack spots in the old town."},{"title":"Something sweet","description":"Finish with local sweets or fresh sugarcane juice."}]'::jsonb, array['Tell us about any allergies or dietary needs in advance.', 'Prices at stalls are best paid in cash with small notes.', 'During Ramadan, food stalls may open later in the evening.']::text[], '[{"question":"Is there vegetarian food?","answer":"Yes — there are vegetarian options at most stops. Let us know in advance."},{"question":"How much food is included?","answer":"Tastings at each stop as described; extra items you order are your own cost."}]'::jsonb, 'A busy market street in Stone Town',
   false, 'published', 'Stone Town Evening Food Tour', 'Street food tour of Forodhani Gardens and Stone Town with a local guide.', true, 11);
@@ -367,7 +368,7 @@ insert into public.tour_prices (tour_id, market, customer_type, currency, amount
 values ((select id from public.tours where slug = 'stone-town-food-tour'), 'resident', 'child', 'TZS', 25000, 'per person', true);
 insert into public.tours
   (category_id, destination_id, name, slug, short_description, description, duration_text,
-   highlights, inclusions, exclusions, what_to_bring, meeting_point, difficulty, suitability,
+   length, travel_styles, highlights, inclusions, exclusions, what_to_bring, meeting_point, difficulty, suitability,
    what_to_expect, good_to_know, faqs,
    cover_image_alt, is_featured, status, seo_title, seo_description, is_sample, sort_order)
 values (
@@ -376,7 +377,7 @@ values (
   'Mangapwani Caves & Beach', 'mangapwani-slave-caves', 'Visit the coral cave and slave chamber at Mangapwani, north of Stone Town, then relax on the beach.', 'Travel north from Stone Town to Mangapwani. Here, a natural coral cave and a man-made underground chamber are linked to the history of the East African slave trade.
 
 Your guide explains the history of the site with care. Afterwards there is time to unwind on the nearby beach before returning.', 'Half day (approx. 3–4 hours)',
-  array['Mangapwani coral cave', 'Historic slave chamber', 'Guided history of the site', 'Time on Mangapwani beach']::text[], array['Return transfer from Stone Town', 'Guide']::text[], array['Personal expenses and tips', 'Drinks unless stated', 'Travel insurance', 'Site entrance fees (if not stated as included)']::text[], array['Comfortable shoes', 'Torch or phone light', 'Swimwear for the beach', 'Water']::text[],
+  'half_day', array['cultural']::text[], array['Mangapwani coral cave', 'Historic slave chamber', 'Guided history of the site', 'Time on Mangapwani beach']::text[], array['Return transfer from Stone Town', 'Guide']::text[], array['Personal expenses and tips', 'Drinks unless stated', 'Travel insurance', 'Site entrance fees (if not stated as included)']::text[], array['Comfortable shoes', 'Torch or phone light', 'Swimwear for the beach', 'Water']::text[],
   'Hotel pickup in or near Stone Town. Exact time confirmed on booking.', 'easy', 'Suitable for most ages. The cave has steps and uneven ground.',
   '[{"title":"Drive north","description":"Transfer from Stone Town to Mangapwani, north of the town."},{"title":"Coral cave","description":"Walk into the natural coral cave with your guide."},{"title":"Slave chamber","description":"Visit the underground chamber and learn its history."},{"title":"Beach","description":"Relax on Mangapwani beach before returning."}]'::jsonb, array['The history shared here is difficult — guides present it with care.', 'The cave is dark and uneven; bring a torch or use your phone light.']::text[], '[{"question":"Is it suitable for children?","answer":"Yes, though younger children may find the history hard. Your guide can adapt."}]'::jsonb, 'Palm-shaded beach with loungers and bougainvillea on the Zanzibar coast',
   false, 'published', 'Mangapwani Caves & Beach Tour', 'Half-day visit to the Mangapwani caves and beach, north of Stone Town.', true, 12);
@@ -390,7 +391,7 @@ insert into public.tour_prices (tour_id, market, customer_type, currency, amount
 values ((select id from public.tours where slug = 'mangapwani-slave-caves'), 'resident', 'child', 'TZS', 30000, 'per person', true);
 insert into public.tours
   (category_id, destination_id, name, slug, short_description, description, duration_text,
-   highlights, inclusions, exclusions, what_to_bring, meeting_point, difficulty, suitability,
+   length, travel_styles, highlights, inclusions, exclusions, what_to_bring, meeting_point, difficulty, suitability,
    what_to_expect, good_to_know, faqs,
    cover_image_alt, is_featured, status, seo_title, seo_description, is_sample, sort_order)
 values (
@@ -399,7 +400,7 @@ values (
   'Kuza Cave & Jambiani Village', 'kuza-cave-jambiani-village', 'Swim in a natural limestone cave pool and walk through a coastal village on the south-east coast.', 'Head to Jambiani on Zanzibar''s south-east coast. Kuza Cave is a limestone cave with a natural freshwater pool, and a popular spot for a cool swim.
 
 Then walk through Jambiani village with a local guide to see daily life, seaweed farming along the shore and the long white-sand beach.', 'Half day (approx. 4 hours)',
-  array['Swim in Kuza Cave''s natural pool', 'Jambiani village walk', 'Seaweed farming on the shore', 'South-east coast beaches']::text[], array['Return transfer', 'Local guide']::text[], array['Personal expenses and tips', 'Drinks unless stated', 'Travel insurance', 'Cave entrance fee (if not stated as included)']::text[], array['Swimwear and towel', 'Water shoes', 'Clothing that covers shoulders and knees for the village']::text[],
+  'half_day', array['family', 'cultural']::text[], array['Swim in Kuza Cave''s natural pool', 'Jambiani village walk', 'Seaweed farming on the shore', 'South-east coast beaches']::text[], array['Return transfer', 'Local guide']::text[], array['Personal expenses and tips', 'Drinks unless stated', 'Travel insurance', 'Cave entrance fee (if not stated as included)']::text[], array['Swimwear and towel', 'Water shoes', 'Clothing that covers shoulders and knees for the village']::text[],
   'Hotel pickup on the south or east coast; Stone Town pickup on request.', 'easy', 'Suitable for confident swimmers in the cave pool; non-swimmers can watch.',
   '[{"title":"Kuza Cave","description":"Swim in the cave''s natural freshwater pool."},{"title":"Village walk","description":"Walk through Jambiani with a local guide to see daily life."},{"title":"Seaweed farms","description":"See (tide permitting) the seaweed farms along the shore."},{"title":"Beach","description":"Time on Jambiani beach before returning."}]'::jsonb, array['Water shoes help on the cave steps and in the shallows.', 'Cover shoulders and knees for the village walk.']::text[], '[{"question":"Is the cave water cold?","answer":"It''s cooler than the sea, which is refreshing on a hot day."}]'::jsonb, 'Relaxing in a hammock on the beach at Jambiani',
   false, 'published', 'Kuza Cave & Jambiani Village Tour', 'Swim in Kuza Cave and walk through Jambiani village on Zanzibar''s south-east coast.', true, 13);
@@ -413,7 +414,7 @@ insert into public.tour_prices (tour_id, market, customer_type, currency, amount
 values ((select id from public.tours where slug = 'kuza-cave-jambiani-village'), 'resident', 'child', 'TZS', 35000, 'per person', true);
 insert into public.tours
   (category_id, destination_id, name, slug, short_description, description, duration_text,
-   highlights, inclusions, exclusions, what_to_bring, meeting_point, difficulty, suitability,
+   length, travel_styles, highlights, inclusions, exclusions, what_to_bring, meeting_point, difficulty, suitability,
    what_to_expect, good_to_know, faqs,
    cover_image_alt, is_featured, status, seo_title, seo_description, is_sample, sort_order)
 values (
@@ -422,7 +423,7 @@ values (
   'Blue Lagoon Snorkelling', 'blue-lagoon-snorkelling', 'Snorkel the calm, clear water of the Blue Lagoon on the Michamvi peninsula.', 'The Blue Lagoon near Michamvi Pingwe is a sheltered spot with clear water, often good for relaxed snorkelling and spotting reef fish.
 
 Snorkelling is best around high tide, so the time of the trip depends on the tides on your chosen day.', 'Half day (approx. 2–3 hours)',
-  array['Calm, clear lagoon water', 'Reef fish and corals', 'Short boat ride', 'Good for beginners']::text[], array['Boat trip', 'Snorkelling equipment', 'Guide']::text[], array['Personal expenses and tips', 'Drinks unless stated', 'Travel insurance', 'Transfers (available on request)']::text[], array['Swimwear and towel', 'Reef-safe sunscreen', 'Water shoes']::text[],
+  'half_day', array['family', 'relaxation']::text[], array['Calm, clear lagoon water', 'Reef fish and corals', 'Short boat ride', 'Good for beginners']::text[], array['Boat trip', 'Snorkelling equipment', 'Guide']::text[], array['Personal expenses and tips', 'Drinks unless stated', 'Travel insurance', 'Transfers (available on request)']::text[], array['Swimwear and towel', 'Reef-safe sunscreen', 'Water shoes']::text[],
   'Michamvi Pingwe beach. Time depends on the tide and is confirmed on booking.', 'easy', 'Good for beginner snorkellers. Life jackets available on request.',
   '[{"title":"Meet at Michamvi Pingwe","description":"Meet the crew on the beach at the right time for the tide."},{"title":"Boat to the lagoon","description":"A short boat ride to the sheltered Blue Lagoon."},{"title":"Snorkelling","description":"Snorkel the calm water and look for reef fish."},{"title":"Return","description":"Back to the beach."}]'::jsonb, array['Timing depends on the tide; we''ll confirm it for your day.', 'Never stand on coral — it''s alive and easily damaged.']::text[], '[{"question":"Is it good for beginners?","answer":"Yes — the lagoon is usually calm and shallow."}]'::jsonb, 'Aerial view of waves breaking over turquoise water off the Zanzibar coast',
   false, 'published', 'Blue Lagoon Snorkelling, Michamvi', 'Relaxed snorkelling trip to the Blue Lagoon on Zanzibar''s Michamvi peninsula.', true, 14);
@@ -436,7 +437,7 @@ insert into public.tour_prices (tour_id, market, customer_type, currency, amount
 values ((select id from public.tours where slug = 'blue-lagoon-snorkelling'), 'resident', 'child', 'TZS', 30000, 'per person', true);
 insert into public.tours
   (category_id, destination_id, name, slug, short_description, description, duration_text,
-   highlights, inclusions, exclusions, what_to_bring, meeting_point, difficulty, suitability,
+   length, travel_styles, highlights, inclusions, exclusions, what_to_bring, meeting_point, difficulty, suitability,
    what_to_expect, good_to_know, faqs,
    cover_image_alt, is_featured, status, seo_title, seo_description, is_sample, sort_order)
 values (
@@ -445,7 +446,7 @@ values (
   'Mnarani Turtle Aquarium, Nungwi', 'mnarani-turtle-aquarium', 'Meet sea turtles at a community-run natural lagoon in Nungwi and learn about local conservation.', 'Mnarani is a natural tidal lagoon in Nungwi, at the northern tip of Zanzibar. A local community project there looks after sea turtles.
 
 Learn about turtle conservation from the team and see the turtles up close, then combine the visit with time on Nungwi beach or the nearby lighthouse area.', 'Approx. 1–2 hours (plus travel)',
-  array['Sea turtles in a natural lagoon', 'Community conservation project', 'Nungwi''s northern tip']::text[], array['Guide', 'Transfers within Nungwi/Kendwa']::text[], array['Personal expenses and tips', 'Drinks unless stated', 'Travel insurance', 'Aquarium entrance fee (if not stated as included)']::text[], array['Sun protection', 'Camera', 'Cash for donations or the entrance fee']::text[],
+  'hours', array['family', 'wildlife']::text[], array['Sea turtles in a natural lagoon', 'Community conservation project', 'Nungwi''s northern tip']::text[], array['Guide', 'Transfers within Nungwi/Kendwa']::text[], array['Personal expenses and tips', 'Drinks unless stated', 'Travel insurance', 'Aquarium entrance fee (if not stated as included)']::text[], array['Sun protection', 'Camera', 'Cash for donations or the entrance fee']::text[],
   'Hotel pickup in Nungwi or Kendwa. Exact time confirmed on booking.', 'easy', 'Great for families with children.',
   '[{"title":"Arrive at Mnarani","description":"Short transfer to the lagoon at Nungwi''s northern tip."},{"title":"Meet the team","description":"Learn how the community project cares for sea turtles."},{"title":"See the turtles","description":"Watch the turtles in the natural lagoon."},{"title":"Explore Nungwi","description":"Time to explore the nearby beach or lighthouse area."}]'::jsonb, array['Entrance fees support the community conservation project.', 'Follow the team''s guidance when near the turtles.']::text[], '[{"question":"Can children feed the turtles?","answer":"Sometimes, under the team''s supervision. Policies may change."}]'::jsonb, 'Green sea turtle swimming over seagrass',
   false, 'published', 'Mnarani Turtle Aquarium, Nungwi', 'Visit the community-run Mnarani turtle lagoon in Nungwi, Zanzibar.', true, 15);
@@ -459,7 +460,7 @@ insert into public.tour_prices (tour_id, market, customer_type, currency, amount
 values ((select id from public.tours where slug = 'mnarani-turtle-aquarium'), 'resident', 'child', 'TZS', 15000, 'per person', true);
 insert into public.tours
   (category_id, destination_id, name, slug, short_description, description, duration_text,
-   highlights, inclusions, exclusions, what_to_bring, meeting_point, difficulty, suitability,
+   length, travel_styles, highlights, inclusions, exclusions, what_to_bring, meeting_point, difficulty, suitability,
    what_to_expect, good_to_know, faqs,
    cover_image_alt, is_featured, status, seo_title, seo_description, is_sample, sort_order)
 values (
@@ -468,7 +469,7 @@ values (
   'Swahili Cooking Class', 'zanzibar-cooking-class', 'Cook a Swahili meal with a local host, using the spices Zanzibar is famous for.', 'Spend a few hours in a local kitchen learning to cook traditional Swahili dishes, such as pilau rice, coconut curry and chapati.
 
 Your host shows you how cloves, cinnamon, cardamom and other island spices are used, and then you sit down together to enjoy the meal you prepared.', 'Approx. 3–4 hours',
-  array['Hands-on cooking with a local host', 'Zanzibar spices explained', 'Eat the meal you cooked', 'Recipes to take home']::text[], array['Cooking class and ingredients', 'Meal', 'Soft drinks or tea']::text[], array['Personal expenses and tips', 'Drinks unless stated', 'Travel insurance', 'Transfers (available on request)']::text[], array['Appetite', 'Notes about any allergies or dietary needs']::text[],
+  'half_day', array['family', 'cultural']::text[], array['Hands-on cooking with a local host', 'Zanzibar spices explained', 'Eat the meal you cooked', 'Recipes to take home']::text[], array['Cooking class and ingredients', 'Meal', 'Soft drinks or tea']::text[], array['Personal expenses and tips', 'Drinks unless stated', 'Travel insurance', 'Transfers (available on request)']::text[], array['Appetite', 'Notes about any allergies or dietary needs']::text[],
   'In or near Stone Town. Exact location and time confirmed on booking.', 'easy', 'Suitable for all ages. Vegetarian options can usually be arranged — ask us.',
   '[{"title":"Welcome","description":"Meet your host and learn about the dishes you''ll cook."},{"title":"Spices","description":"Discover how Zanzibar''s spices are used in Swahili cooking."},{"title":"Cook together","description":"Prepare dishes such as pilau, coconut curry and chapati."},{"title":"Eat","description":"Sit down together and enjoy the meal you made."}]'::jsonb, array['Let us know about allergies and dietary needs when booking.', 'Some classes include a market visit — ask our team.']::text[], '[{"question":"Do I need cooking experience?","answer":"Not at all — it''s hands-on and beginner friendly."}]'::jsonb, 'A bowl of spiced pilau rice',
   false, 'published', 'Swahili Cooking Class, Zanzibar', 'Learn to cook Swahili dishes with Zanzibar spices alongside a local host.', true, 16);
@@ -482,7 +483,7 @@ insert into public.tour_prices (tour_id, market, customer_type, currency, amount
 values ((select id from public.tours where slug = 'zanzibar-cooking-class'), 'resident', 'child', 'TZS', 40000, 'per person', true);
 insert into public.tours
   (category_id, destination_id, name, slug, short_description, description, duration_text,
-   highlights, inclusions, exclusions, what_to_bring, meeting_point, difficulty, suitability,
+   length, travel_styles, highlights, inclusions, exclusions, what_to_bring, meeting_point, difficulty, suitability,
    what_to_expect, good_to_know, faqs,
    cover_image_alt, is_featured, status, seo_title, seo_description, is_sample, sort_order)
 values (
@@ -491,7 +492,7 @@ values (
   'Kwale Island & Menai Bay', 'kwale-island-day-trip', 'Sail to Kwale Island in Menai Bay for a mangrove lagoon swim, a sandbank and a seafood lunch.', 'Explore Menai Bay on a traditional boat, with stops at a sandbank and at Kwale Island, known for its natural lagoon among the mangroves and its giant baobab trees.
 
 The day usually includes snorkelling and a seafood lunch on the island. The exact route depends on tides and conditions.', 'Full day',
-  array['Kwale Island mangrove lagoon', 'Giant baobab trees', 'Sandbank stop', 'Seafood lunch']::text[], array['Boat trip', 'Lunch', 'Snorkelling equipment', 'Guide']::text[], array['Personal expenses and tips', 'Drinks unless stated', 'Travel insurance', 'Transfers (available on request)', 'Conservation area fee (if not stated as included)']::text[], array['Swimwear and towel', 'Sun protection and hat', 'Water shoes']::text[],
+  'full_day', array['family', 'relaxation']::text[], array['Kwale Island mangrove lagoon', 'Giant baobab trees', 'Sandbank stop', 'Seafood lunch']::text[], array['Boat trip', 'Lunch', 'Snorkelling equipment', 'Guide']::text[], array['Personal expenses and tips', 'Drinks unless stated', 'Travel insurance', 'Transfers (available on request)', 'Conservation area fee (if not stated as included)']::text[], array['Swimwear and towel', 'Sun protection and hat', 'Water shoes']::text[],
   'Departure from the Fumba area. Transfer options confirmed on booking.', 'easy', 'Suitable for families. Long day in the sun.',
   '[{"title":"Set off from Fumba","description":"Board a traditional boat into Menai Bay."},{"title":"Sandbank","description":"Swim and relax at a sandbank."},{"title":"Kwale Island","description":"Swim in the mangrove lagoon and see the giant baobabs."},{"title":"Lunch and return","description":"Seafood lunch on the island, then the trip back."}]'::jsonb, array['The route depends on tides and weather.', 'Menai Bay is a conservation area; a fee may apply.']::text[], '[{"question":"How is this different from Safari Blue?","answer":"Both explore Menai Bay; this trip focuses on Kwale Island and its lagoon."}]'::jsonb, 'Large baobab tree spreading its branches against the sky',
   false, 'published', 'Kwale Island & Menai Bay Day Trip', 'Full-day boat trip to Kwale Island, a sandbank and Menai Bay with lunch.', true, 17);
@@ -505,7 +506,7 @@ insert into public.tour_prices (tour_id, market, customer_type, currency, amount
 values ((select id from public.tours where slug = 'kwale-island-day-trip'), 'resident', 'child', 'TZS', 60000, 'per person', true);
 insert into public.tours
   (category_id, destination_id, name, slug, short_description, description, duration_text,
-   highlights, inclusions, exclusions, what_to_bring, meeting_point, difficulty, suitability,
+   length, travel_styles, highlights, inclusions, exclusions, what_to_bring, meeting_point, difficulty, suitability,
    what_to_expect, good_to_know, faqs,
    cover_image_alt, is_featured, status, seo_title, seo_description, is_sample, sort_order)
 values (
@@ -514,7 +515,7 @@ values (
   'The Rock & Michamvi Sunset', 'the-rock-michamvi-sunset', 'Visit the famous restaurant on a rock in the sea, then watch the sunset from the Michamvi peninsula.', 'Spend an afternoon on the south-east coast. See The Rock, a restaurant perched on a rock in the sea at Michamvi Pingwe that is reached on foot at low tide or by boat at high tide.
 
 Continue to the west side of the Michamvi peninsula, one of the few places on the east coast where you can watch the sun set over the water.', 'Half day (afternoon and sunset)',
-  array['The Rock restaurant in the sea', 'Michamvi peninsula', 'Sunset over the water', 'South-east coast beaches']::text[], array['Return transfer', 'Driver-guide']::text[], array['Personal expenses and tips', 'Drinks unless stated', 'Travel insurance', 'Meals at The Rock (reservations are recommended and not guaranteed)']::text[], array['Camera', 'Light jacket for the evening', 'Cash or card for meals']::text[],
+  'half_day', array['romantic', 'relaxation']::text[], array['The Rock restaurant in the sea', 'Michamvi peninsula', 'Sunset over the water', 'South-east coast beaches']::text[], array['Return transfer', 'Driver-guide']::text[], array['Personal expenses and tips', 'Drinks unless stated', 'Travel insurance', 'Meals at The Rock (reservations are recommended and not guaranteed)']::text[], array['Camera', 'Light jacket for the evening', 'Cash or card for meals']::text[],
   'Hotel pickup on the south or east coast. Exact time confirmed on booking.', 'easy', 'Suitable for everyone, especially couples.',
   '[{"title":"Drive to Michamvi Pingwe","description":"Head to the south-east coast in the afternoon."},{"title":"The Rock","description":"See (or dine at) the restaurant on a rock in the sea."},{"title":"Michamvi peninsula","description":"Continue to the peninsula''s west-facing shore."},{"title":"Sunset","description":"Watch the sun go down over the water, then return."}]'::jsonb, array['Dining at The Rock needs a reservation, which we can try to arrange but can''t guarantee.', 'At high tide The Rock is reached by a short boat ride.']::text[], '[{"question":"Is the meal included?","answer":"No — meals are paid at the restaurant."}]'::jsonb, 'The Rock restaurant on its coral outcrop off Michamvi beach',
   false, 'published', 'The Rock & Michamvi Sunset Tour', 'Visit The Rock restaurant and watch the sunset from Michamvi, Zanzibar.', true, 18);
@@ -528,7 +529,7 @@ insert into public.tour_prices (tour_id, market, customer_type, currency, amount
 values ((select id from public.tours where slug = 'the-rock-michamvi-sunset'), 'resident', 'child', 'TZS', 30000, 'per person', true);
 insert into public.tours
   (category_id, destination_id, name, slug, short_description, description, duration_text,
-   highlights, inclusions, exclusions, what_to_bring, meeting_point, difficulty, suitability,
+   length, travel_styles, highlights, inclusions, exclusions, what_to_bring, meeting_point, difficulty, suitability,
    what_to_expect, good_to_know, faqs,
    cover_image_alt, is_featured, status, seo_title, seo_description, is_sample, sort_order)
 values (
@@ -537,7 +538,7 @@ values (
   'Ngorongoro Crater Day Safari from Zanzibar', 'ngorongoro-crater-day-safari', 'Fly from Zanzibar to the mainland for a game drive on the floor of the Ngorongoro Crater.', 'The Ngorongoro Crater is a vast volcanic caldera and one of Tanzania''s best-known wildlife areas. A day trip from Zanzibar combines flights and road transfers with a game drive on the crater floor.
 
 It is a long day with an early start. Flights and timings depend on availability and are confirmed when booking.', 'Full day (early start, late return)',
-  array['Game drive on the crater floor', 'Views from the crater rim', 'Flight from Zanzibar', 'Picnic lunch']::text[], array['Return flights (subject to availability)', 'Game drive with guide', 'Lunch', 'Conservation fees']::text[], array['Personal expenses and tips', 'Drinks unless stated', 'Travel insurance', 'Airport transfers in Zanzibar (on request)']::text[], array['Passport or ID for the flight', 'Warm layer (the rim can be cool)', 'Hat and sunglasses', 'Camera']::text[],
+  'full_day', array['adventure', 'wildlife']::text[], array['Game drive on the crater floor', 'Views from the crater rim', 'Flight from Zanzibar', 'Picnic lunch']::text[], array['Return flights (subject to availability)', 'Game drive with guide', 'Lunch', 'Conservation fees']::text[], array['Personal expenses and tips', 'Drinks unless stated', 'Travel insurance', 'Airport transfers in Zanzibar (on request)']::text[], array['Passport or ID for the flight', 'Warm layer (the rim can be cool)', 'Hat and sunglasses', 'Camera']::text[],
   'Zanzibar airport. Times depend on flight schedules.', 'moderate', 'Long day with flights and driving. Wildlife sightings cannot be guaranteed.',
   '[{"title":"Early flight","description":"Fly from Zanzibar towards the northern circuit."},{"title":"Crater rim","description":"Drive up to the crater rim for the views."},{"title":"Crater floor game drive","description":"Descend to the crater floor to look for wildlife."},{"title":"Lunch and return","description":"Picnic lunch, more game viewing, then the flight back."}]'::jsonb, array['It''s a long day with an early start and a late return.', 'The rim can be cool — bring a warm layer.', 'Flights depend on availability and weather.']::text[], '[{"question":"Would a longer safari be better?","answer":"If you have time, a 2–3 day safari is more relaxed. See our safari packages."}]'::jsonb, 'Zebras grazing in the Ngorongoro Crater under shafts of light',
   false, 'published', 'Ngorongoro Crater Day Safari from Zanzibar', 'Fly-in day safari to the Ngorongoro Crater from Zanzibar.', true, 19);
@@ -551,7 +552,7 @@ insert into public.tour_prices (tour_id, market, customer_type, currency, amount
 values ((select id from public.tours where slug = 'ngorongoro-crater-day-safari'), 'resident', 'child', 'TZS', 1450000, 'per person', true);
 insert into public.tours
   (category_id, destination_id, name, slug, short_description, description, duration_text,
-   highlights, inclusions, exclusions, what_to_bring, meeting_point, difficulty, suitability,
+   length, travel_styles, highlights, inclusions, exclusions, what_to_bring, meeting_point, difficulty, suitability,
    what_to_expect, good_to_know, faqs,
    cover_image_alt, is_featured, status, seo_title, seo_description, is_sample, sort_order)
 values (
@@ -560,7 +561,7 @@ values (
   'Nyerere (Selous) Day Safari from Zanzibar', 'nyerere-selous-day-safari', 'A fly-in day safari to Nyerere National Park, with a game drive and an optional boat safari.', 'Nyerere National Park, formerly part of the Selous Game Reserve, is one of Africa''s largest protected areas. Its rivers and lakes make it known for boat safaris as well as game drives.
 
 Fly from Zanzibar for a day of wildlife viewing, then return in the late afternoon. Flights and activities depend on availability and season.', 'Full day (early start, late return)',
-  array['Game drive in Nyerere National Park', 'Optional boat safari on the river', 'Short flight from Zanzibar', 'Lunch in the park']::text[], array['Return flights (subject to availability)', 'Game drive with guide', 'Lunch', 'Park fees']::text[], array['Personal expenses and tips', 'Drinks unless stated', 'Travel insurance', 'Boat safari (optional extra, where available)', 'Airport transfers in Zanzibar (on request)']::text[], array['Passport or ID for the flight', 'Neutral-coloured clothing', 'Hat and sunglasses', 'Insect repellent']::text[],
+  'full_day', array['adventure', 'wildlife']::text[], array['Game drive in Nyerere National Park', 'Optional boat safari on the river', 'Short flight from Zanzibar', 'Lunch in the park']::text[], array['Return flights (subject to availability)', 'Game drive with guide', 'Lunch', 'Park fees']::text[], array['Personal expenses and tips', 'Drinks unless stated', 'Travel insurance', 'Boat safari (optional extra, where available)', 'Airport transfers in Zanzibar (on request)']::text[], array['Passport or ID for the flight', 'Neutral-coloured clothing', 'Hat and sunglasses', 'Insect repellent']::text[],
   'Zanzibar airport. Times depend on flight schedules.', 'moderate', 'Long day with flights and driving. Wildlife sightings cannot be guaranteed.',
   '[{"title":"Short flight","description":"Fly from Zanzibar to an airstrip in Nyerere National Park."},{"title":"Game drive","description":"Explore the park with your guide."},{"title":"Lunch","description":"Lunch in the park."},{"title":"Boat safari (optional)","description":"Where available, view wildlife from a boat on the river."},{"title":"Return","description":"Fly back to Zanzibar in the late afternoon."}]'::jsonb, array['Boat safaris depend on water levels and season.', 'Bring insect repellent and neutral-coloured clothing.', 'Flights depend on availability and are confirmed when booking.']::text[], '[{"question":"Is the boat safari included?","answer":"It''s an optional extra where available — ask us when booking."}]'::jsonb, 'African elephant in Nyerere National Park',
   false, 'published', 'Nyerere (Selous) Day Safari from Zanzibar', 'Fly-in day safari to Nyerere National Park (Selous) from Zanzibar.', true, 20);
@@ -574,7 +575,7 @@ insert into public.tour_prices (tour_id, market, customer_type, currency, amount
 values ((select id from public.tours where slug = 'nyerere-selous-day-safari'), 'resident', 'child', 'TZS', 1150000, 'per person', true);
 insert into public.tours
   (category_id, destination_id, name, slug, short_description, description, duration_text,
-   highlights, inclusions, exclusions, what_to_bring, meeting_point, difficulty, suitability,
+   length, travel_styles, highlights, inclusions, exclusions, what_to_bring, meeting_point, difficulty, suitability,
    what_to_expect, good_to_know, faqs,
    cover_image_alt, is_featured, status, seo_title, seo_description, is_sample, sort_order)
 values (
@@ -583,7 +584,7 @@ values (
   'Pungume Island & Sandbank Tour', 'pungume-island-sandbank', 'A boat day in Menai Bay to Pungume Island and its sandbank, with snorkelling and a seafood lunch.', 'Pungume is a small island in the Menai Bay Conservation Area, off Zanzibar''s south-west coast. It is surrounded by clear water, reefs and a sandbank that appears with the tide.
 
 Spend the day swimming, snorkelling and relaxing on the sand, with a seafood lunch. Dolphins are sometimes seen on the way, but sightings can''t be guaranteed.', 'Full day',
-  array['Pungume Island', 'Sandbank swim', 'Snorkelling on the reef', 'Seafood lunch']::text[], array['Boat trip', 'Snorkelling equipment', 'Lunch', 'Guide']::text[], array['Personal expenses and tips', 'Drinks unless stated', 'Travel insurance', 'Transfers (available on request)', 'Conservation area fee (if not stated as included)']::text[], array['Swimwear and towel', 'Reef-safe sunscreen and hat', 'Water shoes', 'Waterproof bag']::text[],
+  'full_day', array['family', 'relaxation']::text[], array['Pungume Island', 'Sandbank swim', 'Snorkelling on the reef', 'Seafood lunch']::text[], array['Boat trip', 'Snorkelling equipment', 'Lunch', 'Guide']::text[], array['Personal expenses and tips', 'Drinks unless stated', 'Travel insurance', 'Transfers (available on request)', 'Conservation area fee (if not stated as included)']::text[], array['Swimwear and towel', 'Reef-safe sunscreen and hat', 'Water shoes', 'Waterproof bag']::text[],
   'Departure from the south-west coast (Fumba or Kizimkazi area). Transfer options confirmed on booking.', 'easy', 'Suitable for families. Long day on the water and in the sun.',
   '[{"title":"Set off by boat","description":"Leave the south-west coast and head into Menai Bay."},{"title":"Sandbank","description":"Stop at the sandbank to swim and relax."},{"title":"Snorkelling","description":"Snorkel on the reef around Pungume Island."},{"title":"Island lunch","description":"Seafood lunch and free time on the island."},{"title":"Return","description":"Boat back in the afternoon."}]'::jsonb, array['Timing and route depend on the tides and weather.', 'There is little shade on the sandbank — bring a hat and sunscreen.', 'Menai Bay is a conservation area; a fee may apply.']::text[], '[{"question":"Will we see dolphins?","answer":"Dolphins are sometimes seen in Menai Bay, but sightings can''t be guaranteed."},{"question":"Is it suitable for non-swimmers?","answer":"Yes. Life jackets are available and you can relax on the boat or sandbank."}]'::jsonb, 'Aerial view of a narrow white sandbank in turquoise water off Zanzibar',
   false, 'published', 'Pungume Island & Sandbank Tour', 'Full-day boat trip to Pungume Island and its sandbank in Menai Bay, Zanzibar.', true, 21);
@@ -597,7 +598,7 @@ insert into public.tour_prices (tour_id, market, customer_type, currency, amount
 values ((select id from public.tours where slug = 'pungume-island-sandbank'), 'resident', 'child', 'TZS', 70000, 'per person', true);
 insert into public.tours
   (category_id, destination_id, name, slug, short_description, description, duration_text,
-   highlights, inclusions, exclusions, what_to_bring, meeting_point, difficulty, suitability,
+   length, travel_styles, highlights, inclusions, exclusions, what_to_bring, meeting_point, difficulty, suitability,
    what_to_expect, good_to_know, faqs,
    cover_image_alt, is_featured, status, seo_title, seo_description, is_sample, sort_order)
 values (
@@ -606,7 +607,7 @@ values (
   'Jet Ski Experience', 'jet-ski-experience', 'Ride a jet ski along Zanzibar''s north coast, with a safety briefing and an instructor nearby.', 'Feel the speed on the turquoise water off Nungwi and Kendwa. After a safety briefing, take a jet ski out along the coast within a safe riding area, with an instructor nearby the whole time.
 
 Choose the length of your ride when you book. Rides depend on sea conditions and safety checks on the day.', 'Approx. 30–60 minutes (as booked)',
-  array['Jet ski ride on turquoise water', 'Views of the Nungwi and Kendwa beaches', 'Safety briefing before you ride', 'Instructor nearby throughout']::text[], array['Jet ski session (time as booked)', 'Life jacket and safety equipment', 'Safety briefing', 'Instructor supervision']::text[], array['Personal expenses and tips', 'Drinks unless stated', 'Travel insurance', 'Transfers (available on request)', 'Photos and videos']::text[], array['Swimwear', 'Sun protection', 'A change of clothes', 'Strap for sunglasses']::text[],
+  'hours', array['adventure']::text[], array['Jet ski ride on turquoise water', 'Views of the Nungwi and Kendwa beaches', 'Safety briefing before you ride', 'Instructor nearby throughout']::text[], array['Jet ski session (time as booked)', 'Life jacket and safety equipment', 'Safety briefing', 'Instructor supervision']::text[], array['Personal expenses and tips', 'Drinks unless stated', 'Travel insurance', 'Transfers (available on request)', 'Photos and videos']::text[], array['Swimwear', 'Sun protection', 'A change of clothes', 'Strap for sunglasses']::text[],
   'Water sports centre on Nungwi or Kendwa beach. Exact place and time confirmed on booking.', 'moderate', 'Age and health requirements apply for drivers — we''ll confirm them when you book.',
   '[{"title":"Check-in and briefing","description":"Meet the team on the beach, get your life jacket and learn the controls and safety rules."},{"title":"Your ride","description":"Ride along the coast within the safe area set by your instructor."},{"title":"Back to the beach","description":"Return to shore — add more time if you''re hooked."}]'::jsonb, array['Rides depend on sea conditions and safety checks on the day.', 'Life jackets must be worn at all times.', 'Age and health requirements apply for drivers; we''ll confirm them when you book.', 'Stay within the riding area your instructor shows you.']::text[], '[{"question":"Do I need a licence or experience?","answer":"A licence isn''t usually needed for a supervised ride, and you''ll get a safety briefing first. We''ll confirm the requirements when you book."},{"question":"Can two people share a jet ski?","answer":"Often, yes — a passenger can ride behind the driver, depending on the jet ski and conditions."},{"question":"Can I combine it with parasailing?","answer":"Yes — parasailing is a separate experience at the same beaches. Ask us and we''ll arrange both on the same day."}]'::jsonb, 'Jet ski carving a curved wake across open water',
   false, 'published', 'Jet Ski Experience in Zanzibar', 'Jet ski rides on Zanzibar''s northern coast at Nungwi and Kendwa, with a safety briefing and instructor.', true, 22);
@@ -616,7 +617,7 @@ insert into public.tour_prices (tour_id, market, customer_type, currency, amount
 values ((select id from public.tours where slug = 'jet-ski-experience'), 'resident', 'adult', 'TZS', 110000, 'per person', true);
 insert into public.tours
   (category_id, destination_id, name, slug, short_description, description, duration_text,
-   highlights, inclusions, exclusions, what_to_bring, meeting_point, difficulty, suitability,
+   length, travel_styles, highlights, inclusions, exclusions, what_to_bring, meeting_point, difficulty, suitability,
    what_to_expect, good_to_know, faqs,
    cover_image_alt, is_featured, status, seo_title, seo_description, is_sample, sort_order)
 values (
@@ -625,7 +626,7 @@ values (
   'Parasailing Experience', 'parasailing-experience', 'Fly high above the turquoise water on a parasail towed by a boat — no experience needed.', 'See Zanzibar''s north coast from the sky. A boat takes you out from the beach, you''re clipped into the harness, and the parasail lifts you gently into the air for a bird''s-eye view of the beaches and the reef below.
 
 Fly on your own or as a tandem with a friend or partner. Flights depend on wind, sea conditions and safety checks on the day.', 'Approx. 1 hour including the boat trip',
-  array['Parasailing flight over the ocean', 'Bird''s-eye view of the beaches and reef', 'Solo or tandem flights', 'No experience needed']::text[], array['Boat trip to the launch area', 'Parasailing flight (solo or tandem)', 'Harness, life jacket and safety equipment', 'Crew and safety briefing']::text[], array['Personal expenses and tips', 'Drinks unless stated', 'Travel insurance', 'Transfers (available on request)', 'Photos and videos']::text[], array['Swimwear or light clothes that can get wet', 'Sun protection', 'Strap for sunglasses', 'A change of clothes']::text[],
+  'hours', array['adventure']::text[], array['Parasailing flight over the ocean', 'Bird''s-eye view of the beaches and reef', 'Solo or tandem flights', 'No experience needed']::text[], array['Boat trip to the launch area', 'Parasailing flight (solo or tandem)', 'Harness, life jacket and safety equipment', 'Crew and safety briefing']::text[], array['Personal expenses and tips', 'Drinks unless stated', 'Travel insurance', 'Transfers (available on request)', 'Photos and videos']::text[], array['Swimwear or light clothes that can get wet', 'Sun protection', 'Strap for sunglasses', 'A change of clothes']::text[],
   'Water sports centre on Nungwi or Kendwa beach. Exact place and time confirmed on booking.', 'easy', 'No experience needed. Age, weight and health requirements apply — we''ll confirm them when you book.',
   '[{"title":"Check-in and briefing","description":"Meet the crew on the beach for a safety briefing."},{"title":"Boat out","description":"Ride the boat out to the launch area and get clipped into the harness."},{"title":"Take off","description":"The parasail lifts you gently from the boat — enjoy the view of the coast and reef from above."},{"title":"Landing and return","description":"The crew brings you back down and the boat returns to the beach."}]'::jsonb, array['Flights depend on wind, sea conditions and safety checks on the day.', 'No previous experience is needed.', 'Age, weight and health requirements apply; we''ll confirm them when you book.', 'Secure loose items such as hats and sunglasses before take-off.']::text[], '[{"question":"Can two people fly together?","answer":"Often, yes — tandem flights depend on combined weight and conditions."},{"question":"Will I get wet?","answer":"You may get splashed, so wear swimwear or clothes that can get wet. The crew explains the launch and landing before you fly."},{"question":"Can I combine it with a jet ski ride?","answer":"Yes — the jet ski is a separate experience at the same beaches. Ask us and we''ll arrange both on the same day."}]'::jsonb, 'Two people parasailing above turquoise water with the tow boat below',
   false, 'published', 'Parasailing in Zanzibar', 'Parasailing flights over the turquoise water off Nungwi and Kendwa — solo or tandem, no experience needed.', true, 23);
@@ -635,7 +636,7 @@ insert into public.tour_prices (tour_id, market, customer_type, currency, amount
 values ((select id from public.tours where slug = 'parasailing-experience'), 'resident', 'adult', 'TZS', 130000, 'per person', true);
 insert into public.tours
   (category_id, destination_id, name, slug, short_description, description, duration_text,
-   highlights, inclusions, exclusions, what_to_bring, meeting_point, difficulty, suitability,
+   length, travel_styles, highlights, inclusions, exclusions, what_to_bring, meeting_point, difficulty, suitability,
    what_to_expect, good_to_know, faqs,
    cover_image_alt, is_featured, status, seo_title, seo_description, is_sample, sort_order)
 values (
@@ -644,7 +645,7 @@ values (
   'Salaam Cave Experience', 'salaam-cave-experience', 'Swim in a natural cave pool in Kizimkazi, home to sea turtles, with a local guide.', 'Salaam Cave, in the Kizimkazi area on Zanzibar''s south coast, is a natural limestone cave with a pool of clear water where sea turtles are cared for.
 
 With a local guide, step down into the cave, learn about the turtles and the site, and swim in the cool pool. It combines well with dolphin watching or Jozani Forest.', 'Approx. 1–2 hours (plus travel)',
-  array['Natural cave pool', 'Sea turtles', 'Swim in cool, clear water', 'Easy to combine with Kizimkazi']::text[], array['Local guide', 'Transfers within the Kizimkazi area']::text[], array['Personal expenses and tips', 'Drinks unless stated', 'Travel insurance', 'Cave entrance fee (if not stated as included)']::text[], array['Swimwear and towel', 'Water shoes', 'Camera']::text[],
+  'hours', array['family', 'wildlife']::text[], array['Natural cave pool', 'Sea turtles', 'Swim in cool, clear water', 'Easy to combine with Kizimkazi']::text[], array['Local guide', 'Transfers within the Kizimkazi area']::text[], array['Personal expenses and tips', 'Drinks unless stated', 'Travel insurance', 'Cave entrance fee (if not stated as included)']::text[], array['Swimwear and towel', 'Water shoes', 'Camera']::text[],
   'Kizimkazi, or hotel pickup on request. Exact time confirmed on booking.', 'easy', 'Suitable for families. The cave has steps and can be slippery.',
   '[{"title":"Arrive in Kizimkazi","description":"Meet your local guide at the cave."},{"title":"Into the cave","description":"Step down into the limestone cave and its clear pool."},{"title":"Meet the turtles","description":"Learn about the sea turtles cared for at the site."},{"title":"Swim","description":"Enjoy a cool swim in the natural pool."}]'::jsonb, array['Follow your guide''s instructions near the turtles and don''t touch them unless invited to.', 'The steps and rocks can be slippery — water shoes help.', 'Easy to combine with the Kizimkazi Dolphin Watching Tour on the same morning.']::text[], '[{"question":"Can children swim in the cave?","answer":"Yes, with adult supervision. The guide will advise on the best spots."},{"question":"Can I combine it with dolphin watching?","answer":"Yes — both are in the Kizimkazi area and fit into one morning."}]'::jsonb, 'Sea turtle swimming in clear shallow water',
   false, 'published', 'Salaam Cave Experience, Kizimkazi', 'Swim in the Salaam Cave pool with sea turtles in Kizimkazi, Zanzibar.', true, 24);
@@ -658,7 +659,7 @@ insert into public.tour_prices (tour_id, market, customer_type, currency, amount
 values ((select id from public.tours where slug = 'salaam-cave-experience'), 'resident', 'child', 'TZS', 30000, 'per person', true);
 insert into public.tours
   (category_id, destination_id, name, slug, short_description, description, duration_text,
-   highlights, inclusions, exclusions, what_to_bring, meeting_point, difficulty, suitability,
+   length, travel_styles, highlights, inclusions, exclusions, what_to_bring, meeting_point, difficulty, suitability,
    what_to_expect, good_to_know, faqs,
    cover_image_alt, is_featured, status, seo_title, seo_description, is_sample, sort_order)
 values (
@@ -667,7 +668,7 @@ values (
   'Horse Riding & Swimming Experience', 'horse-riding-swimming', 'Ride along a white-sand beach and, tide permitting, swim with the horses in the warm sea.', 'Ride along Zanzibar''s beaches with an experienced local guide. Rides are matched to your level, from first-timers to confident riders.
 
 When the tide and conditions allow, you can ride into the shallow water and swim with the horses — an unforgettable experience. Sunrise and late-afternoon rides are especially beautiful.', 'Approx. 1–2 hours',
-  array['Beach ride along white sand', 'Swim with the horses (tide permitting)', 'Rides for beginners and experienced riders', 'Sunrise or sunset options']::text[], array['Horse and guide', 'Helmet and safety briefing']::text[], array['Personal expenses and tips', 'Drinks unless stated', 'Travel insurance', 'Transfers (available on request)', 'Photos and videos']::text[], array['Long, comfortable trousers or leggings', 'Closed shoes or sandals with a strap', 'Swimwear underneath', 'Sun protection']::text[],
+  'hours', array['adventure', 'romantic']::text[], array['Beach ride along white sand', 'Swim with the horses (tide permitting)', 'Rides for beginners and experienced riders', 'Sunrise or sunset options']::text[], array['Horse and guide', 'Helmet and safety briefing']::text[], array['Personal expenses and tips', 'Drinks unless stated', 'Travel insurance', 'Transfers (available on request)', 'Photos and videos']::text[], array['Long, comfortable trousers or leggings', 'Closed shoes or sandals with a strap', 'Swimwear underneath', 'Sun protection']::text[],
   'Stables on the north coast. Exact place and time (based on the tide) confirmed on booking.', 'moderate', 'Beginners welcome. Age and weight limits apply — we''ll confirm them when you book.',
   '[{"title":"Meet the horses","description":"Arrive at the stables, meet your guide and get matched with a horse."},{"title":"Safety briefing","description":"Helmet fitting and a short riding briefing for your level."},{"title":"Beach ride","description":"Ride along the beach at a pace that suits you."},{"title":"Swim with the horses","description":"Tide and conditions permitting, ride into the sea and swim together."},{"title":"Return to the stables","description":"Ride back and say goodbye to your horse."}]'::jsonb, array['Ride times are planned around the tides, so they change from day to day.', 'Wear long trousers to avoid chafing; swimwear underneath for the sea.', 'Age and weight limits apply for the horses'' welfare.']::text[], '[{"question":"I''ve never ridden before — can I join?","answer":"Yes. Beginners are welcome and rides are matched to your experience."},{"question":"Will I definitely swim with the horses?","answer":"Only when the tide and conditions are safe; your guide decides on the day."},{"question":"Can children ride?","answer":"Often, yes, from a minimum age. Tell us your children''s ages when you book."}]'::jsonb, 'A rider on a bay horse wading through clear turquoise water under a blue sky',
   false, 'published', 'Horse Riding & Swimming in Zanzibar', 'Beach horse riding and swimming with horses in Zanzibar, for beginners and experienced riders.', true, 25);
@@ -679,17 +680,152 @@ insert into public.tour_prices (tour_id, market, customer_type, currency, amount
 values ((select id from public.tours where slug = 'horse-riding-swimming'), 'resident', 'adult', 'TZS', 130000, 'per person', true);
 insert into public.tour_prices (tour_id, market, customer_type, currency, amount, unit_label, is_illustrative)
 values ((select id from public.tours where slug = 'horse-riding-swimming'), 'resident', 'child', 'TZS', 95000, 'per person', true);
+insert into public.tours
+  (category_id, destination_id, name, slug, short_description, description, duration_text,
+   length, travel_styles, highlights, inclusions, exclusions, what_to_bring, meeting_point, difficulty, suitability,
+   what_to_expect, good_to_know, faqs,
+   cover_image_alt, is_featured, status, seo_title, seo_description, is_sample, sort_order)
+values (
+  (select id from public.tour_categories where slug = 'safari'),
+  (select id from public.destinations where slug = 'serengeti-ngorongoro'),
+  'Serengeti National Park Safari', 'serengeti-national-park-safari', 'Experience the Big Five, vast savannah plains and the Great Wildebeest Migration.', 'Experience the Big Five, vast savannah plains and the Great Wildebeest Migration in Tanzania''s best-known national park.
+
+Combine the Serengeti with Ngorongoro and other northern parks, or with time on Zanzibar''s beaches.', 'Multi-day — tailored to your plans',
+  'multi_day', array['wildlife']::text[], array['The Big Five', 'Vast savannah plains', 'The Great Wildebeest Migration (seasonal)']::text[], '{}'::text[], array['Personal expenses and tips', 'Drinks unless stated', 'Travel insurance']::text[], array['Neutral-coloured, comfortable clothing', 'Hat, sunglasses and sunscreen', 'Binoculars and camera', 'Passport for domestic flights']::text[],
+  'Arranged when you book, depending on where your trip starts (Zanzibar or the mainland).', 'moderate', 'Involves long drives on rough roads. Wildlife sightings cannot be guaranteed.',
+  '[{"title":"Plan your safari","description":"Tell us your dates, group size and budget. We suggest an itinerary and send you a quote."},{"title":"Travel to the park","description":"By road or a short flight, depending on your itinerary."},{"title":"Game drives","description":"Explore the park with a driver-guide in a safari vehicle."}]'::jsonb, array['Length, itinerary and price are tailored to you and confirmed in your quote.', 'Wildlife sightings cannot be guaranteed.']::text[], '[{"question":"How many days do I need?","answer":"It depends on your plans and the other parks you visit. We''ll recommend a length when you enquire."}]'::jsonb, 'A family of elephants walking across the Serengeti grassland',
+  false, 'published', 'Serengeti National Park Safari', 'Experience the Big Five, vast savannah plains and the Great Wildebeest Migration.', true, 26);
+insert into public.tours
+  (category_id, destination_id, name, slug, short_description, description, duration_text,
+   length, travel_styles, highlights, inclusions, exclusions, what_to_bring, meeting_point, difficulty, suitability,
+   what_to_expect, good_to_know, faqs,
+   cover_image_alt, is_featured, status, seo_title, seo_description, is_sample, sort_order)
+values (
+  (select id from public.tour_categories where slug = 'safari'),
+  (select id from public.destinations where slug = ''),
+  'Tarangire National Park Safari', 'tarangire-national-park-safari', 'Discover large elephant herds, ancient baobab trees and diverse wildlife.', 'Discover large elephant herds, ancient baobab trees and diverse wildlife in Tarangire National Park.
+
+Tarangire is part of Tanzania''s northern circuit and is often combined with Lake Manyara, Ngorongoro and the Serengeti.', 'Multi-day — tailored to your plans',
+  'multi_day', array['wildlife']::text[], array['Large elephant herds', 'Ancient baobab trees', 'Diverse wildlife']::text[], '{}'::text[], array['Personal expenses and tips', 'Drinks unless stated', 'Travel insurance']::text[], array['Neutral-coloured, comfortable clothing', 'Hat, sunglasses and sunscreen', 'Binoculars and camera', 'Passport for domestic flights']::text[],
+  'Arranged when you book, depending on where your trip starts (Zanzibar or the mainland).', 'moderate', 'Involves long drives on rough roads. Wildlife sightings cannot be guaranteed.',
+  '[{"title":"Plan your safari","description":"Tell us your dates, group size and budget. We suggest an itinerary and send you a quote."},{"title":"Travel to the park","description":"By road or a short flight, depending on your itinerary."},{"title":"Game drives","description":"Explore the park with a driver-guide in a safari vehicle."}]'::jsonb, array['Length, itinerary and price are tailored to you and confirmed in your quote.', 'Wildlife sightings cannot be guaranteed.']::text[], '[{"question":"How many days do I need?","answer":"It depends on your plans and the other parks you visit. We''ll recommend a length when you enquire."}]'::jsonb, 'A large baobab tree in the Tanzanian bush',
+  false, 'published', 'Tarangire National Park Safari', 'Discover large elephant herds, ancient baobab trees and diverse wildlife.', true, 27);
+insert into public.tours
+  (category_id, destination_id, name, slug, short_description, description, duration_text,
+   length, travel_styles, highlights, inclusions, exclusions, what_to_bring, meeting_point, difficulty, suitability,
+   what_to_expect, good_to_know, faqs,
+   cover_image_alt, is_featured, status, seo_title, seo_description, is_sample, sort_order)
+values (
+  (select id from public.tour_categories where slug = 'safari'),
+  (select id from public.destinations where slug = ''),
+  'Lake Manyara National Park Safari', 'lake-manyara-national-park-safari', 'Experience beautiful landscapes, flamingos, elephants and tree-climbing lions.', 'Experience beautiful landscapes, flamingos, elephants and tree-climbing lions at Lake Manyara National Park.
+
+Lake Manyara is part of Tanzania''s northern circuit and fits easily alongside Tarangire and Ngorongoro.', 'Multi-day — tailored to your plans',
+  'multi_day', array['wildlife']::text[], array['Beautiful landscapes', 'Flamingos', 'Elephants', 'Tree-climbing lions']::text[], '{}'::text[], array['Personal expenses and tips', 'Drinks unless stated', 'Travel insurance']::text[], array['Neutral-coloured, comfortable clothing', 'Hat, sunglasses and sunscreen', 'Binoculars and camera', 'Passport for domestic flights']::text[],
+  'Arranged when you book, depending on where your trip starts (Zanzibar or the mainland).', 'moderate', 'Involves long drives on rough roads. Wildlife sightings cannot be guaranteed.',
+  '[{"title":"Plan your safari","description":"Tell us your dates, group size and budget. We suggest an itinerary and send you a quote."},{"title":"Travel to the park","description":"By road or a short flight, depending on your itinerary."},{"title":"Game drives","description":"Explore the park with a driver-guide in a safari vehicle."}]'::jsonb, array['Length, itinerary and price are tailored to you and confirmed in your quote.', 'Wildlife sightings cannot be guaranteed.']::text[], '[{"question":"How many days do I need?","answer":"It depends on your plans and the other parks you visit. We''ll recommend a length when you enquire."}]'::jsonb, 'Flamingos on the shore of Lake Manyara',
+  false, 'published', 'Lake Manyara National Park Safari', 'Experience beautiful landscapes, flamingos, elephants and tree-climbing lions.', true, 28);
+insert into public.tours
+  (category_id, destination_id, name, slug, short_description, description, duration_text,
+   length, travel_styles, highlights, inclusions, exclusions, what_to_bring, meeting_point, difficulty, suitability,
+   what_to_expect, good_to_know, faqs,
+   cover_image_alt, is_featured, status, seo_title, seo_description, is_sample, sort_order)
+values (
+  (select id from public.tour_categories where slug = 'safari'),
+  (select id from public.destinations where slug = ''),
+  'Arusha National Park Safari', 'arusha-national-park-safari', 'Explore Mount Meru, beautiful forests, lakes and diverse wildlife.', 'Explore Mount Meru, beautiful forests, lakes and diverse wildlife in Arusha National Park.
+
+The park is close to Arusha town, making it a convenient start or end to a northern-circuit safari.', 'Multi-day — tailored to your plans',
+  'multi_day', array['wildlife']::text[], array['Mount Meru', 'Beautiful forests', 'Lakes', 'Diverse wildlife']::text[], '{}'::text[], array['Personal expenses and tips', 'Drinks unless stated', 'Travel insurance']::text[], array['Neutral-coloured, comfortable clothing', 'Hat, sunglasses and sunscreen', 'Binoculars and camera', 'Passport for domestic flights']::text[],
+  'Arranged when you book, depending on where your trip starts (Zanzibar or the mainland).', 'moderate', 'Involves long drives on rough roads. Wildlife sightings cannot be guaranteed.',
+  '[{"title":"Plan your safari","description":"Tell us your dates, group size and budget. We suggest an itinerary and send you a quote."},{"title":"Travel to the park","description":"By road or a short flight, depending on your itinerary."},{"title":"Game drives","description":"Explore the park with a driver-guide in a safari vehicle."}]'::jsonb, array['Length, itinerary and price are tailored to you and confirmed in your quote.', 'Wildlife sightings cannot be guaranteed.']::text[], '[{"question":"How many days do I need?","answer":"It depends on your plans and the other parks you visit. We''ll recommend a length when you enquire."}]'::jsonb, 'Mount Meru rising above forest in Arusha National Park',
+  false, 'published', 'Arusha National Park Safari', 'Explore Mount Meru, beautiful forests, lakes and diverse wildlife.', true, 29);
+insert into public.tours
+  (category_id, destination_id, name, slug, short_description, description, duration_text,
+   length, travel_styles, highlights, inclusions, exclusions, what_to_bring, meeting_point, difficulty, suitability,
+   what_to_expect, good_to_know, faqs,
+   cover_image_alt, is_featured, status, seo_title, seo_description, is_sample, sort_order)
+values (
+  (select id from public.tour_categories where slug = 'safari'),
+  (select id from public.destinations where slug = ''),
+  'Ruaha National Park Safari', 'ruaha-national-park-safari', 'Discover Tanzania''s wilderness, famous for elephants, lions and spectacular landscapes.', 'Discover Tanzania''s wilderness in Ruaha National Park, famous for elephants, lions and spectacular landscapes.
+
+Ruaha is part of the southern circuit, with Mikumi and Nyerere.', 'Multi-day — tailored to your plans',
+  'multi_day', array['adventure', 'wildlife']::text[], array['Elephants', 'Lions', 'Spectacular landscapes']::text[], '{}'::text[], array['Personal expenses and tips', 'Drinks unless stated', 'Travel insurance']::text[], array['Neutral-coloured, comfortable clothing', 'Hat, sunglasses and sunscreen', 'Binoculars and camera', 'Passport for domestic flights']::text[],
+  'Arranged when you book, depending on where your trip starts (Zanzibar or the mainland).', 'moderate', 'Involves long drives on rough roads. Wildlife sightings cannot be guaranteed.',
+  '[{"title":"Plan your safari","description":"Tell us your dates, group size and budget. We suggest an itinerary and send you a quote."},{"title":"Travel to the park","description":"By road or a short flight, depending on your itinerary."},{"title":"Game drives","description":"Explore the park with a driver-guide in a safari vehicle."}]'::jsonb, array['Length, itinerary and price are tailored to you and confirmed in your quote.', 'Wildlife sightings cannot be guaranteed.']::text[], '[{"question":"How many days do I need?","answer":"It depends on your plans and the other parks you visit. We''ll recommend a length when you enquire."}]'::jsonb, 'Elephants in the dry landscape of Ruaha National Park',
+  false, 'published', 'Ruaha National Park Safari', 'Discover Tanzania''s wilderness, famous for elephants, lions and spectacular landscapes.', true, 30);
+insert into public.tours
+  (category_id, destination_id, name, slug, short_description, description, duration_text,
+   length, travel_styles, highlights, inclusions, exclusions, what_to_bring, meeting_point, difficulty, suitability,
+   what_to_expect, good_to_know, faqs,
+   cover_image_alt, is_featured, status, seo_title, seo_description, is_sample, sort_order)
+values (
+  (select id from public.tour_categories where slug = 'safari'),
+  (select id from public.destinations where slug = ''),
+  'Gombe Stream National Park', 'gombe-stream-national-park', 'Experience chimpanzee trekking in the forests along Lake Tanganyika.', 'Experience chimpanzee trekking in the forests along Lake Tanganyika at Gombe Stream National Park.
+
+Gombe is in western Tanzania. It is remote, so travel time is part of the plan.', 'Multi-day — tailored to your plans',
+  'multi_day', array['adventure', 'wildlife']::text[], array['Chimpanzee trekking', 'Forests along Lake Tanganyika']::text[], '{}'::text[], array['Personal expenses and tips', 'Drinks unless stated', 'Travel insurance']::text[], array['Neutral-coloured, comfortable clothing', 'Hat, sunglasses and sunscreen', 'Binoculars and camera', 'Passport for domestic flights']::text[],
+  'Arranged when you book, depending on where your trip starts (Zanzibar or the mainland).', 'challenging', 'Trekking on steep, forested trails. Sightings cannot be guaranteed.',
+  '[{"title":"Plan your safari","description":"Tell us your dates, group size and budget. We suggest an itinerary and send you a quote."},{"title":"Travel to western Tanzania","description":"The parks are remote; travel is arranged as part of your plan."},{"title":"Chimpanzee trekking","description":"Walk through the forest with a park guide to find the chimpanzees."}]'::jsonb, array['Length, itinerary and price are tailored to you and confirmed in your quote.', 'Chimpanzee sightings cannot be guaranteed.']::text[], '[{"question":"How many days do I need?","answer":"It depends on your plans and the other parks you visit. We''ll recommend a length when you enquire."}]'::jsonb, 'Forest on the shore of Lake Tanganyika',
+  false, 'published', 'Gombe Stream National Park', 'Experience chimpanzee trekking in the forests along Lake Tanganyika.', true, 31);
+insert into public.tours
+  (category_id, destination_id, name, slug, short_description, description, duration_text,
+   length, travel_styles, highlights, inclusions, exclusions, what_to_bring, meeting_point, difficulty, suitability,
+   what_to_expect, good_to_know, faqs,
+   cover_image_alt, is_featured, status, seo_title, seo_description, is_sample, sort_order)
+values (
+  (select id from public.tour_categories where slug = 'safari'),
+  (select id from public.destinations where slug = ''),
+  'Mahale Mountains National Park', 'mahale-mountains-national-park', 'Discover wild chimpanzees, tropical forests and beautiful Lake Tanganyika.', 'Discover wild chimpanzees, tropical forests and beautiful Lake Tanganyika at Mahale Mountains National Park.
+
+Mahale is in western Tanzania. It is remote, so travel time is part of the plan.', 'Multi-day — tailored to your plans',
+  'multi_day', array['adventure', 'wildlife']::text[], array['Wild chimpanzees', 'Tropical forests', 'Lake Tanganyika']::text[], '{}'::text[], array['Personal expenses and tips', 'Drinks unless stated', 'Travel insurance']::text[], array['Neutral-coloured, comfortable clothing', 'Hat, sunglasses and sunscreen', 'Binoculars and camera', 'Passport for domestic flights']::text[],
+  'Arranged when you book, depending on where your trip starts (Zanzibar or the mainland).', 'challenging', 'Trekking on steep, forested trails. Sightings cannot be guaranteed.',
+  '[{"title":"Plan your safari","description":"Tell us your dates, group size and budget. We suggest an itinerary and send you a quote."},{"title":"Travel to western Tanzania","description":"The parks are remote; travel is arranged as part of your plan."},{"title":"Chimpanzee trekking","description":"Walk through the forest with a park guide to find the chimpanzees."}]'::jsonb, array['Length, itinerary and price are tailored to you and confirmed in your quote.', 'Chimpanzee sightings cannot be guaranteed.']::text[], '[{"question":"How many days do I need?","answer":"It depends on your plans and the other parks you visit. We''ll recommend a length when you enquire."}]'::jsonb, 'Forested mountains above Lake Tanganyika',
+  false, 'published', 'Mahale Mountains National Park', 'Discover wild chimpanzees, tropical forests and beautiful Lake Tanganyika.', true, 32);
+insert into public.tours
+  (category_id, destination_id, name, slug, short_description, description, duration_text,
+   length, travel_styles, highlights, inclusions, exclusions, what_to_bring, meeting_point, difficulty, suitability,
+   what_to_expect, good_to_know, faqs,
+   cover_image_alt, is_featured, status, seo_title, seo_description, is_sample, sort_order)
+values (
+  (select id from public.tour_categories where slug = 'safari'),
+  (select id from public.destinations where slug = 'serengeti-ngorongoro'),
+  'Great Wildebeest Migration Safari', 'great-wildebeest-migration-safari', 'Witness the spectacular annual migration of wildebeest and zebras across the Serengeti ecosystem.', 'Witness the spectacular annual migration of wildebeest and zebras across the Serengeti ecosystem.
+
+The herds move through the year, so where you stay depends on when you travel. We''ll suggest dates and areas when you enquire.', 'Multi-day — timed to the season',
+  'multi_day', array['wildlife']::text[], array['The annual wildebeest and zebra migration', 'The Serengeti ecosystem']::text[], '{}'::text[], array['Personal expenses and tips', 'Drinks unless stated', 'Travel insurance']::text[], array['Neutral-coloured, comfortable clothing', 'Hat, sunglasses and sunscreen', 'Binoculars and camera', 'Passport for domestic flights']::text[],
+  'Arranged when you book, depending on where your trip starts (Zanzibar or the mainland).', 'moderate', 'Involves long drives on rough roads. Wildlife sightings cannot be guaranteed.',
+  '[{"title":"Plan your safari","description":"Tell us your dates, group size and budget. We suggest an itinerary and send you a quote."},{"title":"Travel to the park","description":"By road or a short flight, depending on your itinerary."},{"title":"Game drives","description":"Explore the park with a driver-guide in a safari vehicle."}]'::jsonb, array['Length, itinerary and price are tailored to you and confirmed in your quote.', 'The herds'' location changes through the year, so dates matter.', 'Wildlife sightings cannot be guaranteed.']::text[], '[{"question":"When is the best time to see the migration?","answer":"It depends on what you want to see. Tell us when you can travel and we''ll suggest where the herds are likely to be."}]'::jsonb, 'Wildebeest herds crossing the Serengeti plains',
+  false, 'published', 'Great Wildebeest Migration Safari', 'Witness the spectacular annual migration of wildebeest and zebras across the Serengeti ecosystem.', true, 33);
+insert into public.tours
+  (category_id, destination_id, name, slug, short_description, description, duration_text,
+   length, travel_styles, highlights, inclusions, exclusions, what_to_bring, meeting_point, difficulty, suitability,
+   what_to_expect, good_to_know, faqs,
+   cover_image_alt, is_featured, status, seo_title, seo_description, is_sample, sort_order)
+values (
+  (select id from public.tour_categories where slug = 'safari'),
+  (select id from public.destinations where slug = 'serengeti-ngorongoro'),
+  'Hot Air Balloon Safari – Serengeti', 'hot-air-balloon-safari-serengeti', 'Enjoy breathtaking aerial views of wildlife and the African savannah.', 'Enjoy breathtaking aerial views of wildlife and the African savannah from a hot air balloon over the Serengeti.
+
+Balloon flights are an add-on to a Serengeti safari and depend on the weather on the day.', 'Early-morning flight, added to a Serengeti safari',
+  'hours', array['romantic', 'wildlife']::text[], array['Aerial views of wildlife', 'The African savannah from above']::text[], '{}'::text[], array['Personal expenses and tips', 'Drinks unless stated', 'Travel insurance']::text[], array['Neutral-coloured, comfortable clothing', 'Hat, sunglasses and sunscreen', 'Binoculars and camera', 'Passport for domestic flights']::text[],
+  'Arranged when you book, depending on where your trip starts (Zanzibar or the mainland).', 'easy', 'Age and health requirements apply — we''ll confirm them when you book.',
+  '[{"title":"Early start","description":"Pick-up from your Serengeti camp before sunrise."},{"title":"Balloon flight","description":"Float over the savannah as the sun comes up."}]'::jsonb, array['Flights depend on the weather and may be cancelled on the day.', 'Length, itinerary and price are tailored to you and confirmed in your quote.']::text[], '[{"question":"Can I book the balloon on its own?","answer":"It''s added to a Serengeti safari. Tell us your plans and we''ll include it in your quote."}]'::jsonb, 'Hot air balloon above the Serengeti at sunrise',
+  false, 'published', 'Hot Air Balloon Safari – Serengeti', 'Enjoy breathtaking aerial views of wildlife and the African savannah.', true, 34);
 
 -- Packages
 insert into public.packages
   (name, slug, short_description, description, days, nights, accommodation_description,
-   transfers_description, meals_description, inclusions, exclusions, terms, is_safari,
+   transfers_description, meals_description, inclusions, exclusions, terms, is_safari, travel_styles,
    is_featured, cover_image_alt, status, seo_title, seo_description, is_sample, sort_order)
 values ('Zanzibar Highlights', 'zanzibar-highlights-4-days', 'Four days covering Stone Town, a spice farm, Prison Island and the northern beaches.', 'A compact introduction to Zanzibar for first-time visitors. Start with the history and culture of Stone Town, then move to the north coast for beach time.
 
 Accommodation can be chosen to suit your budget — from simple guesthouses to comfortable hotels.', 4, 3,
   'Three nights in a guesthouse or hotel; category agreed with you before booking.', 'Airport and inter-hotel transfers by private vehicle.', 'Breakfast daily.', array['Accommodation (3 nights)', 'Listed tours with guides', 'Private transfers', 'Daily breakfast']::text[], array['International and domestic flights', 'Lunches and dinners', 'Travel insurance', 'Personal expenses and tips']::text[],
-  array['Sample terms for layout only. Final booking, payment and cancellation terms will be provided by Bound to Zanzibar.', 'Itineraries may change due to weather, tides, flight schedules or park conditions.', 'A booking is only confirmed once our team has confirmed availability in writing.']::text[], false, true, 'Aerial view of Stone Town''s rooftops beside the turquoise sea', 'published',
+  array['Sample terms for layout only. Final booking, payment and cancellation terms will be provided by Bound to Zanzibar.', 'Itineraries may change due to weather, tides, flight schedules or park conditions.', 'A booking is only confirmed once our team has confirmed availability in writing.']::text[], false, array['family', 'cultural', 'relaxation']::text[], true, 'Aerial view of Stone Town''s rooftops beside the turquoise sea', 'published',
   'Zanzibar Highlights — 4 Days', 'Four-day Zanzibar package: Stone Town, spice farm, Prison Island and beaches.', true, 0);
 insert into public.package_destinations (package_id, destination_id, sort_order)
 values ((select id from public.packages where slug = 'zanzibar-highlights-4-days'), (select id from public.destinations where slug = 'stone-town'), 0);
@@ -719,11 +855,11 @@ insert into public.package_prices (package_id, market, customer_type, currency, 
 values ((select id from public.packages where slug = 'zanzibar-highlights-4-days'), 'resident', 'child', 'TZS', 500000, 'per person sharing', true);
 insert into public.packages
   (name, slug, short_description, description, days, nights, accommodation_description,
-   transfers_description, meals_description, inclusions, exclusions, terms, is_safari,
+   transfers_description, meals_description, inclusions, exclusions, terms, is_safari, travel_styles,
    is_featured, cover_image_alt, status, seo_title, seo_description, is_sample, sort_order)
 values ('Zanzibar Island Explorer', 'zanzibar-island-explorer-6-days', 'Six days of culture, forest, reef and sandbank — ideal for families and groups.', 'A fuller look at the island, mixing culture and nature with time on the water. Paced for families and groups, with free time built in.', 6, 5,
   'Five nights across Stone Town and the coast; family rooms on request.', 'All transfers by private vehicle.', 'Breakfast daily; lunch on the Safari Blue day.', array['Accommodation (5 nights)', 'Listed tours', 'Private transfers', 'Meals as listed']::text[], array['Flights', 'Meals not listed', 'Travel insurance', 'Personal expenses and tips']::text[],
-  array['Sample terms for layout only. Final booking, payment and cancellation terms will be provided by Bound to Zanzibar.', 'Itineraries may change due to weather, tides, flight schedules or park conditions.', 'A booking is only confirmed once our team has confirmed availability in writing.']::text[], false, true, 'Dhow sailing at sunset off Nungwi', 'published',
+  array['Sample terms for layout only. Final booking, payment and cancellation terms will be provided by Bound to Zanzibar.', 'Itineraries may change due to weather, tides, flight schedules or park conditions.', 'A booking is only confirmed once our team has confirmed availability in writing.']::text[], false, array['family', 'cultural', 'relaxation']::text[], true, 'Dhow sailing at sunset off Nungwi', 'published',
   'Zanzibar Island Explorer — 6 Days', 'Six-day Zanzibar package with Jozani, Safari Blue and beach time.', true, 1);
 insert into public.package_destinations (package_id, destination_id, sort_order)
 values ((select id from public.packages where slug = 'zanzibar-island-explorer-6-days'), (select id from public.destinations where slug = 'stone-town'), 0);
@@ -763,13 +899,13 @@ insert into public.package_prices (package_id, market, customer_type, currency, 
 values ((select id from public.packages where slug = 'zanzibar-island-explorer-6-days'), 'resident', 'child', 'TZS', 800000, 'per person sharing', true);
 insert into public.packages
   (name, slug, short_description, description, days, nights, accommodation_description,
-   transfers_description, meals_description, inclusions, exclusions, terms, is_safari,
+   transfers_description, meals_description, inclusions, exclusions, terms, is_safari, travel_styles,
    is_featured, cover_image_alt, status, seo_title, seo_description, is_sample, sort_order)
 values ('Zanzibar & Mikumi Safari', 'zanzibar-mikumi-safari-5-days', 'Combine Stone Town and the beach with an overnight safari in Mikumi.', 'A short safari added to an island break. Fly to the mainland for game drives in Mikumi National Park, then return to Zanzibar to relax.
 
 Flights are subject to availability and schedules, confirmed when booking.', 5, 4,
   'Stone Town and coast hotels; safari lodge or tented camp in Mikumi.', 'Return flights to the mainland (subject to availability) and road transfers.', 'As listed in the itinerary; full board on safari.', array['Accommodation (4 nights)', 'Return mainland flights', 'Game drives and park fees', 'Transfers', 'Meals as listed']::text[], array['International flights', 'Visas', 'Travel insurance', 'Personal expenses and tips']::text[],
-  array['Sample terms for layout only. Final booking, payment and cancellation terms will be provided by Bound to Zanzibar.', 'Itineraries may change due to weather, tides, flight schedules or park conditions.', 'A booking is only confirmed once our team has confirmed availability in writing.']::text[], true, true, 'Safari vehicles on the grassy plains of Mikumi National Park', 'published',
+  array['Sample terms for layout only. Final booking, payment and cancellation terms will be provided by Bound to Zanzibar.', 'Itineraries may change due to weather, tides, flight schedules or park conditions.', 'A booking is only confirmed once our team has confirmed availability in writing.']::text[], true, array['relaxation', 'wildlife']::text[], true, 'Safari vehicles on the grassy plains of Mikumi National Park', 'published',
   'Zanzibar & Mikumi Safari — 5 Days', 'Island break with an overnight safari in Mikumi National Park.', true, 2);
 insert into public.package_destinations (package_id, destination_id, sort_order)
 values ((select id from public.packages where slug = 'zanzibar-mikumi-safari-5-days'), (select id from public.destinations where slug = 'stone-town'), 0);
@@ -799,13 +935,13 @@ insert into public.package_prices (package_id, market, customer_type, currency, 
 values ((select id from public.packages where slug = 'zanzibar-mikumi-safari-5-days'), 'resident', 'child', 'TZS', 2100000, 'per person sharing', true);
 insert into public.packages
   (name, slug, short_description, description, days, nights, accommodation_description,
-   transfers_description, meals_description, inclusions, exclusions, terms, is_safari,
+   transfers_description, meals_description, inclusions, exclusions, terms, is_safari, travel_styles,
    is_featured, cover_image_alt, status, seo_title, seo_description, is_sample, sort_order)
 values ('Serengeti, Ngorongoro & Zanzibar', 'serengeti-ngorongoro-zanzibar-8-days', 'A northern-circuit safari followed by time on the Zanzibar coast.', 'Start on the mainland with game drives in the Serengeti and a descent into the Ngorongoro Crater, then fly to Zanzibar to unwind.
 
 Routes, lodges and flights are confirmed when booking and depend on availability and season.', 8, 7,
   'Safari lodges or tented camps on the mainland; beach hotel in Zanzibar.', '4x4 safari vehicle with driver-guide; flight to Zanzibar; airport transfers.', 'Full board on safari; breakfast in Zanzibar.', array['Accommodation (7 nights)', 'Game drives and park fees', 'Flight to Zanzibar', 'Transfers', 'Meals as listed']::text[], array['International flights', 'Visas', 'Travel insurance', 'Optional tours', 'Personal expenses and tips']::text[],
-  array['Sample terms for layout only. Final booking, payment and cancellation terms will be provided by Bound to Zanzibar.', 'Itineraries may change due to weather, tides, flight schedules or park conditions.', 'A booking is only confirmed once our team has confirmed availability in writing.']::text[], true, false, 'Elephant family on the plains of the Serengeti', 'published',
+  array['Sample terms for layout only. Final booking, payment and cancellation terms will be provided by Bound to Zanzibar.', 'Itineraries may change due to weather, tides, flight schedules or park conditions.', 'A booking is only confirmed once our team has confirmed availability in writing.']::text[], true, array['relaxation', 'wildlife']::text[], false, 'Elephant family on the plains of the Serengeti', 'published',
   'Serengeti, Ngorongoro & Zanzibar — 8 Days', 'Northern Tanzania safari combined with a Zanzibar beach stay.', true, 3);
 insert into public.package_destinations (package_id, destination_id, sort_order)
 values ((select id from public.packages where slug = 'serengeti-ngorongoro-zanzibar-8-days'), (select id from public.destinations where slug = 'serengeti-ngorongoro'), 0);

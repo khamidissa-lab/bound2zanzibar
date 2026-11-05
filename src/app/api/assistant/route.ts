@@ -1,6 +1,7 @@
 import Anthropic from "@anthropic-ai/sdk";
 
 import { contact } from "@/config/site";
+import { LOCALE_INFO } from "@/i18n/config";
 import { buildSystemPrompt, describePage } from "@/lib/assistant/prompt";
 import { createRateLimiter } from "@/lib/rate-limit";
 import { assistantRequestSchema } from "@/lib/validation/assistant";
@@ -63,6 +64,17 @@ export async function POST(request: Request) {
   ]);
   const system = buildSystemPrompt({ tours, packages, destinations, categories });
   const pageNote = describePage(parsed.data.page, { tours, packages, destinations });
+  const locale = parsed.data.locale ?? "en";
+  // Language and page notes go after the visitor's turn so the cached system
+  // prompt stays identical for every page and language.
+  const notes = [
+    pageNote,
+    locale === "en"
+      ? null
+      : `The visitor is using the ${LOCALE_INFO[locale].english} version of the website. Reply in ${LOCALE_INFO[locale].english}, unless they write in another language. Keep site paths unchanged.`,
+  ]
+    .filter(Boolean)
+    .join("\n\n");
 
   const client = new Anthropic();
   const stream = client.beta.messages.stream(
@@ -74,10 +86,8 @@ export async function POST(request: Request) {
       betas: ["server-side-fallback-2026-07-01"],
       fallbacks: "default",
       system: [{ type: "text", text: system, cache_control: { type: "ephemeral" } }],
-      // The page note goes after the visitor's turn so the cached system
-      // prompt stays identical across pages.
-      messages: pageNote
-        ? [...parsed.data.messages, { role: "system", content: pageNote }]
+      messages: notes
+        ? [...parsed.data.messages, { role: "system", content: notes }]
         : parsed.data.messages,
     },
     { signal: request.signal },

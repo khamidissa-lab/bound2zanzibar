@@ -2,23 +2,23 @@ import type { TourCategory } from "@/types/content";
 
 export const sampleCategories: TourCategory[] = [
   {
-    slug: "culture-history",
-    name: "Culture & history",
-    description: "Old town walks, markets, spice farms and the stories behind them.",
+    slug: "sea-islands",
+    name: "Island & boat excursions",
+    description: "Boat trips, sandbanks, snorkelling and the islands off the coast.",
   },
   {
-    slug: "sea-islands",
-    name: "Sea & islands",
-    description: "Boat trips, sandbanks, snorkelling and traditional dhows.",
+    slug: "culture-history",
+    name: "Cultural experiences",
+    description: "Old town walks, markets, spice farms and the stories behind them.",
   },
   {
     slug: "nature-wildlife",
     name: "Nature & wildlife",
-    description: "Forests, mangroves and the island's wildlife.",
+    description: "Forests, caves, mangroves and the island's wildlife.",
   },
   {
     slug: "beach-leisure",
-    name: "Beach & leisure",
+    name: "Beach experiences",
     description: "Slow days on the coast, sunsets and village life.",
   },
   {
@@ -27,8 +27,13 @@ export const sampleCategories: TourCategory[] = [
     description: "Jet skis, parasailing, horse riding and other active experiences.",
   },
   {
+    slug: "cruises-marine",
+    name: "Cruises & marine experiences",
+    description: "Dhow cruises on the Indian Ocean and time with its marine life.",
+  },
+  {
     slug: "safari",
-    name: "Safari",
+    name: "Tanzania wildlife safaris",
     description: "Mainland Tanzania wildlife experiences, combined with the islands.",
   },
 ];

@@ -1,17 +1,52 @@
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
 
+import { DEFAULT_LOCALE, isLocale, LOCALE_COOKIE, localizePath } from "@/i18n/config";
 import { isPublicAdminPath } from "@/lib/auth/redirects";
 import type { Database } from "@/lib/supabase/database.types";
 
 /**
- * Runs on admin and auth routes only. It (1) refreshes the Supabase session
- * cookie and (2) optimistically sends signed-out visitors to the login page.
- * It is NOT the authorization check: every admin page and Server Action
- * re-verifies the user and role (src/lib/auth/session.ts), and the database
- * enforces RLS underneath.
+ * Public pages: resolves the language. "/tours" is English (rewritten to the
+ * internal /en/tours), "/fr/tours" is French, and "/en/…" redirects to the
+ * unprefixed URL so each page has one English address. A visitor who chose
+ * another language (cookie) is sent to that version of unprefixed URLs.
+ */
+function localeRouting(request: NextRequest): NextResponse {
+  const { pathname, search } = request.nextUrl;
+  const first = pathname.split("/")[1] ?? "";
+
+  if (first === DEFAULT_LOCALE) {
+    const url = request.nextUrl.clone();
+    url.pathname = pathname.slice(DEFAULT_LOCALE.length + 1) || "/";
+    return NextResponse.redirect(url, 308);
+  }
+  if (isLocale(first)) return NextResponse.next();
+
+  const preferred = request.cookies.get(LOCALE_COOKIE)?.value;
+  if (isLocale(preferred) && preferred !== DEFAULT_LOCALE) {
+    const url = request.nextUrl.clone();
+    url.pathname = localizePath(preferred, pathname);
+    return NextResponse.redirect(url, 307);
+  }
+
+  const url = request.nextUrl.clone();
+  url.pathname = `/${DEFAULT_LOCALE}${pathname === "/" ? "" : pathname}`;
+  url.search = search;
+  return NextResponse.rewrite(url);
+}
+
+/**
+ * Admin and auth routes: (1) refreshes the Supabase session cookie and (2)
+ * optimistically sends signed-out visitors to the login page. It is NOT the
+ * authorization check: every admin page and Server Action re-verifies the
+ * user and role (src/lib/auth/session.ts), and the database enforces RLS.
  */
 export async function proxy(request: NextRequest) {
+  const { pathname: path } = request.nextUrl;
+  if (!path.startsWith("/admin") && !path.startsWith("/auth")) {
+    return localeRouting(request);
+  }
+
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const key =
     process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY ??
@@ -55,5 +90,7 @@ export async function proxy(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/admin/:path*", "/auth/:path*"],
+  // Everything except Next internals, API routes and files with an extension
+  // (images, icons, robots.txt, sitemap.xml…).
+  matcher: ["/((?!_next/|api/|.*\\..*).*)"],
 };

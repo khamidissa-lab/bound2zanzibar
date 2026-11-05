@@ -1,4 +1,8 @@
+"use client";
+
 import Image from "next/image";
+
+import { useMessagesOrEnglish } from "@/i18n/client";
 
 import { cn } from "@/lib/utils";
 import type { MediaImage, SceneTheme } from "@/types/content";
@@ -10,7 +14,12 @@ type SceneImageProps = {
   priority?: boolean;
   /** Show the "Placeholder image" tag when no photo is set. */
   showPlaceholderTag?: boolean;
+  /** Slowly zoom the picture when an ancestor with `group` is hovered. */
+  hoverZoom?: boolean;
 };
+
+const zoomClass =
+  "motion-safe:transition-transform motion-safe:duration-700 motion-safe:ease-out motion-safe:group-hover:scale-[1.045]";
 
 /**
  * Renders licensed photography when `image.src` is set; otherwise a branded,
@@ -23,7 +32,9 @@ export function SceneImage({
   sizes = "(min-width: 1024px) 33vw, 100vw",
   priority = false,
   showPlaceholderTag = true,
+  hoverZoom = false,
 }: SceneImageProps) {
+  const t = useMessagesOrEnglish();
   if (image.src) {
     return (
       <div className={cn("relative overflow-hidden", className)}>
@@ -33,7 +44,7 @@ export function SceneImage({
           fill
           sizes={sizes}
           priority={priority}
-          className="object-cover"
+          className={cn("object-cover", hoverZoom && zoomClass)}
         />
       </div>
     );
@@ -41,10 +52,14 @@ export function SceneImage({
 
   return (
     <div className={cn("relative overflow-hidden", className)}>
-      <SceneArt theme={image.theme} label={image.alt} />
+      <SceneArt
+        theme={image.theme}
+        label={`${image.alt} ${t.common.placeholderIllustration}`}
+        className={hoverZoom ? zoomClass : undefined}
+      />
       {showPlaceholderTag ? (
-        <span className="absolute bottom-2 left-2 rounded-full bg-black/35 px-2 py-0.5 text-[0.65rem] font-medium text-white backdrop-blur-sm">
-          Placeholder image
+        <span className="absolute bottom-2 left-2 bg-ocean-deep/55 px-2 py-0.5 text-[0.6rem] font-semibold tracking-[0.14em] text-white uppercase backdrop-blur-sm">
+          {t.common.placeholderImage}
         </span>
       ) : null}
     </div>
@@ -68,23 +83,31 @@ const palettes: Record<
     mid: "var(--brand-ocean)",
   },
   town: { sky: "#f5efe4", sun: "var(--brand-gold)", base: "#d9c8aa", mid: "#c4ae8b" },
-  forest: { sky: "#dcebe2", sun: "#e9d9a6", base: "#1f5a45", mid: "#2f7a5c" },
+  forest: { sky: "#e1e8df", sun: "#d9c98f", base: "#2c5a4b", mid: "#4a7a64" },
   spice: { sky: "#f4e3cc", sun: "#c46a3a", base: "#8a4b2a", mid: "#b5713f" },
-  savanna: { sky: "#f6e7c8", sun: "var(--brand-sun)", base: "#b8935a", mid: "#d6b47a" },
+  savanna: { sky: "#efe3cc", sun: "#d9a95a", base: "#a98a5c", mid: "#c9ad80" },
 };
 
-function SceneArt({ theme, label }: { theme: SceneTheme; label: string }) {
+function SceneArt({
+  theme,
+  label,
+  className,
+}: {
+  theme: SceneTheme;
+  label: string;
+  className?: string;
+}) {
   const p = palettes[theme];
   return (
     <svg
       role="img"
-      aria-label={`${label} (placeholder illustration)`}
+      aria-label={label}
       viewBox="0 0 400 300"
       preserveAspectRatio="xMidYMid slice"
-      className="absolute inset-0 size-full"
+      className={cn("absolute inset-0 size-full", className)}
     >
       <rect width="400" height="300" fill={p.sky} />
-      <circle cx="300" cy="90" r="38" fill={p.sun} opacity="0.9" />
+      <circle cx="300" cy="92" r="24" fill={p.sun} opacity="0.75" />
 
       {(theme === "ocean" || theme === "sunset") && (
         <>

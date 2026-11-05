@@ -37,6 +37,8 @@ export type Seo = {
 };
 
 export type TourCategory = {
+  /** Database id (absent for built-in sample data). */
+  id?: string;
   slug: string;
   name: string;
   description: string;
@@ -44,7 +46,17 @@ export type TourCategory = {
 
 export type Difficulty = "easy" | "moderate" | "challenging";
 
+/** How long a tour takes, for filtering ("duration" holds the exact wording). */
+export type TourLength = "hours" | "half_day" | "full_day" | "multi_day";
+
+export type TravelStyle =
+  "luxury" | "adventure" | "romantic" | "family" | "cultural" | "relaxation" | "wildlife";
+
 export type Tour = {
+  /** Database id (absent for built-in sample data). */
+  id?: string;
+  /** Set when shown in a language whose text was machine translated. */
+  machineTranslated?: boolean;
   slug: string;
   name: string;
   shortDescription: string;
@@ -53,6 +65,9 @@ export type Tour = {
   destinationSlug: string;
   /** Human-readable, e.g. "Half day (approx. 3–4 hours)". */
   duration: string;
+  /** `null` until staff set it; such tours only appear when length isn't filtered. */
+  length: TourLength | null;
+  travelStyles: TravelStyle[];
   highlights: string[];
   included: string[];
   excluded: string[];
@@ -88,6 +103,10 @@ export type Faq = {
 export type DestinationRegion = "zanzibar" | "mainland";
 
 export type Destination = {
+  /** Database id (absent for built-in sample data). */
+  id?: string;
+  /** Set when shown in a language whose text was machine translated. */
+  machineTranslated?: boolean;
   slug: string;
   name: string;
   region: DestinationRegion;
@@ -110,6 +129,10 @@ export type ItineraryDay = {
 };
 
 export type TourPackage = {
+  /** Database id (absent for built-in sample data). */
+  id?: string;
+  /** Set when shown in a language whose text was machine translated. */
+  machineTranslated?: boolean;
   slug: string;
   name: string;
   summary: string;
@@ -129,6 +152,7 @@ export type TourPackage = {
   prices: PriceRecord[];
   featured: boolean;
   isSafari: boolean;
+  travelStyles: TravelStyle[];
   status: PublishStatus;
   seo: Seo;
   isSample: boolean;
@@ -140,6 +164,10 @@ export type ArticleSection = {
 };
 
 export type Article = {
+  /** Database id (absent for built-in sample data). */
+  id?: string;
+  /** Set when shown in a language whose text was machine translated. */
+  machineTranslated?: boolean;
   slug: string;
   title: string;
   excerpt: string;

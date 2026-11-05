@@ -7,9 +7,11 @@ import {
   BookOpen,
   CalendarCheck,
   Compass,
+  Contact,
   History,
   Images,
   Inbox,
+  Languages,
   LayoutDashboard,
   Map,
   Menu,
@@ -68,6 +70,12 @@ const groups: { title: string | null; items: NavItem[] }[] = [
         permission: "content.manage",
       },
       {
+        label: "Translations",
+        href: "/admin/translations",
+        icon: Languages,
+        permission: "content.manage",
+      },
+      {
         label: "Reviews",
         href: "/admin/reviews",
         icon: MessageSquareQuote,
@@ -94,6 +102,12 @@ const groups: { title: string | null; items: NavItem[] }[] = [
         label: "Enquiries",
         href: "/admin/enquiries",
         icon: Inbox,
+        permission: "bookings.manage",
+      },
+      {
+        label: "Customers",
+        href: "/admin/customers",
+        icon: Contact,
         permission: "bookings.manage",
       },
     ],
@@ -141,7 +155,7 @@ function NavList({ role, onNavigate }: { role: StaffRole; onNavigate?: () => voi
         return (
           <div key={group.title ?? "main"}>
             {group.title ? (
-              <p className="mb-2 px-3 text-xs font-semibold tracking-wide text-muted-foreground">
+              <p className="mb-2 px-3 text-[0.68rem] font-semibold tracking-[0.12em] text-white/60 uppercase">
                 {group.title}
               </p>
             ) : null}
@@ -155,9 +169,9 @@ function NavList({ role, onNavigate }: { role: StaffRole; onNavigate?: () => voi
                       onClick={onNavigate}
                       aria-current={active ? "page" : undefined}
                       className={cn(
-                        "flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm text-ocean-deep/75 transition-colors hover:bg-sand-soft hover:text-ocean-deep",
+                        "relative flex items-center gap-3 rounded-lg px-3 py-2 text-sm text-white/70 transition-colors hover:bg-white/8 hover:text-white",
                         active &&
-                          "bg-turquoise-deep font-medium text-white shadow-sm hover:bg-turquoise-deep hover:text-white",
+                          "bg-white/12 font-medium text-white before:absolute before:inset-y-2 before:-left-3 before:w-1 before:rounded-r-full before:bg-turquoise hover:bg-white/12",
                       )}
                     >
                       <Icon className="size-4 shrink-0" aria-hidden="true" />
@@ -192,14 +206,17 @@ export function AdminMobileNav({ role }: { role: StaffRole }) {
             variant="ghost"
             size="icon"
             aria-label="Open admin menu"
-            className="text-ocean-deep"
+            className="text-ocean-deep hover:bg-muted"
           />
         }
       >
         <Menu className="size-5" aria-hidden="true" />
       </SheetTrigger>
-      <SheetContent side="left" className="w-72 bg-card p-4">
-        <SheetTitle className="mb-4 px-3 pt-2 font-display text-lg text-ocean-deep">
+      <SheetContent
+        side="left"
+        className="w-72 border-none bg-ocean-deep p-4 text-white [&_[data-slot=sheet-close]]:text-white [&_[data-slot=sheet-close]]:hover:bg-white/10"
+      >
+        <SheetTitle className="mb-4 px-3 pt-2 text-base font-semibold text-white">
           Admin
         </SheetTitle>
         <nav aria-label="Admin">

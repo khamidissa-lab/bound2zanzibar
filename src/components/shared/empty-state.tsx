@@ -11,13 +11,11 @@ export function EmptyState({
   children?: ReactNode;
 }) {
   return (
-    <div className="flex flex-col items-center rounded-2xl border border-dashed bg-card px-6 py-14 text-center">
-      <span className="flex size-12 items-center justify-center rounded-full bg-turquoise-soft text-turquoise-deep">
-        <Icon className="size-5" aria-hidden="true" />
-      </span>
-      <h3 className="mt-4 font-display text-xl">{title}</h3>
+    <div className="flex flex-col items-center border border-dashed border-ocean-deep/20 bg-ivory px-6 py-16 text-center">
+      <Icon className="size-6 text-gold-deep" aria-hidden="true" />
+      <h3 className="mt-4 font-display text-3xl">{title}</h3>
       {children ? (
-        <div className="mt-2 max-w-md text-sm text-muted-foreground">{children}</div>
+        <div className="mt-3 max-w-md text-muted-foreground">{children}</div>
       ) : null}
     </div>
   );

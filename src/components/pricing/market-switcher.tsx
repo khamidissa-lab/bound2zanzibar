@@ -1,6 +1,6 @@
 "use client";
 
-import { marketLabels } from "@/lib/format";
+import { useMessagesOrEnglish } from "@/i18n/client";
 import { setMarket, useMarket } from "@/lib/market-store";
 import { cn } from "@/lib/utils";
 import type { Market } from "@/types/content";
@@ -10,15 +10,24 @@ const options: { market: Market; currency: string }[] = [
   { market: "resident", currency: "TZS" },
 ];
 
-export function MarketSwitcher({ className }: { className?: string }) {
+export function MarketSwitcher({
+  className,
+  tone = "light",
+}: {
+  className?: string;
+  tone?: "light" | "dark";
+}) {
   const market = useMarket();
+  const t = useMessagesOrEnglish();
+  const dark = tone === "dark";
 
   return (
     <div
       role="group"
-      aria-label="Show prices for"
+      aria-label={t.price.showFor}
       className={cn(
-        "inline-flex rounded-full border border-ocean-deep/15 bg-card p-1 text-sm",
+        "inline-flex border text-sm",
+        dark ? "border-white/30" : "border-ocean-deep/20 bg-ivory",
         className,
       )}
     >
@@ -28,10 +37,17 @@ export function MarketSwitcher({ className }: { className?: string }) {
           type="button"
           aria-pressed={market === option.market}
           onClick={() => setMarket(option.market)}
-          className="rounded-full px-3.5 py-1.5 font-medium text-ocean-deep/75 transition-colors hover:text-ocean-deep aria-pressed:bg-ocean-deep aria-pressed:text-white"
+          className={cn(
+            "px-3.5 py-2 font-medium transition-colors",
+            dark
+              ? "text-white/75 hover:text-white aria-pressed:bg-ivory aria-pressed:text-ocean-deep"
+              : "text-ocean-deep/70 hover:text-ocean-deep aria-pressed:bg-ocean-deep aria-pressed:text-ivory",
+          )}
         >
-          {marketLabels[option.market].short}
-          <span className="ml-1 font-normal">· {option.currency}</span>
+          {t.markets[option.market].short}
+          <span className="ml-1.5 text-[0.7rem] tracking-[0.12em] uppercase">
+            {option.currency}
+          </span>
         </button>
       ))}
     </div>

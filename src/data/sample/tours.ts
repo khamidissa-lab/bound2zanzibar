@@ -1,6 +1,8 @@
 import type { Tour } from "@/types/content";
 
 import { illustrativePrices, standardExclusions, type TourBase } from "./shared";
+import { tourDiscovery } from "./discovery";
+import { safariDetails, safariTours } from "./safaris";
 import { tourDetails } from "./tour-details";
 import { moreTours } from "./tours-more";
 
@@ -339,7 +341,7 @@ const coreTours: TourBase[] = [
       "Board a traditional wooden dhow for an evening sail along the Stone Town waterfront.",
       "Watch the sunset over the Indian Ocean with light refreshments. Sailing depends on weather.",
     ],
-    categorySlug: "sea-islands",
+    categorySlug: "cruises-marine",
     destinationSlug: "stone-town",
     duration: "Approx. 2 hours",
     highlights: [
@@ -421,7 +423,7 @@ const coreTours: TourBase[] = [
       "Set out early from the fishing village of Kizimkazi in search of the dolphins that are often seen off the south coast.",
       "Responsible dolphin watching means keeping a respectful distance and never chasing or crowding the animals. Sightings are never guaranteed. The trip can be combined with Jozani Forest.",
     ],
-    categorySlug: "sea-islands",
+    categorySlug: "cruises-marine",
     destinationSlug: "menai-bay-kizimkazi",
     duration: "Half day (early morning)",
     highlights: [
@@ -501,8 +503,13 @@ const coreTours: TourBase[] = [
 ];
 
 /** All sample tours, each combined with its "More details" content. */
-export const sampleTours: Tour[] = [...coreTours, ...moreTours].map((tour) => {
-  const details = tourDetails[tour.slug];
-  if (!details) throw new Error(`Missing tour details for "${tour.slug}"`);
-  return { ...tour, ...details };
-});
+export const sampleTours: Tour[] = [...coreTours, ...moreTours, ...safariTours].map(
+  (tour) => {
+    const details = tourDetails[tour.slug] ?? safariDetails[tour.slug];
+    if (!details) throw new Error(`Missing tour details for "${tour.slug}"`);
+    const discovery = tourDiscovery[tour.slug];
+    if (!discovery)
+      throw new Error(`Missing length and travel styles for "${tour.slug}"`);
+    return { ...tour, ...details, ...discovery };
+  },
+);

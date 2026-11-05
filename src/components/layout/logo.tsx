@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Link from "next/link";
+import { LocaleLink as Link } from "@/components/i18n/locale-link";
 
 import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils";
@@ -14,22 +14,27 @@ type LogoProps = {
   /** Pixel size of the full logo (square). */
   size?: number;
   priority?: boolean;
+  /** Translated word for "home" in the link label. */
+  homeLabel?: string;
 };
 
 /**
- * The owner's logo artwork (public/brand). The artwork has a white background,
- * so place it on white surfaces (the full logo carries its own white card).
+ * The owner's logo artwork (public/brand). The artwork has a solid white
+ * background: the compact logo is multiplied onto light surfaces (white turns
+ * transparent on ivory/sand); the full logo carries its own white card for
+ * dark surfaces.
  */
 export function Logo({
   className,
   variant = "compact",
   size = 160,
   priority,
+  homeLabel = "home",
 }: LogoProps) {
   return (
     <Link
       href="/"
-      aria-label={`${siteConfig.name} — home`}
+      aria-label={`${siteConfig.name} — ${homeLabel}`}
       className={cn(
         "inline-flex shrink-0 items-center",
         variant === "full" ? "rounded-2xl" : "rounded-md",
@@ -44,7 +49,7 @@ export function Logo({
             width={480}
             height={327}
             priority={priority}
-            className="h-9 w-auto sm:h-12"
+            className="h-9 w-auto mix-blend-multiply sm:h-11"
           />
           <Image
             src="/brand/wordmark.png"
@@ -52,7 +57,7 @@ export function Logo({
             width={555}
             height={176}
             priority={priority}
-            className="h-8 w-auto sm:h-11"
+            className="h-8 w-auto mix-blend-multiply sm:h-10"
           />
         </span>
       ) : (

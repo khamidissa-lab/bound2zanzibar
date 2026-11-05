@@ -39,6 +39,7 @@ export default async function EditDestinationPage({
         title={destination.name}
         status={destination.status}
         liveHref={`/destinations/${destination.slug}`}
+        translationsHref={`/admin/translations/destinations/${destination.id}`}
         isSample={destination.is_sample}
         created={query.created !== undefined}
       />

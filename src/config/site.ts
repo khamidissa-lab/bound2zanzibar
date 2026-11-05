@@ -1,3 +1,5 @@
+import type { Messages } from "@/i18n/messages/en";
+
 /**
  * Static site configuration.
  *
@@ -19,46 +21,53 @@ export const siteConfig = {
     "Zanzibar tours, Tanzania safaris and multi-day travel packages for residents, East African travellers and international visitors.",
 } as const;
 
-export const mainNav: readonly NavItem[] = [
-  { label: "Home", href: "/" },
-  { label: "Zanzibar Tours", href: "/tours" },
-  { label: "Safari", href: "/safari" },
-  { label: "Packages", href: "/packages" },
-  { label: "Destinations", href: "/destinations" },
-  { label: "Travel Guide", href: "/travel-guide" },
-  { label: "About", href: "/about" },
-  { label: "Contact", href: "/contact" },
-];
+/** Main navigation; labels come from the visitor's language (see localizedMainNav). */
+export const mainNav = [
+  { key: "home", href: "/" },
+  { key: "tours", href: "/tours" },
+  { key: "safari", href: "/safari" },
+  { key: "packages", href: "/packages" },
+  { key: "destinations", href: "/destinations" },
+  { key: "travelGuide", href: "/travel-guide" },
+  { key: "about", href: "/about" },
+  { key: "contact", href: "/contact" },
+] as const satisfies readonly { key: keyof Messages["nav"]; href: string }[];
 
-export const bookNowItem: NavItem = { label: "Book Now", href: "/book" };
+export const bookNowHref = "/book";
 
-export const footerNav: readonly { title: string; items: readonly NavItem[] }[] = [
-  {
-    title: "Explore",
-    items: [
-      { label: "Zanzibar Tours", href: "/tours" },
-      { label: "Tanzania Safari", href: "/safari" },
-      { label: "Packages", href: "/packages" },
-      { label: "Destinations", href: "/destinations" },
-    ],
-  },
-  {
-    title: "Company",
-    items: [
-      { label: "About", href: "/about" },
-      { label: "Travel Guide", href: "/travel-guide" },
-      { label: "Contact", href: "/contact" },
-      { label: "Book a trip", href: "/book" },
-    ],
-  },
-  {
-    title: "Legal",
-    items: [
-      { label: "Privacy policy", href: "/privacy" },
-      { label: "Terms & conditions", href: "/terms" },
-    ],
-  },
-];
+export function localizedMainNav(t: Messages): NavItem[] {
+  return mainNav.map(({ key, href }) => ({ label: t.nav[key], href }));
+}
+
+export function localizedFooterNav(t: Messages): { title: string; items: NavItem[] }[] {
+  return [
+    {
+      title: t.footer.explore,
+      items: [
+        { label: t.nav.tours, href: "/tours" },
+        { label: t.footer.tanzaniaSafari, href: "/safari" },
+        { label: t.nav.packages, href: "/packages" },
+        { label: t.nav.destinations, href: "/destinations" },
+      ],
+    },
+    {
+      title: t.footer.company,
+      items: [
+        { label: t.nav.about, href: "/about" },
+        { label: t.nav.travelGuide, href: "/travel-guide" },
+        { label: t.nav.contact, href: "/contact" },
+        { label: t.footer.bookATrip, href: "/book" },
+      ],
+    },
+    {
+      title: t.footer.legal,
+      items: [
+        { label: t.footer.privacy, href: "/privacy" },
+        { label: t.footer.terms, href: "/terms" },
+      ],
+    },
+  ];
+}
 
 /**
  * Owner-supplied contact details (provided 2026-10-31). The owner confirmed on
@@ -88,12 +97,14 @@ export type ContactField = {
 };
 
 /** `null` values are still awaiting verified details from the owner. */
-export const contactDetails: readonly ContactField[] = [
-  { label: "Phone", value: contact.phoneDisplay, href: `tel:${contact.phone}` },
-  { label: "WhatsApp", value: contact.phoneDisplay, href: whatsappLink() },
-  { label: "Email", value: contact.email, href: `mailto:${contact.email}` },
-  { label: "Office address", value: null, href: null },
-];
+export function localizedContactDetails(t: Messages): ContactField[] {
+  return [
+    { label: t.footer.phone, value: contact.phoneDisplay, href: `tel:${contact.phone}` },
+    { label: t.nav.whatsapp, value: contact.phoneDisplay, href: whatsappLink() },
+    { label: t.footer.email, value: contact.email, href: `mailto:${contact.email}` },
+    { label: t.footer.officeAddress, value: null, href: null },
+  ];
+}
 
 export type SocialLink = {
   label: string;

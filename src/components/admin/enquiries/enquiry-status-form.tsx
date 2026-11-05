@@ -76,7 +76,7 @@ export function EnquiryStatusForm({
           maxLength={5000}
           defaultValue={internalNotes}
           disabled={disabled}
-          className="w-full rounded-xl border border-input bg-background px-3 py-2.5 text-sm outline-none focus-visible:border-turquoise focus-visible:ring-2 focus-visible:ring-turquoise/30"
+          className="w-full rounded-xl border border-input bg-background px-3 py-2.5 text-sm outline-none focus-visible:border-turquoise-deep focus-visible:ring-2 focus-visible:ring-turquoise-deep/25"
         />
         {state.fieldErrors?.internalNotes ? (
           <p className="text-sm text-destructive">{state.fieldErrors.internalNotes}</p>

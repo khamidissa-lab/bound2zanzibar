@@ -255,6 +255,43 @@ export type Database = {
           },
         ];
       };
+      content_translations: {
+        Row: {
+          id: string;
+          entity: string;
+          entity_id: string;
+          locale: string;
+          fields: Json;
+          is_machine: boolean;
+          updated_by: string | null;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          entity: string;
+          entity_id: string;
+          locale: string;
+          fields?: Json;
+          is_machine?: boolean;
+          updated_by?: string | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          id?: string;
+          entity?: string;
+          entity_id?: string;
+          locale?: string;
+          fields?: Json;
+          is_machine?: boolean;
+          updated_by?: string | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Relationships: [
+        ];
+      };
       currencies: {
         Row: {
           code: string;
@@ -575,6 +612,7 @@ export type Database = {
           sort_order: number;
           created_at: string;
           updated_at: string;
+          travel_styles: string[];
         };
         Insert: {
           id?: string;
@@ -602,6 +640,7 @@ export type Database = {
           sort_order?: number;
           created_at?: string;
           updated_at?: string;
+          travel_styles?: string[];
         };
         Update: {
           id?: string;
@@ -629,6 +668,7 @@ export type Database = {
           sort_order?: number;
           created_at?: string;
           updated_at?: string;
+          travel_styles?: string[];
         };
         Relationships: [
         ];
@@ -880,6 +920,8 @@ export type Database = {
           what_to_expect: Json;
           good_to_know: string[];
           faqs: Json;
+          length: Database["public"]["Enums"]["tour_length"] | null;
+          travel_styles: string[];
         };
         Insert: {
           id?: string;
@@ -911,6 +953,8 @@ export type Database = {
           what_to_expect?: Json;
           good_to_know?: string[];
           faqs?: Json;
+          length?: Database["public"]["Enums"]["tour_length"] | null;
+          travel_styles?: string[];
         };
         Update: {
           id?: string;
@@ -942,6 +986,8 @@ export type Database = {
           what_to_expect?: Json;
           good_to_know?: string[];
           faqs?: Json;
+          length?: Database["public"]["Enums"]["tour_length"] | null;
+          travel_styles?: string[];
         };
         Relationships: [
           {
@@ -969,6 +1015,16 @@ export type Database = {
         Args: {
           p_action: string;
           p_details?: Json;
+        };
+        Returns: undefined;
+      };
+      set_content_translation: {
+        Args: {
+          p_entity: string;
+          p_entity_id: string;
+          p_locale: string;
+          p_fields: Json;
+          p_is_machine?: boolean;
         };
         Returns: undefined;
       };
@@ -1043,6 +1099,7 @@ export type Database = {
       market: "resident" | "east_african" | "international";
       publish_status: "draft" | "published" | "archived";
       staff_role: "super_admin" | "admin" | "booking_staff" | "content_editor";
+      tour_length: "hours" | "half_day" | "full_day" | "multi_day";
     };
     CompositeTypes: {
       [_ in never]: never;

@@ -1,13 +1,14 @@
-import Link from "next/link";
-
+import { LocaleLink as Link } from "@/components/i18n/locale-link";
 import type { NavItem } from "@/config/site";
+import { splitLocale } from "@/i18n/config";
 import { cn } from "@/lib/utils";
 
-/** True when `pathname` is the item's route or one of its child routes. */
+/** True when `pathname` (any language) is the item's route or a child route. */
 export function isActivePath(pathname: string | null, href: string): boolean {
   if (!pathname) return false;
-  if (href === "/") return pathname === "/";
-  return pathname === href || pathname.startsWith(`${href}/`);
+  const { path } = splitLocale(pathname);
+  if (href === "/") return path === "/";
+  return path === href || path.startsWith(`${href}/`);
 }
 
 type NavLinksProps = {
@@ -26,7 +27,7 @@ export function NavLinks({ items, pathname, variant, onNavigate }: NavLinksProps
   return (
     <ul
       className={cn(
-        variant === "desktop" ? "flex items-center gap-1" : "flex flex-col gap-1",
+        variant === "desktop" ? "flex items-center gap-0.5" : "flex flex-col",
       )}
     >
       {items.map((item) => {
@@ -40,9 +41,9 @@ export function NavLinks({ items, pathname, variant, onNavigate }: NavLinksProps
               className={cn(
                 "transition-colors",
                 variant === "desktop" &&
-                  "relative rounded-full px-3 py-2 text-sm font-medium text-ocean-deep/80 hover:bg-sand-soft hover:text-ocean-deep aria-[current=page]:text-ocean-deep aria-[current=page]:after:absolute aria-[current=page]:after:inset-x-3 aria-[current=page]:after:-bottom-0.5 aria-[current=page]:after:h-0.5 aria-[current=page]:after:rounded-full aria-[current=page]:after:bg-turquoise",
+                  "relative px-2.5 py-2 text-[0.76rem] font-medium tracking-[0.04em] whitespace-nowrap text-ocean-deep/75 uppercase after:absolute after:inset-x-2.5 after:bottom-0.5 after:h-px after:origin-left after:scale-x-0 after:bg-ocean-deep after:transition-transform after:duration-300 hover:text-ocean-deep hover:after:scale-x-100 aria-[current=page]:text-ocean-deep aria-[current=page]:after:scale-x-100 aria-[current=page]:after:bg-gold-deep",
                 variant === "mobile" &&
-                  "flex items-center rounded-xl px-4 py-3 font-display text-xl text-ocean-deep hover:bg-sand-soft aria-[current=page]:bg-turquoise-soft",
+                  "flex items-baseline justify-between border-b border-white/10 py-3.5 font-display text-[1.9rem] leading-none text-ivory hover:text-gold-light aria-[current=page]:text-gold-light",
               )}
             >
               {item.label}

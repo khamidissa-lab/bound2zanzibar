@@ -49,6 +49,7 @@ export default async function EditPackagePage({
         title={pkg.name}
         status={pkg.status}
         liveHref={`/packages/${pkg.slug}`}
+        translationsHref={`/admin/translations/packages/${pkg.id}`}
         isSample={pkg.is_sample}
         created={query.created !== undefined}
       />

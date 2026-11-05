@@ -45,6 +45,8 @@ const nextConfig: NextConfig = {
   cacheComponents: true,
   partialPrefetching: true,
   poweredByHeader: false,
+  // Development only: lets a phone on the same Wi-Fi load the dev server.
+  allowedDevOrigins: ["192.168.100.108"],
   async headers() {
     return [
       { source: "/:path*", headers: securityHeaders },

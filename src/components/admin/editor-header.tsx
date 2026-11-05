@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowLeft, ExternalLink } from "lucide-react";
+import { ArrowLeft, ExternalLink, Languages } from "lucide-react";
 
 import type { Enums } from "@/lib/supabase/database.types";
 
@@ -14,6 +14,7 @@ export function EditorHeader({
   liveHref,
   isSample,
   created,
+  translationsHref,
 }: {
   backHref: string;
   backLabel: string;
@@ -22,6 +23,8 @@ export function EditorHeader({
   liveHref?: string;
   isSample?: boolean;
   created?: boolean;
+  /** Link to this item's translations, once it exists. */
+  translationsHref?: string;
 }) {
   return (
     <div className="mb-8">
@@ -49,6 +52,15 @@ export function EditorHeader({
             View on website
             <ExternalLink className="size-3.5" aria-hidden="true" />
             <span className="sr-only">(opens in a new tab)</span>
+          </Link>
+        ) : null}
+        {translationsHref ? (
+          <Link
+            href={translationsHref}
+            className="inline-flex items-center gap-1 text-sm text-turquoise-deep hover:underline"
+          >
+            <Languages className="size-3.5" aria-hidden="true" />
+            Translations
           </Link>
         ) : null}
       </div>

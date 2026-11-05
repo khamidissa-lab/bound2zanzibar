@@ -15,6 +15,7 @@ import {
 } from "@/components/admin/editor-controls";
 import { FormMessage } from "@/components/admin/form-controls";
 import { ImagePicker } from "@/components/admin/image-picker";
+import { TravelStyleField } from "@/components/admin/travel-style-field";
 import { toLines } from "@/lib/admin-forms";
 import { serializeFaqs, serializeSteps } from "@/lib/tour-details-format";
 import { parseFaqs, parseTourSteps } from "@/services/content-mappers";
@@ -67,6 +68,19 @@ export function TourForm({
           maxLength={120}
           placeholder="e.g. Half day (approx. 3–4 hours)"
           error={e.durationText}
+        />
+        <SelectField
+          name="length"
+          label="Trip length (for filters)"
+          defaultValue={tour?.length ?? ""}
+          placeholder="Not set"
+          options={[
+            { value: "hours", label: "A few hours" },
+            { value: "half_day", label: "Half day" },
+            { value: "full_day", label: "Full day" },
+            { value: "multi_day", label: "Several days" },
+          ]}
+          error={e.length}
         />
         <SelectField
           name="categoryId"
@@ -165,6 +179,7 @@ export function TourForm({
           placeholder="e.g. Suitable for families"
           error={e.suitability}
         />
+        <TravelStyleField selected={tour?.travel_styles ?? []} error={e.travelStyles} />
       </FieldSet>
 
       <FieldSet

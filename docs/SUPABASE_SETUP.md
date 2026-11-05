@@ -63,6 +63,8 @@ Alternatively, paste each file in `supabase/migrations/` into the dashboard **SQ
 | `…20261102000100_admin_content_functions.sql` | Atomic save helpers for prices, itineraries and galleries |
 | `…20261102000200_tour_more_details.sql` | Tour "More details": what to expect, good to know, FAQs |
 | `…20261103000100_activity_log.sql` | Append-only staff activity log (see 5f) |
+| `…20261103000200_activity_log_no_anon.sql` | Removes visitor access to the activity log |
+| `…20261104000100_content_translations.sql` | Translations of tours, packages, destinations and articles (see `docs/TRANSLATIONS.md`) |
 
 ## 4. (Development only) load sample content
 

@@ -41,6 +41,7 @@ export default async function EditArticlePage({
         title={article.title}
         status={article.status}
         liveHref={`/travel-guide/${article.slug}`}
+        translationsHref={`/admin/translations/blog_posts/${article.id}`}
         isSample={article.is_sample}
         created={query.created !== undefined}
       />

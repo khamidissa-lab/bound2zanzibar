@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 
+import { LOCALES, localizePath } from "@/i18n/config";
 import { getSiteUrl } from "@/lib/site-url";
 import { getArticles, getDestinations, getPackages, getTours } from "@/services/content";
 
@@ -20,6 +21,17 @@ const STATIC_PATHS = [
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const base = getSiteUrl();
   const url = (path: string) => new URL(path, base).toString();
+  // One entry per language, each listing all language versions (hreflang).
+  const entry = (path: string, lastModified?: string): MetadataRoute.Sitemap =>
+    LOCALES.map((locale) => ({
+      url: url(localizePath(locale, path)),
+      ...(lastModified ? { lastModified } : {}),
+      alternates: {
+        languages: Object.fromEntries(
+          LOCALES.map((l) => [l, url(localizePath(l, path))]),
+        ),
+      },
+    }));
   const [tours, packages, destinations, articles] = await Promise.all([
     getTours(),
     getPackages(),
@@ -28,13 +40,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   ]);
 
   return [
-    ...STATIC_PATHS.map((path) => ({ url: url(path) })),
-    ...tours.map((t) => ({ url: url(`/tours/${t.slug}`) })),
-    ...packages.map((p) => ({ url: url(`/packages/${p.slug}`) })),
-    ...destinations.map((d) => ({ url: url(`/destinations/${d.slug}`) })),
-    ...articles.map((a) => ({
-      url: url(`/travel-guide/${a.slug}`),
-      lastModified: a.publishedOn,
-    })),
+    ...STATIC_PATHS.flatMap((path) => entry(path)),
+    ...tours.flatMap((t) => entry(`/tours/${t.slug}`)),
+    ...packages.flatMap((p) => entry(`/packages/${p.slug}`)),
+    ...destinations.flatMap((d) => entry(`/destinations/${d.slug}`)),
+    ...articles.flatMap((a) => entry(`/travel-guide/${a.slug}`, a.publishedOn)),
   ];
 }

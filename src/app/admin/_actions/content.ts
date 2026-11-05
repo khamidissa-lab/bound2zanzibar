@@ -110,7 +110,10 @@ export async function saveCategory(
 // --- Tours -------------------------------------------------------------------
 
 export async function saveTour(_prev: FormState, formData: FormData): Promise<FormState> {
-  const input = await prepare("content.manage", tourSchema, formValues(formData));
+  const input = await prepare("content.manage", tourSchema, {
+    ...formValues(formData),
+    travelStyles: formData.getAll("travelStyles").filter((v) => typeof v === "string"),
+  });
   if (!input.ok) return input.state;
   const v = input.data;
   const row = {
@@ -121,6 +124,8 @@ export async function saveTour(_prev: FormState, formData: FormData): Promise<Fo
     short_description: v.shortDescription,
     description: v.description,
     duration_text: v.durationText,
+    length: v.length,
+    travel_styles: v.travelStyles,
     highlights: v.highlights,
     inclusions: v.inclusions,
     exclusions: v.exclusions,
@@ -254,6 +259,7 @@ export async function savePackage(
     destinationIds: formData
       .getAll("destinationIds")
       .filter((v) => typeof v === "string"),
+    travelStyles: formData.getAll("travelStyles").filter((v) => typeof v === "string"),
   });
   if (!input.ok) return input.state;
   const v = input.data;
@@ -271,6 +277,7 @@ export async function savePackage(
     exclusions: v.exclusions,
     terms: v.terms,
     is_safari: v.isSafari,
+    travel_styles: v.travelStyles,
     is_featured: v.isFeatured,
     cover_image_path: v.coverImagePath,
     cover_image_alt: v.coverImageAlt,

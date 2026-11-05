@@ -42,7 +42,14 @@ async function Preview({
   const view = buildDashboard(await loadPreviewDashboardInput(now, example), now);
 
   return (
-    <AdminFrame staff={{ fullName: "Preview User", role: "super_admin" }} preview>
+    <AdminFrame
+      staff={{ fullName: "Preview User", role: "super_admin" }}
+      preview
+      notifications={{
+        pendingBookings: view.totals.pending,
+        newEnquiries: view.totals.newInquiries,
+      }}
+    >
       <div
         role="note"
         className="mb-6 flex flex-col items-start gap-3 rounded-2xl border border-dashed border-gold bg-gold/10 px-4 py-3 text-sm text-ocean-deep sm:flex-row sm:items-center"

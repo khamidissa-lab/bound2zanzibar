@@ -37,6 +37,8 @@ This is a logical starting schema. Claude Code should turn it into reviewed Post
 - `short_description` text
 - `description` text
 - `duration_text` text
+- `length` enum `tour_length` nullable: `hours`, `half_day`, `full_day`, `multi_day` (for filters; `duration_text` stays the wording visitors see)
+- `travel_styles` text[]: any of `luxury`, `adventure`, `romantic`, `family`, `cultural`, `relaxation`, `wildlife` (checked by `private.valid_travel_styles`; packages have the same column)
 - `highlights` jsonb or related child table
 - `inclusions` jsonb
 - `exclusions` jsonb

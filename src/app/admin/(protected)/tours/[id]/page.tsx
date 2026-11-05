@@ -48,6 +48,7 @@ export default async function EditTourPage({
         title={tour.name}
         status={tour.status}
         liveHref={`/tours/${tour.slug}`}
+        translationsHref={`/admin/translations/tours/${tour.id}`}
         isSample={tour.is_sample}
         created={query.created !== undefined}
       />

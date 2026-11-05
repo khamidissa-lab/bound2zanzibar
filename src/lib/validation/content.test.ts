@@ -54,6 +54,27 @@ describe("tourSchema", () => {
     }
     expect(tourSchema.safeParse({ ...baseTour, slug: "Bad Slug" }).success).toBe(false);
   });
+
+  it("reads trip length and travel styles, in the standard order", () => {
+    const parsed = tourSchema.parse({
+      ...baseTour,
+      length: "half_day",
+      travelStyles: ["wildlife", "family"],
+    });
+    expect(parsed.length).toBe("half_day");
+    expect(parsed.travelStyles).toEqual(["family", "wildlife"]);
+    // Unset length and no ticked styles are allowed.
+    const empty = tourSchema.parse({ ...baseTour, length: "" });
+    expect(empty.length).toBeNull();
+    expect(empty.travelStyles).toEqual([]);
+  });
+
+  it("rejects an unknown length or style", () => {
+    expect(tourSchema.safeParse({ ...baseTour, length: "weekend" }).success).toBe(false);
+    expect(tourSchema.safeParse({ ...baseTour, travelStyles: ["spa"] }).success).toBe(
+      false,
+    );
+  });
 });
 
 describe("packageSchema", () => {

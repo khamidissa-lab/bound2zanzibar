@@ -1,0 +1,796 @@
+import { contact } from "@/config/site";
+
+/**
+ * English interface text — the source for every other language.
+ *
+ * Other languages are generated from this file by `npm run i18n:ui` (AI
+ * draft, then reviewed). Keep keys stable; use {placeholders} for values.
+ * Business content (tours, packages, …) is NOT here: it comes from the
+ * database and its translations (content_translations).
+ */
+export const en = {
+  meta: {
+    siteName: "Bound to Zanzibar",
+    tagline: "Your Journey Begins in Zanzibar.",
+    description:
+      "Zanzibar tours, Tanzania safaris and multi-day travel packages for residents, East African travellers and international visitors.",
+  },
+  language: {
+    label: "Language",
+    choose: "Choose language",
+    machineNotice:
+      "This page was translated automatically and is being reviewed. If anything is unclear, please ask us.",
+    viewEnglish: "View in English",
+  },
+  nav: {
+    home: "Home",
+    tours: "Zanzibar Tours",
+    safari: "Safari",
+    packages: "Packages",
+    destinations: "Destinations",
+    travelGuide: "Travel Guide",
+    about: "About",
+    contact: "Contact",
+    bookNow: "Book Now",
+    main: "Main",
+    mobile: "Mobile",
+    menu: "Menu",
+    openMenu: "Open menu",
+    skipToContent: "Skip to content",
+    quickContact: "Quick contact",
+    topBar: "Zanzibar · Tanzania safari · Packages",
+    whatsapp: "WhatsApp",
+    call: "Call",
+    opensWhatsApp: "(opens WhatsApp)",
+    opensNewTab: "(opens in a new tab)",
+    instagramNewTab: "(Instagram, opens in a new tab)",
+    breadcrumb: "Breadcrumb",
+  },
+  footer: {
+    statementBefore: "Your journey begins in",
+    statementPlace: "Zanzibar.",
+    intro:
+      "Tell us your dates and what you'd love to see. We reply with an itinerary and confirm availability before anything is booked.",
+    planJourney: "Plan your journey",
+    whatsappUs: "WhatsApp us",
+    whatsappMessage: "Hello! I'd like to plan a trip.",
+    about: "Tours, safaris and travel packages for local and international travellers.",
+    explore: "Explore",
+    company: "Company",
+    legal: "Legal",
+    tanzaniaSafari: "Tanzania Safari",
+    bookATrip: "Book a trip",
+    privacy: "Privacy policy",
+    terms: "Terms & conditions",
+    getInTouch: "Get in touch",
+    phone: "Phone",
+    email: "Email",
+    officeAddress: "Office address",
+    pending: "To be supplied by owner",
+    followUs: "Follow us",
+    linkPending: "(link to be supplied by owner)",
+    rights: "All rights reserved.",
+    place: "Zanzibar · Tanzania",
+  },
+  common: {
+    sample: "Sample",
+    sampleContent: "Sample content",
+    view: "View",
+    viewExperience: "View experience",
+    viewItinerary: "View itinerary",
+    readGuide: "Read the guide",
+    quickLook: "Quick look",
+    whatToExpect: "What to expect",
+    included: "Included",
+    notIncluded: "Not included",
+    viewFullTour: "View full tour",
+    includesSafari: "Includes safari",
+    daysNights: "{days} days · {nights} nights",
+    daysUnit: "days",
+    daysThenNights: "days · {nights} nights",
+    nightsShort: "{nights} nights",
+    day: "Day",
+    dayN: "Day {n}",
+    moreDays: "+ {n} more days",
+    minRead: "{n} min read",
+    zanzibar: "Zanzibar",
+    mainland: "Mainland Tanzania",
+    allTours: "All tours",
+    allDestinations: "All destinations",
+    allPackages: "All packages",
+    allArticles: "All articles",
+    exploreTours: "Explore tours",
+    contactUs: "Contact us",
+    backHome: "Back to home",
+    placeholderImage: "Placeholder image",
+    placeholderIllustration: "(placeholder illustration)",
+    photo: "Photo",
+    pause: "Pause slideshow",
+    play: "Play slideshow",
+    showPhoto: "Show photo {n}: {caption}",
+    photoOf: "Photo {n} of {total}: {alt}",
+    heroPhotos: "Hero photos",
+    loading: "Loading page",
+  },
+  price: {
+    showFor: "Show prices for",
+    from: "From",
+    illustrative: "Illustrative price",
+    onRequestFor: "Price on request for {market}",
+    adult: "Adult",
+    child: "Child",
+    onRequest: "On request",
+    illustrativeNote:
+      "Illustrative sample price — final prices will be confirmed by our team.",
+    samplePrices: "Sample tours & illustrative prices",
+    sampleSafaris: "Sample safaris & illustrative prices",
+    samplePackages: "Sample packages & illustrative prices",
+  },
+  markets: {
+    international: { short: "International", long: "International visitors" },
+    resident: { short: "Tanzania resident", long: "Tanzanian residents" },
+    east_african: { short: "East African", long: "East African residents" },
+  },
+  marketHints: {
+    international: "Visitors from outside East Africa",
+    east_african: "Residents of an East African Community country",
+    resident: "Tanzanian citizens and residents",
+  },
+  units: {
+    "per person": "per person",
+    "per person sharing": "per person sharing",
+    "per group": "per group",
+    "per boat": "per boat",
+    "per vehicle": "per vehicle",
+  } as Record<string, string>,
+  difficulty: { easy: "Easy", moderate: "Moderate", challenging: "Challenging" },
+  home: {
+    eyebrow: "Zanzibar & Tanzania",
+    intro:
+      "Tours, safaris and travel packages planned with local knowledge — for Tanzanian residents, East African travellers and visitors from around the world.",
+    exploreTours: "Explore tours",
+    planJourney: "Plan your journey",
+    counts: {
+      experiences: "experiences",
+      destinations: "destinations",
+      safaris: "safaris",
+    },
+    insetAlt: "Stone Town rooftops beside the turquoise sea",
+    video: {
+      label:
+        "Video: aerial views of Zanzibar's beaches, turquoise lagoons, palm-fringed resorts and a sunset over the sea",
+      caption: "Zanzibar from above",
+      play: "Play video",
+      pause: "Pause video",
+    },
+    search: {
+      label: "Find an experience",
+      want: "I'd like to",
+      wantPlaceholder: "Snorkel, explore Stone Town, see elephants…",
+      where: "Where",
+      anywhere: "Anywhere",
+      type: "Type",
+      allExperiences: "All experiences",
+      submit: "Find experiences",
+    },
+    destinations: {
+      eyebrow: "Destinations",
+      title: "Islands, old towns and open plains",
+      description:
+        "From Stone Town's carved doors to Mnemba's reef and the mainland parks — start with a place.",
+    },
+    experiences: { eyebrow: "Popular experiences", title: "Zanzibar, one day at a time" },
+    travellers: {
+      eyebrow: "Travel your way",
+      title: "A trip for every traveller",
+      description:
+        "Tell us who is coming and we will shape the days around you: the pace, the stays and the moments that matter.",
+      cta: "Start planning",
+      items: {
+        family: {
+          title: "Families",
+          body: "Easy-paced days of wildlife, beaches and island stories for all ages.",
+          alt: "A family with a young child beside an open safari vehicle on the plains of Tanzania",
+        },
+        couples: {
+          title: "Couples",
+          body: "Slow beach days, sunset sails and quiet dinners for two.",
+          alt: "A couple relaxing on a beach daybed in Zanzibar",
+        },
+        groups: {
+          title: "Groups",
+          body: "Friends, clubs and reunions, with one plan that works for everyone.",
+          alt: "A group of travellers posing in front of a waterfall in Tanzania",
+        },
+        honeymoon: {
+          title: "Honeymoons",
+          body: "Barefoot sunsets, time for just the two of you and a safari to remember.",
+          alt: "A sunset picnic on the sand with cushions and wine, facing traditional boats in Zanzibar",
+        },
+        solo: {
+          title: "Solo travellers",
+          body: "Go at your own pace and discover the island with a local guide.",
+          alt: "A woman playing a ukulele on the beach at Paje, Zanzibar",
+        },
+      },
+    },
+    safari: {
+      eyebrow: "Tanzania safari",
+      title: "From the reef to the plains",
+      body: "Combine island days with a mainland safari — from a long day trip to Mikumi to a full northern-circuit adventure in the Serengeti and Ngorongoro.",
+      cta: "Explore safaris",
+      elephantAlt: "An elephant in Nyerere National Park",
+      caption: "On safari · Tanzania",
+      videoLabel:
+        "Video: a safari vehicle at sunset with giraffes, hot-air balloons over the plains, a buffalo, an elephant, a zebra and a lion in Tanzania",
+    },
+    packages: {
+      eyebrow: "Multi-day packages",
+      title: "Trips planned end to end",
+      description:
+        "Accommodation, transfers and experiences in one itinerary — adjustable to your budget.",
+    },
+    reviews: {
+      eyebrow: "Guest reviews",
+      title: "What our guests say",
+      soon: "Guest reviews coming soon.",
+      body: "We only publish genuine reviews from real guests. Travelled with us? We would love to hear from you.",
+    },
+    guide: { eyebrow: "Travel guide", title: "Plan with confidence" },
+  },
+  why: {
+    eyebrow: "Why travel with us",
+    title: "Planned locally, with care",
+    reasons: [
+      {
+        title: "Local knowledge",
+        body: "Based in Zanzibar, planning trips around the island and mainland Tanzania.",
+      },
+      {
+        title: "For residents and visitors",
+        body: "Clear prices for Tanzanian residents and international travellers, with options for different budgets.",
+      },
+      {
+        title: "Clear, honest booking",
+        body: "We confirm availability and final prices with you before anything is booked.",
+      },
+      {
+        title: "Respect for people and places",
+        body: "We encourage responsible wildlife viewing and respect for local culture.",
+      },
+    ],
+  },
+  travelStyles: {
+    luxury: "Luxury",
+    adventure: "Adventure",
+    romantic: "Romantic",
+    family: "Family",
+    cultural: "Cultural",
+    relaxation: "Relaxation",
+    wildlife: "Wildlife & safari",
+  },
+  tourLengths: {
+    hours: "A few hours",
+    half_day: "Half day",
+    full_day: "Full day",
+    multi_day: "Several days",
+  },
+  tours: {
+    metaTitle: "Zanzibar Tours & Experiences",
+    metaDescription:
+      "Day tours and experiences in Zanzibar: Stone Town, Prison Island, spice farms, Jozani Forest, snorkelling, sandbanks and dhow cruises.",
+    eyebrow: "Experiences",
+    title: "Zanzibar tours & experiences",
+    description:
+      "Culture, sea, forest and beach — day trips across Zanzibar, plus options on the mainland.",
+    headerAlt: "Aerial view of a narrow white sandbank in turquoise water off Zanzibar",
+    allTours: "All tours",
+    filter: "Filter tours",
+    searchLabel: "Search tours",
+    searchPlaceholder: "Search tours, e.g. snorkelling",
+    category: "Category",
+    allCategories: "All categories",
+    destination: "Destination",
+    allDestinations: "All destinations",
+    search: "Search",
+    found: "Experiences found: {n}",
+    clear: "Clear filters",
+    noneTitle: "No tours match your search",
+    noneBody:
+      "Try a different keyword or clear the filters. You can also contact us — we are happy to plan something around what you have in mind.",
+    lengthLabel: "Trip length",
+    anyLength: "Any length",
+    styleLabel: "Travel style",
+    anyStyle: "Any style",
+    levelLabel: "Activity level",
+    anyLevel: "Any level",
+    budgetLabel: "Budget per person",
+    anyBudget: "Any budget",
+    budgetUpTo: "Up to {max}",
+    budgetBetween: "{min} – {max}",
+    budgetOver: "Over {min}",
+    budgetNote:
+      "Budgets use the price for your selected market. Trips priced on request are hidden while a budget is set.",
+    planLabel: "Your trip",
+    dateLabel: "Travel date",
+    adultsLabel: "Adults",
+    childrenLabel: "Children",
+    planNote:
+      "Your date and group size go into your booking request. Our team confirms availability.",
+    moreFilters: "More filters",
+    fewerFilters: "Fewer filters",
+    viewDetails: "View details",
+    bookNow: "Book now",
+  },
+  tour: {
+    notFound: "Tour not found",
+    facts: {
+      duration: "Duration",
+      destination: "Destination",
+      difficulty: "Difficulty",
+      suitability: "Suitability",
+    },
+    onThisPage: "On this page",
+    sections: {
+      overview: "Overview",
+      itinerary: "Itinerary",
+      included: "What's included",
+      goodToKnow: "Good to know",
+      faqs: "FAQs",
+    },
+    about: "About this experience",
+    highlights: "Highlights",
+    whatToExpect: "What to expect",
+    whatsIncluded: "What's included",
+    includedFallback:
+      "What's included depends on the itinerary we plan with you and is listed in your quote.",
+    included: "Included",
+    notIncluded: "Not included",
+    whatToBring: "What to bring",
+    goodToKnow: "Good to know",
+    meetingPoint: "Meeting point & pickup",
+    faqs: "Frequently asked questions",
+    keepExploring: "Keep exploring",
+    similar: "Similar experiences",
+  },
+  generalFaqs: [
+    {
+      question: "How do I book?",
+      answer:
+        "Send us an enquiry by email or phone. Our team confirms availability and the final price in writing before anything is booked.",
+    },
+    {
+      question: "Are the prices final?",
+      answer:
+        "Prices marked “illustrative” are samples. Your final price is confirmed by our team when we reply to your request.",
+    },
+    {
+      question: "What is the cancellation policy?",
+      answer:
+        "Cancellation terms depend on the tour and are confirmed with your booking. Please ask our team before you book.",
+    },
+    {
+      question: "Can tours be made private or adjusted?",
+      answer:
+        "Often, yes. Tell us what you have in mind and our team will suggest options.",
+    },
+  ],
+  enquiry: {
+    label: "Prices and enquiries",
+    planTour: "Plan this tour",
+    planPackage: "Plan this package",
+    prices: "Prices",
+    requestToBook: "Request to book",
+    whatsapp: "Chat on WhatsApp",
+    whatsappMessage: "Hello! I'm interested in the {item}.",
+    email: "Enquire by email",
+    emailSubject: "Enquiry: {item}",
+    call: "Call {phone}",
+    note: "A request isn't a confirmed booking. Our team confirms availability and the final price before anything is booked, and no payment is taken online.",
+  },
+  safari: {
+    metaTitle: "Tanzania Safari from Zanzibar",
+    metaDescription:
+      "Combine Zanzibar with a Tanzania safari: the Serengeti, Ngorongoro, Tarangire, Ruaha, Nyerere, chimpanzee trekking and more.",
+    eyebrow: "Safari",
+    title: "Tanzania safari, from Zanzibar",
+    description:
+      "Pair the beaches and culture of Zanzibar with the wildlife of mainland Tanzania.",
+    howItWorks: "How our safaris work",
+    points: [
+      {
+        title: "Island + safari, one plan",
+        body: "Flights, transfers and island time arranged as one connected trip.",
+      },
+      {
+        title: "Options for any timeframe",
+        body: "From a long day trip to Mikumi to a multi-day safari in the north, south or west.",
+      },
+      {
+        title: "Honest about conditions",
+        body: "Wildlife sightings and flight schedules can't be guaranteed — we tell you what to expect.",
+      },
+    ],
+    experiencesEyebrow: "Safari experiences",
+    experiencesTitle: "Safari experiences",
+    experiencesDescription:
+      "Day trips from Zanzibar and longer safaris across Tanzania's northern, southern and western parks.",
+    experienceCount: "Experiences: {n}",
+    circuits: {
+      northern: "Northern Circuit Safaris",
+      southern: "Southern Circuit Safaris",
+      western: "Western Tanzania Safaris",
+      special: "Special Safari Experiences",
+      more: "More safari experiences",
+    } as Record<string, string>,
+    packagesEyebrow: "Island + safari",
+    packagesTitle: "Safari packages",
+    packagesDescription:
+      "Multi-day trips combining a mainland safari with time in Zanzibar.",
+    parksEyebrow: "Parks",
+    parksTitle: "Where we go on safari",
+  },
+  packages: {
+    metaTitle: "Travel Packages",
+    metaDescription:
+      "Multi-day Zanzibar holiday packages and Zanzibar + Tanzania safari combinations with accommodation, transfers and tours.",
+    eyebrow: "Multi-day trips",
+    title: "Travel packages",
+    description:
+      "Itineraries that bring together accommodation, transfers and experiences. Every package can be adjusted to your dates, group and budget.",
+    headerAlt: "Palm trees framing a sunny beach with loungers and turquoise water",
+    emptyTitle: "Packages coming soon",
+    emptyBody:
+      "We are preparing our first packages. Contact us to plan a trip in the meantime.",
+    islandEyebrow: "The island",
+    islandTitle: "Zanzibar island packages",
+    safariEyebrow: "Island + mainland",
+    safariTitle: "Zanzibar + safari packages",
+    aboutSafaris: "About our safaris",
+  },
+  package: {
+    notFound: "Package not found",
+    destinations: "Destinations",
+    facts: {
+      length: "Length",
+      lengthValue: "{days} days / {nights} nights",
+      accommodation: "Accommodation",
+      transfers: "Transfers",
+      meals: "Meals",
+    },
+    overview: "Overview",
+    itinerary: "Day-by-day itinerary",
+    overnight: "Overnight: {place}",
+    noOvernight: "No overnight",
+    mealsList: "Meals: {meals}",
+    experiences: "Experiences included",
+    whatsIncluded: "What's included",
+    terms: "Terms",
+  },
+  destinations: {
+    metaTitle: "Destinations",
+    metaDescription:
+      "Explore Zanzibar's towns, beaches, reefs and forests, and mainland Tanzania's safari parks.",
+    eyebrow: "Where to go",
+    title: "Destinations",
+    description:
+      "From Stone Town's lanes to the reefs of Mnemba and the plains of the mainland parks.",
+    headerAlt:
+      "Aerial view of waves breaking over turquoise water off the Zanzibar coast",
+    sample: "Sample destination guides",
+    islandsEyebrow: "The islands",
+    safariEyebrow: "On safari",
+  },
+  destination: {
+    notFound: "Destination not found",
+    about: "About {name}",
+    highlights: "Highlights",
+    experiencesEyebrow: "Experiences",
+    experiencesTitle: "Experiences in {name}",
+    noToursTitle: "No day tours listed here yet",
+    noToursBody:
+      "This destination features in our packages, or contact us and we can plan a visit for you.",
+    packagesEyebrow: "Packages",
+    packagesTitle: "Packages that visit {name}",
+  },
+  guide: {
+    metaTitle: "Travel Guide",
+    metaDescription:
+      "Practical tips for planning a trip to Zanzibar and Tanzania: seasons, culture and packing.",
+    eyebrow: "Plan your trip",
+    title: "Travel guide",
+    description:
+      "Practical, honest advice for planning your visit to Zanzibar and Tanzania.",
+    sample: "Sample articles — owner to review",
+    all: "All articles",
+    emptyTitle: "Articles coming soon",
+    emptyBody: "We are writing our first travel guides.",
+    notFound: "Article not found",
+    backToAll: "All travel guide articles",
+    keepReading: "Keep reading",
+    more: "More from the travel guide",
+  },
+  about: {
+    metaTitle: "About Us",
+    metaDescription:
+      "About Bound to Zanzibar: a Zanzibar-based travel company for local and international travellers.",
+    eyebrow: "Our story",
+    title: "About Bound to Zanzibar",
+    description:
+      "A Zanzibar-based tourism and travel brand for Tanzanian residents, East African travellers and visitors from around the world.",
+    headerAlt: "Coconut palms leaning over a thatched roof on a Zanzibar beach",
+    draft: "Draft copy — owner to review",
+    lead: "Bound to Zanzibar helps travellers discover Zanzibar and mainland Tanzania — from a half-day walk through Stone Town to a multi-day safari combined with time on the coast.",
+    p1: "We plan trips for couples, families, groups and solo travellers, and for both local and international guests. That means clear pricing for residents and visitors, and options that suit different budgets.",
+    p2: "Every trip starts with a conversation. Tell us what you would like to see and when, and we will suggest an itinerary and confirm availability before anything is booked.",
+    toBePublished: "To be published",
+    companyDetails: "Company details",
+    companyBody:
+      "Our founding story, team, business registration and licence details will be published here once supplied and verified.",
+    ready: "Ready to start planning?",
+  },
+  contact: {
+    metaTitle: "Contact Us",
+    metaDescription:
+      "Contact Bound to Zanzibar to plan a Zanzibar tour, safari or travel package.",
+    eyebrow: "Get in touch",
+    title: "Contact us",
+    description:
+      "Questions about a tour, package or safari? Reach out and our team will get back to you.",
+    direct: "Talk to us directly",
+    channels: {
+      email: "Email",
+      emailNote: "Tell us your dates, group size and what you would like to do.",
+      emailSubject: "Trip enquiry",
+      phone: "Phone",
+      phoneNote: "Call us to talk through your plans.",
+      whatsapp: "WhatsApp",
+      whatsappNote: "Send us a message on WhatsApp.",
+      whatsappMessage: "Hello! I'd like to ask about a trip.",
+      instagram: "Instagram",
+      instagramNote: "Follow along and send us a message.",
+    },
+    officeTitle: "Office address",
+    officeBody: "Zanzibar, Tanzania. Full address to be supplied by the owner.",
+    formTitle: "Send us a message",
+    formIntroBefore:
+      "Ask anything about tours, safaris or packages. To book a specific trip, use the",
+    formIntroLink: "booking request form",
+    formUnavailable:
+      "The online form opens soon. Until then, please email, call or WhatsApp us.",
+  },
+  enquiryForm: {
+    honeypot: "Leave this field empty",
+    name: "Name",
+    email: "Email",
+    phone: "Phone or WhatsApp (optional)",
+    phoneHint: "Include your country code.",
+    subject: "Subject (optional)",
+    subjectPlaceholder: "e.g. Safari in March",
+    message: "Message",
+    messagePlaceholder: "Your dates, group size and what you'd like to do.",
+    consentBefore:
+      "I agree that Bound to Zanzibar may use these details to reply to me, as described in the",
+    privacyPolicy: "privacy policy",
+    sending: "Sending…",
+    send: "Send message",
+    sendAnother: "Send another message",
+  },
+  book: {
+    tripNotes: {
+      family: "We are planning a family trip.",
+      couples: "We are a couple planning a trip.",
+      groups: "We are planning a group trip.",
+      honeymoon: "We are planning our honeymoon.",
+      solo: "I am planning a solo trip.",
+    },
+    metaTitle: "Book a Trip",
+    metaDescription:
+      "Send a booking request for a Zanzibar tour, safari or package. Our team confirms availability and the final price with you.",
+    eyebrow: "Booking",
+    title: "Request a booking",
+    description:
+      "Tell us what you'd like to do and when. This is a request — nothing is booked or charged until our team confirms it with you.",
+    loadingForm: "Loading the booking form…",
+    howTitle: "How booking works",
+    steps: [
+      "Choose a tour or package and send your preferred date and group size.",
+      "You get a reference number straight away.",
+      "Our team checks availability and replies with the details and final price.",
+      "Your booking is confirmed only once our team confirms it in writing.",
+    ],
+    talkTitle: "Prefer to talk?",
+    emailSubject: "Booking enquiry",
+    whatsappMessage: "Hello! I'd like help booking a trip.",
+    whatsappLabel: "WhatsApp {phone}",
+    unavailable:
+      "Online booking requests open soon. Until then, please email {email} or call {phone}.",
+  },
+  bookingForm: {
+    honeypot: "Leave this field empty",
+    yourTrip: "Your trip",
+    item: "Tour or package",
+    chooseItem: "Choose a tour or package…",
+    groupTours: "Tours",
+    groupPackages: "Packages",
+    daysSuffix: "{days} days",
+    travellingFrom: "Where are you travelling from?",
+    preferredDate: "Preferred date",
+    preferredDateHint: "We'll confirm availability for this date.",
+    currency: "Currency",
+    currencyHint: "Prices are set per currency and never converted.",
+    adults: "Adults",
+    children: "Children",
+    childrenHint: "Under 12 years.",
+    estimate: "Estimated total: {total}",
+    perAdult: "{price} per adult",
+    perChild: ", {price} per child",
+    illustrative: " · illustrative sample prices",
+    confirmNote: ". Our team confirms the final price with you.",
+    noPrice: "No online price for this choice — our team will quote you directly.",
+    yourDetails: "Your details",
+    fullName: "Full name",
+    email: "Email",
+    phone: "Phone or WhatsApp",
+    phoneHint: "Include your country code.",
+    pickup: "Hotel or pickup area (optional)",
+    message: "Questions or special requests (optional)",
+    consentBefore:
+      "I agree that Bound to Zanzibar may use these details to reply to my request, as described in the",
+    privacyPolicy: "privacy policy",
+    requestNoteBefore: "This sends a",
+    requestWord: "request",
+    requestNoteAfter:
+      ", not a confirmed booking. No payment is taken online — our team will contact you to confirm availability and the final price.",
+    sending: "Sending request…",
+    send: "Send booking request",
+  },
+  received: {
+    metaTitle: "Booking request received",
+    title: "Request received",
+    bodyBefore: "Thank you! Your booking request is",
+    pending: "pending",
+    bodyAfter:
+      "— it is not confirmed yet. Our team will contact you to confirm availability and the final price.",
+    nextTitle: "What happens next",
+    next: [
+      "Our team replies by email or phone using the details you gave.",
+      "No payment has been taken. We'll explain how to pay once confirmed.",
+      "Need to change something? Contact us and quote your reference.",
+    ],
+    reference: "Your reference",
+    keep: "Keep this for any questions.",
+    whatsappMessage: "Hello! My booking request reference is {ref}.",
+    whatsapp: "Message us on WhatsApp about this request",
+    browse: "Browse more tours",
+  },
+  legal: {
+    eyebrow: "Legal",
+    privacyTitle: "Privacy Policy",
+    privacyBody:
+      "How we collect, use and protect personal information. The full policy will be published once approved by the business owner.",
+    termsTitle: "Terms & Conditions",
+    termsBody:
+      "Booking, cancellation and service terms. The full terms will be published once approved by the business owner.",
+    building: "This page is being built and will be available soon.",
+  },
+  notFound: {
+    title: "This page drifted off course",
+    body: "The page you are looking for doesn't exist or has moved.",
+    home: "Go to home",
+    browse: "Browse tours",
+  },
+  error: {
+    title: "Something went wrong",
+    body: "We couldn't load this page. Please try again in a moment.",
+    retry: "Try again",
+  },
+  /**
+   * Form validation and server messages, keyed by the English text the
+   * server returns, so they can be shown in the visitor's language.
+   */
+  errors: {
+    "Please check the highlighted fields.": "Please check the highlighted fields.",
+    "Choose a tour or package.": "Choose a tour or package.",
+    "Enter your full name.": "Enter your full name.",
+    "Enter your name.": "Enter your name.",
+    "Use 120 characters or fewer.": "Use 120 characters or fewer.",
+    "Use 200 characters or fewer.": "Use 200 characters or fewer.",
+    "Use 300 characters or fewer.": "Use 300 characters or fewer.",
+    "Use 2,000 characters or fewer.": "Use 2,000 characters or fewer.",
+    "Use 4,000 characters or fewer.": "Use 4,000 characters or fewer.",
+    "That email address is too long.": "That email address is too long.",
+    "Enter a valid email address, like name@example.com.":
+      "Enter a valid email address, like name@example.com.",
+    "Enter a phone number with country code, like +255 712 345 678.":
+      "Enter a phone number with country code, like +255 712 345 678.",
+    "Enter a phone number with country code, or leave it empty.":
+      "Enter a phone number with country code, or leave it empty.",
+    "That phone number is too short.": "That phone number is too short.",
+    "That phone number is too long.": "That phone number is too long.",
+    "Choose where you're travelling from.": "Choose where you're travelling from.",
+    "Choose a currency.": "Choose a currency.",
+    "Choose your preferred date.": "Choose your preferred date.",
+    "Choose a valid date.": "Choose a valid date.",
+    "Choose a date from today onwards.": "Choose a date from today onwards.",
+    "We take requests up to two years ahead.": "We take requests up to two years ahead.",
+    "Please agree so we can reply to your request.":
+      "Please agree so we can reply to your request.",
+    "Please agree so we can reply to you.": "Please agree so we can reply to you.",
+    "Tell us a little more (at least 10 characters).":
+      "Tell us a little more (at least 10 characters).",
+    "Please check your name.": "Please check your name.",
+    "Please check your email address.": "Please check your email address.",
+    "Please check your phone number.": "Please check your phone number.",
+    "Please check your message.": "Please check your message.",
+    "Please check the number of travellers.": "Please check the number of travellers.",
+    "Please choose a date between today and two years ahead.":
+      "Please choose a date between today and two years ahead.",
+    "Your pickup location or message is too long.":
+      "Your pickup location or message is too long.",
+    "Your phone number or subject is too long.":
+      "Your phone number or subject is too long.",
+    "That currency isn't available. Please choose another.":
+      "That currency isn't available. Please choose another.",
+    "That tour or package is no longer available. Please choose another or contact us.":
+      "That tour or package is no longer available. Please choose another or contact us.",
+    "We've received several requests from you recently. Please wait an hour or contact us directly.":
+      "We've received several requests from you recently. Please wait an hour or contact us directly.",
+    "We've received several messages from you recently. Please wait an hour or contact us directly.":
+      "We've received several messages from you recently. Please wait an hour or contact us directly.",
+    "Thank you — your message has been sent. Our team will reply by email.":
+      "Thank you — your message has been sent. Our team will reply by email.",
+    "Enter the number of adults.": "Enter the number of adults.",
+    "Enter the number of children.": "Enter the number of children.",
+    "At least 1 adult is required.": "At least 1 adult is required.",
+    "For groups over 50, please contact us.": "For groups over 50, please contact us.",
+    [`Online booking requests aren't available right now. Please email ${contact.email} or call ${contact.phoneDisplay} and we'll help you directly.`]: `Online booking requests aren't available right now. Please email ${contact.email} or call ${contact.phoneDisplay} and we'll help you directly.`,
+    [`The contact form isn't available right now. Please email ${contact.email} or message us on WhatsApp at ${contact.phoneDisplay}.`]: `The contact form isn't available right now. Please email ${contact.email} or message us on WhatsApp at ${contact.phoneDisplay}.`,
+  } as Record<string, string>,
+  assistant: {
+    open: "Ask AI",
+    title: "Ask our AI assistant",
+    description:
+      "Answers use the information on this website and can contain mistakes. Our team confirms every price and booking. Please don't share payment details here.",
+    welcome:
+      "Jambo! Ask me about our Zanzibar tours, safaris and packages — what to expect, what's included, prices and how booking works.",
+    suggested: "Suggested questions",
+    suggestions: [
+      "Which tours suit a family with young kids?",
+      "What should I bring for snorkelling at Mnemba?",
+      "Can I do a safari from Zanzibar in one day?",
+      "How does booking work?",
+    ],
+    tourSuggestions: [
+      "What's included in this tour?",
+      "What should I bring for this tour?",
+      "Is this tour suitable for children?",
+      "How do I book this tour?",
+    ],
+    packageSuggestions: [
+      "What does this package include?",
+      "Can this package be adjusted?",
+      "What isn't included in the price?",
+      "How do I book this package?",
+    ],
+    you: "You:",
+    assistant: "Assistant:",
+    thinking: "Thinking…",
+    atLimit: "This chat is getting long — start a new one to keep asking.",
+    yourQuestion: "Your question",
+    placeholder: "Ask about tours, prices, what to bring…",
+    stop: "Stop answer",
+    send: "Send question",
+    newChat: "New chat",
+    notConfigured:
+      "Our AI assistant isn't switched on yet. Please contact our team at {email} or {phone}.",
+    rateLimited:
+      "You've sent a lot of questions in a short time. Please wait a minute and try again.",
+    tooLong: "That conversation is too long. Start a new chat and ask again.",
+    failed:
+      "Sorry, the assistant isn't available right now. Please contact us at {email}.",
+  },
+};
+
+/** The shape every language must provide (values may differ, keys may not). */
+export type Messages = typeof en;

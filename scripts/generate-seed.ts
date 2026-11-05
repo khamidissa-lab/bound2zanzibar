@@ -67,14 +67,14 @@ out("\n-- Tours");
 sampleTours.forEach((t, i) => {
   out(`insert into public.tours
   (category_id, destination_id, name, slug, short_description, description, duration_text,
-   highlights, inclusions, exclusions, what_to_bring, meeting_point, difficulty, suitability,
+   length, travel_styles, highlights, inclusions, exclusions, what_to_bring, meeting_point, difficulty, suitability,
    what_to_expect, good_to_know, faqs,
    cover_image_alt, is_featured, status, seo_title, seo_description, is_sample, sort_order)
 values (
   (select id from public.tour_categories where slug = ${q(t.categorySlug)}),
   (select id from public.destinations where slug = ${q(t.destinationSlug)}),
   ${q(t.name)}, ${q(t.slug)}, ${q(t.shortDescription)}, ${paragraphs(t.description)}, ${q(t.duration)},
-  ${arr(t.highlights)}, ${arr(t.included)}, ${arr(t.excluded)}, ${arr(t.whatToBring)},
+  ${q(t.length)}, ${arr(t.travelStyles)}, ${arr(t.highlights)}, ${arr(t.included)}, ${arr(t.excluded)}, ${arr(t.whatToBring)},
   ${q(t.meetingPoint)}, ${q(t.difficulty)}, ${q(t.suitability)},
   ${json(t.whatToExpect)}, ${arr(t.goodToKnow)}, ${json(t.faqs)}, ${q(t.coverImage.alt)},
   ${t.featured}, ${q(t.status)}, ${q(t.seo.title)}, ${q(t.seo.description)}, ${t.isSample}, ${i});`);
@@ -88,11 +88,11 @@ out("\n-- Packages");
 samplePackages.forEach((p, i) => {
   out(`insert into public.packages
   (name, slug, short_description, description, days, nights, accommodation_description,
-   transfers_description, meals_description, inclusions, exclusions, terms, is_safari,
+   transfers_description, meals_description, inclusions, exclusions, terms, is_safari, travel_styles,
    is_featured, cover_image_alt, status, seo_title, seo_description, is_sample, sort_order)
 values (${q(p.name)}, ${q(p.slug)}, ${q(p.summary)}, ${paragraphs(p.description)}, ${p.days}, ${p.nights},
   ${q(p.accommodation)}, ${q(p.transfers)}, ${q(p.meals)}, ${arr(p.included)}, ${arr(p.excluded)},
-  ${arr(p.terms)}, ${p.isSafari}, ${p.featured}, ${q(p.coverImage.alt)}, ${q(p.status)},
+  ${arr(p.terms)}, ${p.isSafari}, ${arr(p.travelStyles)}, ${p.featured}, ${q(p.coverImage.alt)}, ${q(p.status)},
   ${q(p.seo.title)}, ${q(p.seo.description)}, ${p.isSample}, ${i});`);
   const pkgId = `(select id from public.packages where slug = ${q(p.slug)})`;
   p.destinationSlugs.forEach((slug, order) => {

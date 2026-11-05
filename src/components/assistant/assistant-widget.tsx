@@ -8,10 +8,10 @@ import {
   type FormEvent,
   type ReactNode,
 } from "react";
-import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ArrowUp, RotateCcw, Sparkles, Square } from "lucide-react";
 
+import { LocaleLink as Link } from "@/components/i18n/locale-link";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -22,35 +22,17 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { contact } from "@/config/site";
+import { useI18n } from "@/i18n/client";
+import { splitLocale } from "@/i18n/config";
+import type { Messages } from "@/i18n/messages/en";
 import { cn } from "@/lib/utils";
 import { ASSISTANT_LIMITS, type AssistantMessage } from "@/lib/validation/assistant";
 
-const GENERAL_SUGGESTIONS = [
-  "Which tours suit a family with young kids?",
-  "What should I bring for snorkelling at Mnemba?",
-  "Can I do a safari from Zanzibar in one day?",
-  "How does booking work?",
-];
-
 /** Suggestions for the page the visitor is on (tour/package pages get their own). */
-function suggestionsFor(pathname: string): string[] {
-  if (/^\/tours\/[a-z0-9-]+$/.test(pathname)) {
-    return [
-      "What's included in this tour?",
-      "What should I bring for this tour?",
-      "Is this tour suitable for children?",
-      "How do I book this tour?",
-    ];
-  }
-  if (/^\/packages\/[a-z0-9-]+$/.test(pathname)) {
-    return [
-      "What does this package include?",
-      "Can this package be adjusted?",
-      "What isn't included in the price?",
-      "How do I book this package?",
-    ];
-  }
-  return GENERAL_SUGGESTIONS;
+function suggestionsFor(path: string, t: Messages): string[] {
+  if (/^\/tours\/[a-z0-9-]+$/.test(path)) return t.assistant.tourSuggestions;
+  if (/^\/packages\/[a-z0-9-]+$/.test(path)) return t.assistant.packageSuggestions;
+  return t.assistant.suggestions;
 }
 
 const STORAGE_KEY = "b2z-assistant-chat";
@@ -86,13 +68,17 @@ function save(messages: AssistantMessage[]) {
   }
 }
 
-const ERRORS: Record<string, string> = {
-  not_configured: `Our AI assistant isn't switched on yet. Please contact our team at ${contact.email} or ${contact.phoneDisplay}.`,
-  rate_limited:
-    "You've sent a lot of questions in a short time. Please wait a minute and try again.",
-  invalid_request: "That conversation is too long. Start a new chat and ask again.",
-};
-const GENERIC_ERROR = `Sorry, the assistant isn't available right now. Please contact us at ${contact.email}.`;
+function errorText(
+  t: Messages,
+  fmt: (s: string, v: Record<string, string>) => string,
+  code?: string,
+): string {
+  const values = { email: contact.email, phone: contact.phoneDisplay };
+  if (code === "not_configured") return fmt(t.assistant.notConfigured, values);
+  if (code === "rate_limited") return t.assistant.rateLimited;
+  if (code === "invalid_request") return t.assistant.tooLong;
+  return fmt(t.assistant.failed, values);
+}
 
 // Site paths the assistant cites (e.g. /tours/prison-island-tour) become links.
 const PATH_RE =
@@ -127,7 +113,9 @@ function MessageText({ text, onNavigate }: { text: string; onNavigate: () => voi
 }
 
 export function AssistantWidget() {
-  const pathname = usePathname();
+  const { t, fmt, locale } = useI18n();
+  const a = t.assistant;
+  const pathname = splitLocale(usePathname() ?? "/").path;
   const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState<AssistantMessage[]>([]);
   const [input, setInput] = useState("");
@@ -169,12 +157,12 @@ export function AssistantWidget() {
       const res = await fetch("/api/assistant", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ messages: history, page: pathname }),
+        body: JSON.stringify({ messages: history, page: pathname, locale }),
         signal: controller.signal,
       });
       if (!res.ok || !res.body) {
         const data = (await res.json().catch(() => null)) as { error?: string } | null;
-        setError(ERRORS[data?.error ?? ""] ?? GENERIC_ERROR);
+        setError(errorText(t, fmt, data?.error));
         setMessages(messages);
         setInput(text);
         return;
@@ -190,7 +178,7 @@ export function AssistantWidget() {
       }
       if (!answer.trim()) {
         setMessages(messages);
-        setError(GENERIC_ERROR);
+        setError(errorText(t, fmt));
       }
     } catch {
       if (controller.signal.aborted) {
@@ -204,7 +192,7 @@ export function AssistantWidget() {
           setInput(text);
         }
       } else {
-        setError(GENERIC_ERROR);
+        setError(errorText(t, fmt));
         setMessages(messages);
         setInput(text);
       }
@@ -239,26 +227,24 @@ export function AssistantWidget() {
         render={
           <button
             type="button"
-            className="fixed right-4 bottom-4 z-40 flex items-center gap-2 rounded-full bg-ocean-deep py-3 pr-5 pl-4 text-sm font-medium text-white shadow-lg ring-2 ring-white/70 transition hover:bg-ocean focus-visible:ring-4 focus-visible:ring-gold focus-visible:outline-none sm:right-6 sm:bottom-6"
+            className="fixed end-4 bottom-4 z-40 flex items-center gap-2 border border-gold/60 bg-ocean-deep py-3 pr-5 pl-4 text-[0.72rem] font-semibold tracking-[0.14em] text-ivory uppercase shadow-card transition hover:bg-ocean focus-visible:ring-4 focus-visible:ring-gold focus-visible:outline-none sm:end-6 sm:bottom-6"
           />
         }
       >
         <Sparkles className="size-4 text-gold-light" aria-hidden="true" />
-        Ask AI
+        {a.open}
       </SheetTrigger>
       <SheetContent
-        side="right"
+        side={locale === "ar" ? "left" : "right"}
         className="w-full gap-0 bg-warm-white p-0 sm:max-w-md data-[side=right]:sm:max-w-md"
       >
         <SheetHeader className="border-b border-border px-5 pt-5 pb-4">
           <SheetTitle className="flex items-center gap-2 font-display text-xl text-ocean-deep">
             <Sparkles className="size-5 text-gold-deep" aria-hidden="true" />
-            Ask our AI assistant
+            {a.title}
           </SheetTitle>
           <SheetDescription className="text-xs leading-relaxed">
-            Answers use the information on this website and can contain mistakes. Our team
-            confirms every price and booking. Please don&apos;t share payment details
-            here.
+            {a.description}
           </SheetDescription>
         </SheetHeader>
 
@@ -271,17 +257,14 @@ export function AssistantWidget() {
         >
           {messages.length === 0 ? (
             <div className="space-y-3">
-              <p className="text-ocean-deep">
-                Jambo! Ask me about our Zanzibar tours, safaris and packages — what to
-                expect, what&apos;s included, prices and how booking works.
-              </p>
-              <ul className="flex flex-col gap-2" aria-label="Suggested questions">
-                {suggestionsFor(pathname).map((s) => (
+              <p className="text-ocean-deep">{a.welcome}</p>
+              <ul className="flex flex-col gap-2" aria-label={a.suggested}>
+                {suggestionsFor(pathname, t).map((s) => (
                   <li key={s}>
                     <button
                       type="button"
                       onClick={() => void ask(s)}
-                      className="w-full rounded-2xl border border-turquoise/40 bg-white px-4 py-2.5 text-left text-ocean-deep transition hover:border-turquoise hover:bg-turquoise-soft"
+                      className="w-full rounded-2xl border border-turquoise/40 bg-white px-4 py-2.5 text-start text-ocean-deep transition hover:border-turquoise hover:bg-turquoise-soft"
                     >
                       {s}
                     </button>
@@ -296,13 +279,11 @@ export function AssistantWidget() {
                 className={cn(
                   "max-w-[90%] rounded-2xl px-4 py-3",
                   m.role === "user"
-                    ? "ml-auto rounded-br-md bg-ocean-deep text-white"
-                    : "rounded-bl-md border border-border bg-white text-ink",
+                    ? "ms-auto rounded-ee-md bg-ocean-deep text-white"
+                    : "rounded-es-md border border-border bg-white text-ink",
                 )}
               >
-                <span className="sr-only">
-                  {m.role === "user" ? "You:" : "Assistant:"}
-                </span>
+                <span className="sr-only">{m.role === "user" ? a.you : a.assistant}</span>
                 {m.role === "user" ? (
                   <p className="whitespace-pre-wrap">{m.content}</p>
                 ) : (
@@ -318,7 +299,7 @@ export function AssistantWidget() {
                 <span className="size-1.5 animate-bounce rounded-full bg-turquoise [animation-delay:-0.15s]" />
                 <span className="size-1.5 animate-bounce rounded-full bg-turquoise" />
               </span>
-              Thinking…
+              {a.thinking}
             </p>
           ) : null}
           {error ? (
@@ -333,13 +314,11 @@ export function AssistantWidget() {
 
         <div className="border-t border-border bg-white px-4 pt-3 pb-4">
           {atLimit ? (
-            <p className="mb-2 text-xs text-muted-foreground">
-              This chat is getting long — start a new one to keep asking.
-            </p>
+            <p className="mb-2 text-xs text-muted-foreground">{a.atLimit}</p>
           ) : null}
           <form onSubmit={onSubmit} className="flex items-end gap-2">
             <label htmlFor="assistant-input" className="sr-only">
-              Your question
+              {a.yourQuestion}
             </label>
             <textarea
               id="assistant-input"
@@ -354,14 +333,14 @@ export function AssistantWidget() {
               rows={1}
               maxLength={ASSISTANT_LIMITS.maxMessageChars}
               disabled={atLimit}
-              placeholder="Ask about tours, prices, what to bring…"
-              className="max-h-32 min-h-11 flex-1 resize-none rounded-2xl border border-input bg-warm-white px-4 py-2.5 text-sm text-ink outline-none placeholder:text-muted-foreground focus-visible:border-turquoise focus-visible:ring-2 focus-visible:ring-turquoise/30 disabled:opacity-60"
+              placeholder={a.placeholder}
+              className="max-h-32 min-h-11 flex-1 resize-none rounded-2xl border border-input bg-warm-white px-4 py-2.5 text-sm text-ink outline-none placeholder:text-muted-foreground focus-visible:border-turquoise-deep focus-visible:ring-2 focus-visible:ring-turquoise-deep/25 disabled:opacity-60"
             />
             {pending ? (
               <Button
                 type="button"
                 size="icon"
-                aria-label="Stop answer"
+                aria-label={a.stop}
                 onClick={stop}
                 className="size-11 shrink-0 bg-ocean-deep text-white hover:bg-ocean"
               >
@@ -371,7 +350,7 @@ export function AssistantWidget() {
               <Button
                 type="submit"
                 size="icon"
-                aria-label="Send question"
+                aria-label={a.send}
                 disabled={!input.trim() || atLimit}
                 className="size-11 shrink-0 bg-turquoise-deep text-white hover:bg-ocean-deep"
               >
@@ -386,7 +365,7 @@ export function AssistantWidget() {
               className="mt-2 inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-ocean-deep"
             >
               <RotateCcw className="size-3.5" aria-hidden="true" />
-              New chat
+              {a.newChat}
             </button>
           ) : null}
         </div>

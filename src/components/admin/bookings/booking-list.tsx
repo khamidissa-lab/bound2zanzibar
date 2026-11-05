@@ -16,7 +16,7 @@ import type { Currency } from "@/types/content";
 import { BookingStatusBadge } from "./booking-badge";
 
 const selectClass =
-  "h-10 w-full rounded-lg border border-input bg-background px-3 text-sm outline-none focus-visible:border-turquoise focus-visible:ring-2 focus-visible:ring-turquoise/30";
+  "h-10 w-full rounded-lg border border-input bg-background px-3 text-sm outline-none focus-visible:border-turquoise-deep focus-visible:ring-2 focus-visible:ring-turquoise-deep/25";
 
 export function BookingList({
   basePath,

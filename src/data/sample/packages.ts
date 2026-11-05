@@ -1,5 +1,6 @@
 import type { TourPackage } from "@/types/content";
 
+import { packageTravelStyles } from "./discovery";
 import { illustrativePrices } from "./shared";
 
 const sampleTerms = [
@@ -84,6 +85,7 @@ export const samplePackages: TourPackage[] = [
     ),
     featured: true,
     isSafari: false,
+    travelStyles: packageTravelStyles["zanzibar-highlights-4-days"],
     status: "published",
     seo: {
       title: "Zanzibar Highlights — 4 Days",
@@ -187,6 +189,7 @@ export const samplePackages: TourPackage[] = [
     ),
     featured: true,
     isSafari: false,
+    travelStyles: packageTravelStyles["zanzibar-island-explorer-6-days"],
     status: "published",
     seo: {
       title: "Zanzibar Island Explorer — 6 Days",
@@ -275,6 +278,7 @@ export const samplePackages: TourPackage[] = [
     ),
     featured: true,
     isSafari: true,
+    travelStyles: packageTravelStyles["zanzibar-mikumi-safari-5-days"],
     status: "published",
     seo: {
       title: "Zanzibar & Mikumi Safari — 5 Days",
@@ -385,6 +389,7 @@ export const samplePackages: TourPackage[] = [
     ),
     featured: false,
     isSafari: true,
+    travelStyles: packageTravelStyles["serengeti-ngorongoro-zanzibar-8-days"],
     status: "published",
     seo: {
       title: "Serengeti, Ngorongoro & Zanzibar — 8 Days",

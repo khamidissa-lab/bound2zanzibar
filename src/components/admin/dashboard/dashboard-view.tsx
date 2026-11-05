@@ -44,7 +44,7 @@ function Card({
 }) {
   return (
     <section
-      className={cn("rounded-2xl bg-card p-5 shadow-card", className)}
+      className={cn("rounded-xl border bg-card p-5", className)}
       aria-label={title}
     >
       <div className="mb-4 flex items-center justify-between gap-3">
@@ -71,11 +71,12 @@ function Empty({ children }: { children: ReactNode }) {
   );
 }
 
+// Every tile is a white card; the tone colours its icon chip only.
 const TILE_STYLES = {
   navy: "bg-ocean-deep text-white",
   sea: "bg-turquoise-deep text-white",
-  gold: "bg-gold-pill text-ocean-deep",
-  white: "bg-card text-ocean-deep",
+  gold: "bg-gold text-ocean-deep",
+  white: "bg-turquoise-soft text-turquoise-deep",
 } as const;
 
 function StatTile({
@@ -96,25 +97,22 @@ function StatTile({
   return (
     <Link
       href={href}
-      className={cn(
-        "flex items-center gap-4 rounded-2xl p-4 shadow-card transition-transform hover:-translate-y-0.5",
-        TILE_STYLES[tone],
-      )}
+      className="flex items-center gap-4 rounded-xl border bg-card p-4 text-ocean-deep transition-[box-shadow,transform] hover:-translate-y-0.5 hover:shadow-card"
     >
       <span
         className={cn(
-          "flex size-12 shrink-0 items-center justify-center rounded-xl",
-          tone === "white" ? "bg-turquoise-soft text-turquoise-deep" : "bg-white/20",
+          "flex size-12 shrink-0 items-center justify-center rounded-lg",
+          TILE_STYLES[tone],
         )}
       >
-        <Icon className="size-6" aria-hidden="true" />
+        <Icon className="size-5" aria-hidden="true" />
       </span>
       <span>
-        <span className="block text-xs font-medium">{label}</span>
-        <span className="block font-display text-3xl leading-tight tabular-nums">
+        <span className="block text-xs font-medium text-muted-foreground">{label}</span>
+        <span className="block text-3xl leading-tight font-semibold tabular-nums">
           {value.toLocaleString("en-US")}
         </span>
-        <span className="block text-xs">{hint}</span>
+        <span className="block text-xs text-muted-foreground">{hint}</span>
       </span>
     </Link>
   );

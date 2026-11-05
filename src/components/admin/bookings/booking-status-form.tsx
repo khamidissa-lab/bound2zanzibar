@@ -89,7 +89,7 @@ export function BookingStatusForm({
           defaultValue={internalNotes}
           disabled={disabled}
           aria-describedby="internalNotes-hint"
-          className="w-full rounded-xl border border-input bg-background px-3 py-2.5 text-sm outline-none focus-visible:border-turquoise focus-visible:ring-2 focus-visible:ring-turquoise/30"
+          className="w-full rounded-xl border border-input bg-background px-3 py-2.5 text-sm outline-none focus-visible:border-turquoise-deep focus-visible:ring-2 focus-visible:ring-turquoise-deep/25"
         />
         <p id="internalNotes-hint" className="text-xs text-muted-foreground">
           Only staff can see these notes. The customer never does.

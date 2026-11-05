@@ -2,6 +2,8 @@ import "server-only";
 
 import { cacheLife, cacheTag } from "next/cache";
 
+import type { TranslatedLocale } from "@/i18n/config";
+import type { TranslatableEntity, Translation } from "@/lib/i18n/localize-content";
 import { createSupabasePublicClient } from "@/lib/supabase/public";
 import type {
   Article,
@@ -109,4 +111,33 @@ export async function loadArticles(): Promise<Article[]> {
     .order("published_at", { ascending: false });
   if (error) fail("articles", error);
   return data.map(mapArticle);
+}
+
+/** entity → item id → translation, for one language. */
+export type TranslationIndex = Partial<
+  Record<TranslatableEntity, Record<string, Translation>>
+>;
+
+/** Published content's translations for one language (cached like the content). */
+export async function loadTranslations(
+  locale: TranslatedLocale,
+): Promise<TranslationIndex> {
+  "use cache";
+  cacheTag(CONTENT_TAG);
+  cacheLife("hours");
+  const { data, error } = await createSupabasePublicClient()
+    .from("content_translations")
+    .select("entity, entity_id, fields, is_machine")
+    .eq("locale", locale);
+  if (error) fail("translations", error);
+  const index: TranslationIndex = {};
+  for (const row of data) {
+    const entity = row.entity as TranslatableEntity;
+    const fields =
+      typeof row.fields === "object" && row.fields !== null && !Array.isArray(row.fields)
+        ? (row.fields as Record<string, unknown>)
+        : {};
+    (index[entity] ??= {})[row.entity_id] = { fields, isMachine: row.is_machine };
+  }
+  return index;
 }

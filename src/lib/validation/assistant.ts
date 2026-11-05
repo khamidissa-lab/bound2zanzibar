@@ -1,5 +1,7 @@
 import { z } from "zod";
 
+import { LOCALES } from "@/i18n/config";
+
 export const ASSISTANT_LIMITS = {
   maxMessages: 20,
   maxMessageChars: 1500,
@@ -39,6 +41,8 @@ export const assistantRequestSchema = z.object({
     .max(200)
     .regex(/^\/[a-z0-9/-]*$/)
     .optional(),
+  /** The visitor's website language; answers are written in it. */
+  locale: z.enum(LOCALES).optional(),
 });
 
 export type AssistantMessage = z.infer<typeof message>;

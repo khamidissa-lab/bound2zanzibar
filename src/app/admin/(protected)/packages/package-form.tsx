@@ -15,6 +15,7 @@ import {
 } from "@/components/admin/editor-controls";
 import { FormMessage } from "@/components/admin/form-controls";
 import { ImagePicker } from "@/components/admin/image-picker";
+import { TravelStyleField } from "@/components/admin/travel-style-field";
 import {
   ItineraryEditor,
   type ItineraryDayValue,
@@ -111,6 +112,7 @@ export function PackageForm({
             defaultChecked={p?.is_safari ?? false}
           />
         </div>
+        <TravelStyleField selected={p?.travel_styles ?? []} error={e.travelStyles} />
       </FieldSet>
 
       <FieldSet

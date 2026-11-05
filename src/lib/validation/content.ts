@@ -1,8 +1,10 @@
 import { z } from "zod";
 
 import { parseArticleMarkup } from "@/lib/article-markup";
+import { TOUR_LENGTHS, TRAVEL_STYLES, toTravelStyles } from "@/lib/discovery";
 import { SLUG_PATTERN, slugify } from "@/lib/slug";
 import { parseFaqs, parseSteps } from "@/lib/tour-details-format";
+import type { TourLength, TravelStyle } from "@/types/content";
 
 /*
  * Server-side validation for the admin content editors. Form fields arrive as
@@ -61,6 +63,17 @@ export const publishStatus = z.enum(["draft", "published", "archived"], {
   error: "Choose a status.",
 });
 
+/** Checkbox group: each ticked style arrives as its own form value. */
+const travelStyles = z
+  .array(
+    z.enum(TRAVEL_STYLES as [TravelStyle, ...TravelStyle[]], {
+      error: "Choose a valid travel style.",
+    }),
+  )
+  .max(TRAVEL_STYLES.length)
+  .optional()
+  .transform((v) => toTravelStyles(v ?? []));
+
 /** Storage object path inside the media bucket (no traversal, no URLs). */
 export const mediaPath = z
   .string()
@@ -110,6 +123,13 @@ export const tourSchema = z
     shortDescription: text(300),
     description: text(10000),
     durationText: text(120),
+    length: z
+      .enum(["", ...(TOUR_LENGTHS as [TourLength, ...TourLength[]])], {
+        error: "Choose a trip length.",
+      })
+      .optional()
+      .transform((v) => v || null),
+    travelStyles,
     highlights: lines(),
     inclusions: lines(),
     exclusions: lines(),
@@ -220,6 +240,7 @@ export const packageSchema = z
     exclusions: lines(),
     terms: lines(30, 600),
     isSafari: checkbox,
+    travelStyles,
     isFeatured: checkbox,
     coverImagePath: mediaPath,
     coverImageAlt: optionalText(200),

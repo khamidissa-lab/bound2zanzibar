@@ -1,3 +1,4 @@
+import { toTravelStyles } from "@/lib/discovery";
 import { mediaUrl, themeForCategory } from "@/lib/media";
 import type { Tables } from "@/lib/supabase/database.types";
 import type {
@@ -118,12 +119,18 @@ export function parseFaqs(value: unknown): Faq[] {
 }
 
 export function mapCategory(row: Tables<"tour_categories">): TourCategory {
-  return { slug: row.slug, name: row.name, description: row.description ?? "" };
+  return {
+    id: row.id,
+    slug: row.slug,
+    name: row.name,
+    description: row.description ?? "",
+  };
 }
 
 export function mapTour(row: TourRow): Tour {
   const theme = themeForCategory(row.category?.slug);
   return {
+    id: row.id,
     slug: row.slug,
     name: row.name,
     shortDescription: row.short_description,
@@ -131,6 +138,8 @@ export function mapTour(row: TourRow): Tour {
     categorySlug: row.category?.slug ?? "",
     destinationSlug: row.destination?.slug ?? "",
     duration: row.duration_text,
+    length: row.length,
+    travelStyles: toTravelStyles(row.travel_styles),
     highlights: row.highlights,
     included: row.inclusions,
     excluded: row.exclusions,
@@ -159,6 +168,7 @@ export function mapTour(row: TourRow): Tour {
 export function mapDestination(row: Tables<"destinations">): Destination {
   const theme: SceneTheme = row.region === "mainland" ? "savanna" : "ocean";
   return {
+    id: row.id,
     slug: row.slug,
     name: row.name,
     region: row.region,
@@ -178,6 +188,7 @@ export function mapDestination(row: Tables<"destinations">): Destination {
 
 export function mapPackage(row: PackageRow): TourPackage {
   return {
+    id: row.id,
     slug: row.slug,
     name: row.name,
     summary: row.short_description,
@@ -212,6 +223,7 @@ export function mapPackage(row: PackageRow): TourPackage {
     prices: groupPrices(row.package_prices, "per person sharing"),
     featured: row.is_featured,
     isSafari: row.is_safari,
+    travelStyles: toTravelStyles(row.travel_styles),
     status: row.status,
     seo: {
       title: row.seo_title || row.name,
@@ -242,6 +254,7 @@ export function mapArticle(row: Tables<"blog_posts">): Article {
     .join(" ")
     .split(/\s+/).length;
   return {
+    id: row.id,
     slug: row.slug,
     title: row.title,
     excerpt: row.excerpt,

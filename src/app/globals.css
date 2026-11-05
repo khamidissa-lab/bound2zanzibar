@@ -5,61 +5,61 @@
 @custom-variant dark (&:is(.dark *));
 
 /*
- * BOUND 2 ZANZIBAR — design tokens, matched to the owner's logo.
+ * BOUND 2 ZANZIBAR — "Contemporary Tropical Editorial" design tokens.
  *
- * Brand tokens (--brand-*) are the single source of truth for colour.
- * shadcn/ui semantic tokens (--primary, --muted, ...) are mapped onto them
- * below so primitives inherit the brand without per-component overrides.
+ * Deep ocean, turquoise, warm ivory, soft sand and a subtle champagne gold.
+ * The public site uses square corners, hairline rules and editorial type
+ * (Instrument Serif + Instrument Sans); the admin opts back into softer
+ * corners via `.admin-scope` (see below).
  *
- * Colours were sampled from the logo artwork (median of each colour family):
- *   wordmark navy #022D38 · gold #E2A725 (deep #CD8E11, light #EFBA3B)
- *   sea cyan #03A2BE · sun orange #FDA90B
- * ("turquoise" token names are kept for continuity; they now hold the logo's sea.)
+ * Token names (ocean-deep, turquoise, sand, gold, ...) are kept stable so
+ * every component inherits the palette; their values define the identity.
  *
- * Contrast notes (WCAG 2.x, against warm white unless stated):
- * - --brand-turquoise (logo sea #03A2BE) is ~3:1 with white text: decorative
- *   accents, icons and large shapes only. On navy it is ~4.8:1.
- * - --brand-turquoise-deep (#00758E, the sea deepened) is ~5.3:1 with white
- *   and ~5.1:1 on warm white: primary buttons, links and focus rings.
- * - Navy text on --brand-gold is ~6.8:1 (the logo's "Tour & Safari" pill);
- *   white text on gold fails (~2.2:1) and must never be used.
- * - --brand-slate muted text passes 4.5:1 on the sand surface (~4.9:1).
+ * Contrast notes (WCAG 2.x, against ivory #F8F4EC unless stated):
+ * - --brand-turquoise (#2AA8A6) is decorative only (rules, icons, large
+ *   shapes); never small text on light surfaces. On ocean-deep it is ~5:1.
+ * - --brand-turquoise-deep (#0E6E73) ~5.5:1 on ivory, ~6:1 with white text:
+ *   links, focus rings, small accent text.
+ * - --brand-gold (champagne #C5A46D) is decorative; ocean-deep text on it
+ *   is ~6.4:1. --brand-gold-deep (#83622A) ~5.1:1 for small champagne text.
+ * - --brand-slate muted text ~5.6:1 on ivory, ~5.2:1 on sand-soft, ~4.7:1 on sand.
  */
 :root {
-  --brand-ocean-deep: #022d38;
-  --brand-ocean: #0a4a5c;
-  --brand-turquoise: #03a2be;
-  --brand-turquoise-deep: #00758e;
-  --brand-turquoise-soft: #d9f1f5;
-  --brand-warm-white: #fafaf7;
-  --brand-sand: #f1e6d0;
-  --brand-sand-soft: #f8f2e6;
-  --brand-slate: #556274;
-  --brand-gold: #e2a725;
-  --brand-gold-deep: #cd8e11;
-  --brand-gold-light: #efba3b;
-  --brand-sun: #fda90b;
-  --brand-ink: #0c2a33;
+  --brand-ocean-deep: #0a2a38;
+  --brand-ocean: #11485c;
+  --brand-turquoise: #2aa8a6;
+  --brand-turquoise-deep: #0e6e73;
+  --brand-turquoise-soft: #dcefec;
+  --brand-warm-white: #f8f4ec;
+  --brand-ivory: #fbf8f2;
+  --brand-sand: #eadfc9;
+  --brand-sand-soft: #f2eadb;
+  --brand-slate: #56636c;
+  --brand-gold: #c5a46d;
+  --brand-gold-deep: #83622a;
+  --brand-gold-light: #dcc497;
+  --brand-sun: #e9a23b;
+  --brand-ink: #0d2430;
 
   --background: var(--brand-warm-white);
   --foreground: var(--brand-ink);
-  --card: #ffffff;
+  --card: var(--brand-ivory);
   --card-foreground: var(--brand-ink);
-  --popover: var(--brand-warm-white);
+  --popover: var(--brand-ivory);
   --popover-foreground: var(--brand-ink);
-  --primary: var(--brand-turquoise-deep);
-  --primary-foreground: #ffffff;
+  --primary: var(--brand-ocean-deep);
+  --primary-foreground: var(--brand-ivory);
   --secondary: var(--brand-sand);
   --secondary-foreground: var(--brand-ocean-deep);
   --muted: var(--brand-sand-soft);
   --muted-foreground: var(--brand-slate);
   --accent: var(--brand-turquoise-soft);
   --accent-foreground: var(--brand-ocean-deep);
-  --destructive: #b42318;
-  --border: #e3dccf;
-  --input: #d9d1c2;
+  --destructive: #a8281d;
+  --border: #ddd2bf;
+  --input: #cfc3ad;
   --ring: var(--brand-turquoise-deep);
-  --radius: 0.75rem;
+  --radius: 0.125rem;
 
   --chart-1: var(--brand-turquoise-deep);
   --chart-2: var(--brand-ocean);
@@ -76,7 +76,33 @@
   --sidebar-border: rgb(255 255 255 / 0.12);
   --sidebar-ring: var(--brand-turquoise);
 
-  --header-height: 4.5rem;
+  --header-height: 4.75rem;
+
+  --font-display: var(--font-serif);
+  --font-body: var(--font-sans-latin);
+}
+
+/* Arabic pages: Arabic fonts first, the Latin faces for any Latin text. */
+:root[dir="rtl"] {
+  --font-display: var(--font-ar-display), var(--font-serif);
+  --font-body: var(--font-ar-body), var(--font-sans-latin);
+}
+
+/* The admin is a working tool: softer corners and a cool neutral canvas. */
+.admin-scope {
+  --radius: 0.625rem;
+  --background: #f4f6f6;
+  --card: #ffffff;
+  --popover: #ffffff;
+  --border: #e2e6e6;
+  --input: #d5dbdb;
+  --primary: var(--brand-turquoise-deep);
+  --primary-foreground: #ffffff;
+  --muted: #eef1f1;
+  --muted-foreground: #58636b;
+  --brand-sand-soft: #f1f3f3;
+  /* A working tool reads better in one clean sans. */
+  --font-display: var(--font-body);
 }
 
 @theme inline {
@@ -86,6 +112,7 @@
   --color-turquoise-deep: var(--brand-turquoise-deep);
   --color-turquoise-soft: var(--brand-turquoise-soft);
   --color-warm-white: var(--brand-warm-white);
+  --color-ivory: var(--brand-ivory);
   --color-sand: var(--brand-sand);
   --color-sand-soft: var(--brand-sand-soft);
   --color-slate-brand: var(--brand-slate);
@@ -139,7 +166,7 @@
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
 
-  --shadow-card: 0 1px 2px rgb(2 45 56 / 0.06), 0 8px 24px -12px rgb(2 45 56 / 0.2);
+  --shadow-card: 0 1px 2px rgb(10 42 56 / 0.05), 0 12px 32px -18px rgb(10 42 56 / 0.25);
 }
 
 @layer base {
@@ -153,12 +180,16 @@
   body {
     @apply bg-background text-foreground;
     text-rendering: optimizeLegibility;
+    font-feature-settings: "ss01";
   }
   h1,
   h2,
   h3 {
-    @apply font-display tracking-tight text-ocean-deep;
+    @apply font-display font-normal tracking-[-0.01em] text-ocean-deep;
     text-wrap: balance;
+  }
+  .admin-scope :is(h1, h2, h3) {
+    @apply font-semibold tracking-[-0.015em];
   }
   p {
     text-wrap: pretty;
@@ -173,32 +204,80 @@
 
 @layer utilities {
   .container-page {
-    @apply mx-auto w-full max-w-[1280px] px-5 sm:px-8;
+    @apply mx-auto w-full max-w-[1320px] px-4 sm:px-8 lg:px-10;
   }
-  /* Subtle sea-and-sunlight wash used on brand surfaces; purely decorative. */
-  .bg-tide {
-    background-image:
-      radial-gradient(120% 80% at 100% 0%, rgb(3 162 190 / 0.18), transparent 60%),
-      radial-gradient(90% 70% at 0% 100%, rgb(226 167 37 / 0.14), transparent 55%);
+  /* Small uppercase label used above headings and in meta rows. */
+  .eyebrow {
+    @apply font-sans text-[0.7rem] font-semibold tracking-[0.2em] uppercase;
   }
-  /* Polished gold like the logo's "Tour & Safari" pill. Use with navy text only. */
+  /* Editorial display sizes. */
+  .display-xl {
+    @apply font-display text-[2.9rem] leading-[0.98] tracking-[-0.02em] sm:text-7xl lg:text-[6.4rem];
+  }
+  .display-lg {
+    @apply font-display text-4xl leading-[1.02] tracking-[-0.015em] sm:text-5xl lg:text-6xl;
+  }
+  /* Animated underline for text links. */
+  .link-underline {
+    background-image: linear-gradient(currentColor, currentColor);
+    background-size: 0% 1px;
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    transition: background-size 0.35s ease;
+  }
+  .link-underline:hover,
+  .link-underline:focus-visible {
+    background-size: 100% 1px;
+  }
+  /* Kept for existing admin tiles: champagne fill, navy text only. */
   .bg-gold-pill {
     background-image: linear-gradient(
       180deg,
       var(--brand-gold-light) 0%,
-      var(--brand-gold) 55%,
-      var(--brand-gold-deep) 100%
+      var(--brand-gold) 100%
     );
+  }
+  /* Soft decorative wash used on a few light sections. */
+  .bg-tide {
+    background-image:
+      radial-gradient(90% 70% at 100% 0%, rgb(42 168 166 / 0.12), transparent 60%),
+      radial-gradient(80% 60% at 0% 100%, rgb(197 164 109 / 0.14), transparent 55%);
   }
 }
 
-/* Slow "Ken Burns" zoom for the home hero photos. */
+/* Slow drift for hero photos. */
 @keyframes hero-zoom {
   from {
     transform: scale(1);
   }
   to {
-    transform: scale(1.07);
+    transform: scale(1.06);
+  }
+}
+
+/* Gentle fade-up when a page or section appears. */
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .page-enter {
+    animation: rise-in 0.55s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  }
+  /* Scroll reveal where supported; content is always visible otherwise. */
+  @supports (animation-timeline: view()) {
+    .reveal {
+      animation: rise-in linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 30%;
+    }
   }
 }
 

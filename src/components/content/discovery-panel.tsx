@@ -1,12 +1,16 @@
+"use client";
+
 import Form from "next/form";
-import { Search } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
+import { useI18n } from "@/i18n/client";
 
 type Option = { slug: string; name: string };
 
+// Underlined fields on the ocean band; native controls keep it accessible.
 const fieldClass =
-  "h-12 w-full rounded-xl border border-input bg-background px-4 text-sm text-ocean-deep";
+  "h-11 w-full border-0 border-b border-white/35 bg-transparent px-0 text-base text-ivory placeholder:text-white/50 focus:border-gold-light focus-visible:outline-gold-light [&>option]:text-ocean-deep";
 
 /**
  * Homepage trip discovery. Submits a GET to /tours, whose filters read the
@@ -19,28 +23,28 @@ export function DiscoveryPanel({
   categories: Option[];
   destinations: Option[];
 }) {
+  const { t, href } = useI18n();
+  const s = t.home.search;
   return (
     <Form
-      action="/tours"
+      action={href("/tours")}
       role="search"
-      aria-label="Find an experience"
-      className="grid gap-3 rounded-2xl border bg-card p-4 shadow-card sm:p-5 md:grid-cols-[1.4fr_1fr_1fr_auto] md:items-end"
+      aria-label={s.label}
+      className="grid gap-6 md:grid-cols-[1.5fr_1fr_1fr_auto] md:items-end md:gap-8"
     >
       <label className="block">
-        <span className="mb-1.5 block text-xs font-semibold text-ocean-deep">
-          What would you like to do?
-        </span>
+        <span className="eyebrow mb-1 block text-gold-light">{s.want}</span>
         <input
           name="q"
           type="search"
-          placeholder="e.g. snorkelling, Stone Town"
+          placeholder={s.wantPlaceholder}
           className={fieldClass}
         />
       </label>
       <label className="block">
-        <span className="mb-1.5 block text-xs font-semibold text-ocean-deep">Where</span>
+        <span className="eyebrow mb-1 block text-gold-light">{s.where}</span>
         <select name="destination" defaultValue="" className={fieldClass}>
-          <option value="">Anywhere</option>
+          <option value="">{s.anywhere}</option>
           {destinations.map((d) => (
             <option key={d.slug} value={d.slug}>
               {d.name}
@@ -49,9 +53,9 @@ export function DiscoveryPanel({
         </select>
       </label>
       <label className="block">
-        <span className="mb-1.5 block text-xs font-semibold text-ocean-deep">Type</span>
+        <span className="eyebrow mb-1 block text-gold-light">{s.type}</span>
         <select name="category" defaultValue="" className={fieldClass}>
-          <option value="">All experiences</option>
+          <option value="">{s.allExperiences}</option>
           {categories.map((c) => (
             <option key={c.slug} value={c.slug}>
               {c.name}
@@ -59,9 +63,13 @@ export function DiscoveryPanel({
           ))}
         </select>
       </label>
-      <Button type="submit" size="lg" className="h-12 rounded-xl">
-        <Search aria-hidden="true" data-icon="inline-start" />
-        Find experiences
+      <Button type="submit" size="lg" variant="light">
+        {s.submit}
+        <ArrowRight
+          aria-hidden="true"
+          data-icon="inline-end"
+          className="rtl:-scale-x-100"
+        />
       </Button>
     </Form>
   );

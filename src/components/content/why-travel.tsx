@@ -1,52 +1,42 @@
-import { HeartHandshake, Leaf, MapPin, Wallet } from "lucide-react";
+import { SectionHeading } from "@/components/shared/section-heading";
+import type { Locale } from "@/i18n/config";
+import { getMessages } from "@/i18n/messages";
 
 // Brand commitments (not credentials or claims of experience). Owner to review.
-const reasons = [
-  {
-    icon: MapPin,
-    title: "Local knowledge",
-    body: "Based in Zanzibar, planning trips around the island and mainland Tanzania.",
-  },
-  {
-    icon: Wallet,
-    title: "For residents and visitors",
-    body: "Clear prices for Tanzanian residents and international travellers, with options for different budgets.",
-  },
-  {
-    icon: HeartHandshake,
-    title: "Clear, honest booking",
-    body: "We confirm availability and final prices with you before anything is booked.",
-  },
-  {
-    icon: Leaf,
-    title: "Respect for people and places",
-    body: "We encourage responsible wildlife viewing and respect for local culture.",
-  },
-];
-
-export function WhyTravel({ headingId = "why-heading" }: { headingId?: string }) {
+export function WhyTravel({
+  locale,
+  headingId = "why-heading",
+  index,
+}: {
+  locale: Locale;
+  headingId?: string;
+  index?: string;
+}) {
+  const { why } = getMessages(locale);
   return (
-    <section aria-labelledby={headingId} className="py-20">
+    <section aria-labelledby={headingId} className="py-20 sm:py-28">
       <div className="container-page">
-        <div className="max-w-2xl">
-          <p className="mb-2 text-sm font-semibold text-turquoise-deep">
-            Why travel with us
-          </p>
-          <h2 id={headingId} className="text-3xl font-medium sm:text-4xl">
-            Planned locally, with care
-          </h2>
-        </div>
-        <ul className="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-          {reasons.map(({ icon: Icon, title, body }) => (
-            <li key={title}>
-              <span className="flex size-11 items-center justify-center rounded-full bg-turquoise-soft text-turquoise-deep">
-                <Icon className="size-5" aria-hidden="true" />
+        <SectionHeading
+          id={headingId}
+          index={index}
+          eyebrow={why.eyebrow}
+          title={why.title}
+          className="mb-12"
+        />
+        <ol className="grid border-t border-ocean-deep/15 sm:grid-cols-2 lg:grid-cols-4">
+          {why.reasons.map(({ title, body }, i) => (
+            <li
+              key={title}
+              className="reveal border-b border-ocean-deep/15 py-8 sm:pe-8 lg:border-e lg:border-b-0 lg:px-8 lg:first:ps-0 lg:last:border-e-0"
+            >
+              <span className="font-display text-5xl leading-none text-gold-deep italic">
+                {String(i + 1).padStart(2, "0")}
               </span>
-              <h3 className="mt-4 font-display text-xl">{title}</h3>
-              <p className="mt-2 text-muted-foreground">{body}</p>
+              <h3 className="mt-6 font-display text-2xl">{title}</h3>
+              <p className="mt-3 leading-relaxed text-muted-foreground">{body}</p>
             </li>
           ))}
-        </ul>
+        </ol>
       </div>
     </section>
   );
