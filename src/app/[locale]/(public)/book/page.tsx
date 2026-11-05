@@ -4,7 +4,7 @@ import { connection } from "next/server";
 import { Info, Mail, MessageCircle, Phone } from "lucide-react";
 
 import { BookingForm, type BookableItem } from "@/components/booking/booking-form";
-import { isTravellerType } from "@/components/home/traveller-types";
+import { isTravellerType } from "@/config/travellers";
 import { PageHeader } from "@/components/shared/page-header";
 import { contact, enquiryMailto, whatsappLink } from "@/config/site";
 import type { Locale } from "@/i18n/config";

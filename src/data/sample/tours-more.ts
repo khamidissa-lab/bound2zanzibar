@@ -80,8 +80,8 @@ export const moreTours: TourBase[] = [
     difficulty: "easy",
     suitability: "Suitable for most ages. The cave has steps and uneven ground.",
     coverImage: {
-      src: "/images/photos/beach-benches.jpg",
-      alt: "Palm-shaded beach with loungers and bougainvillea on the Zanzibar coast",
+      src: "/images/tours/mangapwani-cave.jpg",
+      alt: "Water pooled among the rocks inside a coral cave",
       theme: "sunset",
     },
     gallery: [],
@@ -126,8 +126,8 @@ export const moreTours: TourBase[] = [
     suitability:
       "Suitable for confident swimmers in the cave pool; non-swimmers can watch.",
     coverImage: {
-      src: "/images/photos/hammock.jpg",
-      alt: "Relaxing in a hammock on the beach at Jambiani",
+      src: "/images/tours/kuza-cave.jpg",
+      alt: "A swimmer floating in the clear turquoise water of a limestone cave",
       theme: "sunset",
     },
     gallery: [],
@@ -167,8 +167,8 @@ export const moreTours: TourBase[] = [
     difficulty: "easy",
     suitability: "Good for beginner snorkellers. Life jackets available on request.",
     coverImage: {
-      src: "/images/photos/aerial-shore.jpg",
-      alt: "Aerial view of waves breaking over turquoise water off the Zanzibar coast",
+      src: "/images/tours/blue-lagoon-snorkel.jpg",
+      alt: "A woman and a child snorkelling among batfish in clear blue water",
       theme: "ocean",
     },
     gallery: [],
@@ -209,8 +209,8 @@ export const moreTours: TourBase[] = [
     difficulty: "easy",
     suitability: "Great for families with children.",
     coverImage: {
-      src: "/images/photos/turtle.jpg",
-      alt: "Green sea turtle swimming over seagrass",
+      src: "/images/tours/mnarani-turtles.jpg",
+      alt: "A swimmer surrounded by sea turtles in a turquoise natural pool",
       theme: "ocean",
     },
     gallery: [],
@@ -249,8 +249,8 @@ export const moreTours: TourBase[] = [
     suitability:
       "Suitable for all ages. Vegetarian options can usually be arranged — ask us.",
     coverImage: {
-      src: "/images/photos/pilau.jpg",
-      alt: "A bowl of spiced pilau rice",
+      src: "/images/tours/cooking-class.jpg",
+      alt: "Visitors preparing food by hand with local women, seated on a woven mat",
       theme: "spice",
     },
     gallery: [],
@@ -515,8 +515,8 @@ export const moreTours: TourBase[] = [
     difficulty: "easy",
     suitability: "Suitable for families. Long day on the water and in the sun.",
     coverImage: {
-      src: "/images/photos/sandbank.jpg",
-      alt: "Aerial view of a narrow white sandbank in turquoise water off Zanzibar",
+      src: "/images/tours/pungume-sandbank.jpg",
+      alt: "A curved white sandbank in turquoise water, with boats moored nearby",
       theme: "ocean",
     },
     gallery: [],
@@ -571,8 +571,8 @@ export const moreTours: TourBase[] = [
     suitability:
       "Age and health requirements apply for drivers — we'll confirm them when you book.",
     coverImage: {
-      src: "/images/photos/jetski.jpg",
-      alt: "Jet ski carving a curved wake across open water",
+      src: "/images/tours/jet-ski.jpg",
+      alt: "Two riders on a yellow jet ski near a beach lined with traditional boats",
       theme: "ocean",
     },
     gallery: [],
@@ -680,8 +680,8 @@ export const moreTours: TourBase[] = [
     difficulty: "easy",
     suitability: "Suitable for families. The cave has steps and can be slippery.",
     coverImage: {
-      src: "/images/photos/turtle2.jpg",
-      alt: "Sea turtle swimming in clear shallow water",
+      src: "/images/tours/salaam-cave.jpg",
+      alt: "Visitors with sea turtles in the clear water of Salaam Cave",
       theme: "ocean",
     },
     gallery: [],

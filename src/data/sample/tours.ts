@@ -148,8 +148,8 @@ const coreTours: TourBase[] = [
     difficulty: "easy",
     suitability: "Suitable for all ages.",
     coverImage: {
-      src: "/images/photos/nutmeg.jpg",
-      alt: "Fresh nutmeg wrapped in red mace, held at a Zanzibar spice farm",
+      src: "/images/tours/spice-farm.jpg",
+      alt: "Two women wearing woven leaf crowns hold fresh coconuts while taking a photo",
       theme: "spice",
     },
     gallery: [],
@@ -232,8 +232,8 @@ const coreTours: TourBase[] = [
     difficulty: "moderate",
     suitability: "Best for confident swimmers. Life jackets available on request.",
     coverImage: {
-      src: "/images/photos/reef.jpg",
-      alt: "Fish swimming over a colourful coral reef",
+      src: "/images/tours/mnemba-island.jpg",
+      alt: "A dhow sailing past a small forested island in deep blue water",
       theme: "ocean",
     },
     gallery: [
@@ -318,8 +318,8 @@ const coreTours: TourBase[] = [
     difficulty: "easy",
     suitability: "Suitable for families.",
     coverImage: {
-      src: "/images/photos/sandbank.jpg",
-      alt: "Aerial view of a narrow white sandbank in turquoise water off Zanzibar",
+      src: "/images/tours/nakupenda-sandbank.jpg",
+      alt: "Aerial view of a white sandbank with boats moored in turquoise water",
       theme: "ocean",
     },
     gallery: [],
@@ -356,8 +356,8 @@ const coreTours: TourBase[] = [
     difficulty: "easy",
     suitability: "Suitable for all ages, couples and groups.",
     coverImage: {
-      src: "/hero/nungwi-dhow-sunset.jpg",
-      alt: "Dhow sailing at sunset off Nungwi",
+      src: "/images/tours/sunset-dhows.jpg",
+      alt: "Two dhows sailing on the sea at sunset",
       theme: "sunset",
     },
     gallery: [],
@@ -438,8 +438,8 @@ const coreTours: TourBase[] = [
     difficulty: "easy",
     suitability: "Suitable for families. Wildlife sightings cannot be guaranteed.",
     coverImage: {
-      src: "/images/photos/dolphins.jpg",
-      alt: "Dolphins swimming just below the surface of blue water",
+      src: "/images/tours/kizimkazi-dolphins.jpg",
+      alt: "Dolphins swimming in clear blue water",
       theme: "ocean",
     },
     gallery: [],

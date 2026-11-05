@@ -188,11 +188,13 @@ export function TourExplorer({
               className={selectClass}
             >
               <option value="">{t.tours.anyLength}</option>
-              {TOUR_LENGTHS.map((l) => (
-                <option key={l} value={l}>
-                  {t.tourLengths[l]}
-                </option>
-              ))}
+              {TOUR_LENGTHS.filter((l) => tours.some((tour) => tour.length === l)).map(
+                (l) => (
+                  <option key={l} value={l}>
+                    {t.tourLengths[l]}
+                  </option>
+                ),
+              )}
             </select>
           </label>
           <label className="block bg-ivory">

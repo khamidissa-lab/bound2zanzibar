@@ -12,6 +12,7 @@ import { SampleBadge } from "@/components/shared/sample-badge";
 import { SectionHeading } from "@/components/shared/section-heading";
 import { localeAlternates, pageLocale } from "@/i18n/seo";
 import { getI18n } from "@/i18n/server";
+import { isSafariTour } from "@/lib/discovery";
 import { cn } from "@/lib/utils";
 import {
   getDestinationBySlug,
@@ -99,7 +100,10 @@ export default async function TourDetailPage({
             <Breadcrumbs
               items={[
                 { label: t.nav.home, href: "/" },
-                { label: t.nav.tours, href: "/tours" },
+                // Safaris are listed on the Safari page, not under Zanzibar tours.
+                isSafariTour(tour)
+                  ? { label: t.nav.safari, href: "/safari" }
+                  : { label: t.nav.tours, href: "/tours" },
                 { label: tour.name },
               ]}
               className="mb-10"

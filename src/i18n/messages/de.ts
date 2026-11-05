@@ -177,7 +177,7 @@ export const de: Messages = {
       title: "Eine Reise für jeden Reisenden",
       description:
         "Sagen Sie uns, wer mitkommt, und wir gestalten die Tage nach Ihnen: das Tempo, die Unterkünfte und die Momente, die zählen.",
-      cta: "Reise planen",
+      cta: "Entdecken",
       items: {
         family: {
           title: "Familien",
@@ -267,6 +267,83 @@ export const de: Messages = {
     full_day: "Ganztags",
     multi_day: "Mehrere Tage",
   },
+  travellerPage: {
+    metaTitle: "{title}: Reisen auf Sansibar und in Tansania",
+    eyebrow: "Reisen, wie Sie möchten",
+    tipsTitle: "Tipps zur Planung",
+    suggestedEyebrow: "Empfohlene Erlebnisse",
+    suggestedTitle: "Erlebnisse für {title}",
+    suggestedNote:
+      "Die Vorschläge richten sich nach dem Reisestil jeder Tour. Die Details stimmen wir mit Ihnen ab.",
+    planTitle: "Bereit zu planen?",
+    planBody:
+      "Senden Sie eine Anfrage mit Ihren Daten und Ihrer Gruppe. Wir bestätigen Verfügbarkeit und Preise mit Ihnen; online wird nichts berechnet.",
+    plan: "Diese Reise planen",
+    ask: "Frage stellen",
+    others: "Weitere Reisearten",
+    pages: {
+      family: {
+        intro: [
+          "Sansibar eignet sich gut für Familien: kurze Bootsausflüge, Riesenschildkröten, Meeresschildkröten, Wälder mit Roten Stummelaffen und ruhige Strände – und für ältere Kinder liegen Safaris auf dem Festland in Reichweite.",
+          "Nennen Sie uns das Alter Ihrer Kinder und wie Sie gern reisen, und wir schlagen ein Tempo mit Pausen zwischen den Ausflügen vor.",
+        ],
+        tips: [
+          "Kombinieren Sie Halbtagesausflüge mit freien Nachmittagen am Strand.",
+          "Die Riesenschildkröten auf Prison Island und die Stummelaffen in Jozani sind bei Kindern beliebt.",
+          "Fragen Sie uns bei einer Safari, welche Parks und Reiselängen zum Alter Ihrer Kinder passen.",
+          "Kinderpreise werden angezeigt, wo sie gelten; den Gesamtpreis bestätigen wir mit Ihnen.",
+        ],
+      },
+      couples: {
+        intro: [
+          "Ruhige Morgen, weiße Sandbänke, Dhau-Fahrten bei Sonnenuntergang und Abendessen am Meer: Sansibar genießt man wunderbar zu zweit.",
+          "Sagen Sie uns, was Ihnen beiden gefällt – ruhige Strände, Kultur, das Meer oder Tiere – und wir schlagen passende Erlebnisse vor.",
+        ],
+        tips: [
+          "Eine Dhau-Fahrt bei Sonnenuntergang ist ein schöner erster Abend.",
+          "Verbinden Sie eine Sandbank-Tour mit ruhigen Tagen an den Stränden der Ostküste.",
+          "Ergänzen Sie eine kurze Safari auf dem Festland als Abwechslung.",
+          "Gibt es etwas zu feiern? Sagen Sie es uns, wir haben Ideen.",
+        ],
+      },
+      groups: {
+        intro: [
+          "Freunde, gemeinsam reisende Familien, Vereine und Wiedersehen: Wir planen Tage, die für alle passen – von Bootsausflügen und Schnorcheln bis zu Spaziergängen durch Stone Town.",
+          "Nennen Sie uns Gruppengröße, Reisedaten und Interessen. Größere Gruppen lassen sich mit früher Planung leichter organisieren, melden Sie sich also so bald wie möglich.",
+        ],
+        tips: [
+          "Ganztägige Bootsausflüge wie Safari Blue sind ideal für Gruppen.",
+          "Mischen Sie aktive Angebote wie Schnorcheln und Jetski mit entspannten.",
+          "Fragen Sie nach Gruppenpreisen, wo sie gelten.",
+          "Informieren Sie uns über unterschiedliche Altersgruppen oder Fähigkeiten in der Gruppe.",
+        ],
+      },
+      honeymoon: {
+        intro: [
+          "Sonnenuntergänge barfuß, ruhige Sandbänke und auf Wunsch eine Safari: Sansibar und das tansanische Festland sorgen für unvergessliche Flitterwochen.",
+          "Nennen Sie uns Ihre Reisedaten und Wünsche, und wir schlagen Erlebnisse und ein Tempo vor, das viel Zeit nur für Sie beide lässt.",
+        ],
+        tips: [
+          "Verbinden Sie Strandtage mit einer Dhau-Fahrt bei Sonnenuntergang.",
+          "Eine Ballonfahrt über die Serengeti lässt sich zu einer Safari hinzufügen.",
+          "Planen Sie freie Tage zwischen den Erlebnissen ein.",
+          "Erwähnen Sie bei Ihrer Anfrage, dass es Ihre Flitterwochen sind.",
+        ],
+      },
+      solo: {
+        intro: [
+          "Allein unterwegs? Die Gassen von Stone Town, Gewürzfarmen, Kochkurse und die Riffe der Insel lassen sich mit einem einheimischen Guide gut im eigenen Tempo entdecken.",
+          "Nennen Sie uns Ihre Reisedaten, Interessen und Ihr Budget, und wir schlagen passende Erlebnisse vor.",
+        ],
+        tips: [
+          "Kulturtouren sind eine entspannte Art, die Insel kennenzulernen.",
+          "Schließen Sie sich einem Bootsausflug zum Schnorcheln an und erleben Sie die Küste.",
+          "Nennen Sie uns Ihr Budget, damit wir passende Optionen vorschlagen können.",
+          "Senden Sie uns Ihre Ankunftsdaten, damit wir Abholungen planen können.",
+        ],
+      },
+    },
+  },
   tours: {
     metaTitle: "Touren & Erlebnisse auf Sansibar",
     metaDescription:
@@ -274,7 +351,7 @@ export const de: Messages = {
     eyebrow: "Erlebnisse",
     title: "Touren & Erlebnisse auf Sansibar",
     description:
-      "Kultur, Meer, Wald und Strand — Tagesausflüge auf ganz Sansibar sowie Angebote auf dem Festland.",
+      "Kultur, Meer, Wald und Strand — Ausflüge und Erlebnisse auf ganz Sansibar. Safaris auf dem Festland finden Sie auf der Safari-Seite.",
     headerAlt:
       "Luftaufnahme einer schmalen weißen Sandbank in türkisfarbenem Wasser vor Sansibar",
     allTours: "Alle Touren",

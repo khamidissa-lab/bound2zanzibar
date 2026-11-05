@@ -9,6 +9,7 @@ import { PageHeader } from "@/components/shared/page-header";
 import { SampleBadge } from "@/components/shared/sample-badge";
 import { getMessages } from "@/i18n/messages";
 import { localeAlternates, pageLocale } from "@/i18n/seo";
+import { SAFARI_CATEGORY, isSafariTour } from "@/lib/discovery";
 import {
   getCategories,
   getDestinations,
@@ -31,12 +32,15 @@ export async function generateMetadata({
 export default async function ToursPage({ params }: PageProps<"/[locale]/tours">) {
   const locale = pageLocale((await params).locale);
   const t = getMessages(locale);
-  const [tours, categories, destinations, lookups] = await Promise.all([
+  const [allTours, allCategories, destinations, lookups] = await Promise.all([
     getTours({}, locale),
     getCategories(locale),
     getDestinations({}, locale),
     getNameLookups(locale),
   ]);
+  // Tanzania safaris are listed on the Safari page, not here.
+  const tours = allTours.filter((tour) => !isSafariTour(tour));
+  const categories = allCategories.filter((c) => c.slug !== SAFARI_CATEGORY);
   const usedDestinations = destinations.filter((d) =>
     tours.some((tour) => tour.destinationSlug === d.slug),
   );

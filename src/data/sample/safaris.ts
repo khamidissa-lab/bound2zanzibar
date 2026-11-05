@@ -1,6 +1,6 @@
 import type { Tour } from "@/types/content";
 
-import { img, standardExclusions, type TourBase } from "./shared";
+import { standardExclusions, type TourBase } from "./shared";
 
 /*
  * Mainland safaris from the owner's list (2026-11-04). Names and one-line
@@ -114,7 +114,11 @@ export const safariTours: TourBase[] = [
       "Lake Manyara is part of Tanzania's northern circuit and fits easily alongside Tarangire and Ngorongoro.",
     ],
     highlights: ["Beautiful landscapes", "Flamingos", "Elephants", "Tree-climbing lions"],
-    coverImage: img("Flamingos on the shore of Lake Manyara", "savanna"),
+    coverImage: {
+      src: "/images/safari/manyara.jpg",
+      alt: "An elephant among acacia trees in Lake Manyara National Park",
+      theme: "savanna",
+    },
   }),
   safari({
     slug: "arusha-national-park-safari",
@@ -126,7 +130,11 @@ export const safariTours: TourBase[] = [
       "The park is close to Arusha town, making it a convenient start or end to a northern-circuit safari.",
     ],
     highlights: ["Mount Meru", "Beautiful forests", "Lakes", "Diverse wildlife"],
-    coverImage: img("Mount Meru rising above forest in Arusha National Park", "forest"),
+    coverImage: {
+      src: "/images/safari/arusha.jpg",
+      alt: "Sunrise over Kilimanjaro, seen from the slopes of Mount Meru",
+      theme: "sunset",
+    },
   }),
   safari({
     slug: "ruaha-national-park-safari",
@@ -138,7 +146,11 @@ export const safariTours: TourBase[] = [
       "Ruaha is part of the southern circuit, with Mikumi and Nyerere.",
     ],
     highlights: ["Elephants", "Lions", "Spectacular landscapes"],
-    coverImage: img("Elephants in the dry landscape of Ruaha National Park", "savanna"),
+    coverImage: {
+      src: "/images/safari/ruaha.jpg",
+      alt: "A lion resting in the grass in Ruaha National Park",
+      theme: "savanna",
+    },
   }),
   safari({
     slug: "gombe-stream-national-park",
@@ -152,7 +164,11 @@ export const safariTours: TourBase[] = [
     highlights: ["Chimpanzee trekking", "Forests along Lake Tanganyika"],
     difficulty: "challenging",
     suitability: "Trekking on steep, forested trails. Sightings cannot be guaranteed.",
-    coverImage: img("Forest on the shore of Lake Tanganyika", "forest"),
+    coverImage: {
+      src: "/images/safari/gombe.jpg",
+      alt: "A wild chimpanzee sitting on a fallen tree in the forest",
+      theme: "forest",
+    },
   }),
   safari({
     slug: "mahale-mountains-national-park",
@@ -166,7 +182,11 @@ export const safariTours: TourBase[] = [
     highlights: ["Wild chimpanzees", "Tropical forests", "Lake Tanganyika"],
     difficulty: "challenging",
     suitability: "Trekking on steep, forested trails. Sightings cannot be guaranteed.",
-    coverImage: img("Forested mountains above Lake Tanganyika", "forest"),
+    coverImage: {
+      src: "/images/safari/mahale.jpg",
+      alt: "A chimpanzee mother and baby in the forest of Mahale Mountains National Park (black and white)",
+      theme: "forest",
+    },
   }),
   safari({
     slug: "great-wildebeest-migration-safari",
@@ -180,7 +200,11 @@ export const safariTours: TourBase[] = [
     destinationSlug: "serengeti-ngorongoro",
     duration: "Multi-day — timed to the season",
     highlights: ["The annual wildebeest and zebra migration", "The Serengeti ecosystem"],
-    coverImage: img("Wildebeest herds crossing the Serengeti plains", "savanna"),
+    coverImage: {
+      src: "/images/safari/migration.jpg",
+      alt: "Wildebeest herds crossing the Mara River in Serengeti National Park",
+      theme: "savanna",
+    },
   }),
   safari({
     slug: "hot-air-balloon-safari-serengeti",
@@ -196,7 +220,11 @@ export const safariTours: TourBase[] = [
     highlights: ["Aerial views of wildlife", "The African savannah from above"],
     difficulty: "easy",
     suitability: "Age and health requirements apply — we'll confirm them when you book.",
-    coverImage: img("Hot air balloon above the Serengeti at sunrise", "sunset"),
+    coverImage: {
+      src: "/images/safari/balloon.jpg",
+      alt: "A hot air balloon above the Serengeti plains",
+      theme: "savanna",
+    },
   }),
 ];
 

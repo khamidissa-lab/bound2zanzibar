@@ -82,6 +82,40 @@ Both **supplied by the owner** on 2026-11-02. Source and licence not yet recorde
 
 The Unsplash photo `/images/photos/horse.jpg` (Uran Wang) remains as the second gallery image.
 
+## Safari photos (`public/images/safari/`)
+
+Under the [Unsplash License](https://unsplash.com/license). Each photo page was checked on 2026-11-05 and shows "Free to use under the Unsplash License" (none are Unsplash+). Downloaded on 2026-11-05 at 2000px wide. Alt text names a park only when Unsplash gives that location.
+
+| File | Tour | Photographer | Location (per Unsplash) | Source |
+| --- | --- | --- | --- | --- |
+| `manyara.jpg` | Lake Manyara National Park Safari | Raissa Lara Lütolf | Lake Manyara, Tanzania | [aeQdJyuyGco](https://unsplash.com/photos/aeQdJyuyGco) |
+| `arusha.jpg` | Arusha National Park Safari | Wilson Stratton | Mt. Meru high camp, Tanzania (view of Kilimanjaro); cropped to the mountain | [sQzurq8xD4c](https://unsplash.com/photos/sQzurq8xD4c) |
+| `ruaha.jpg` | Ruaha National Park Safari | Bob Brewer | Ruaha National Park, Iringa, Tanzania | [6v_qfXndV64](https://unsplash.com/photos/6v_qfXndV64) |
+| `gombe.jpg` | Gombe Stream National Park | Simone Dinoia | **Kibale National Park, Uganda** (no free Gombe photo found; alt text names no place) | [zIZUrCRQjkM](https://unsplash.com/photos/zIZUrCRQjkM) |
+| `mahale.jpg` | Mahale Mountains National Park | Ryan Al Bishri | Mahale Mountain National Park, Tanzania | [reXwAuEdkVM](https://unsplash.com/photos/reXwAuEdkVM) |
+| `migration.jpg` | Great Wildebeest Migration Safari | Jorge Tung | Mara River, Serengeti National Park, Tanzania | [1pZJqQlgpsY](https://unsplash.com/photos/1pZJqQlgpsY) |
+| `balloon.jpg` | Hot Air Balloon Safari – Serengeti | Ryan Al Bishri | Serengeti, Tanzania | [HZrraBFLS20](https://unsplash.com/photos/HZrraBFLS20) |
+
+## Tour main photos supplied by the owner (`public/images/tours/`)
+
+**Supplied by the owner** on 2026-11-05 to replace the main photo of 13 tours. Source and licence not yet recorded. Most arrived as small (474px wide) web images; several look like they come from other sites or social media (one shows a "Salaam Cave" sign). Confirm each is your own photo or that you have permission to use it, note the source here, and replace them with full-size originals when possible. The Unsplash photos these tours used before (listed below under "Used on") are no longer their main photos.
+
+| File | Tour | Size |
+| --- | --- | --- |
+| `mnarani-turtles.jpg` | Mnarani Turtle Aquarium | 474px |
+| `jet-ski.jpg` | Jet Ski Experience | 474px |
+| `salaam-cave.jpg` | Salaam Cave Experience | 474px |
+| `cooking-class.jpg` | Zanzibar Cooking Class | 474px |
+| `blue-lagoon-snorkel.jpg` | Blue Lagoon Snorkelling | 2000px (from a 3200px original) |
+| `kuza-cave.jpg` | Kuza Cave & Jambiani Village | 474px |
+| `mangapwani-cave.jpg` | Mangapwani Slave Caves | 474px |
+| `kizimkazi-dolphins.jpg` | Kizimkazi Dolphin Experience | 474px |
+| `nakupenda-sandbank.jpg` | Nakupenda Sandbank | 474px |
+| `sunset-dhows.jpg` | Sunset Dhow Cruise | 474px |
+| `pungume-sandbank.jpg` | Pungume Island & Sandbank | 474px |
+| `spice-farm.jpg` | Spice Farm Tour | 474px |
+| `mnemba-island.jpg` | Mnemba Island Snorkelling | 474px |
+
 ## Home page "A trip for every traveller" boxes (`public/images/travellers/`)
 
 All under the [Unsplash License](https://unsplash.com/license). Each photo page was checked on 2026-11-05 and shows "Free to use under the Unsplash License" (none are Unsplash+). Downloaded on 2026-11-05 and optimised to 1400px wide. The family and group photos come from the Unsplash account of another Tanzanian tour company (Twende Africa Tours); no company branding is visible in either, but replace them with your own guests' photos (with their permission) when you can.

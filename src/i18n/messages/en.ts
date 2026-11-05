@@ -185,7 +185,7 @@ export const en = {
       title: "A trip for every traveller",
       description:
         "Tell us who is coming and we will shape the days around you: the pace, the stays and the moments that matter.",
-      cta: "Start planning",
+      cta: "Discover",
       items: {
         family: {
           title: "Families",
@@ -275,6 +275,83 @@ export const en = {
     full_day: "Full day",
     multi_day: "Several days",
   },
+  travellerPage: {
+    metaTitle: "{title}: trips in Zanzibar & Tanzania",
+    eyebrow: "Travel your way",
+    tipsTitle: "Planning tips",
+    suggestedEyebrow: "Suggested experiences",
+    suggestedTitle: "Experiences that suit {title}",
+    suggestedNote:
+      "Suggestions are based on each trip's travel style. We'll tailor the details with you.",
+    planTitle: "Ready to plan?",
+    planBody:
+      "Send a request with your dates and group. We'll confirm availability and prices with you; nothing is charged online.",
+    plan: "Plan this trip",
+    ask: "Ask a question",
+    others: "Other ways to travel",
+    pages: {
+      family: {
+        intro: [
+          "Zanzibar suits families well: short boat trips, giant tortoises, sea turtles, forests with red colobus monkeys and calm beaches, with mainland safaris within reach for older children.",
+          "Tell us your children's ages and how you like to travel, and we'll suggest a pace with time to rest between outings.",
+        ],
+        tips: [
+          "Mix half-day trips with free afternoons at the beach.",
+          "Prison Island's giant tortoises and Jozani's red colobus monkeys are popular with children.",
+          "For a safari, ask us which parks and trip lengths suit your children's ages.",
+          "Child prices are shown where they apply; we confirm the total with you.",
+        ],
+      },
+      couples: {
+        intro: [
+          "Slow mornings, white sandbanks, sunset dhow cruises and dinners by the sea: Zanzibar is easy to enjoy as two.",
+          "Tell us what you both enjoy — quiet beaches, culture, the sea or wildlife — and we'll suggest experiences that suit you.",
+        ],
+        tips: [
+          "A sunset dhow cruise is an easy first evening.",
+          "Combine a sandbank trip with slow days on the east coast beaches.",
+          "Add a short mainland safari for something different.",
+          "Celebrating something? Tell us and we'll suggest ideas.",
+        ],
+      },
+      groups: {
+        intro: [
+          "Friends, families travelling together, clubs and reunions: we plan days that work for everyone, from boat trips and snorkelling to Stone Town walks.",
+          "Share your group size, dates and interests. Larger groups are easier to arrange with early planning, so get in touch as soon as you can.",
+        ],
+        tips: [
+          "Full-day boat trips such as Safari Blue are a good shared day out.",
+          "Mix active options like snorkelling and jet skis with relaxed ones.",
+          "Ask us about group prices where they apply.",
+          "Tell us about different ages or abilities in the group.",
+        ],
+      },
+      honeymoon: {
+        intro: [
+          "Barefoot sunsets, quiet sandbanks and the option of a safari: Zanzibar and mainland Tanzania make a memorable honeymoon.",
+          "Tell us your dates and what you have in mind, and we'll suggest experiences and a pace that leave plenty of time for just the two of you.",
+        ],
+        tips: [
+          "Pair beach days with a sunset dhow cruise.",
+          "A balloon flight over the Serengeti can be added to a safari.",
+          "Leave free days between experiences.",
+          "Mention that it's your honeymoon when you get in touch.",
+        ],
+      },
+      solo: {
+        intro: [
+          "Travelling alone? Stone Town's lanes, spice farms, cooking classes and the island's reefs are easy to explore at your own pace with a local guide.",
+          "Tell us your dates, interests and budget, and we'll suggest experiences that fit your plans.",
+        ],
+        tips: [
+          "Cultural tours are a relaxed way to get to know the island.",
+          "Join a boat trip to snorkel and see the coast.",
+          "Share your budget so we can suggest suitable options.",
+          "Send your arrival details so we can plan pick-ups.",
+        ],
+      },
+    },
+  },
   tours: {
     metaTitle: "Zanzibar Tours & Experiences",
     metaDescription:
@@ -282,7 +359,7 @@ export const en = {
     eyebrow: "Experiences",
     title: "Zanzibar tours & experiences",
     description:
-      "Culture, sea, forest and beach — day trips across Zanzibar, plus options on the mainland.",
+      "Culture, sea, forest and beach — day trips and experiences across Zanzibar. Mainland safaris are on the Safari page.",
     headerAlt: "Aerial view of a narrow white sandbank in turquoise water off Zanzibar",
     allTours: "All tours",
     filter: "Filter tours",

@@ -175,7 +175,7 @@ export const tr: Messages = {
       title: "Her gezgine bir yolculuk",
       description:
         "Kimlerin geleceğini söyleyin, günleri size göre planlayalım: tempo, konaklama ve önemli anlar.",
-      cta: "Planlamaya başla",
+      cta: "Keşfet",
       items: {
         family: {
           title: "Aileler",
@@ -265,6 +265,83 @@ export const tr: Messages = {
     full_day: "Tam gün",
     multi_day: "Birkaç gün",
   },
+  travellerPage: {
+    metaTitle: "{title}: Zanzibar ve Tanzanya gezileri",
+    eyebrow: "Kendi tarzınızda seyahat edin",
+    tipsTitle: "Planlama ipuçları",
+    suggestedEyebrow: "Önerilen deneyimler",
+    suggestedTitle: "{title} için deneyimler",
+    suggestedNote:
+      "Öneriler her gezinin seyahat tarzına göre yapılır. Ayrıntıları sizinle birlikte belirleriz.",
+    planTitle: "Planlamaya hazır mısınız?",
+    planBody:
+      "Tarihlerinizi ve grubunuzu içeren bir talep gönderin. Müsaitliği ve fiyatları sizinle onaylarız; çevrimiçi ödeme alınmaz.",
+    plan: "Bu geziyi planla",
+    ask: "Soru sor",
+    others: "Diğer seyahat şekilleri",
+    pages: {
+      family: {
+        intro: [
+          "Zanzibar aileler için çok uygundur: kısa tekne gezileri, dev kaplumbağalar, deniz kaplumbağaları, kızıl kolobus maymunlarının yaşadığı ormanlar ve sakin plajlar; büyük çocuklar için anakarada safariler de mümkün.",
+          "Çocuklarınızın yaşlarını ve nasıl seyahat etmeyi sevdiğinizi söyleyin; geziler arasında dinlenme zamanı olan bir tempo önerelim.",
+        ],
+        tips: [
+          "Yarım günlük gezileri plajda serbest öğleden sonralarla birleştirin.",
+          "Prison Island'daki dev kaplumbağalar ve Jozani'deki kızıl kolobuslar çocukların ilgisini çeker.",
+          "Safari için çocuklarınızın yaşına uygun parkları ve süreleri bize sorun.",
+          "Çocuk fiyatları geçerli olduğunda gösterilir; toplamı sizinle onaylarız.",
+        ],
+      },
+      couples: {
+        intro: [
+          "Yavaş sabahlar, beyaz kum adacıkları, gün batımında dhow turları ve deniz kenarında akşam yemekleri: Zanzibar iki kişi için harikadır.",
+          "İkinizin de neyden hoşlandığını söyleyin — sakin plajlar, kültür, deniz ya da vahşi yaşam — size uygun deneyimler önerelim.",
+        ],
+        tips: [
+          "Gün batımında bir dhow turu ilk akşam için güzel bir seçimdir.",
+          "Kum adacığı gezisini doğu kıyısı plajlarında sakin günlerle birleştirin.",
+          "Farklı bir deneyim için kısa bir anakara safarisi ekleyin.",
+          "Kutlayacağınız bir şey mi var? Bize söyleyin, fikirler önerelim.",
+        ],
+      },
+      groups: {
+        intro: [
+          "Arkadaşlar, birlikte seyahat eden aileler, kulüpler ve buluşmalar: Tekne gezileri ve şnorkelden Stone Town yürüyüşlerine kadar herkese uyan günler planlarız.",
+          "Grup büyüklüğünü, tarihleri ve ilgi alanlarını paylaşın. Büyük gruplar erken planlamayla daha kolay düzenlenir; bu yüzden mümkün olan en kısa sürede bize ulaşın.",
+        ],
+        tips: [
+          "Safari Blue gibi tam günlük tekne gezileri gruplar için idealdir.",
+          "Şnorkel ve jet ski gibi aktif seçenekleri sakin olanlarla karıştırın.",
+          "Geçerli olduğunda grup fiyatlarını bize sorun.",
+          "Gruptaki farklı yaşları ya da becerileri bize bildirin.",
+        ],
+      },
+      honeymoon: {
+        intro: [
+          "Çıplak ayakla gün batımları, sakin kum adacıkları ve isterseniz bir safari: Zanzibar ve Tanzanya anakarası unutulmaz bir balayı sunar.",
+          "Tarihlerinizi ve hayalinizdekini söyleyin; yalnızca ikinize bolca zaman bırakan deneyimler ve bir tempo önerelim.",
+        ],
+        tips: [
+          "Plaj günlerini gün batımında bir dhow turuyla birleştirin.",
+          "Safariye Serengeti üzerinde bir balon uçuşu eklenebilir.",
+          "Deneyimler arasında serbest günler bırakın.",
+          "Bize ulaşırken balayınız olduğunu belirtin.",
+        ],
+      },
+      solo: {
+        intro: [
+          "Yalnız mı seyahat ediyorsunuz? Stone Town'ın sokakları, baharat çiftlikleri, yemek kursları ve adanın resifleri yerel bir rehberle kendi temponuzda kolayca keşfedilir.",
+          "Tarihlerinizi, ilgi alanlarınızı ve bütçenizi söyleyin; planlarınıza uygun deneyimler önerelim.",
+        ],
+        tips: [
+          "Kültür turları adayı tanımanın rahat bir yoludur.",
+          "Şnorkel yapmak ve kıyıyı görmek için bir tekne gezisine katılın.",
+          "Size uygun seçenekler önerebilmemiz için bütçenizi paylaşın.",
+          "Transferleri planlayabilmemiz için varış bilgilerinizi gönderin.",
+        ],
+      },
+    },
+  },
   tours: {
     metaTitle: "Zanzibar Turları ve Deneyimleri",
     metaDescription:
@@ -272,7 +349,7 @@ export const tr: Messages = {
     eyebrow: "Deneyimler",
     title: "Zanzibar turları ve deneyimleri",
     description:
-      "Kültür, deniz, orman ve plaj — Zanzibar genelinde günübirlik geziler ve anakarada seçenekler.",
+      "Kültür, deniz, orman ve plaj — Zanzibar genelinde geziler ve deneyimler. Anakara safarileri Safari sayfasında.",
     headerAlt:
       "Zanzibar açıklarında turkuaz suda dar, beyaz bir kum adacığının havadan görünümü",
     allTours: "Tüm turlar",

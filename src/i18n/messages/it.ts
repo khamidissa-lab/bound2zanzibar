@@ -184,7 +184,7 @@ export const it: Messages = {
       title: "Un viaggio per ogni viaggiatore",
       description:
         "Dicci chi viene e costruiremo le giornate intorno a te: il ritmo, gli alloggi e i momenti che contano.",
-      cta: "Inizia a pianificare",
+      cta: "Scopri",
       items: {
         family: {
           title: "Famiglie",
@@ -274,6 +274,83 @@ export const it: Messages = {
     full_day: "Giornata intera",
     multi_day: "Più giorni",
   },
+  travellerPage: {
+    metaTitle: "{title}: viaggi a Zanzibar e in Tanzania",
+    eyebrow: "Viaggia a modo tuo",
+    tipsTitle: "Consigli per organizzare",
+    suggestedEyebrow: "Esperienze consigliate",
+    suggestedTitle: "Esperienze per: {title}",
+    suggestedNote:
+      "I suggerimenti si basano sullo stile di ogni viaggio. Definiamo i dettagli insieme a te.",
+    planTitle: "Pronto a organizzare?",
+    planBody:
+      "Invia una richiesta con le date e il gruppo. Confermiamo disponibilità e prezzi con te; non si paga nulla online.",
+    plan: "Organizza questo viaggio",
+    ask: "Fai una domanda",
+    others: "Altri modi di viaggiare",
+    pages: {
+      family: {
+        intro: [
+          "Zanzibar è adatta alle famiglie: brevi gite in barca, tartarughe giganti, tartarughe marine, foreste con le scimmie colobo rosso e spiagge tranquille, con i safari sul continente alla portata dei bambini più grandi.",
+          "Indicaci l’età dei tuoi figli e come ti piace viaggiare, e ti proporremo un ritmo con pause tra un’uscita e l’altra.",
+        ],
+        tips: [
+          "Alterna gite di mezza giornata a pomeriggi liberi in spiaggia.",
+          "Le tartarughe giganti di Prison Island e i colobi rossi di Jozani piacciono molto ai bambini.",
+          "Per un safari, chiedici quali parchi e quale durata sono adatti all’età dei tuoi figli.",
+          "I prezzi per bambini sono indicati quando previsti; confermiamo il totale con te.",
+        ],
+      },
+      couples: {
+        intro: [
+          "Mattine lente, banchi di sabbia bianca, crociere in dhow al tramonto e cene sul mare: Zanzibar è perfetta da vivere in due.",
+          "Dicci cosa vi piace — spiagge tranquille, cultura, mare o fauna — e ti suggeriremo esperienze adatte a entrambi.",
+        ],
+        tips: [
+          "Una crociera in dhow al tramonto è una prima serata semplice e bella.",
+          "Abbina un banco di sabbia a giornate lente sulle spiagge della costa est.",
+          "Aggiungi un breve safari sul continente per cambiare scenario.",
+          "Avete qualcosa da festeggiare? Diccelo e ti proporremo delle idee.",
+        ],
+      },
+      groups: {
+        intro: [
+          "Amici, famiglie che viaggiano insieme, associazioni e rimpatriate: organizziamo giornate adatte a tutti, dalle gite in barca e lo snorkeling alle passeggiate a Stone Town.",
+          "Indicaci numero di persone, date e interessi. I gruppi numerosi si organizzano meglio con anticipo, quindi contattaci appena puoi.",
+        ],
+        tips: [
+          "Le gite in barca di una giornata come Safari Blue sono ideali in gruppo.",
+          "Alterna attività dinamiche come snorkeling e moto d’acqua a momenti di relax.",
+          "Chiedici i prezzi di gruppo quando previsti.",
+          "Segnalaci età o capacità diverse all’interno del gruppo.",
+        ],
+      },
+      honeymoon: {
+        intro: [
+          "Tramonti a piedi nudi, banchi di sabbia tranquilli e la possibilità di un safari: Zanzibar e la Tanzania continentale rendono la luna di miele indimenticabile.",
+          "Indicaci le date e i vostri desideri, e ti proporremo esperienze e un ritmo che lascino tanto tempo solo per voi due.",
+        ],
+        tips: [
+          "Abbina giornate di mare a una crociera in dhow al tramonto.",
+          "Un volo in mongolfiera sul Serengeti può essere aggiunto a un safari.",
+          "Lascia giorni liberi tra un’esperienza e l’altra.",
+          "Indica che è la vostra luna di miele quando ci contatti.",
+        ],
+      },
+      solo: {
+        intro: [
+          "Viaggi da solo? I vicoli di Stone Town, le fattorie delle spezie, i corsi di cucina e le barriere coralline dell’isola si scoprono facilmente al tuo ritmo con una guida locale.",
+          "Indicaci date, interessi e budget, e ti suggeriremo esperienze adatte ai tuoi piani.",
+        ],
+        tips: [
+          "I tour culturali sono un modo rilassato per conoscere l’isola.",
+          "Partecipa a una gita in barca per fare snorkeling e vedere la costa.",
+          "Indicaci il budget per ricevere proposte adatte.",
+          "Inviaci i dettagli di arrivo per organizzare i trasferimenti.",
+        ],
+      },
+    },
+  },
   tours: {
     metaTitle: "Escursioni ed esperienze a Zanzibar",
     metaDescription:
@@ -281,7 +358,7 @@ export const it: Messages = {
     eyebrow: "Esperienze",
     title: "Escursioni ed esperienze a Zanzibar",
     description:
-      "Cultura, mare, foresta e spiaggia — gite giornaliere in tutta Zanzibar e proposte sul continente.",
+      "Cultura, mare, foresta e spiaggia — escursioni ed esperienze in tutta Zanzibar. I safari sul continente sono nella pagina Safari.",
     headerAlt:
       "Vista aerea di uno stretto banco di sabbia bianca nell’acqua turchese al largo di Zanzibar",
     allTours: "Tutte le escursioni",

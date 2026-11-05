@@ -19,6 +19,7 @@ import { SectionHeading } from "@/components/shared/section-heading";
 import { buttonVariants } from "@/components/ui/button";
 import { localeAlternates, pageLocale } from "@/i18n/seo";
 import { getI18n } from "@/i18n/server";
+import { SAFARI_CATEGORY, isSafariTour } from "@/lib/discovery";
 import { cn } from "@/lib/utils";
 import {
   getArticles,
@@ -84,14 +85,16 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
     getNameLookups(locale),
   ]);
 
+  // The search goes to Zanzibar tours, which excludes safaris (they have their own page).
+  const zanzibarTours = allTours.filter((tour) => !isSafariTour(tour));
   const searchableDestinations = destinations
-    .filter((d) => allTours.some((tour) => tour.destinationSlug === d.slug))
+    .filter((d) => zanzibarTours.some((tour) => tour.destinationSlug === d.slug))
     .map(({ slug, name }) => ({ slug, name }));
-  const safaris = allTours.filter((tour) => tour.categorySlug === "safari");
+  const safaris = allTours.filter(isSafariTour);
   const [leadTour, ...moreTours] = featuredTours.slice(0, 7);
   const [leadArticle, ...moreArticles] = articles.slice(0, 3);
   const counts = [
-    { value: allTours.length, label: h.counts.experiences },
+    { value: zanzibarTours.length, label: h.counts.experiences },
     { value: destinations.length, label: h.counts.destinations },
     { value: safaris.length, label: h.counts.safaris },
   ].filter((c) => c.value > 0);
@@ -174,7 +177,9 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
       <section aria-label={h.search.label} className="bg-ocean-deep py-10 sm:py-12">
         <div className="container-page">
           <DiscoveryPanel
-            categories={categories.map(({ slug, name }) => ({ slug, name }))}
+            categories={categories
+              .filter((c) => c.slug !== SAFARI_CATEGORY)
+              .map(({ slug, name }) => ({ slug, name }))}
             destinations={searchableDestinations}
           />
         </div>

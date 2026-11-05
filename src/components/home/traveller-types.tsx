@@ -2,33 +2,11 @@ import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
 
 import { LocaleLink as Link } from "@/components/i18n/locale-link";
+import { TRAVELLERS, TRAVELLER_TYPES } from "@/config/travellers";
 import type { Messages } from "@/i18n/messages";
 import { cn } from "@/lib/utils";
 
-export const TRAVELLER_TYPES = [
-  "family",
-  "couples",
-  "groups",
-  "honeymoon",
-  "solo",
-] as const;
-export type TravellerType = (typeof TRAVELLER_TYPES)[number];
-export const isTravellerType = (v: string): v is TravellerType =>
-  (TRAVELLER_TYPES as readonly string[]).includes(v);
-
-/** Photo per traveller type; `position` keeps the people in a portrait crop. */
-const PHOTOS: Record<TravellerType, { src: string; position: string }> = {
-  family: { src: "/images/travellers/family.jpg", position: "object-[36%_50%]" },
-  couples: { src: "/images/travellers/couples.jpg", position: "object-[64%_50%]" },
-  groups: { src: "/images/travellers/groups.jpg", position: "object-[40%_50%]" },
-  honeymoon: { src: "/images/travellers/honeymoon.jpg", position: "object-[42%_50%]" },
-  solo: { src: "/images/travellers/solo.jpg", position: "object-[88%_50%]" },
-};
-
-/**
- * One picture box per kind of traveller. Each opens the booking form with a
- * matching opening line in the message.
- */
+/** One picture box per kind of traveller, each opening its own page. */
 export function TravellerTypes({ t }: { t: Messages["home"]["travellers"] }) {
   return (
     // Swipeable row on phones (bleeding to the screen edge, matching the
@@ -36,20 +14,20 @@ export function TravellerTypes({ t }: { t: Messages["home"]["travellers"] }) {
     <ul className="-mx-4 flex snap-x snap-mandatory scroll-ps-4 gap-4 overflow-x-auto px-4 pb-2 sm:-mx-8 sm:scroll-ps-8 sm:px-8 lg:mx-0 lg:grid lg:grid-cols-5 lg:overflow-visible lg:px-0 lg:pb-0">
       {TRAVELLER_TYPES.map((type, i) => {
         const item = t.items[type];
-        const photo = PHOTOS[type];
+        const photo = TRAVELLERS[type];
         return (
           <li
             key={type}
             className="reveal w-[72%] shrink-0 snap-start sm:w-[44%] lg:w-auto"
           >
             <Link
-              href={`/book?trip=${type}`}
+              href={`/trips/${type}`}
               className="group flex h-full flex-col bg-ivory shadow-card focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring"
             >
               {/* The photo stays clear of text so faces are never covered. */}
               <div className="relative aspect-[4/5] overflow-hidden bg-ocean-deep">
                 <Image
-                  src={photo.src}
+                  src={photo.photo}
                   alt={item.alt}
                   fill
                   sizes="(min-width: 1024px) 20vw, (min-width: 640px) 44vw, 72vw"

@@ -28,6 +28,11 @@ export const TOUR_LENGTHS: readonly TourLength[] = [
 
 export const DIFFICULTIES: readonly Difficulty[] = ["easy", "moderate", "challenging"];
 
+/** Tanzania safaris have their own page; Zanzibar tours lists everything else. */
+export const SAFARI_CATEGORY = "safari";
+export const isSafariTour = (tour: Pick<Tour, "categorySlug">) =>
+  tour.categorySlug === SAFARI_CATEGORY;
+
 export const isTravelStyle = (v: string): v is TravelStyle =>
   (TRAVEL_STYLES as readonly string[]).includes(v);
 export const isTourLength = (v: string): v is TourLength =>

@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 
+import { TRAVELLER_TYPES } from "@/config/travellers";
 import { LOCALES, localizePath } from "@/i18n/config";
 import { getSiteUrl } from "@/lib/site-url";
 import { getArticles, getDestinations, getPackages, getTours } from "@/services/content";
@@ -45,5 +46,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...packages.flatMap((p) => entry(`/packages/${p.slug}`)),
     ...destinations.flatMap((d) => entry(`/destinations/${d.slug}`)),
     ...articles.flatMap((a) => entry(`/travel-guide/${a.slug}`, a.publishedOn)),
+    ...TRAVELLER_TYPES.flatMap((type) => entry(`/trips/${type}`)),
   ];
 }
