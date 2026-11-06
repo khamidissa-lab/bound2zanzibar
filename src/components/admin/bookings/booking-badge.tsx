@@ -5,6 +5,7 @@ import { STATUS_LABELS } from "@/services/admin-dashboard-model";
 const STYLES: Record<BookingStatus, string> = {
   pending: "bg-gold/15 text-ocean-deep ring-gold/50",
   confirmed: "bg-turquoise-soft text-ocean-deep ring-turquoise/50",
+  paid: "bg-[#E1F4EA] text-[#11633A] ring-[#11633A]/30",
   completed: "bg-ocean-deep text-white ring-ocean-deep",
   cancelled: "bg-muted text-muted-foreground ring-border",
   rejected: "bg-destructive/10 text-destructive ring-destructive/30",

@@ -63,6 +63,7 @@ export type DashboardInput = {
 export const STATUS_LABELS: Record<BookingStatus, string> = {
   pending: "Pending",
   confirmed: "Confirmed",
+  paid: "Paid",
   completed: "Completed",
   cancelled: "Cancelled",
   rejected: "Rejected",
@@ -96,7 +97,7 @@ function ranked(counts: Map<string, number>, limit: number) {
     .map(([name, count]) => ({ name, count, share: total ? count / total : 0 }));
 }
 
-const ACTIVE: BookingStatus[] = ["pending", "confirmed"];
+const ACTIVE: BookingStatus[] = ["pending", "confirmed", "paid"];
 
 export function buildDashboard(input: DashboardInput, now: Date) {
   const today = zanzibarDate(now);
@@ -159,7 +160,8 @@ export function buildDashboard(input: DashboardInput, now: Date) {
       bookings: bookings.length,
       pending: statusCounts.get("pending") ?? 0,
       upcomingConfirmed: bookings.filter(
-        (b) => b.status === "confirmed" && b.preferredDate >= today,
+        (b) =>
+          (b.status === "confirmed" || b.status === "paid") && b.preferredDate >= today,
       ).length,
       requestsThisMonth: monthly.at(-1)?.count ?? 0,
       newInquiries: input.inquiries.filter((i) => i.status === "new").length,

@@ -19,7 +19,7 @@ export function illustrativePrices(
 /** A tour without its "More details" content (merged in from tour-details.ts). */
 export type TourBase = Omit<
   Tour,
-  "whatToExpect" | "goodToKnow" | "faqs" | "length" | "travelStyles"
+  "whatToExpect" | "goodToKnow" | "faqs" | "length" | "travelStyles" | "options"
 >;
 
 /** Placeholder image (no photo yet) with a themed illustration. */

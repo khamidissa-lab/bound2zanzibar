@@ -6,6 +6,7 @@ import { AccessDenied } from "@/components/admin/admin-states";
 import { DeleteButton } from "@/components/admin/delete-button";
 import { EditorHeader } from "@/components/admin/editor-header";
 import { GalleryEditor } from "@/components/admin/gallery-editor";
+import { OptionsEditor } from "@/components/admin/options-editor";
 import { PriceEditor } from "@/components/admin/price-editor";
 import { toPriceRows } from "@/lib/admin-forms";
 import { can } from "@/lib/auth/permissions";
@@ -65,6 +66,24 @@ export default async function EditTourPage({
         currencies={currencies}
         canEdit={can(staff.role, "prices.manage")}
         defaultUnit="per person"
+      />
+      <OptionsEditor
+        tourId={tour.id}
+        currencies={currencies}
+        canEdit={can(staff.role, "prices.manage")}
+        initialOptions={[...tour.tour_options]
+          .sort((a, b) => a.sort_order - b.sort_order)
+          .map((o) => ({
+            name: o.name,
+            description: o.description ?? "",
+            pricing: o.pricing,
+            isActive: o.is_active,
+            prices: o.tour_option_prices.map((p) => ({
+              market: p.market,
+              currency: p.currency,
+              amount: String(p.amount),
+            })),
+          }))}
       />
       <GalleryEditor
         tourId={tour.id}

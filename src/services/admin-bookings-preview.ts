@@ -5,7 +5,7 @@ import { BOOKING_STATUSES, type BookingStatus } from "@/lib/booking/status";
 import { getPackages, getTours } from "@/services/content";
 
 import { zanzibarDate } from "./admin-dashboard-model";
-import type { BookingDetail, BookingEvent } from "./bookings";
+import type { BookingDetail, BookingEvent, BookingPayment } from "./bookings";
 
 /*
  * DEVELOPMENT PREVIEW ONLY. Deterministic EXAMPLE bookings (guest names and
@@ -131,4 +131,22 @@ export function previewEvents(b: BookingDetail): BookingEvent[] {
     });
   }
   return events;
+}
+
+/** Example payments: completed bookings show one recorded transfer of the quote. */
+export function previewPayments(b: BookingDetail): BookingPayment[] {
+  if (b.status !== "completed" || b.quoted_total === null) return [];
+  return [
+    {
+      id: "00000000-0000-4000-8000-0000000000aa",
+      amount: b.quoted_total,
+      currency: b.currency,
+      method: "bank_transfer",
+      reference: "EXAMPLE-0001",
+      paid_on: b.preferred_date,
+      notes: null,
+      recorded_by: "Preview User",
+      created_at: b.created_at,
+    },
+  ];
 }

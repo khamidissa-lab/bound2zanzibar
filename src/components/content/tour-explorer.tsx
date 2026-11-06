@@ -19,6 +19,7 @@ import {
   type TourFilters,
 } from "@/lib/discovery";
 import { tripPlanFromParams, tripPlanQuery } from "@/lib/trip-plan";
+import { useBudgetLabel } from "@/components/pricing/use-budget-label";
 import { useMarket } from "@/lib/market-store";
 import type { Tour } from "@/types/content";
 
@@ -49,7 +50,7 @@ export function TourExplorer({
   destinations,
   lookups,
 }: TourExplorerProps) {
-  const { t, fmt, price } = useI18n();
+  const { t, fmt } = useI18n();
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -86,18 +87,7 @@ export function TourExplorer({
     Boolean(query || plan.date || plan.adults || plan.children);
 
   const currency = marketCurrency(tours, market);
-  const budgetLabel = (id: string) => {
-    const band = BUDGET_BANDS[currency].find((b) => b.id === id);
-    if (!band) return "";
-    if (band.min === 0 && band.max !== null)
-      return fmt(t.tours.budgetUpTo, { max: price(band.max, currency) });
-    if (band.max === null)
-      return fmt(t.tours.budgetOver, { min: price(band.min, currency) });
-    return fmt(t.tours.budgetBetween, {
-      min: price(band.min, currency),
-      max: price(band.max, currency),
-    });
-  };
+  const budgetLabel = useBudgetLabel(currency);
 
   const today = new Date().toISOString().slice(0, 10);
   const bookQuery = tripPlanQuery(plan);

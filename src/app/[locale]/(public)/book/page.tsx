@@ -131,6 +131,7 @@ async function BookingSection({
       label: `${t.name} · ${t.duration}`,
       group: "Tours" as const,
       prices: t.prices,
+      options: t.options,
     })),
     ...packages.map((p) => ({
       value: `package:${p.slug}`,

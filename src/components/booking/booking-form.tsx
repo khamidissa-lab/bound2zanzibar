@@ -18,10 +18,11 @@ import {
 } from "@/lib/booking/request";
 import { useI18n } from "@/i18n/client";
 import { initialFormState } from "@/lib/forms";
+import { buildQuote } from "@/lib/booking/quote";
 import { useMarket } from "@/lib/market-store";
 import type { TripPlan } from "@/lib/trip-plan";
 import { cn } from "@/lib/utils";
-import type { Currency, Market, PriceRecord } from "@/types/content";
+import type { Currency, Market, PriceRecord, TourOption } from "@/types/content";
 
 export type BookableItem = {
   /** "tour:slug" or "package:slug". */
@@ -29,6 +30,8 @@ export type BookableItem = {
   label: string;
   group: "Tours" | "Packages";
   prices: PriceRecord[];
+  /** Priced extras (tours only). */
+  options?: TourOption[];
 };
 
 const fieldClass =
@@ -153,10 +156,21 @@ export function BookingForm({
 
   const nAdults = toCount(adults, 0);
   const nChildren = toCount(children, 0);
-  const estimate =
-    price && (nChildren === 0 || price.child !== null)
-      ? price.adult * nAdults + (price.child ?? 0) * nChildren
-      : null;
+  const itemOptions = selected?.options ?? [];
+  const [chosen, setChosen] = useState<string[]>([]);
+  // Only options of the currently selected tour count.
+  const chosenOptions = itemOptions.filter((o) => chosen.includes(o.id));
+  const quote = price
+    ? buildQuote({
+        price,
+        adults: nAdults,
+        children: nChildren,
+        options: chosenOptions,
+        market,
+      })
+    : null;
+  const optionPrice = (o: TourOption) =>
+    o.prices.find((p) => p.market === market && p.currency === currency);
 
   return (
     <form action={action} noValidate className="space-y-8">
@@ -319,20 +333,96 @@ export function BookingForm({
           </FormField>
         </div>
 
+        {itemOptions.length > 0 ? (
+          <fieldset>
+            <legend className="text-sm font-medium">{f.optionsLegend}</legend>
+            <p className="mb-2 text-xs text-muted-foreground">{f.optionsHint}</p>
+            <div className="space-y-2">
+              {itemOptions.map((o) => {
+                const p = optionPrice(o);
+                return (
+                  <label
+                    key={o.id}
+                    className="flex cursor-pointer items-start gap-3 rounded-xl border bg-background p-3 text-sm has-focus-visible:ring-2 has-focus-visible:ring-turquoise/40"
+                  >
+                    <input
+                      type="checkbox"
+                      name="optionIds"
+                      value={o.id}
+                      checked={chosen.includes(o.id)}
+                      onChange={() =>
+                        setChosen((c) =>
+                          c.includes(o.id) ? c.filter((x) => x !== o.id) : [...c, o.id],
+                        )
+                      }
+                      className="mt-0.5 accent-turquoise-deep"
+                    />
+                    <span className="flex-1">
+                      <span className="block font-medium text-ocean-deep">{o.name}</span>
+                      {o.description ? (
+                        <span className="text-xs text-muted-foreground">
+                          {o.description}
+                        </span>
+                      ) : null}
+                    </span>
+                    <span className="text-end text-xs whitespace-nowrap text-ocean-deep">
+                      {p ? (
+                        <>
+                          {formatPrice(p.amount, p.currency)}
+                          <span className="block text-muted-foreground">
+                            {o.pricing === "per_booking"
+                              ? t.tour.perBooking
+                              : t.tour.perPerson}
+                          </span>
+                        </>
+                      ) : (
+                        <span className="text-muted-foreground">{f.noPriceLine}</span>
+                      )}
+                    </span>
+                  </label>
+                );
+              })}
+            </div>
+          </fieldset>
+        ) : null}
+
         {selected ? (
           <div className="rounded-xl bg-sand-soft px-4 py-3 text-sm" aria-live="polite">
-            {estimate !== null && price ? (
+            {quote ? (
               <>
-                <p className="font-medium text-ocean-deep">
-                  {fmt(f.estimate, { total: formatPrice(estimate, price.currency) })}
-                </p>
-                <p className="text-xs text-muted-foreground">
-                  {fmt(f.perAdult, { price: formatPrice(price.adult, price.currency) })}
-                  {price.child !== null
-                    ? fmt(f.perChild, { price: formatPrice(price.child, price.currency) })
-                    : ""}
-                  {price.isIllustrative ? f.illustrative : ""}
-                  {f.confirmNote}
+                <p className="mb-2 font-medium text-ocean-deep">{f.breakdown}</p>
+                <dl className="space-y-1">
+                  {quote.lines.map((line, i) => (
+                    <div key={i} className="flex justify-between gap-4">
+                      <dt className="text-muted-foreground">
+                        {line.kind === "adults"
+                          ? fmt(f.lineAdults, { n: line.count })
+                          : line.kind === "children"
+                            ? fmt(f.lineChildren, { n: line.count })
+                            : line.pricing === "per_booking"
+                              ? line.name
+                              : fmt(f.lineOption, { name: line.name, n: line.count })}
+                      </dt>
+                      <dd className="text-ocean-deep tabular-nums">
+                        {line.total === null
+                          ? f.noPriceLine
+                          : formatPrice(line.total, quote.currency)}
+                      </dd>
+                    </div>
+                  ))}
+                  <div className="flex justify-between gap-4 border-t border-ocean-deep/15 pt-1.5 font-semibold text-ocean-deep">
+                    <dt>{f.estimatedTotal}</dt>
+                    <dd className="tabular-nums">
+                      {quote.total === null
+                        ? f.noPriceLine
+                        : formatPrice(quote.total, quote.currency)}
+                    </dd>
+                  </div>
+                </dl>
+                <p className="mt-2 text-xs text-muted-foreground">
+                  {quote.total === null ? f.partialNote : ""}
+                  {price?.isIllustrative ? `${t.price.illustrative}. ` : ""}
+                  {f.confirmNote.replace(/^\. /, "")}
                 </p>
               </>
             ) : (

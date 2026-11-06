@@ -15,6 +15,8 @@ export const PERMISSIONS = {
   "prices.manage": ["super_admin", "admin"],
   "bookings.manage": ["super_admin", "admin", "booking_staff"],
   "bookings.export": ["super_admin", "admin"],
+  /** Correcting a recorded payment (deleting it); recording is bookings.manage. */
+  "payments.delete": ["super_admin", "admin"],
   "settings.manage": ["super_admin", "admin"],
   "activity.view": ["super_admin", "admin"],
   "staff.manage": ["super_admin"],

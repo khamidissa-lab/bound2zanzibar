@@ -18,6 +18,7 @@ import {
   mediaPath,
   packageSchema,
   pricesSchema,
+  tourOptionsSchema,
   tourSchema,
 } from "@/lib/validation/content";
 import { CONTENT_TAG } from "@/services/content-db";
@@ -183,6 +184,29 @@ export async function saveTourPrices(
   });
   if (error) return dbErrorMessage(error);
   return saved("Prices saved.");
+}
+
+export async function saveTourOptions(
+  _prev: FormState,
+  formData: FormData,
+): Promise<FormState> {
+  const input = await prepare("prices.manage", tourOptionsSchema, formValues(formData));
+  if (!input.ok) return input.state;
+  const id = idOf(formData);
+  if (!id) return { status: "error", message: "Save the tour first." };
+  const supabase = await createSupabaseServerClient();
+  const { error } = await supabase.rpc("set_tour_options", {
+    p_tour_id: id,
+    p_options: input.data.options.map((o) => ({
+      name: o.name,
+      description: o.description,
+      pricing: o.pricing,
+      is_active: o.isActive,
+      prices: o.prices,
+    })),
+  });
+  if (error) return dbErrorMessage(error);
+  return saved("Options saved.");
 }
 
 export async function saveTourGallery(

@@ -37,6 +37,15 @@ export type TourRow = Tables<"tours"> & {
   destination: Pick<Tables<"destinations">, "slug" | "name" | "region"> | null;
   tour_prices: PriceRow[];
   tour_images: Pick<Tables<"tour_images">, "storage_path" | "alt_text" | "sort_order">[];
+  tour_options?: (Pick<
+    Tables<"tour_options">,
+    "id" | "name" | "description" | "pricing" | "sort_order" | "is_active"
+  > & {
+    tour_option_prices: Pick<
+      Tables<"tour_option_prices">,
+      "market" | "currency" | "amount"
+    >[];
+  })[];
 };
 
 export type PackageRow = Tables<"packages"> & {
@@ -150,6 +159,20 @@ export function mapTour(row: TourRow): Tour {
     whatToExpect: parseTourSteps(row.what_to_expect),
     goodToKnow: row.good_to_know,
     faqs: parseFaqs(row.faqs),
+    options: [...(row.tour_options ?? [])]
+      .filter((o) => o.is_active)
+      .sort((a, b) => a.sort_order - b.sort_order)
+      .map((o) => ({
+        id: o.id,
+        name: o.name,
+        description: o.description ?? "",
+        pricing: o.pricing,
+        prices: o.tour_option_prices.map((p) => ({
+          market: p.market,
+          currency: p.currency as Currency,
+          amount: Number(p.amount),
+        })),
+      })),
     coverImage: image(row.cover_image_path, row.cover_image_alt, row.name, theme),
     gallery: [...row.tour_images]
       .sort((a, b) => a.sort_order - b.sort_order)

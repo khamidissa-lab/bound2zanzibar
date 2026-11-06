@@ -92,13 +92,16 @@ export async function listTours(filter: ListFilter): Promise<TourListItem[]> {
 export type TourDetail = Tables<"tours"> & {
   tour_prices: Tables<"tour_prices">[];
   tour_images: Tables<"tour_images">[];
+  tour_options: (Tables<"tour_options"> & {
+    tour_option_prices: Tables<"tour_option_prices">[];
+  })[];
 };
 
 export async function getTour(id: string): Promise<TourDetail | null> {
   const supabase = await createSupabaseServerClient();
   const { data, error } = await supabase
     .from("tours")
-    .select("*, tour_prices(*), tour_images(*)")
+    .select("*, tour_prices(*), tour_images(*), tour_options(*, tour_option_prices(*))")
     .eq("id", id)
     .maybeSingle();
   if (error) failed("tour", error);

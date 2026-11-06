@@ -81,6 +81,8 @@ export type Tour = {
   goodToKnow: string[];
   /** Tour-specific questions; general booking FAQs are added by the page. */
   faqs: Faq[];
+  /** Optional priced extras, chosen on the booking form. */
+  options: TourOption[];
   coverImage: MediaImage;
   gallery: MediaImage[];
   prices: PriceRecord[];
@@ -88,6 +90,18 @@ export type Tour = {
   status: PublishStatus;
   seo: Seo;
   isSample: boolean;
+};
+
+export type OptionPricing = "per_person" | "per_booking";
+
+/** A priced extra a visitor can add when booking a tour. */
+export type TourOption = {
+  id: string;
+  name: string;
+  description: string;
+  pricing: OptionPricing;
+  /** One per market and currency; never converted. */
+  prices: { market: Market; currency: Currency; amount: number }[];
 };
 
 export type TourStep = {

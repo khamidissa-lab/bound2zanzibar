@@ -29,6 +29,7 @@ export async function submitBookingRequest(req: BookingRequest): Promise<SubmitR
     p_children: req.children,
     p_pickup_location: req.pickupLocation || undefined,
     p_message: req.message || undefined,
+    p_option_ids: req.optionIds,
   });
   const reference = data?.[0]?.reference;
   if (error || !reference) return { ok: false, dbMessage: error?.message ?? "" };
@@ -79,6 +80,28 @@ export type BookingDetail = BookingListRow & {
   internal_notes: string | null;
   source: string;
   updated_at: string;
+  /** Options chosen at request time (snapshot); loaded on the detail page. */
+  options?: BookingOptionSnapshot[];
+};
+
+export type BookingOptionSnapshot = {
+  name: string;
+  pricing: "per_person" | "per_booking";
+  amount: number | null;
+  total: number | null;
+};
+
+export type BookingPayment = {
+  id: string;
+  amount: number;
+  currency: string;
+  method: Enums<"payment_method">;
+  reference: string | null;
+  paid_on: string;
+  notes: string | null;
+  /** Staff member name (resolved from recorded_by). */
+  recorded_by: string | null;
+  created_at: string;
 };
 
 export type BookingEvent = {
@@ -168,25 +191,32 @@ export async function countByStatus(
   ) as Record<BookingStatus, number>;
 }
 
-export async function getBooking(
-  reference: string,
-): Promise<{ booking: BookingDetail; events: BookingEvent[] } | null> {
+export async function getBooking(reference: string): Promise<{
+  booking: BookingDetail;
+  events: BookingEvent[];
+  payments: BookingPayment[];
+} | null> {
   const supabase = await createSupabaseServerClient();
   const { data, error } = await supabase
     .from("bookings")
     .select(
-      `${LIST_COLUMNS}, pickup_location, message, internal_notes, source, updated_at, events:booking_status_events(from_status, to_status, changed_by, created_at)`,
+      `${LIST_COLUMNS}, pickup_location, message, internal_notes, source, updated_at, options, events:booking_status_events(from_status, to_status, changed_by, created_at), payments:booking_payments(id, amount, currency, method, reference, paid_on, notes, recorded_by, created_at)`,
     )
     .eq("reference", reference)
     .maybeSingle();
   if (error) failed("load booking", error);
   if (!data) return null;
 
-  const { events, ...booking } = data as unknown as BookingDetail & {
+  const { events, payments, ...booking } = data as unknown as BookingDetail & {
     events: BookingEvent[];
+    payments: BookingPayment[];
   };
   const staffIds = [
-    ...new Set(events.map((e) => e.changed_by).filter(Boolean)),
+    ...new Set(
+      [...events.map((e) => e.changed_by), ...payments.map((p) => p.recorded_by)].filter(
+        Boolean,
+      ),
+    ),
   ] as string[];
   const names = new Map<string, string>();
   if (staffIds.length > 0) {
@@ -204,7 +234,58 @@ export async function getBooking(
         changed_by: e.changed_by ? (names.get(e.changed_by) ?? "A team member") : null,
       }))
       .sort((a, b) => b.created_at.localeCompare(a.created_at)),
+    payments: payments
+      .map((p) => ({
+        ...p,
+        amount: Number(p.amount),
+        recorded_by: p.recorded_by ? (names.get(p.recorded_by) ?? "A team member") : null,
+      }))
+      .sort((a, b) => a.paid_on.localeCompare(b.paid_on)),
   };
+}
+
+export type PaymentInput = {
+  bookingId: string;
+  amount: number;
+  currency: string;
+  method: Enums<"payment_method">;
+  reference: string;
+  paidOn: string;
+  notes: string;
+};
+
+/** Records a verified payment. RLS limits this to booking staff. */
+export async function recordPayment(input: PaymentInput): Promise<boolean> {
+  const supabase = await createSupabaseServerClient();
+  const { data, error } = await supabase
+    .from("booking_payments")
+    .insert({
+      booking_id: input.bookingId,
+      amount: input.amount,
+      currency: input.currency,
+      method: input.method,
+      reference: input.reference || null,
+      paid_on: input.paidOn,
+      notes: input.notes || null,
+    })
+    .select("id");
+  if (error) {
+    if (error.code === "42501") return false;
+    failed("record payment", error);
+  }
+  return (data ?? []).length > 0;
+}
+
+/** Deletes a payment recorded in error. RLS limits this to admins. */
+export async function deletePayment(id: string): Promise<boolean> {
+  const supabase = await createSupabaseServerClient();
+  const { data, error } = await supabase
+    .from("booking_payments")
+    .delete()
+    .eq("id", id)
+    .select("id");
+  if (error) failed("delete payment", error);
+  return (data ?? []).length > 0;
 }
 
 export async function exportBookings(filters: BookingFilters): Promise<BookingDetail[]> {
@@ -225,16 +306,24 @@ export async function exportBookings(filters: BookingFilters): Promise<BookingDe
 
 export type BookingUpdate = { status: BookingStatus; internalNotes: string };
 
-/** Updates status and notes; returns false when no row was visible to update. */
-export async function updateBooking(id: string, update: BookingUpdate): Promise<boolean> {
+/**
+ * Updates status and notes. "denied" when no row was visible to update;
+ * "payment_required" when the database refuses "paid" because recorded
+ * payments don't cover the quote yet.
+ */
+export async function updateBooking(
+  id: string,
+  update: BookingUpdate,
+): Promise<"ok" | "denied" | "payment_required"> {
   const supabase = await createSupabaseServerClient();
   const { data, error } = await supabase
     .from("bookings")
     .update({ status: update.status, internal_notes: update.internalNotes || null })
     .eq("id", id)
     .select("id");
+  if (error?.message.includes("booking_payment_required")) return "payment_required";
   if (error) failed("update booking", error);
-  return (data ?? []).length > 0;
+  return (data ?? []).length > 0 ? "ok" : "denied";
 }
 
 export async function getBookingStatus(id: string): Promise<BookingStatus | null> {

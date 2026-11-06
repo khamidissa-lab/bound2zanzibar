@@ -351,6 +351,58 @@ export const it: Messages = {
       },
     },
   },
+  finder: {
+    metaTitle: "Trova il tuo viaggio",
+    metaDescription:
+      "Rispondi a sei brevi domande e ricevi suggerimenti di tour e pacchetti a Zanzibar e nella Tanzania continentale.",
+    eyebrow: "Trova il tuo viaggio",
+    title: "Trova il tuo viaggio",
+    description:
+      "Sei brevi domande, poi suggerimenti tra i nostri tour e pacchetti. Ci vuole circa un minuto.",
+    stepOf: "Domanda {n} di {total}",
+    back: "Indietro",
+    next: "Avanti",
+    skip: "Salta",
+    seeResults: "Vedi i suggerimenti",
+    startAgain: "Ricomincia",
+    editAnswers: "Modifica le risposte",
+    whereTitle: "Dove vorresti andare?",
+    where: {
+      zanzibar: "Solo Zanzibar",
+      mainland: "Solo safari sul continente",
+      both: "Entrambi: le isole e un safari",
+    },
+    interestsTitle: "Quali esperienze ti interessano?",
+    interestsHint: "Scegli quelle che ti attirano.",
+    daysTitle: "Quanti giorni hai a disposizione?",
+    days: {
+      "1": "Un giorno o meno",
+      "2-3": "2–3 giorni",
+      "4-7": "4–7 giorni",
+      "8+": "8 giorni o più",
+    },
+    budgetTitle: "Qual è il tuo budget indicativo a persona?",
+    budgetHint: "In {currency}, secondo i prezzi del mercato selezionato.",
+    noPreference: "Nessuna preferenza",
+    travellersTitle: "Quante persone viaggiano?",
+    stylesTitle: "Che tipo di viaggio preferisci?",
+    stylesHint: "Scegline uno o più.",
+    resultsTitle: "Suggerimenti per te",
+    resultsIntro:
+      "In base alle tue risposte, questi tour e pacchetti sono un buon punto di partenza. I prezzi sono quelli indicati per il tuo mercato; disponibilità e prezzo finale vengono confermati quando invii una richiesta.",
+    toursHeading: "Esperienze",
+    packagesHeading: "Pacchetti",
+    noneTitle: "Nessun risultato per tutte le tue risposte",
+    noneBody:
+      "Prova un altro budget o un’altra durata, oppure raccontaci cosa hai in mente e ti faremo una proposta.",
+    why: "Perché:",
+    reasonBudget: "Nel tuo budget",
+    reasonDays: "Adatto alla durata del viaggio",
+    reasonChildren: "Adatto ai bambini",
+    customTitle: "Vuoi qualcosa su misura?",
+    customBody: "Raccontaci idee, date e gruppo, e prepareremo un programma per te.",
+    customCta: "Raccontaci i tuoi piani",
+  },
   tours: {
     metaTitle: "Escursioni ed esperienze a Zanzibar",
     metaDescription:
@@ -400,6 +452,11 @@ export const it: Messages = {
     bookNow: "Prenota",
   },
   tour: {
+    optionsTitle: "Opzioni disponibili",
+    optionsIntro:
+      "Aggiungile al momento della prenotazione. Il nostro team conferma il prezzo finale con te.",
+    perPerson: "a persona",
+    perBooking: "a prenotazione",
     notFound: "Escursione non trovata",
     facts: {
       duration: "Durata",
@@ -685,6 +742,16 @@ export const it: Messages = {
       "Le richieste di prenotazione online saranno presto disponibili. Nel frattempo scrivete a {email} o chiamate il {phone}.",
   },
   bookingForm: {
+    optionsLegend: "Aggiungi opzioni",
+    optionsHint: "Extra facoltativi per questo tour.",
+    breakdown: "Dettaglio del prezzo",
+    lineAdults: "Adulti × {n}",
+    lineChildren: "Bambini × {n}",
+    lineOption: "{name} × {n}",
+    estimatedTotal: "Totale stimato",
+    noPriceLine: "Prezzo su richiesta",
+    partialNote:
+      "Alcune voci non hanno un prezzo online; il nostro team ti invierà un preventivo.",
     honeypot: "Lasciare vuoto questo campo",
     yourTrip: "Il vostro viaggio",
     item: "Escursione o pacchetto",
@@ -766,6 +833,7 @@ export const it: Messages = {
     retry: "Riprova",
   },
   errors: {
+    "Please check the options you chose.": "Controlla le opzioni scelte.",
     "Please check the highlighted fields.": "Controllate i campi evidenziati.",
     "Choose a tour or package.": "Scegliete un’escursione o un pacchetto.",
     "Enter your full name.": "Inserite nome e cognome.",

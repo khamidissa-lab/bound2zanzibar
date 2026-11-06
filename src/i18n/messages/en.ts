@@ -352,6 +352,59 @@ export const en = {
       },
     },
   },
+  finder: {
+    metaTitle: "Trip Finder",
+    metaDescription:
+      "Answer six quick questions and get tour and package suggestions for Zanzibar and mainland Tanzania.",
+    eyebrow: "Trip finder",
+    title: "Find your trip",
+    description:
+      "Six quick questions, then suggestions from our tours and packages. It takes about a minute.",
+    stepOf: "Question {n} of {total}",
+    back: "Back",
+    next: "Next",
+    skip: "Skip",
+    seeResults: "See suggestions",
+    startAgain: "Start again",
+    editAnswers: "Change answers",
+    whereTitle: "Where would you like to go?",
+    where: {
+      zanzibar: "Zanzibar only",
+      mainland: "Mainland safari only",
+      both: "Both: the islands and a safari",
+    },
+    interestsTitle: "What experiences interest you?",
+    interestsHint: "Choose any that appeal.",
+    daysTitle: "How many days do you have?",
+    days: {
+      "1": "A day or less",
+      "2-3": "2–3 days",
+      "4-7": "4–7 days",
+      "8+": "8 days or more",
+    },
+    budgetTitle: "What is your approximate budget per person?",
+    budgetHint: "In {currency}, using the prices for your selected market.",
+    noPreference: "No preference",
+    travellersTitle: "How many people are travelling?",
+    stylesTitle: "What type of trip do you prefer?",
+    stylesHint: "Choose one or more.",
+    resultsTitle: "Suggestions for you",
+    resultsIntro:
+      "Based on your answers, these tours and packages are a good place to start. Prices are as listed for your market; availability and the final price are confirmed when you send a request.",
+    toursHeading: "Experiences",
+    packagesHeading: "Packages",
+    noneTitle: "Nothing matches all your answers",
+    noneBody:
+      "Try a different budget or trip length, or tell us what you have in mind and we'll suggest something.",
+    why: "Why:",
+    reasonBudget: "Within your budget",
+    reasonDays: "Fits your trip length",
+    reasonChildren: "Good with children",
+    customTitle: "Want something tailored?",
+    customBody:
+      "Tell us your ideas, dates and group, and we'll put a plan together for you.",
+    customCta: "Tell us your plans",
+  },
   tours: {
     metaTitle: "Zanzibar Tours & Experiences",
     metaDescription:
@@ -400,6 +453,11 @@ export const en = {
     bookNow: "Book now",
   },
   tour: {
+    optionsTitle: "Available options",
+    optionsIntro:
+      "Add any of these when you book. Our team confirms the final price with you.",
+    perPerson: "per person",
+    perBooking: "per booking",
     notFound: "Tour not found",
     facts: {
       duration: "Duration",
@@ -684,6 +742,15 @@ export const en = {
       "Online booking requests open soon. Until then, please email {email} or call {phone}.",
   },
   bookingForm: {
+    optionsLegend: "Add options",
+    optionsHint: "Optional extras for this tour.",
+    breakdown: "Price breakdown",
+    lineAdults: "Adults × {n}",
+    lineChildren: "Children × {n}",
+    lineOption: "{name} × {n}",
+    estimatedTotal: "Estimated total",
+    noPriceLine: "Price on request",
+    partialNote: "Some items have no online price; our team will quote you directly.",
     honeypot: "Leave this field empty",
     yourTrip: "Your trip",
     item: "Tour or package",
@@ -767,6 +834,7 @@ export const en = {
    * server returns, so they can be shown in the visitor's language.
    */
   errors: {
+    "Please check the options you chose.": "Please check the options you chose.",
     "Please check the highlighted fields.": "Please check the highlighted fields.",
     "Choose a tour or package.": "Choose a tour or package.",
     "Enter your full name.": "Enter your full name.",

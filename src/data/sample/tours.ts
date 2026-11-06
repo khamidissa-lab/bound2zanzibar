@@ -510,6 +510,7 @@ export const sampleTours: Tour[] = [...coreTours, ...moreTours, ...safariTours].
     const discovery = tourDiscovery[tour.slug];
     if (!discovery)
       throw new Error(`Missing length and travel styles for "${tour.slug}"`);
-    return { ...tour, ...details, ...discovery };
+    // No sample options: real extras and their prices come from the owner.
+    return { ...tour, ...details, ...discovery, options: [] };
   },
 );

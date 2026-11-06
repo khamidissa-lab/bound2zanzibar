@@ -95,6 +95,11 @@ export function bookingRequestSchema(today: string) {
     pickupLocation: z.string().trim().max(300, "Use 300 characters or fewer."),
     message: z.string().trim().max(2000, "Use 2,000 characters or fewer."),
     consent: z.literal("on", "Please agree so we can reply to your request."),
+    /** Chosen tour options; the database checks they belong to the tour. */
+    optionIds: z
+      .array(z.uuid("Please check the options you chose."))
+      .max(20, "Please check the options you chose.")
+      .default([]),
   });
 }
 
@@ -112,6 +117,7 @@ export const BOOKING_ERROR_MESSAGES: Record<string, string> = {
   booking_invalid_date: "Please choose a date between today and two years ahead.",
   booking_text_too_long: "Your pickup location or message is too long.",
   booking_invalid_currency: "That currency isn't available. Please choose another.",
+  booking_invalid_options: "Please check the options you chose.",
   booking_item_unavailable:
     "That tour or package is no longer available. Please choose another or contact us.",
   booking_rate_limited:

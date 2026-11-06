@@ -121,6 +121,7 @@ function StatTile({
 const STATUS_BADGE: Record<BookingStatus, string> = {
   pending: "bg-[#FFF3D6] text-[#7A5200]",
   confirmed: "bg-[#E1F4EA] text-[#11633A]",
+  paid: "bg-[#D5EFE0] text-[#0B4F2C]",
   completed: "bg-turquoise-soft text-ocean-deep",
   cancelled: "bg-muted text-muted-foreground",
   rejected: "bg-[#FDE8E6] text-[#9A2A1F]",

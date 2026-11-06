@@ -353,6 +353,59 @@ export const fr: Messages = {
       },
     },
   },
+  finder: {
+    metaTitle: "Trouver mon voyage",
+    metaDescription:
+      "Répondez à six questions rapides et recevez des suggestions d’excursions et de forfaits à Zanzibar et en Tanzanie continentale.",
+    eyebrow: "Trouver mon voyage",
+    title: "Trouvez votre voyage",
+    description:
+      "Six questions rapides, puis des suggestions parmi nos excursions et forfaits. Cela prend environ une minute.",
+    stepOf: "Question {n} sur {total}",
+    back: "Retour",
+    next: "Suivant",
+    skip: "Passer",
+    seeResults: "Voir les suggestions",
+    startAgain: "Recommencer",
+    editAnswers: "Modifier mes réponses",
+    whereTitle: "Où souhaitez-vous aller ?",
+    where: {
+      zanzibar: "Zanzibar uniquement",
+      mainland: "Safari sur le continent uniquement",
+      both: "Les deux : les îles et un safari",
+    },
+    interestsTitle: "Quelles expériences vous intéressent ?",
+    interestsHint: "Choisissez celles qui vous plaisent.",
+    daysTitle: "De combien de jours disposez-vous ?",
+    days: {
+      "1": "Une journée ou moins",
+      "2-3": "2 à 3 jours",
+      "4-7": "4 à 7 jours",
+      "8+": "8 jours ou plus",
+    },
+    budgetTitle: "Quel est votre budget approximatif par personne ?",
+    budgetHint: "En {currency}, selon les prix de votre marché sélectionné.",
+    noPreference: "Pas de préférence",
+    travellersTitle: "Combien de personnes voyagent ?",
+    stylesTitle: "Quel type de voyage préférez-vous ?",
+    stylesHint: "Choisissez-en un ou plusieurs.",
+    resultsTitle: "Nos suggestions pour vous",
+    resultsIntro:
+      "D’après vos réponses, ces excursions et forfaits sont un bon point de départ. Les prix sont ceux affichés pour votre marché ; la disponibilité et le prix final sont confirmés lorsque vous envoyez une demande.",
+    toursHeading: "Expériences",
+    packagesHeading: "Forfaits",
+    noneTitle: "Rien ne correspond à toutes vos réponses",
+    noneBody:
+      "Essayez un autre budget ou une autre durée, ou dites-nous ce que vous avez en tête et nous vous ferons une proposition.",
+    why: "Pourquoi :",
+    reasonBudget: "Dans votre budget",
+    reasonDays: "Adapté à la durée de votre voyage",
+    reasonChildren: "Adapté aux enfants",
+    customTitle: "Envie d’un voyage sur mesure ?",
+    customBody:
+      "Partagez vos idées, vos dates et votre groupe, et nous préparerons un programme pour vous.",
+    customCta: "Parlez-nous de vos projets",
+  },
   tours: {
     metaTitle: "Excursions et expériences à Zanzibar",
     metaDescription:
@@ -402,6 +455,11 @@ export const fr: Messages = {
     bookNow: "Réserver",
   },
   tour: {
+    optionsTitle: "Options disponibles",
+    optionsIntro:
+      "Ajoutez-les lors de votre réservation. Notre équipe confirme le prix final avec vous.",
+    perPerson: "par personne",
+    perBooking: "par réservation",
     notFound: "Excursion introuvable",
     facts: {
       duration: "Durée",
@@ -690,6 +748,16 @@ export const fr: Messages = {
       "Les demandes de réservation en ligne ouvrent bientôt. En attendant, écrivez à {email} ou appelez le {phone}.",
   },
   bookingForm: {
+    optionsLegend: "Ajouter des options",
+    optionsHint: "Suppléments facultatifs pour cette excursion.",
+    breakdown: "Détail du prix",
+    lineAdults: "Adultes × {n}",
+    lineChildren: "Enfants × {n}",
+    lineOption: "{name} × {n}",
+    estimatedTotal: "Total estimé",
+    noPriceLine: "Prix sur demande",
+    partialNote:
+      "Certains éléments n’ont pas de prix en ligne ; notre équipe vous fera un devis.",
     honeypot: "Laissez ce champ vide",
     yourTrip: "Votre voyage",
     item: "Excursion ou séjour",
@@ -770,6 +838,7 @@ export const fr: Messages = {
     retry: "Réessayer",
   },
   errors: {
+    "Please check the options you chose.": "Veuillez vérifier les options choisies.",
     "Please check the highlighted fields.": "Veuillez vérifier les champs signalés.",
     "Choose a tour or package.": "Choisissez une excursion ou un séjour.",
     "Enter your full name.": "Indiquez votre nom complet.",

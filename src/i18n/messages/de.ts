@@ -344,6 +344,59 @@ export const de: Messages = {
       },
     },
   },
+  finder: {
+    metaTitle: "Reisefinder",
+    metaDescription:
+      "Beantworten Sie sechs kurze Fragen und erhalten Sie Vorschläge für Touren und Pakete auf Sansibar und auf dem tansanischen Festland.",
+    eyebrow: "Reisefinder",
+    title: "Finden Sie Ihre Reise",
+    description:
+      "Sechs kurze Fragen, dann Vorschläge aus unseren Touren und Paketen. Das dauert etwa eine Minute.",
+    stepOf: "Frage {n} von {total}",
+    back: "Zurück",
+    next: "Weiter",
+    skip: "Überspringen",
+    seeResults: "Vorschläge ansehen",
+    startAgain: "Neu beginnen",
+    editAnswers: "Antworten ändern",
+    whereTitle: "Wohin möchten Sie reisen?",
+    where: {
+      zanzibar: "Nur Sansibar",
+      mainland: "Nur Safari auf dem Festland",
+      both: "Beides: die Inseln und eine Safari",
+    },
+    interestsTitle: "Welche Erlebnisse interessieren Sie?",
+    interestsHint: "Wählen Sie alles, was Sie anspricht.",
+    daysTitle: "Wie viele Tage haben Sie?",
+    days: {
+      "1": "Einen Tag oder weniger",
+      "2-3": "2–3 Tage",
+      "4-7": "4–7 Tage",
+      "8+": "8 Tage oder mehr",
+    },
+    budgetTitle: "Wie hoch ist Ihr ungefähres Budget pro Person?",
+    budgetHint: "In {currency}, nach den Preisen Ihres gewählten Marktes.",
+    noPreference: "Keine Präferenz",
+    travellersTitle: "Wie viele Personen reisen?",
+    stylesTitle: "Welche Art von Reise bevorzugen Sie?",
+    stylesHint: "Wählen Sie eine oder mehrere.",
+    resultsTitle: "Vorschläge für Sie",
+    resultsIntro:
+      "Nach Ihren Antworten sind diese Touren und Pakete ein guter Ausgangspunkt. Die Preise sind die für Ihren Markt angegebenen; Verfügbarkeit und Endpreis werden bestätigt, wenn Sie eine Anfrage senden.",
+    toursHeading: "Erlebnisse",
+    packagesHeading: "Pakete",
+    noneTitle: "Nichts passt zu allen Ihren Antworten",
+    noneBody:
+      "Versuchen Sie ein anderes Budget oder eine andere Reisedauer, oder erzählen Sie uns, was Sie sich vorstellen, und wir machen einen Vorschlag.",
+    why: "Warum:",
+    reasonBudget: "Im Rahmen Ihres Budgets",
+    reasonDays: "Passt zu Ihrer Reisedauer",
+    reasonChildren: "Gut mit Kindern",
+    customTitle: "Lieber etwas Maßgeschneidertes?",
+    customBody:
+      "Teilen Sie uns Ihre Ideen, Reisedaten und Gruppe mit, und wir stellen einen Plan für Sie zusammen.",
+    customCta: "Erzählen Sie uns von Ihren Plänen",
+  },
   tours: {
     metaTitle: "Touren & Erlebnisse auf Sansibar",
     metaDescription:
@@ -393,6 +446,11 @@ export const de: Messages = {
     bookNow: "Jetzt buchen",
   },
   tour: {
+    optionsTitle: "Verfügbare Optionen",
+    optionsIntro:
+      "Fügen Sie diese bei der Buchung hinzu. Unser Team bestätigt den Endpreis mit Ihnen.",
+    perPerson: "pro Person",
+    perBooking: "pro Buchung",
     notFound: "Tour nicht gefunden",
     facts: {
       duration: "Dauer",
@@ -678,6 +736,16 @@ export const de: Messages = {
       "Online-Buchungsanfragen sind bald verfügbar. Bis dahin schreiben Sie bitte an {email} oder rufen Sie {phone} an.",
   },
   bookingForm: {
+    optionsLegend: "Optionen hinzufügen",
+    optionsHint: "Optionale Extras für diese Tour.",
+    breakdown: "Preisaufstellung",
+    lineAdults: "Erwachsene × {n}",
+    lineChildren: "Kinder × {n}",
+    lineOption: "{name} × {n}",
+    estimatedTotal: "Geschätzter Gesamtpreis",
+    noPriceLine: "Preis auf Anfrage",
+    partialNote:
+      "Für einige Posten gibt es keinen Online-Preis; unser Team erstellt Ihnen ein Angebot.",
     honeypot: "Dieses Feld leer lassen",
     yourTrip: "Ihre Reise",
     item: "Tour oder Paket",
@@ -758,6 +826,7 @@ export const de: Messages = {
     retry: "Erneut versuchen",
   },
   errors: {
+    "Please check the options you chose.": "Bitte prüfen Sie die gewählten Optionen.",
     "Please check the highlighted fields.": "Bitte prüfen Sie die markierten Felder.",
     "Choose a tour or package.": "Bitte wählen Sie eine Tour oder ein Paket.",
     "Enter your full name.": "Bitte geben Sie Ihren vollständigen Namen ein.",

@@ -48,6 +48,7 @@ export function localizedFooterNav(t: Messages): { title: string; items: NavItem
         { label: t.footer.tanzaniaSafari, href: "/safari" },
         { label: t.nav.packages, href: "/packages" },
         { label: t.nav.destinations, href: "/destinations" },
+        { label: t.finder.metaTitle, href: "/trip-finder" },
       ],
     },
     {

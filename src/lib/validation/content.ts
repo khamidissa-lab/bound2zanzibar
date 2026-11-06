@@ -315,6 +315,43 @@ export const pricesSchema = z.object({
   ),
 });
 
+export const tourOptionSchema = z.object({
+  name: z.string().trim().min(1, { error: "Every option needs a name." }).max(120),
+  description: z
+    .string()
+    .trim()
+    .max(300, { error: "Keep descriptions under 300 characters." }),
+  pricing: z.enum(["per_person", "per_booking"], {
+    error: "Choose how the option is priced.",
+  }),
+  isActive: z.boolean(),
+  prices: z
+    .array(
+      z.object({
+        market: z.enum(["resident", "east_african", "international"]),
+        currency: z
+          .string()
+          .trim()
+          .toUpperCase()
+          .regex(/^[A-Z]{3}$/, { error: "Use a 3-letter currency code." }),
+        amount: z.coerce
+          .number({ error: "Enter an amount." })
+          .min(0, { error: "Amounts can't be negative." })
+          .max(1_000_000_000),
+      }),
+    )
+    .max(9)
+    .refine(
+      (rows) =>
+        new Set(rows.map((r) => `${r.market}:${r.currency}`)).size === rows.length,
+      { error: "Each option can only have one price per market and currency." },
+    ),
+});
+
+export const tourOptionsSchema = z.object({
+  options: jsonArray(tourOptionSchema, 20, "options"),
+});
+
 export const galleryImageSchema = z.object({
   storagePath: mediaPath.refine((v) => v !== null, { error: "Choose an image." }),
   altText: z.string().trim().min(1, { error: "Describe each image." }).max(200),

@@ -5,6 +5,7 @@ import { getMessages, type Messages } from "@/i18n/messages";
 import type { Faq, Tour } from "@/types/content";
 
 import { ListBlock } from "./list-block";
+import { TourOptions } from "./tour-options";
 
 export function tourSectionLinks(t: Messages) {
   return [
@@ -122,6 +123,7 @@ export function TourSections({ tour, locale }: { tour: Tour; locale: Locale }) {
           items={tour.whatToBring}
           className="mt-10"
         />
+        <TourOptions options={tour.options} />
       </section>
 
       <section aria-labelledby="good-title" id="good-to-know" className="scroll-mt-32">

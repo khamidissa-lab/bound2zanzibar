@@ -342,6 +342,59 @@ export const tr: Messages = {
       },
     },
   },
+  finder: {
+    metaTitle: "Gezi Bulucu",
+    metaDescription:
+      "Altı kısa soruyu yanıtlayın, Zanzibar ve Tanzanya anakarası için tur ve paket önerileri alın.",
+    eyebrow: "Gezi bulucu",
+    title: "Gezinizi bulun",
+    description:
+      "Altı kısa soru, ardından tur ve paketlerimizden öneriler. Yaklaşık bir dakika sürer.",
+    stepOf: "Soru {n} / {total}",
+    back: "Geri",
+    next: "İleri",
+    skip: "Atla",
+    seeResults: "Önerileri gör",
+    startAgain: "Baştan başla",
+    editAnswers: "Yanıtları değiştir",
+    whereTitle: "Nereye gitmek istersiniz?",
+    where: {
+      zanzibar: "Yalnızca Zanzibar",
+      mainland: "Yalnızca anakara safarisi",
+      both: "İkisi de: adalar ve bir safari",
+    },
+    interestsTitle: "Hangi deneyimler ilginizi çekiyor?",
+    interestsHint: "Hoşunuza gidenleri seçin.",
+    daysTitle: "Kaç gününüz var?",
+    days: {
+      "1": "Bir gün veya daha az",
+      "2-3": "2–3 gün",
+      "4-7": "4–7 gün",
+      "8+": "8 gün veya daha fazla",
+    },
+    budgetTitle: "Kişi başı yaklaşık bütçeniz nedir?",
+    budgetHint: "{currency} cinsinden, seçtiğiniz pazarın fiyatlarına göre.",
+    noPreference: "Tercih yok",
+    travellersTitle: "Kaç kişi seyahat ediyor?",
+    stylesTitle: "Nasıl bir gezi tercih edersiniz?",
+    stylesHint: "Bir veya daha fazlasını seçin.",
+    resultsTitle: "Size öneriler",
+    resultsIntro:
+      "Yanıtlarınıza göre bu tur ve paketler iyi bir başlangıç noktası. Fiyatlar pazarınız için listelendiği gibidir; müsaitlik ve son fiyat, talep gönderdiğinizde onaylanır.",
+    toursHeading: "Deneyimler",
+    packagesHeading: "Paketler",
+    noneTitle: "Tüm yanıtlarınıza uyan bir şey yok",
+    noneBody:
+      "Farklı bir bütçe veya süre deneyin ya da aklınızdakini bize anlatın, size bir öneri sunalım.",
+    why: "Neden:",
+    reasonBudget: "Bütçenize uygun",
+    reasonDays: "Gezi sürenize uygun",
+    reasonChildren: "Çocuklar için uygun",
+    customTitle: "Size özel bir şey mi istiyorsunuz?",
+    customBody:
+      "Fikirlerinizi, tarihlerinizi ve grubunuzu anlatın, sizin için bir plan hazırlayalım.",
+    customCta: "Planlarınızı anlatın",
+  },
   tours: {
     metaTitle: "Zanzibar Turları ve Deneyimleri",
     metaDescription:
@@ -391,6 +444,11 @@ export const tr: Messages = {
     bookNow: "Rezervasyon",
   },
   tour: {
+    optionsTitle: "Mevcut seçenekler",
+    optionsIntro:
+      "Rezervasyon yaparken bunları ekleyebilirsiniz. Son fiyatı ekibimiz sizinle onaylar.",
+    perPerson: "kişi başı",
+    perBooking: "rezervasyon başı",
     notFound: "Tur bulunamadı",
     facts: {
       duration: "Süre",
@@ -677,6 +735,16 @@ export const tr: Messages = {
       "Çevrimiçi rezervasyon talepleri yakında açılacak. O zamana kadar lütfen {email} adresine yazın veya {phone} numarasını arayın.",
   },
   bookingForm: {
+    optionsLegend: "Seçenek ekle",
+    optionsHint: "Bu tur için isteğe bağlı ekstralar.",
+    breakdown: "Fiyat dökümü",
+    lineAdults: "Yetişkin × {n}",
+    lineChildren: "Çocuk × {n}",
+    lineOption: "{name} × {n}",
+    estimatedTotal: "Tahmini toplam",
+    noPriceLine: "Fiyat talep üzerine",
+    partialNote:
+      "Bazı kalemlerin çevrimiçi fiyatı yok; ekibimiz size fiyat teklifi verecek.",
     honeypot: "Bu alanı boş bırakın",
     yourTrip: "Seyahatiniz",
     item: "Tur veya paket",
@@ -756,6 +824,7 @@ export const tr: Messages = {
     retry: "Tekrar dene",
   },
   errors: {
+    "Please check the options you chose.": "Lütfen seçtiğiniz seçenekleri kontrol edin.",
     "Please check the highlighted fields.": "Lütfen işaretli alanları kontrol edin.",
     "Choose a tour or package.": "Bir tur veya paket seçin.",
     "Enter your full name.": "Adınızı ve soyadınızı girin.",

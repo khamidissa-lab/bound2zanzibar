@@ -6,10 +6,11 @@ import { whatsappLink } from "@/config/site";
 import { formatReceived, guestsLabel, itemName } from "@/lib/booking/format";
 import { formatDate, formatPrice, marketLabels } from "@/lib/format";
 import { STATUS_LABELS } from "@/services/admin-dashboard-model";
-import type { BookingDetail, BookingEvent } from "@/services/bookings";
+import type { BookingDetail, BookingEvent, BookingPayment } from "@/services/bookings";
 import type { Currency } from "@/types/content";
 
 import { BookingStatusBadge } from "./booking-badge";
+import { BookingPayments } from "./booking-payments";
 import { BookingStatusForm } from "./booking-status-form";
 
 function Row({ label, children }: { label: string; children: ReactNode }) {
@@ -35,12 +36,21 @@ export function BookingDetailView({
   booking,
   events,
   canEdit,
+  payments = [],
+  currencies = ["USD", "TZS"],
+  today,
+  canDeletePayments = false,
   preview = false,
 }: {
   backHref: string;
   booking: BookingDetail;
   events: BookingEvent[];
   canEdit: boolean;
+  payments?: BookingPayment[];
+  currencies?: string[];
+  /** Today in Zanzibar ("YYYY-MM-DD"), the latest allowed payment date. */
+  today: string;
+  canDeletePayments?: boolean;
   preview?: boolean;
 }) {
   const item = booking.tour ?? booking.package;
@@ -104,6 +114,27 @@ export function BookingDetailView({
                   </span>
                 )}
               </Row>
+              {booking.options && booking.options.length > 0 ? (
+                <Row label="Options">
+                  <ul className="space-y-1">
+                    {booking.options.map((o) => (
+                      <li key={o.name}>
+                        {o.name}
+                        <span className="text-muted-foreground">
+                          {" "}
+                          ·{" "}
+                          {o.total !== null
+                            ? formatPrice(o.total, booking.currency as Currency)
+                            : "price on request"}
+                          {o.pricing === "per_person"
+                            ? " (per person)"
+                            : " (per booking)"}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                </Row>
+              ) : null}
               <Row label="Pickup">{booking.pickup_location || "—"}</Row>
             </dl>
           </Card>
@@ -168,6 +199,21 @@ export function BookingDetailView({
               <BookingStatusBadge status={booking.status} />
             )}
           </Card>
+
+          {canEdit ? (
+            <Card title="Payments">
+              <BookingPayments
+                bookingId={booking.id}
+                currency={booking.currency}
+                quotedTotal={booking.quoted_total}
+                payments={payments}
+                currencies={currencies}
+                today={today}
+                canDelete={canDeletePayments}
+                disabled={preview}
+              />
+            </Card>
+          ) : null}
 
           <Card title="History">
             {events.length === 0 ? (

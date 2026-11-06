@@ -126,6 +126,60 @@ export type Database = {
           },
         ];
       };
+      booking_payments: {
+        Row: {
+          id: string;
+          booking_id: string;
+          amount: number;
+          currency: string;
+          method: Database["public"]["Enums"]["payment_method"];
+          reference: string | null;
+          paid_on: string;
+          notes: string | null;
+          recorded_by: string | null;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          booking_id: string;
+          amount: number;
+          currency: string;
+          method: Database["public"]["Enums"]["payment_method"];
+          reference?: string | null;
+          paid_on: string;
+          notes?: string | null;
+          recorded_by?: string | null;
+          created_at?: string;
+        };
+        Update: {
+          id?: string;
+          booking_id?: string;
+          amount?: number;
+          currency?: string;
+          method?: Database["public"]["Enums"]["payment_method"];
+          reference?: string | null;
+          paid_on?: string;
+          notes?: string | null;
+          recorded_by?: string | null;
+          created_at?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "booking_payments_booking_id_fkey";
+            columns: ["booking_id"];
+            isOneToOne: false;
+            referencedRelation: "bookings";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "booking_payments_currency_fkey";
+            columns: ["currency"];
+            isOneToOne: false;
+            referencedRelation: "currencies";
+            referencedColumns: ["code"];
+          },
+        ];
+      };
       booking_status_events: {
         Row: {
           id: string;
@@ -184,6 +238,7 @@ export type Database = {
           source: string;
           created_at: string;
           updated_at: string;
+          options: Json;
         };
         Insert: {
           id?: string;
@@ -207,6 +262,7 @@ export type Database = {
           source?: string;
           created_at?: string;
           updated_at?: string;
+          options?: Json;
         };
         Update: {
           id?: string;
@@ -230,6 +286,7 @@ export type Database = {
           source?: string;
           created_at?: string;
           updated_at?: string;
+          options?: Json;
         };
         Relationships: [
           {
@@ -832,6 +889,89 @@ export type Database = {
           },
         ];
       };
+      tour_option_prices: {
+        Row: {
+          id: string;
+          option_id: string;
+          market: Database["public"]["Enums"]["market"];
+          currency: string;
+          amount: number;
+        };
+        Insert: {
+          id?: string;
+          option_id: string;
+          market: Database["public"]["Enums"]["market"];
+          currency: string;
+          amount: number;
+        };
+        Update: {
+          id?: string;
+          option_id?: string;
+          market?: Database["public"]["Enums"]["market"];
+          currency?: string;
+          amount?: number;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "tour_option_prices_currency_fkey";
+            columns: ["currency"];
+            isOneToOne: false;
+            referencedRelation: "currencies";
+            referencedColumns: ["code"];
+          },
+          {
+            foreignKeyName: "tour_option_prices_option_id_fkey";
+            columns: ["option_id"];
+            isOneToOne: false;
+            referencedRelation: "tour_options";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
+      tour_options: {
+        Row: {
+          id: string;
+          tour_id: string;
+          name: string;
+          description: string | null;
+          pricing: Database["public"]["Enums"]["option_pricing"];
+          sort_order: number;
+          is_active: boolean;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          tour_id: string;
+          name: string;
+          description?: string | null;
+          pricing?: Database["public"]["Enums"]["option_pricing"];
+          sort_order?: number;
+          is_active?: boolean;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          id?: string;
+          tour_id?: string;
+          name?: string;
+          description?: string | null;
+          pricing?: Database["public"]["Enums"]["option_pricing"];
+          sort_order?: number;
+          is_active?: boolean;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "tour_options_tour_id_fkey";
+            columns: ["tour_id"];
+            isOneToOne: false;
+            referencedRelation: "tours";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
       tour_prices: {
         Row: {
           id: string;
@@ -1051,6 +1191,13 @@ export type Database = {
         };
         Returns: undefined;
       };
+      set_tour_options: {
+        Args: {
+          p_tour_id: string;
+          p_options: Json;
+        };
+        Returns: undefined;
+      };
       set_tour_prices: {
         Args: {
           p_tour_id: string;
@@ -1072,6 +1219,7 @@ export type Database = {
           p_children?: number;
           p_pickup_location?: string;
           p_message?: string;
+          p_option_ids?: string[];
         };
         Returns: {
           reference: string;
@@ -1091,12 +1239,14 @@ export type Database = {
     };
     Enums: {
       booking_item_type: "tour" | "package";
-      booking_status: "pending" | "confirmed" | "rejected" | "cancelled" | "completed";
+      booking_status: "pending" | "confirmed" | "paid" | "rejected" | "cancelled" | "completed";
       customer_type: "adult" | "child" | "group";
       destination_region: "zanzibar" | "mainland";
       difficulty_level: "easy" | "moderate" | "challenging";
       inquiry_status: "new" | "in_progress" | "closed";
       market: "resident" | "east_african" | "international";
+      option_pricing: "per_person" | "per_booking";
+      payment_method: "bank_transfer" | "mobile_money" | "card" | "cash" | "other";
       publish_status: "draft" | "published" | "archived";
       staff_role: "super_admin" | "admin" | "booking_staff" | "content_editor";
       tour_length: "hours" | "half_day" | "full_day" | "multi_day";

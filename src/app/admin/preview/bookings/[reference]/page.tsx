@@ -6,7 +6,12 @@ import { connection } from "next/server";
 import { AdminFrame } from "@/components/admin/admin-frame";
 import { BookingDetailView } from "@/components/admin/bookings/booking-detail";
 import { PreviewNote } from "@/components/admin/bookings/preview-note";
-import { previewBookings, previewEvents } from "@/services/admin-bookings-preview";
+import {
+  previewBookings,
+  previewEvents,
+  previewPayments,
+} from "@/services/admin-bookings-preview";
+import { zanzibarDate } from "@/services/admin-dashboard-model";
 
 export const metadata: Metadata = { title: "Booking preview" };
 
@@ -42,6 +47,9 @@ async function Preview({
         booking={booking}
         events={previewEvents(booking)}
         canEdit
+        payments={previewPayments(booking)}
+        today={zanzibarDate(new Date())}
+        canDeletePayments
         preview
       />
     </AdminFrame>

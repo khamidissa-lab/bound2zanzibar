@@ -35,7 +35,10 @@ export async function requestBooking(
     return { status: "error", message: UNAVAILABLE, values: echo };
   }
 
-  const parsed = bookingRequestSchema(zanzibarDate(new Date())).safeParse(values);
+  const parsed = bookingRequestSchema(zanzibarDate(new Date())).safeParse({
+    ...values,
+    optionIds: formData.getAll("optionIds").filter((v) => typeof v === "string"),
+  });
   if (!parsed.success) {
     const fieldErrors: Record<string, string> = {};
     for (const issue of parsed.error.issues) {

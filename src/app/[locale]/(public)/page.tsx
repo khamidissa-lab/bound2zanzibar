@@ -146,7 +146,7 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
                 {arrow}
               </Link>
               <Link
-                href="/book"
+                href="/trip-finder"
                 className={buttonVariants({ size: "lg", variant: "outline-light" })}
               >
                 {h.planJourney}

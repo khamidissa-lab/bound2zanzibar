@@ -15,6 +15,7 @@ const dbHelperFor: Partial<Record<Permission, string>> = {
   "content.delete": "private.is_admin()",
   "prices.manage": "private.can_manage_prices()",
   "bookings.manage": "private.can_manage_bookings()",
+  "payments.delete": "private.is_admin()",
   "settings.manage": "private.is_admin()",
   "staff.manage": "private.is_super_admin()",
 };

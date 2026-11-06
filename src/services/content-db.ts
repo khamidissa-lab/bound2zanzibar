@@ -58,7 +58,9 @@ export async function loadTours(): Promise<Tour[]> {
     .select(
       `*, category:tour_categories(slug, name), destination:destinations(slug, name, region),
        tour_prices(market, customer_type, currency, amount, unit_label, is_illustrative, is_active),
-       tour_images(storage_path, alt_text, sort_order)`,
+       tour_images(storage_path, alt_text, sort_order),
+       tour_options(id, name, description, pricing, sort_order, is_active,
+         tour_option_prices(market, currency, amount))`,
     )
     .eq("status", "published")
     .order("sort_order")
