@@ -5,6 +5,7 @@ import { AccessDenied } from "@/components/admin/admin-states";
 import { BookingDetailView } from "@/components/admin/bookings/booking-detail";
 import { can } from "@/lib/auth/permissions";
 import { requireStaffPage } from "@/lib/auth/session";
+import { getSiteUrl } from "@/lib/site-url";
 import { BOOKING_REFERENCE_RE } from "@/lib/booking/request";
 import { listCurrencies } from "@/services/admin-content";
 import { zanzibarDate } from "@/services/admin-dashboard-model";
@@ -40,6 +41,7 @@ export default async function AdminBookingPage({
       currencies={await listCurrencies()}
       today={zanzibarDate(new Date())}
       canDeletePayments={can(staff.role, "payments.delete")}
+      siteUrl={getSiteUrl().origin}
     />
   );
 }

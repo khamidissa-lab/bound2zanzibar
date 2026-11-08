@@ -19,6 +19,11 @@ export const PERMISSIONS = {
   "payments.delete": ["super_admin", "admin"],
   "settings.manage": ["super_admin", "admin"],
   "activity.view": ["super_admin", "admin"],
+  /** Visitor tracking, leads and follow-ups (mirrors private.can_view_visitors). */
+  "visitors.view": ["super_admin", "admin", "booking_staff"],
+  "visitors.export": ["super_admin", "admin"],
+  /** Erasing a visitor's record (privacy requests). */
+  "visitors.delete": ["super_admin", "admin"],
   "staff.manage": ["super_admin"],
 } as const satisfies Record<string, readonly StaffRole[]>;
 
@@ -38,7 +43,7 @@ export const ROLE_LABELS: Record<StaffRole, string> = {
 
 export const ROLE_DESCRIPTIONS: Record<StaffRole, string> = {
   super_admin: "Full access, including staff accounts.",
-  admin: "Content, prices, bookings, settings and the activity log.",
+  admin: "Content, prices, bookings, visitors, settings and the activity log.",
   content_editor: "Tours, destinations, packages, guide articles, reviews and images.",
-  booking_staff: "Booking requests and enquiries.",
+  booking_staff: "Booking requests, enquiries, visitors and leads.",
 };

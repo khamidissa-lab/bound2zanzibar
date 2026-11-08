@@ -49,7 +49,7 @@ export function Logo({
             width={480}
             height={327}
             priority={priority}
-            className="h-9 w-auto mix-blend-multiply sm:h-11"
+            className="h-9 w-auto mix-blend-multiply max-[400px]:h-7 sm:h-11"
           />
           <Image
             src="/brand/wordmark.png"
@@ -57,7 +57,7 @@ export function Logo({
             width={555}
             height={176}
             priority={priority}
-            className="h-8 w-auto mix-blend-multiply sm:h-10"
+            className="h-8 w-auto mix-blend-multiply max-[400px]:h-6 sm:h-10"
           />
         </span>
       ) : (

@@ -81,6 +81,8 @@ function iconFor(entry: ActivityEntry): { icon: LucideIcon; tone: string } {
     case "password_changed":
       return { icon: KeyRound, tone: "bg-sand-soft text-ocean-deep" };
     case "bookings_exported":
+    case "visitors_exported":
+    case "subscribers_exported":
       return { icon: Download, tone: "bg-gold/15 text-gold-deep" };
     default:
       return { icon: Pencil, tone: "bg-sand-soft text-ocean-deep" };

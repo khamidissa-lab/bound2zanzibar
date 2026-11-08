@@ -4,7 +4,7 @@ import { parseArticleMarkup } from "@/lib/article-markup";
 import { TOUR_LENGTHS, TRAVEL_STYLES, toTravelStyles } from "@/lib/discovery";
 import { SLUG_PATTERN, slugify } from "@/lib/slug";
 import { parseFaqs, parseSteps } from "@/lib/tour-details-format";
-import type { TourLength, TravelStyle } from "@/types/content";
+import { ARTICLE_CATEGORIES, type TourLength, type TravelStyle } from "@/types/content";
 
 /*
  * Server-side validation for the admin content editors. Form fields arrive as
@@ -278,6 +278,13 @@ export const articleSchema = z
           .filter(Boolean),
       )
       .pipe(z.array(z.string().max(40)).max(10, { error: "Use at most 10 tags." })),
+    category: z.enum(ARTICLE_CATEGORIES, { error: "Choose a category." }),
+    isFeatured: checkbox,
+    authorName: optionalText(80),
+    tourIds: z
+      .array(z.uuid())
+      .max(12, { error: "Choose at most 12 related tours." })
+      .default([]),
     readingMinutes: z
       .string()
       .trim()

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
 
-import { ArticleCard } from "@/components/content/cards";
+import { ArticleCard, TourCard } from "@/components/content/cards";
 import { LocaleLink as Link } from "@/components/i18n/locale-link";
 import { MachineTranslationNotice } from "@/components/i18n/machine-notice";
 import { SceneImage } from "@/components/media/scene-image";
@@ -11,7 +11,13 @@ import { SampleBadge } from "@/components/shared/sample-badge";
 import { SectionHeading } from "@/components/shared/section-heading";
 import { localeAlternates, pageLocale } from "@/i18n/seo";
 import { getI18n } from "@/i18n/server";
-import { getArticleBySlug, getArticles, staticSlugParams } from "@/services/content";
+import {
+  getArticleBySlug,
+  getArticles,
+  getNameLookups,
+  getTours,
+  staticSlugParams,
+} from "@/services/content";
 import { shareImages } from "@/lib/seo";
 
 export async function generateStaticParams() {
@@ -35,6 +41,8 @@ export async function generateMetadata({
       images: shareImages(article.coverImage),
       type: "article",
       publishedTime: article.publishedOn,
+      authors: [article.author || getI18n(locale).t.journal.team],
+      section: getI18n(locale).t.journal.categories[article.category],
     },
   };
 }
@@ -48,9 +56,24 @@ export default async function ArticlePage({
   const article = await getArticleBySlug(slug, locale);
   if (!article) notFound();
 
-  const more = (await getArticles(locale))
+  const [articles, tours, lookups] = await Promise.all([
+    getArticles(locale),
+    getTours({}, locale),
+    getNameLookups(locale),
+  ]);
+  // Keep reading: same category first, then the newest others.
+  const more = articles
     .filter((a) => a.slug !== article.slug)
+    .toSorted(
+      (a, b) =>
+        Number(b.category === article.category) - Number(a.category === article.category),
+    )
     .slice(0, 2);
+  const related = article.relatedTourSlugs.flatMap((s) => {
+    const tour = tours.find((x) => x.slug === s);
+    return tour ? [tour] : [];
+  });
+  const author = article.author || t.journal.team;
 
   return (
     <>
@@ -67,6 +90,13 @@ export default async function ArticlePage({
             />
             <div className="mx-auto max-w-4xl text-center">
               <div className="eyebrow flex flex-wrap items-center justify-center gap-2 text-gold-deep">
+                <Link
+                  href={`/travel-guide?category=${article.category}`}
+                  className="link-underline"
+                >
+                  {t.journal.categories[article.category]}
+                </Link>
+                <span aria-hidden="true">·</span>
                 <time dateTime={article.publishedOn}>{date(article.publishedOn)}</time>
                 <span aria-hidden="true">·</span>
                 <span>{fmt(t.common.minRead, { n: article.readingMinutes })}</span>
@@ -75,6 +105,9 @@ export default async function ArticlePage({
               <h1 className="display-xl mt-6">{article.title}</h1>
               <p className="mx-auto mt-6 max-w-2xl font-display text-2xl leading-snug text-muted-foreground italic">
                 {article.excerpt}
+              </p>
+              <p className="mt-6 text-sm text-muted-foreground">
+                {fmt(t.journal.byline, { author })}
               </p>
               {article.machineTranslated ? (
                 <div className="mx-auto mt-6 w-fit">
@@ -111,6 +144,27 @@ export default async function ArticlePage({
               </div>
             </section>
           ))}
+
+          {related.length > 0 ? (
+            <section
+              aria-labelledby="related-tours"
+              className="border-t border-ocean-deep/15 pt-10"
+            >
+              <h2 id="related-tours" className="font-display text-3xl">
+                {t.journal.relatedTitle}
+              </h2>
+              <div className="mt-8 grid gap-x-8 gap-y-12 sm:grid-cols-2">
+                {related.slice(0, 4).map((tour) => (
+                  <TourCard
+                    key={tour.slug}
+                    tour={tour}
+                    categoryName={lookups.categories[tour.categorySlug]}
+                    destinationName={lookups.destinations[tour.destinationSlug]}
+                  />
+                ))}
+              </div>
+            </section>
+          ) : null}
 
           <Link
             href="/travel-guide"

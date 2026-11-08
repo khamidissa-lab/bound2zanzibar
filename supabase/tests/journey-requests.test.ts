@@ -1,7 +1,7 @@
 import type { PGlite, Transaction } from "@electric-sql/pglite";
 import { beforeAll, describe, expect, it } from "vitest";
 
-import { anon, as, createTestDatabase, setup, superuser, user } from "./db-harness";
+import { anon, as, createTestDatabase, setup, superuser } from "./db-harness";
 
 const bookingStaff = "00000000-0000-4000-a000-000000000021";
 const editor = "00000000-0000-4000-a000-000000000022";

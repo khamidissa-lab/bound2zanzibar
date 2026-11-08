@@ -3,6 +3,8 @@ import { ArrowUpRight, MessageCircle } from "lucide-react";
 
 import { LocaleLink as Link } from "@/components/i18n/locale-link";
 import { buttonVariants } from "@/components/ui/button";
+import { NewsletterForm } from "@/components/visitors/newsletter-form";
+import { CookieSettingsButton } from "@/components/visitors/visitor-tracker";
 import {
   bookNowHref,
   localizedContactDetails,
@@ -147,11 +149,20 @@ export async function SiteFooter({ locale }: { locale: Locale }) {
       </div>
 
       <div className="border-t border-white/10">
+        <div className="container-page py-10">
+          <NewsletterForm strings={t.newsletter} locale={locale} />
+        </div>
+      </div>
+
+      <div className="border-t border-white/10">
         <div className="container-page flex flex-col gap-2 py-6 text-xs tracking-[0.06em] text-white/55 sm:flex-row sm:items-center sm:justify-between">
           <p>
             © {year} {siteConfig.name}. {t.footer.rights}
           </p>
-          <p className="uppercase">{t.footer.place}</p>
+          <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
+            <CookieSettingsButton label={t.consent.settings} />
+            <p className="uppercase">{t.footer.place}</p>
+          </div>
         </div>
       </div>
     </footer>

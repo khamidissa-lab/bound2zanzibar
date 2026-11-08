@@ -8,6 +8,7 @@ import { createSupabasePublicClient } from "@/lib/supabase/public";
 import type {
   Article,
   Destination,
+  Review,
   Tour,
   TourCategory,
   TourPackage,
@@ -18,8 +19,11 @@ import {
   mapCategory,
   mapDestination,
   mapPackage,
+  mapReview,
   mapTour,
+  type ArticleRow,
   type PackageRow,
+  type ReviewRow,
   type TourRow,
 } from "./content-mappers";
 
@@ -29,6 +33,17 @@ import {
  * changes appear immediately; otherwise entries refresh hourly.
  */
 export const CONTENT_TAG = "content";
+
+/**
+ * True when a table or relationship is missing because the database has not
+ * had the latest migration yet. Optional extras (reviews, related tours) are
+ * skipped instead of taking the whole page down.
+ */
+function notMigrated(error: { code?: string }): boolean {
+  return ["42P01", "42703", "PGRST200", "PGRST204", "PGRST205"].includes(
+    error.code ?? "",
+  );
+}
 
 function fail(what: string, error: { message: string }): never {
   // Log server-side only; pages show their error boundary, never SQL details.
@@ -106,13 +121,42 @@ export async function loadArticles(): Promise<Article[]> {
   "use cache";
   cacheTag(CONTENT_TAG);
   cacheLife("hours");
-  const { data, error } = await createSupabasePublicClient()
-    .from("blog_posts")
-    .select("*")
-    .eq("status", "published")
-    .order("published_at", { ascending: false });
+  const query = (columns: string) =>
+    createSupabasePublicClient()
+      .from("blog_posts")
+      .select(columns)
+      .eq("status", "published")
+      .order("published_at", { ascending: false });
+  let { data, error } = await query("*, blog_post_tours(sort_order, tour:tours(slug))");
+  if (error && notMigrated(error)) {
+    console.warn(
+      "[content] related tours unavailable until the journal migration is applied",
+    );
+    ({ data, error } = await query("*"));
+  }
   if (error) fail("articles", error);
-  return data.map(mapArticle);
+  return (data as unknown as ArticleRow[]).map(mapArticle);
+}
+
+/** Approved reviews, newest first (RLS only ever returns approved ones). */
+export async function loadReviews(): Promise<Review[]> {
+  "use cache";
+  cacheTag(CONTENT_TAG);
+  cacheLife("hours");
+  const { data, error } = await createSupabasePublicClient()
+    .from("reviews")
+    .select(
+      "id, rating, title, body, display_name, country, created_at, tour:tours(slug), package:packages(slug)",
+    )
+    .eq("status", "approved")
+    .order("created_at", { ascending: false })
+    .limit(500);
+  if (error && notMigrated(error)) {
+    console.warn("[content] reviews unavailable until the reviews migration is applied");
+    return [];
+  }
+  if (error) fail("reviews", error);
+  return (data as unknown as ReviewRow[]).map(mapReview);
 }
 
 /** entity → item id → translation, for one language. */

@@ -7,7 +7,7 @@ import { EditorHeader } from "@/components/admin/editor-header";
 import { serializeArticleMarkup } from "@/lib/article-markup";
 import { can } from "@/lib/auth/permissions";
 import { requireStaffPage } from "@/lib/auth/session";
-import { getArticle, listMedia } from "@/services/admin-content";
+import { getArticle, getOptions, listMedia } from "@/services/admin-content";
 import { parseArticleBody } from "@/services/content-mappers";
 
 import { ArticleForm } from "../article-form";
@@ -26,9 +26,10 @@ export default async function EditArticlePage({
   if (!allowed) return <AccessDenied />;
   if (!/^[0-9a-f-]{36}$/i.test(id)) notFound();
 
-  const [article, media, query] = await Promise.all([
+  const [article, media, options, query] = await Promise.all([
     getArticle(id),
     listMedia(),
+    getOptions(),
     searchParams,
   ]);
   if (!article) notFound();
@@ -49,6 +50,7 @@ export default async function EditArticlePage({
         article={article}
         bodyMarkup={serializeArticleMarkup(parseArticleBody(article.body))}
         mediaPaths={media.map((m) => m.path)}
+        tours={options.tours}
       />
       {can(staff.role, "content.delete") ? (
         <section className="rounded-2xl border border-destructive/30 bg-card p-5 sm:p-6">

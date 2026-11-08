@@ -27,11 +27,16 @@ export async function createTestDatabase(): Promise<PGlite> {
 }
 
 export type Actor =
-  { role: "anon" } | { role: "authenticated"; userId: string } | { role: "superuser" };
+  | { role: "anon" }
+  | { role: "authenticated"; userId: string }
+  | { role: "service_role" }
+  | { role: "superuser" };
 
 export const anon: Actor = { role: "anon" };
 export const user = (userId: string): Actor => ({ role: "authenticated", userId });
 export const superuser: Actor = { role: "superuser" };
+/** The website server (service-role key): bypasses RLS, needs explicit grants. */
+export const service: Actor = { role: "service_role" };
 
 /**
  * Runs `fn` as the given actor inside a transaction that is always rolled
@@ -50,7 +55,7 @@ export async function as<T>(
         const claims =
           actor.role === "authenticated"
             ? { sub: actor.userId, role: "authenticated" }
-            : { role: "anon" };
+            : { role: actor.role };
         await tx.query("select set_config('request.jwt.claims', $1, true)", [
           JSON.stringify(claims),
         ]);

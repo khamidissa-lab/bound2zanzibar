@@ -9,6 +9,7 @@ import { journeyErrorMessage, journeyRequestSchema } from "@/lib/journey/request
 import { isSupabaseConfigured } from "@/lib/supabase/env";
 import { zanzibarDate } from "@/services/admin-dashboard-model";
 import { submitJourneyRequest } from "@/services/journeys";
+import { identifyCurrentVisitor } from "@/services/visitor-tracking";
 
 const UNAVAILABLE = `Journey requests aren't available online right now. Please email ${contact.email} or call ${contact.phoneDisplay} and we'll help you directly.`;
 
@@ -64,5 +65,12 @@ export async function requestJourney(
     return { status: "error", message: friendly ?? UNAVAILABLE, values: echo };
   }
 
+  await identifyCurrentVisitor({
+    source: "journey",
+    email: parsed.data.email,
+    name: parsed.data.customerName,
+    phone: parsed.data.phone || null,
+    reference: result.reference,
+  });
   redirect(`${received}?ref=${encodeURIComponent(result.reference)}`);
 }

@@ -7,6 +7,7 @@ import { ListBlock } from "@/components/content/list-block";
 import { LocaleLink as Link } from "@/components/i18n/locale-link";
 import { MachineTranslationNotice } from "@/components/i18n/machine-notice";
 import { SceneImage } from "@/components/media/scene-image";
+import { ReviewsSection } from "@/components/reviews/reviews-section";
 import { Breadcrumbs } from "@/components/shared/breadcrumbs";
 import { SampleBadge } from "@/components/shared/sample-badge";
 import { localeAlternates, pageLocale } from "@/i18n/seo";
@@ -15,6 +16,7 @@ import {
   getNameLookups,
   getPackageBySlug,
   getPackages,
+  getReviews,
   getTours,
   staticSlugParams,
 } from "@/services/content";
@@ -55,9 +57,10 @@ export default async function PackageDetailPage({
   const pkg = await getPackageBySlug(slug, locale);
   if (!pkg) notFound();
 
-  const [allTours, lookups] = await Promise.all([
+  const [allTours, lookups, reviews] = await Promise.all([
     getTours({}, locale),
     getNameLookups(locale),
+    getReviews({ packageSlug: pkg.slug, limit: 6 }),
   ]);
   const includedTours = allTours.filter((t) => pkg.includedTourSlugs.includes(t.slug));
 
@@ -242,6 +245,7 @@ export default async function PackageDetailPage({
           />
         </div>
       </div>
+      <ReviewsSection reviews={reviews} rating={pkg.rating} locale={locale} />
     </article>
   );
 }

@@ -183,15 +183,19 @@ export async function listArticles(filter: ListFilter): Promise<Tables<"blog_pos
   return data;
 }
 
-export async function getArticle(id: string): Promise<Tables<"blog_posts"> | null> {
+export type ArticleDetail = Tables<"blog_posts"> & {
+  blog_post_tours: { tour_id: string; sort_order: number }[];
+};
+
+export async function getArticle(id: string): Promise<ArticleDetail | null> {
   const supabase = await createSupabaseServerClient();
   const { data, error } = await supabase
     .from("blog_posts")
-    .select("*")
+    .select("*, blog_post_tours(tour_id, sort_order)")
     .eq("id", id)
     .maybeSingle();
   if (error) failed("article", error);
-  return data;
+  return data as ArticleDetail | null;
 }
 
 export const MEDIA_FOLDERS = [

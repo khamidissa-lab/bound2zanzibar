@@ -8,6 +8,7 @@ import {
   EditorForm,
   FieldSet,
   SaveButton,
+  CheckboxField,
   SelectField,
   TextAreaField,
   TextField,
@@ -15,20 +16,36 @@ import {
 import { FormMessage } from "@/components/admin/form-controls";
 import { ImagePicker } from "@/components/admin/image-picker";
 import { initialFormState } from "@/lib/forms";
-import type { Tables } from "@/lib/supabase/database.types";
+import type { ArticleDetail, Option } from "@/services/admin-content";
+import { ARTICLE_CATEGORIES, type ArticleCategory } from "@/types/content";
+
+/** Admin labels (the admin is in English). */
+const CATEGORY_LABELS: Record<ArticleCategory, string> = {
+  "zanzibar-guide": "Zanzibar travel guide",
+  "things-to-do": "Things to do in Zanzibar",
+  "safari-guides": "Tanzania safari guides",
+  "travel-tips": "Travel tips",
+  "culture-history": "Culture & history",
+  "beach-islands": "Beach & island experiences",
+};
 
 export function ArticleForm({
   article,
   bodyMarkup,
   mediaPaths,
+  tours,
 }: {
-  article: Tables<"blog_posts"> | null;
+  article: ArticleDetail | null;
   bodyMarkup: string;
   mediaPaths: string[];
+  tours: Option[];
 }) {
   const [state, dispatch, pending] = useActionState(saveArticle, initialFormState);
   const e = state.fieldErrors ?? {};
   const a = article;
+  const selectedTours = [...(a?.blog_post_tours ?? [])]
+    .sort((x, y) => x.sort_order - y.sort_order)
+    .map((r) => r.tour_id);
 
   return (
     <EditorForm action={dispatch} className="space-y-6">
@@ -94,6 +111,55 @@ export function ArticleForm({
           error={e.readingMinutes}
           hint="Leave empty to estimate it automatically."
         />
+      </FieldSet>
+
+      <FieldSet legend="Journal">
+        <SelectField
+          name="category"
+          label="Category"
+          defaultValue={a?.category ?? "travel-tips"}
+          options={ARTICLE_CATEGORIES.map((c) => ({
+            value: c,
+            label: CATEGORY_LABELS[c],
+          }))}
+          error={e.category}
+        />
+        <TextField
+          name="authorName"
+          label="Author name"
+          defaultValue={a?.author_name ?? ""}
+          maxLength={80}
+          placeholder="The Bound to Zanzibar team"
+          hint="Leave empty to show the team name."
+          error={e.authorName}
+        />
+        <div className="sm:col-span-2">
+          <CheckboxField
+            name="isFeatured"
+            label="Feature this article first on the travel guide page"
+            defaultChecked={a?.is_featured ?? false}
+          />
+        </div>
+        <fieldset className="sm:col-span-2">
+          <legend className="mb-2 text-sm font-medium">Related tours</legend>
+          <p className="mb-2 text-xs text-muted-foreground">
+            Shown at the end of the article. Choose up to 12.
+          </p>
+          <div className="max-h-64 space-y-2 overflow-y-auto rounded-lg border p-3">
+            {tours.map((tour) => (
+              <CheckboxField
+                key={tour.id}
+                name="tourIds"
+                value={tour.id}
+                label={tour.name}
+                defaultChecked={selectedTours.includes(tour.id)}
+              />
+            ))}
+          </div>
+          {e.tourIds ? (
+            <p className="mt-1 text-sm text-destructive">{e.tourIds}</p>
+          ) : null}
+        </fieldset>
       </FieldSet>
 
       <FieldSet legend="Image">

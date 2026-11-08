@@ -11,6 +11,7 @@ import type { Currency } from "@/types/content";
 
 import { BookingStatusBadge } from "./booking-badge";
 import { BookingPayments } from "./booking-payments";
+import { ReviewLink } from "./review-link";
 import { BookingStatusForm } from "./booking-status-form";
 
 function Row({ label, children }: { label: string; children: ReactNode }) {
@@ -40,6 +41,7 @@ export function BookingDetailView({
   currencies = ["USD", "TZS"],
   today,
   canDeletePayments = false,
+  siteUrl,
   preview = false,
 }: {
   backHref: string;
@@ -51,6 +53,8 @@ export function BookingDetailView({
   /** Today in Zanzibar ("YYYY-MM-DD"), the latest allowed payment date. */
   today: string;
   canDeletePayments?: boolean;
+  /** Public site address, for the review link. */
+  siteUrl?: string;
   preview?: boolean;
 }) {
   const item = booking.tour ?? booking.package;
@@ -199,6 +203,21 @@ export function BookingDetailView({
               <BookingStatusBadge status={booking.status} />
             )}
           </Card>
+
+          {canEdit &&
+          booking.status === "completed" &&
+          booking.review_token &&
+          siteUrl ? (
+            <Card title="Review link">
+              <ReviewLink
+                url={`${siteUrl}/review/${booking.review_token}`}
+                customerName={booking.customer_name}
+                email={booking.email}
+                phone={booking.phone}
+                reference={booking.reference}
+              />
+            </Card>
+          ) : null}
 
           {canEdit ? (
             <Card title="Payments">

@@ -466,6 +466,87 @@ export const en = {
     whatsappMessage: "Hello, I've sent a journey request with reference {ref}.",
     footerLink: "Design your journey",
   },
+  reviews: {
+    eyebrow: "Reviews",
+    title: "Guest reviews",
+    homeTitle: "What our guests say",
+    average: "{average} out of 5",
+    countOne: "1 verified review",
+    countMany: "{n} verified reviews",
+    stars: "{n} out of 5 stars",
+    verified: "Verified guest",
+    policy:
+      "Only guests who have travelled with us can leave a review, and every review is checked before it's published.",
+  },
+  reviewPage: {
+    metaTitle: "Review your trip",
+    greeting: "Hello {name}, how was {item}?",
+    intro:
+      "Your review helps other travellers. It will appear on our website once our team has checked it.",
+    ratingLegend: "Your rating",
+    titleLabel: "Title (optional)",
+    bodyLabel: "Your review",
+    displayNameLabel: "Name to show",
+    displayNameHint: "For example your first name and initial.",
+    countryLabel: "Country (optional)",
+    consent:
+      "I agree that Bound to Zanzibar may publish this review with the name and country above.",
+    submit: "Send review",
+    sending: "Sending…",
+    thanksTitle: "Thank you!",
+    thanksBody:
+      "We've received your review. It will appear on the website once our team has checked it.",
+    alreadyTitle: "Thank you — you've already reviewed this trip",
+    invalidTitle: "This review link isn't valid",
+    invalidBody:
+      "The link may be incomplete, or the trip isn't finished yet. If you need help, please contact us.",
+  },
+  journal: {
+    categories: {
+      "zanzibar-guide": "Zanzibar travel guide",
+      "things-to-do": "Things to do in Zanzibar",
+      "safari-guides": "Tanzania safari guides",
+      "travel-tips": "Travel tips",
+      "culture-history": "Culture & history",
+      "beach-islands": "Beach & island experiences",
+    },
+    all: "All",
+    filter: "Filter articles by category",
+    featured: "Featured",
+    byline: "By {author}",
+    team: "The Bound to Zanzibar team",
+    relatedTitle: "Experiences in this article",
+    noneInCategory: "No articles in this category yet.",
+  },
+  consent: {
+    title: "Cookies & visitor statistics",
+    body: "With your permission, we use our own cookie to see which pages and tours interest visitors, so we can improve our trips and answer your requests better. No advertising cookies, and nothing is sold or shared.",
+    accept: "Accept",
+    decline: "Decline",
+    privacy: "Privacy policy",
+    settings: "Cookie settings",
+  },
+  newsletter: {
+    title: "Travel ideas by email",
+    body: "Occasional seasonal tips and new tours. No spam; unsubscribe any time.",
+    label: "Email address",
+    consent: "I agree to receive emails from Bound to Zanzibar.",
+    submit: "Subscribe",
+    success: "Thank you — you're subscribed.",
+    invalidEmail: "Enter a valid email address.",
+    consentRequired: "Please tick the box to agree.",
+    error: "Subscribing isn't available right now. Please try again later.",
+  },
+  tracking: {
+    title: "Cookies and visitor statistics",
+    items: [
+      "If you accept, we set a random visitor ID in our own cookie for up to 6 months. It records the pages and tours you view, how long you stay, and clicks on the Book, WhatsApp and Contact buttons, together with your approximate country and city, device type, browser and operating system. We do not store your IP address.",
+      "If you send us a booking, enquiry, custom trip or newsletter form, the name, email and phone number you entered are linked to this record so our team can understand your interests and reply better.",
+      "If you decline, we only count page views anonymously (page, country and device type), without any ID.",
+      "Only our booking team and administrators can see this information. It is never sold or used for advertising. Activity records are deleted after 13 months.",
+      "You can change your choice at any time with “Cookie settings” at the bottom of every page. Declining after accepting deletes your visitor record.",
+    ],
+  },
   tours: {
     metaTitle: "Zanzibar Tours & Experiences",
     metaDescription:
@@ -911,6 +992,15 @@ export const en = {
    * server returns, so they can be shown in the visitor's language.
    */
   errors: {
+    "This review link isn't valid.": "This review link isn't valid.",
+    "We've already received a review for this trip. Thank you!":
+      "We've already received a review for this trip. Thank you!",
+    "Choose a rating from 1 to 5 stars.": "Choose a rating from 1 to 5 stars.",
+    "Enter the name to show with your review.":
+      "Enter the name to show with your review.",
+    "Use 60 characters or fewer.": "Use 60 characters or fewer.",
+    "Please agree so we can publish your review.":
+      "Please agree so we can publish your review.",
     "Enter a budget greater than zero, or leave it empty.":
       "Enter a budget greater than zero, or leave it empty.",
     "Use 80 characters or fewer.": "Use 80 characters or fewer.",

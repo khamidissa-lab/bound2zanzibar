@@ -1030,23 +1030,53 @@ values ((select id from public.packages where slug = 'serengeti-ngorongoro-zanzi
 
 -- Travel guide articles
 insert into public.blog_posts
-  (title, slug, excerpt, body, tags, reading_minutes, cover_image_alt, status, published_at,
-   seo_title, seo_description, is_sample)
+  (title, slug, excerpt, body, tags, category, is_featured, author_name, reading_minutes,
+   cover_image_alt, status, published_at, seo_title, seo_description, is_sample)
 values ('When is the best time to visit Zanzibar?', 'best-time-to-visit-zanzibar', 'A simple guide to Zanzibar''s seasons and what they mean for beach days, boat trips and safaris.', '[{"heading":"Zanzibar''s seasons at a glance","paragraphs":["Zanzibar has a warm tropical climate all year. Broadly, there are two drier periods — roughly June to October and December to February — and two rainier periods, with the heavier rains usually around March to May and shorter rains around November.","Weather varies from year to year, so treat these as general patterns rather than guarantees."]},{"heading":"Planning a safari as well?","paragraphs":["If you plan to combine the island with a mainland safari, the drier months are often preferred for game viewing. Our team can help you match your dates to the experiences you want."]},{"heading":"Travelling in the rainy season","paragraphs":["Rain often comes in short, heavy showers rather than all day. Some boat trips may be rescheduled for weather, and some accommodation may close for part of the long rains — so it is worth planning flexibly."]}]'::jsonb, array['Planning', 'Seasons']::text[],
-  4, 'Palm trees framing a sunny beach with loungers and turquoise water', 'published', '2026-10-01'::timestamptz,
+  'zanzibar-guide', true, null, 4,
+  'Palm trees framing a sunny beach with loungers and turquoise water', 'published', '2026-10-01'::timestamptz,
   'Best Time to Visit Zanzibar', 'Zanzibar''s seasons explained for beach, boat and safari trips.', true);
+insert into public.blog_post_tours (post_id, tour_id, sort_order)
+values ((select id from public.blog_posts where slug = 'best-time-to-visit-zanzibar'),
+  (select id from public.tours where slug = 'safari-blue-menai-bay'), 0);
+insert into public.blog_post_tours (post_id, tour_id, sort_order)
+values ((select id from public.blog_posts where slug = 'best-time-to-visit-zanzibar'),
+  (select id from public.tours where slug = 'mnemba-island-snorkelling'), 1);
+insert into public.blog_post_tours (post_id, tour_id, sort_order)
+values ((select id from public.blog_posts where slug = 'best-time-to-visit-zanzibar'),
+  (select id from public.tours where slug = 'mikumi-day-safari'), 2);
 insert into public.blog_posts
-  (title, slug, excerpt, body, tags, reading_minutes, cover_image_alt, status, published_at,
-   seo_title, seo_description, is_sample)
+  (title, slug, excerpt, body, tags, category, is_featured, author_name, reading_minutes,
+   cover_image_alt, status, published_at, seo_title, seo_description, is_sample)
 values ('Respecting local culture in Stone Town', 'respecting-local-culture-stone-town', 'Simple ways to be a welcome guest in Zanzibar''s historic old town.', '[{"heading":"Dress with care","paragraphs":["Zanzibar is a predominantly Muslim society. In towns and villages, covering shoulders and knees is appreciated. Swimwear is best kept to the beach and your accommodation."]},{"heading":"Ask before you photograph","paragraphs":["Many people are happy to be photographed, but always ask first — especially in markets and residential lanes."]},{"heading":"During Ramadan","paragraphs":["During the holy month of Ramadan, avoid eating, drinking or smoking in public during daylight hours in towns and villages. Many restaurants for visitors stay open."]}]'::jsonb, array['Culture', 'Stone Town']::text[],
-  3, 'A busy market street in Stone Town', 'published', '2026-09-15'::timestamptz,
+  'culture-history', false, null, 3,
+  'A busy market street in Stone Town', 'published', '2026-09-15'::timestamptz,
   'Respecting Local Culture in Stone Town', 'Etiquette tips for visiting Stone Town, Zanzibar.', true);
+insert into public.blog_post_tours (post_id, tour_id, sort_order)
+values ((select id from public.blog_posts where slug = 'respecting-local-culture-stone-town'),
+  (select id from public.tours where slug = 'stone-town-city-tour'), 0);
+insert into public.blog_post_tours (post_id, tour_id, sort_order)
+values ((select id from public.blog_posts where slug = 'respecting-local-culture-stone-town'),
+  (select id from public.tours where slug = 'stone-town-food-tour'), 1);
+insert into public.blog_post_tours (post_id, tour_id, sort_order)
+values ((select id from public.blog_posts where slug = 'respecting-local-culture-stone-town'),
+  (select id from public.tours where slug = 'spice-farm-tour'), 2);
 insert into public.blog_posts
-  (title, slug, excerpt, body, tags, reading_minutes, cover_image_alt, status, published_at,
-   seo_title, seo_description, is_sample)
+  (title, slug, excerpt, body, tags, category, is_featured, author_name, reading_minutes,
+   cover_image_alt, status, published_at, seo_title, seo_description, is_sample)
 values ('What to pack for a Zanzibar day trip', 'what-to-pack-for-zanzibar-day-trips', 'A short checklist for boat trips, forest walks and town tours.', '[{"heading":"For boat and sandbank trips","paragraphs":["Bring swimwear, a towel, a hat and plenty of sun protection — sandbanks have little shade. A waterproof bag keeps your phone and cash dry. Choose reef-safe sunscreen to help protect coral."]},{"heading":"For town and forest visits","paragraphs":["Comfortable walking shoes, light clothing that covers shoulders and knees, insect repellent and a refillable water bottle will cover most days."]},{"heading":"Always useful","paragraphs":["Some cash in small notes for snacks, tips and small purchases, and a copy of your booking details."]}]'::jsonb, array['Planning', 'Packing']::text[],
-  3, 'Palm-shaded beach with loungers and bougainvillea on the Zanzibar coast', 'published', '2026-08-20'::timestamptz,
+  'travel-tips', false, null, 3,
+  'Palm-shaded beach with loungers and bougainvillea on the Zanzibar coast', 'published', '2026-08-20'::timestamptz,
   'What to Pack for Zanzibar Day Trips', 'Packing checklist for Zanzibar boat trips, tours and forest walks.', true);
+insert into public.blog_post_tours (post_id, tour_id, sort_order)
+values ((select id from public.blog_posts where slug = 'what-to-pack-for-zanzibar-day-trips'),
+  (select id from public.tours where slug = 'nakupenda-sandbank'), 0);
+insert into public.blog_post_tours (post_id, tour_id, sort_order)
+values ((select id from public.blog_posts where slug = 'what-to-pack-for-zanzibar-day-trips'),
+  (select id from public.tours where slug = 'jozani-forest-tour'), 1);
+insert into public.blog_post_tours (post_id, tour_id, sort_order)
+values ((select id from public.blog_posts where slug = 'what-to-pack-for-zanzibar-day-trips'),
+  (select id from public.tours where slug = 'prison-island-tour'), 2);
 
 -- Public site settings (owner-supplied contact details)
 insert into public.site_settings (key, value, is_public, description) values ('contact.email', '"khamidissa@gmail.com"'::jsonb, true, 'Public contact email');

@@ -4,12 +4,19 @@ import { ArrowUpRight, Check, ChevronDown, Clock, MapPin } from "lucide-react";
 
 import { LocaleLink as Link } from "@/components/i18n/locale-link";
 import { SceneImage } from "@/components/media/scene-image";
+import { Stars } from "@/components/reviews/stars";
 import { PriceDisplay } from "@/components/pricing/price-display";
 import { SampleBadge } from "@/components/shared/sample-badge";
 import { buttonVariants } from "@/components/ui/button";
 import { useI18n } from "@/i18n/client";
 import { cn } from "@/lib/utils";
-import type { Article, Destination, Tour, TourPackage } from "@/types/content";
+import type {
+  Article,
+  Destination,
+  RatingSummary,
+  Tour,
+  TourPackage,
+} from "@/types/content";
 
 // Cards use a "stretched link": the title link's ::after covers the card so
 // the whole card is clickable while screen readers get one clear link. The
@@ -31,6 +38,22 @@ function ViewCue({ label, tone = "light" }: { label: string; tone?: "light" | "d
       {label}
       <ArrowUpRight className="size-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 rtl:-scale-x-100" />
     </span>
+  );
+}
+
+/** Stars and review count, shown only for items with approved reviews. */
+function CardRating({ rating }: { rating: RatingSummary }) {
+  const { t, fmt, locale } = useI18n();
+  const average = new Intl.NumberFormat(locale, { maximumFractionDigits: 1 }).format(
+    rating.average,
+  );
+  return (
+    <p className="mt-2 flex items-center gap-2 text-xs text-muted-foreground">
+      <Stars rating={rating.average} label={fmt(t.reviews.stars, { n: average })} />
+      {rating.count === 1
+        ? t.reviews.countOne
+        : fmt(t.reviews.countMany, { n: rating.count })}
+    </p>
   );
 }
 
@@ -162,6 +185,7 @@ export function TourCard({
             {tour.name}
           </Link>
         </h3>
+        {tour.rating ? <CardRating rating={tour.rating} /> : null}
         <p className="mt-2.5 line-clamp-2 text-[0.95rem] leading-relaxed text-muted-foreground">
           {tour.shortDescription}
         </p>
@@ -346,6 +370,7 @@ export function PackageCard({
             {pkg.name}
           </Link>
         </h3>
+        {pkg.rating ? <CardRating rating={pkg.rating} /> : null}
         <p className="mt-2.5 line-clamp-3 text-[0.95rem] leading-relaxed text-muted-foreground">
           {pkg.summary}
         </p>
@@ -428,6 +453,8 @@ export function ArticleCard({
       />
       <div className="flex flex-1 flex-col pt-5">
         <div className="eyebrow flex flex-wrap items-center gap-2 text-muted-foreground">
+          <span className="text-gold-deep">{t.journal.categories[article.category]}</span>
+          <span aria-hidden="true">·</span>
           <time dateTime={article.publishedOn}>{date(article.publishedOn)}</time>
           <span aria-hidden="true">·</span>
           <span>{fmt(t.common.minRead, { n: article.readingMinutes })}</span>

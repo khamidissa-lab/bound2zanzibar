@@ -85,6 +85,9 @@ const EVENT_TITLES: Record<string, string> = {
   signed_out: "Signed out",
   password_changed: "Changed their password",
   bookings_exported: "Exported bookings to CSV",
+  visitors_exported: "Exported visitors to CSV",
+  subscribers_exported: "Exported newsletter subscribers to CSV",
+  visitor_erased: "Erased a visitor's record",
 };
 
 /** One-line summary, e.g. `Edited tour "Safari Blue"`. */
@@ -212,6 +215,10 @@ export function activityChanges(entry: ActivityEntry): string[] {
   if (entry.entity === "tour_prices" || entry.entity === "package_prices") {
     const { before, after } = details;
     return isPriceRows(before) && isPriceRows(after) ? priceChanges(before, after) : [];
+  }
+  if (entry.action === "visitors_exported" || entry.action === "subscribers_exported") {
+    const rows = typeof details.rows === "number" ? details.rows : null;
+    return rows === null ? [] : [`${rows} row${rows === 1 ? "" : "s"}`];
   }
   if (entry.action === "bookings_exported") {
     const rows = typeof details.rows === "number" ? details.rows : null;

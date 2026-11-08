@@ -4,6 +4,8 @@ import { whatsappLink } from "@/config/site";
 
 const submit = vi.fn();
 vi.mock("@/services/enquiries", () => ({ submitEnquiry: submit }));
+const identify = vi.fn();
+vi.mock("@/services/visitor-tracking", () => ({ identifyCurrentVisitor: identify }));
 
 const { sendEnquiry } = await import("./actions");
 

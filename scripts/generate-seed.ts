@@ -116,11 +116,17 @@ values (${pkgId}, ${q(price.market)}, ${q(price.customerType)}, ${q(price.curren
 out("\n-- Travel guide articles");
 for (const a of sampleArticles) {
   out(`insert into public.blog_posts
-  (title, slug, excerpt, body, tags, reading_minutes, cover_image_alt, status, published_at,
-   seo_title, seo_description, is_sample)
+  (title, slug, excerpt, body, tags, category, is_featured, author_name, reading_minutes,
+   cover_image_alt, status, published_at, seo_title, seo_description, is_sample)
 values (${q(a.title)}, ${q(a.slug)}, ${q(a.excerpt)}, ${json(a.sections)}, ${arr(a.tags)},
-  ${a.readingMinutes}, ${q(a.coverImage.alt)}, ${q(a.status)}, ${q(a.publishedOn)}::timestamptz,
+  ${q(a.category)}, ${a.featured}, ${q(a.author || null)}, ${a.readingMinutes},
+  ${q(a.coverImage.alt)}, ${q(a.status)}, ${q(a.publishedOn)}::timestamptz,
   ${q(a.seo.title)}, ${q(a.seo.description)}, ${a.isSample});`);
+  a.relatedTourSlugs.forEach((slug, order) => {
+    out(`insert into public.blog_post_tours (post_id, tour_id, sort_order)
+values ((select id from public.blog_posts where slug = ${q(a.slug)}),
+  (select id from public.tours where slug = ${q(slug)}), ${order});`);
+  });
 }
 
 out("\n-- Public site settings (owner-supplied contact details)");

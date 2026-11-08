@@ -7,6 +7,7 @@ import { TourSections, tourSectionLinks } from "@/components/content/tour-sectio
 import { LocaleLink as Link } from "@/components/i18n/locale-link";
 import { MachineTranslationNotice } from "@/components/i18n/machine-notice";
 import { SceneImage } from "@/components/media/scene-image";
+import { RatingSummaryLine, ReviewsSection } from "@/components/reviews/reviews-section";
 import { Breadcrumbs } from "@/components/shared/breadcrumbs";
 import { SampleBadge } from "@/components/shared/sample-badge";
 import { SectionHeading } from "@/components/shared/section-heading";
@@ -20,6 +21,7 @@ import {
   getTourBySlug,
   getTours,
   staticSlugParams,
+  getReviews,
 } from "@/services/content";
 import { shareImages } from "@/lib/seo";
 
@@ -66,10 +68,11 @@ export default async function TourDetailPage({
   const tour = await getTourBySlug(slug, locale);
   if (!tour) notFound();
 
-  const [destination, lookups, sameCategory] = await Promise.all([
+  const [destination, lookups, sameCategory, reviews] = await Promise.all([
     getDestinationBySlug(tour.destinationSlug, locale),
     getNameLookups(locale),
     getTours({ categorySlug: tour.categorySlug }, locale),
+    getReviews({ tourSlug: tour.slug, limit: 6 }),
   ]);
   const related = sameCategory.filter((r) => r.slug !== tour.slug).slice(0, 3);
   const photos = [tour.coverImage, ...tour.gallery].slice(0, 4);
@@ -121,6 +124,14 @@ export default async function TourDetailPage({
                 <p className="mt-6 max-w-2xl text-xl leading-relaxed text-muted-foreground">
                   {tour.shortDescription}
                 </p>
+                {tour.rating ? (
+                  <a
+                    href="#reviews-heading"
+                    className="mt-4 inline-block hover:underline"
+                  >
+                    <RatingSummaryLine rating={tour.rating} locale={locale} />
+                  </a>
+                ) : null}
                 {tour.machineTranslated ? (
                   <div className="mt-6">
                     <MachineTranslationNotice path={`/tours/${tour.slug}`} />
@@ -206,6 +217,8 @@ export default async function TourDetailPage({
           </div>
         </div>
       </article>
+
+      <ReviewsSection reviews={reviews} rating={tour.rating} locale={locale} />
 
       {related.length > 0 ? (
         <section

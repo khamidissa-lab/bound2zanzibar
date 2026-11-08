@@ -457,6 +457,86 @@ export const tr: Messages = {
     whatsappMessage: "Merhaba, {ref} numaralı bir gezi talebi gönderdim.",
     footerLink: "Gezinizi tasarlayın",
   },
+  reviews: {
+    eyebrow: "Yorumlar",
+    title: "Misafir yorumları",
+    homeTitle: "Misafirlerimiz ne diyor",
+    average: "5 üzerinden {average}",
+    countOne: "1 doğrulanmış yorum",
+    countMany: "{n} doğrulanmış yorum",
+    stars: "5 üzerinden {n} yıldız",
+    verified: "Doğrulanmış misafir",
+    policy:
+      "Yalnızca bizimle seyahat etmiş misafirler yorum yapabilir ve her yorum yayımlanmadan önce kontrol edilir.",
+  },
+  reviewPage: {
+    metaTitle: "Gezinizi değerlendirin",
+    greeting: "Merhaba {name}, {item} nasıldı?",
+    intro:
+      "Yorumunuz diğer gezginlere yardımcı olur. Ekibimiz kontrol ettikten sonra sitemizde görünecek.",
+    ratingLegend: "Puanınız",
+    titleLabel: "Başlık (isteğe bağlı)",
+    bodyLabel: "Yorumunuz",
+    displayNameLabel: "Görünecek ad",
+    displayNameHint: "Örneğin adınız ve soyadınızın baş harfi.",
+    countryLabel: "Ülke (isteğe bağlı)",
+    consent:
+      "Bound to Zanzibar'ın bu yorumu yukarıdaki ad ve ülkeyle yayımlamasını kabul ediyorum.",
+    submit: "Yorumu gönder",
+    sending: "Gönderiliyor…",
+    thanksTitle: "Teşekkürler!",
+    thanksBody: "Yorumunuzu aldık. Ekibimiz kontrol ettikten sonra sitede görünecek.",
+    alreadyTitle: "Teşekkürler — bu geziyi zaten değerlendirdiniz",
+    invalidTitle: "Bu yorum bağlantısı geçerli değil",
+    invalidBody:
+      "Bağlantı eksik olabilir ya da gezi henüz tamamlanmamış olabilir. Yardıma ihtiyacınız olursa bize ulaşın.",
+  },
+  journal: {
+    categories: {
+      "zanzibar-guide": "Zanzibar gezi rehberi",
+      "things-to-do": "Zanzibar'da yapılacaklar",
+      "safari-guides": "Tanzanya safari rehberleri",
+      "travel-tips": "Seyahat ipuçları",
+      "culture-history": "Kültür ve tarih",
+      "beach-islands": "Plaj ve ada deneyimleri",
+    },
+    all: "Tümü",
+    filter: "Makaleleri kategoriye göre filtrele",
+    featured: "Öne çıkan",
+    byline: "Yazan: {author}",
+    team: "Bound to Zanzibar ekibi",
+    relatedTitle: "Bu makaledeki deneyimler",
+    noneInCategory: "Bu kategoride henüz makale yok.",
+  },
+  consent: {
+    title: "Çerezler ve ziyaret istatistikleri",
+    body: "İzninizle, ziyaretçilerin hangi sayfalara ve turlara ilgi duyduğunu görmek için kendi çerezimizi kullanırız; böylece gezilerimizi geliştirir ve taleplerinize daha iyi yanıt veririz. Reklam çerezi yok, hiçbir şey satılmaz veya paylaşılmaz.",
+    accept: "Kabul et",
+    decline: "Reddet",
+    privacy: "Gizlilik politikası",
+    settings: "Çerez ayarları",
+  },
+  newsletter: {
+    title: "E-postayla seyahat fikirleri",
+    body: "Ara sıra mevsim önerileri ve yeni turlar. Spam yok; istediğiniz zaman abonelikten çıkabilirsiniz.",
+    label: "E-posta adresi",
+    consent: "Bound to Zanzibar'dan e-posta almayı kabul ediyorum.",
+    submit: "Abone ol",
+    success: "Teşekkürler — aboneliğiniz tamam.",
+    invalidEmail: "Geçerli bir e-posta adresi girin.",
+    consentRequired: "Onay vermek için lütfen kutuyu işaretleyin.",
+    error: "Abonelik şu anda kullanılamıyor. Lütfen daha sonra tekrar deneyin.",
+  },
+  tracking: {
+    title: "Çerezler ve ziyaret istatistikleri",
+    items: [
+      "Kabul ederseniz, kendi çerezimizde en fazla 6 ay boyunca rastgele bir ziyaretçi kimliği saklarız. Görüntülediğiniz sayfaları ve turları, sitede kalma sürenizi ve Rezervasyon, WhatsApp ve İletişim düğmelerine tıklamalarınızı; yaklaşık ülke ve şehrinizle birlikte cihaz türü, tarayıcı ve işletim sistemini kaydeder. IP adresinizi saklamayız.",
+      "Bize rezervasyon, soru, özel gezi veya bülten formu gönderirseniz, girdiğiniz ad, e-posta ve telefon numarası bu kayda bağlanır; böylece ekibimiz ilgi alanlarınızı anlayıp size daha iyi yanıt verebilir.",
+      "Reddederseniz, sayfa görüntülemelerini yalnızca anonim olarak (sayfa, ülke ve cihaz türü), hiçbir kimlik olmadan sayarız.",
+      "Bu bilgileri yalnızca rezervasyon ekibimiz ve yöneticilerimiz görebilir. Asla satılmaz veya reklam için kullanılmaz. Etkinlik kayıtları 13 ay sonra silinir.",
+      "Seçiminizi her sayfanın altındaki “Çerez ayarları” ile istediğiniz zaman değiştirebilirsiniz. Kabul ettikten sonra reddetmek ziyaretçi kaydınızı siler.",
+    ],
+  },
   tours: {
     metaTitle: "Zanzibar Turları ve Deneyimleri",
     metaDescription:
@@ -902,6 +982,15 @@ export const tr: Messages = {
     retry: "Tekrar dene",
   },
   errors: {
+    "This review link isn't valid.": "Bu yorum bağlantısı geçerli değil.",
+    "We've already received a review for this trip. Thank you!":
+      "Bu gezi için zaten bir yorum aldık. Teşekkürler!",
+    "Choose a rating from 1 to 5 stars.": "1 ile 5 yıldız arasında bir puan seçin.",
+    "Enter the name to show with your review.":
+      "Yorumunuzla birlikte görünecek adı girin.",
+    "Use 60 characters or fewer.": "En fazla 60 karakter kullanın.",
+    "Please agree so we can publish your review.":
+      "Yorumunuzu yayımlayabilmemiz için lütfen onaylayın.",
     "Enter a budget greater than zero, or leave it empty.":
       "Sıfırdan büyük bir bütçe girin ya da boş bırakın.",
     "Use 80 characters or fewer.": "En fazla 80 karakter kullanın.",

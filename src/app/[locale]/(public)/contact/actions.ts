@@ -5,6 +5,7 @@ import { enquiryErrorMessage, enquiryRequestSchema } from "@/lib/enquiry/request
 import { formValues, type FormState } from "@/lib/forms";
 import { isSupabaseConfigured } from "@/lib/supabase/env";
 import { submitEnquiry } from "@/services/enquiries";
+import { identifyCurrentVisitor } from "@/services/visitor-tracking";
 
 const UNAVAILABLE = `The contact form isn't available right now. Please email ${contact.email} or message us on WhatsApp at ${contact.phoneDisplay}.`;
 const SENT = "Thank you — your message has been sent. Our team will reply by email.";
@@ -44,5 +45,11 @@ export async function sendEnquiry(
     return { status: "error", message: friendly ?? UNAVAILABLE, values: echo };
   }
 
+  await identifyCurrentVisitor({
+    source: "enquiry",
+    email: parsed.data.email,
+    name: parsed.data.name,
+    phone: parsed.data.phone || null,
+  });
   return { status: "success", message: SENT };
 }

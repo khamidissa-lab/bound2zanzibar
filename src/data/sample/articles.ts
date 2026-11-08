@@ -9,6 +9,14 @@ export const sampleArticles: Article[] = [
     publishedOn: "2026-10-01",
     readingMinutes: 4,
     tags: ["Planning", "Seasons"],
+    category: "zanzibar-guide",
+    featured: true,
+    author: "",
+    relatedTourSlugs: [
+      "safari-blue-menai-bay",
+      "mnemba-island-snorkelling",
+      "mikumi-day-safari",
+    ],
     coverImage: {
       src: "/images/photos/palm-beach.jpg",
       alt: "Palm trees framing a sunny beach with loungers and turquoise water",
@@ -49,6 +57,10 @@ export const sampleArticles: Article[] = [
     publishedOn: "2026-09-15",
     readingMinutes: 3,
     tags: ["Culture", "Stone Town"],
+    category: "culture-history",
+    featured: false,
+    author: "",
+    relatedTourSlugs: ["stone-town-city-tour", "stone-town-food-tour", "spice-farm-tour"],
     coverImage: {
       src: "/images/tours/stone-town-market-street.jpg",
       alt: "A busy market street in Stone Town",
@@ -88,6 +100,10 @@ export const sampleArticles: Article[] = [
     publishedOn: "2026-08-20",
     readingMinutes: 3,
     tags: ["Planning", "Packing"],
+    category: "travel-tips",
+    featured: false,
+    author: "",
+    relatedTourSlugs: ["nakupenda-sandbank", "jozani-forest-tour", "prison-island-tour"],
     coverImage: {
       src: "/images/photos/beach-benches.jpg",
       alt: "Palm-shaded beach with loungers and bougainvillea on the Zanzibar coast",

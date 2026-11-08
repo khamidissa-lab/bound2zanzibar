@@ -173,7 +173,7 @@ export function BookingForm({
     o.prices.find((p) => p.market === market && p.currency === currency);
 
   return (
-    <form action={action} noValidate className="space-y-8">
+    <form action={action} noValidate data-track-form="booking" className="space-y-8">
       {state.status === "error" && state.message ? (
         <p
           role="alert"

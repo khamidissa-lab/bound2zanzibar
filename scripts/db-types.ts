@@ -200,12 +200,16 @@ export async function renderDatabaseTypes(db: PGlite): Promise<string> {
   );
   for (const fn of fns) {
     const firstDefault = fn.arg_names.length - fn.arg_defaults;
-    out.push(`      ${fn.name}: {`, "        Args: {");
-    fn.arg_names.forEach((name, i) => {
-      const optional = i >= firstDefault ? "?" : "";
-      out.push(`          ${name}${optional}: ${typeName(fn.arg_types[i])};`);
-    });
-    out.push("        };");
+    if (fn.arg_names.length === 0) {
+      out.push(`      ${fn.name}: {`, "        Args: never;");
+    } else {
+      out.push(`      ${fn.name}: {`, "        Args: {");
+      fn.arg_names.forEach((name, i) => {
+        const optional = i >= firstDefault ? "?" : "";
+        out.push(`          ${name}${optional}: ${typeName(fn.arg_types[i])};`);
+      });
+      out.push("        };");
+    }
     if (fn.table_columns) {
       out.push("        Returns: {");
       for (const col of fn.table_columns)

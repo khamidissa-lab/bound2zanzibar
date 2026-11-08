@@ -460,6 +460,88 @@ export const de: Messages = {
     whatsappMessage: "Hallo, ich habe eine Reiseanfrage mit der Nummer {ref} gesendet.",
     footerLink: "Reise gestalten",
   },
+  reviews: {
+    eyebrow: "Bewertungen",
+    title: "Bewertungen unserer Gäste",
+    homeTitle: "Das sagen unsere Gäste",
+    average: "{average} von 5",
+    countOne: "1 geprüfte Bewertung",
+    countMany: "{n} geprüfte Bewertungen",
+    stars: "{n} von 5 Sternen",
+    verified: "Geprüfter Gast",
+    policy:
+      "Nur Gäste, die mit uns gereist sind, können eine Bewertung abgeben, und jede Bewertung wird vor der Veröffentlichung geprüft.",
+  },
+  reviewPage: {
+    metaTitle: "Reise bewerten",
+    greeting: "Hallo {name}, wie war {item}?",
+    intro:
+      "Ihre Bewertung hilft anderen Reisenden. Sie erscheint auf unserer Website, sobald unser Team sie geprüft hat.",
+    ratingLegend: "Ihre Bewertung",
+    titleLabel: "Titel (optional)",
+    bodyLabel: "Ihr Erfahrungsbericht",
+    displayNameLabel: "Angezeigter Name",
+    displayNameHint: "Zum Beispiel Ihr Vorname und ein Initial.",
+    countryLabel: "Land (optional)",
+    consent:
+      "Ich bin einverstanden, dass Bound to Zanzibar diese Bewertung mit dem oben genannten Namen und Land veröffentlicht.",
+    submit: "Bewertung senden",
+    sending: "Wird gesendet…",
+    thanksTitle: "Vielen Dank!",
+    thanksBody:
+      "Wir haben Ihre Bewertung erhalten. Sie erscheint auf der Website, sobald unser Team sie geprüft hat.",
+    alreadyTitle: "Vielen Dank — Sie haben diese Reise bereits bewertet",
+    invalidTitle: "Dieser Bewertungslink ist ungültig",
+    invalidBody:
+      "Der Link ist vielleicht unvollständig, oder die Reise ist noch nicht beendet. Wenn Sie Hilfe brauchen, kontaktieren Sie uns.",
+  },
+  journal: {
+    categories: {
+      "zanzibar-guide": "Sansibar-Reiseführer",
+      "things-to-do": "Erlebnisse auf Sansibar",
+      "safari-guides": "Safari-Ratgeber Tansania",
+      "travel-tips": "Reisetipps",
+      "culture-history": "Kultur & Geschichte",
+      "beach-islands": "Strände & Inseln",
+    },
+    all: "Alle",
+    filter: "Artikel nach Kategorie filtern",
+    featured: "Empfohlen",
+    byline: "Von {author}",
+    team: "Das Team von Bound to Zanzibar",
+    relatedTitle: "Erlebnisse in diesem Artikel",
+    noneInCategory: "In dieser Kategorie gibt es noch keine Artikel.",
+  },
+  consent: {
+    title: "Cookies & Besucherstatistik",
+    body: "Mit Ihrer Erlaubnis verwenden wir ein eigenes Cookie, um zu sehen, welche Seiten und Touren Besucher interessieren – so können wir unsere Reisen verbessern und Ihre Anfragen besser beantworten. Keine Werbe-Cookies, nichts wird verkauft oder weitergegeben.",
+    accept: "Akzeptieren",
+    decline: "Ablehnen",
+    privacy: "Datenschutzerklärung",
+    settings: "Cookie-Einstellungen",
+  },
+  newsletter: {
+    title: "Reiseideen per E-Mail",
+    body: "Gelegentlich Tipps zur Saison und neue Touren. Kein Spam; jederzeit abbestellbar.",
+    label: "E-Mail-Adresse",
+    consent: "Ich möchte E-Mails von Bound to Zanzibar erhalten.",
+    submit: "Abonnieren",
+    success: "Vielen Dank – Sie sind angemeldet.",
+    invalidEmail: "Geben Sie eine gültige E-Mail-Adresse ein.",
+    consentRequired: "Bitte setzen Sie das Häkchen, um zuzustimmen.",
+    error:
+      "Die Anmeldung ist gerade nicht möglich. Bitte versuchen Sie es später erneut.",
+  },
+  tracking: {
+    title: "Cookies und Besucherstatistik",
+    items: [
+      "Wenn Sie zustimmen, speichern wir eine zufällige Besucher-ID in einem eigenen Cookie für bis zu 6 Monate. Erfasst werden die angesehenen Seiten und Touren, Ihre Verweildauer und Klicks auf die Schaltflächen Buchen, WhatsApp und Kontakt sowie ungefähres Land und Stadt, Gerätetyp, Browser und Betriebssystem. Ihre IP-Adresse speichern wir nicht.",
+      "Wenn Sie uns ein Buchungs-, Anfrage-, Wunschreise- oder Newsletter-Formular senden, werden Name, E-Mail und Telefonnummer, die Sie eingegeben haben, mit diesem Datensatz verknüpft, damit unser Team Ihre Interessen versteht und besser antworten kann.",
+      "Wenn Sie ablehnen, zählen wir Seitenaufrufe nur anonym (Seite, Land und Gerätetyp), ohne jede ID.",
+      "Nur unser Buchungsteam und unsere Administratoren sehen diese Daten. Sie werden nie verkauft oder für Werbung genutzt. Aktivitätsdaten werden nach 13 Monaten gelöscht.",
+      "Sie können Ihre Wahl jederzeit über „Cookie-Einstellungen“ unten auf jeder Seite ändern. Wenn Sie nach einer Zustimmung ablehnen, wird Ihr Besucherdatensatz gelöscht.",
+    ],
+  },
   tours: {
     metaTitle: "Touren & Erlebnisse auf Sansibar",
     metaDescription:
@@ -905,6 +987,16 @@ export const de: Messages = {
     retry: "Erneut versuchen",
   },
   errors: {
+    "This review link isn't valid.": "Dieser Bewertungslink ist ungültig.",
+    "We've already received a review for this trip. Thank you!":
+      "Für diese Reise haben wir bereits eine Bewertung erhalten. Vielen Dank!",
+    "Choose a rating from 1 to 5 stars.":
+      "Wählen Sie eine Bewertung von 1 bis 5 Sternen.",
+    "Enter the name to show with your review.":
+      "Geben Sie den Namen ein, der bei Ihrer Bewertung angezeigt wird.",
+    "Use 60 characters or fewer.": "Verwenden Sie höchstens 60 Zeichen.",
+    "Please agree so we can publish your review.":
+      "Bitte stimmen Sie zu, damit wir Ihre Bewertung veröffentlichen können.",
     "Enter a budget greater than zero, or leave it empty.":
       "Geben Sie ein Budget über null ein oder lassen Sie das Feld leer.",
     "Use 80 characters or fewer.": "Verwenden Sie höchstens 80 Zeichen.",

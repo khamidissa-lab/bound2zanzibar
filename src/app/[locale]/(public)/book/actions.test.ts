@@ -2,6 +2,8 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 const submit = vi.fn();
 vi.mock("@/services/bookings", () => ({ submitBookingRequest: submit }));
+const identify = vi.fn();
+vi.mock("@/services/visitor-tracking", () => ({ identifyCurrentVisitor: identify }));
 vi.mock("next/navigation", () => ({
   redirect: (url: string) => {
     throw new Error(`REDIRECT:${url}`);
@@ -54,6 +56,15 @@ describe("requestBooking", () => {
         currency: "TZS",
       }),
     );
+    // The visitor's own details are linked to their visitor record.
+    expect(identify).toHaveBeenCalledWith({
+      source: "booking",
+      email: "amina@example.com",
+      name: "Amina Hassan",
+      phone: "+255 712 345 678",
+      reference: "BTZ-2611-ABCDEF12",
+      item: { type: "package", slug: "zanzibar-highlights-4-days" },
+    });
   });
 
   it("returns field errors and keeps the typed values", async () => {

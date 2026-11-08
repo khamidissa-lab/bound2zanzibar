@@ -2,6 +2,8 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 const submit = vi.fn();
 vi.mock("@/services/journeys", () => ({ submitJourneyRequest: submit }));
+const identify = vi.fn();
+vi.mock("@/services/visitor-tracking", () => ({ identifyCurrentVisitor: identify }));
 vi.mock("next/navigation", () => ({
   redirect: (url: string) => {
     throw new Error(`REDIRECT:${url}`);

@@ -58,6 +58,39 @@ export type Database = {
         Relationships: [
         ];
       };
+      blog_post_tours: {
+        Row: {
+          post_id: string;
+          tour_id: string;
+          sort_order: number;
+        };
+        Insert: {
+          post_id: string;
+          tour_id: string;
+          sort_order?: number;
+        };
+        Update: {
+          post_id?: string;
+          tour_id?: string;
+          sort_order?: number;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "blog_post_tours_post_id_fkey";
+            columns: ["post_id"];
+            isOneToOne: false;
+            referencedRelation: "blog_posts";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "blog_post_tours_tour_id_fkey";
+            columns: ["tour_id"];
+            isOneToOne: false;
+            referencedRelation: "tours";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
       blog_posts: {
         Row: {
           id: string;
@@ -77,6 +110,9 @@ export type Database = {
           is_sample: boolean;
           created_at: string;
           updated_at: string;
+          category: string;
+          is_featured: boolean;
+          author_name: string | null;
         };
         Insert: {
           id?: string;
@@ -96,6 +132,9 @@ export type Database = {
           is_sample?: boolean;
           created_at?: string;
           updated_at?: string;
+          category?: string;
+          is_featured?: boolean;
+          author_name?: string | null;
         };
         Update: {
           id?: string;
@@ -115,6 +154,9 @@ export type Database = {
           is_sample?: boolean;
           created_at?: string;
           updated_at?: string;
+          category?: string;
+          is_featured?: boolean;
+          author_name?: string | null;
         };
         Relationships: [
           {
@@ -239,6 +281,7 @@ export type Database = {
           created_at: string;
           updated_at: string;
           options: Json;
+          review_token: string | null;
         };
         Insert: {
           id?: string;
@@ -263,6 +306,7 @@ export type Database = {
           created_at?: string;
           updated_at?: string;
           options?: Json;
+          review_token?: string | null;
         };
         Update: {
           id?: string;
@@ -287,6 +331,7 @@ export type Database = {
           created_at?: string;
           updated_at?: string;
           options?: Json;
+          review_token?: string | null;
         };
         Relationships: [
           {
@@ -310,6 +355,34 @@ export type Database = {
             referencedRelation: "tours";
             referencedColumns: ["id"];
           },
+        ];
+      };
+      consent_records: {
+        Row: {
+          id: number;
+          visitor_id: string | null;
+          choice: string;
+          policy_version: string;
+          country: string | null;
+          created_at: string;
+        };
+        Insert: {
+          id: number;
+          visitor_id?: string | null;
+          choice: string;
+          policy_version: string;
+          country?: string | null;
+          created_at?: string;
+        };
+        Update: {
+          id?: number;
+          visitor_id?: string | null;
+          choice?: string;
+          policy_version?: string;
+          country?: string | null;
+          created_at?: string;
+        };
+        Relationships: [
         ];
       };
       content_translations: {
@@ -567,6 +640,131 @@ export type Database = {
           },
         ];
       };
+      lead_notes: {
+        Row: {
+          id: string;
+          visitor_id: string;
+          kind: string;
+          body: string;
+          author_id: string | null;
+          created_at: string;
+          author_name: string | null;
+        };
+        Insert: {
+          id?: string;
+          visitor_id: string;
+          kind?: string;
+          body: string;
+          author_id?: string | null;
+          created_at?: string;
+          author_name?: string | null;
+        };
+        Update: {
+          id?: string;
+          visitor_id?: string;
+          kind?: string;
+          body?: string;
+          author_id?: string | null;
+          created_at?: string;
+          author_name?: string | null;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "lead_notes_author_id_fkey";
+            columns: ["author_id"];
+            isOneToOne: false;
+            referencedRelation: "profiles";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "lead_notes_visitor_id_fkey";
+            columns: ["visitor_id"];
+            isOneToOne: false;
+            referencedRelation: "visitors";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
+      lead_tasks: {
+        Row: {
+          id: string;
+          visitor_id: string;
+          title: string;
+          due_date: string | null;
+          assigned_to: string | null;
+          done_at: string | null;
+          created_by: string | null;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          visitor_id: string;
+          title: string;
+          due_date?: string | null;
+          assigned_to?: string | null;
+          done_at?: string | null;
+          created_by?: string | null;
+          created_at?: string;
+        };
+        Update: {
+          id?: string;
+          visitor_id?: string;
+          title?: string;
+          due_date?: string | null;
+          assigned_to?: string | null;
+          done_at?: string | null;
+          created_by?: string | null;
+          created_at?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "lead_tasks_assigned_to_fkey";
+            columns: ["assigned_to"];
+            isOneToOne: false;
+            referencedRelation: "profiles";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "lead_tasks_created_by_fkey";
+            columns: ["created_by"];
+            isOneToOne: false;
+            referencedRelation: "profiles";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "lead_tasks_visitor_id_fkey";
+            columns: ["visitor_id"];
+            isOneToOne: false;
+            referencedRelation: "visitors";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
+      newsletter_subscribers: {
+        Row: {
+          id: string;
+          email: string;
+          locale: string;
+          subscribed_at: string;
+          unsubscribed_at: string | null;
+        };
+        Insert: {
+          id?: string;
+          email: string;
+          locale?: string;
+          subscribed_at?: string;
+          unsubscribed_at?: string | null;
+        };
+        Update: {
+          id?: string;
+          email?: string;
+          locale?: string;
+          subscribed_at?: string;
+          unsubscribed_at?: string | null;
+        };
+        Relationships: [
+        ];
+      };
       package_destinations: {
         Row: {
           package_id: string;
@@ -822,6 +1020,31 @@ export type Database = {
         Relationships: [
         ];
       };
+      page_view_counts: {
+        Row: {
+          day: string;
+          path: string;
+          country: string;
+          device: string;
+          views: number;
+        };
+        Insert: {
+          day: string;
+          path: string;
+          country?: string;
+          device: string;
+          views?: number;
+        };
+        Update: {
+          day?: string;
+          path?: string;
+          country?: string;
+          device?: string;
+          views?: number;
+        };
+        Relationships: [
+        ];
+      };
       profiles: {
         Row: {
           id: string;
@@ -848,6 +1071,82 @@ export type Database = {
           updated_at?: string;
         };
         Relationships: [
+        ];
+      };
+      reviews: {
+        Row: {
+          id: string;
+          booking_id: string;
+          tour_id: string | null;
+          package_id: string | null;
+          rating: number;
+          title: string | null;
+          body: string;
+          display_name: string;
+          country: string | null;
+          locale: string;
+          status: Database["public"]["Enums"]["review_status"];
+          moderated_by: string | null;
+          moderated_at: string | null;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          booking_id: string;
+          tour_id?: string | null;
+          package_id?: string | null;
+          rating: number;
+          title?: string | null;
+          body: string;
+          display_name: string;
+          country?: string | null;
+          locale?: string;
+          status?: Database["public"]["Enums"]["review_status"];
+          moderated_by?: string | null;
+          moderated_at?: string | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          id?: string;
+          booking_id?: string;
+          tour_id?: string | null;
+          package_id?: string | null;
+          rating?: number;
+          title?: string | null;
+          body?: string;
+          display_name?: string;
+          country?: string | null;
+          locale?: string;
+          status?: Database["public"]["Enums"]["review_status"];
+          moderated_by?: string | null;
+          moderated_at?: string | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "reviews_booking_id_fkey";
+            columns: ["booking_id"];
+            isOneToOne: true;
+            referencedRelation: "bookings";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "reviews_package_id_fkey";
+            columns: ["package_id"];
+            isOneToOne: false;
+            referencedRelation: "packages";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "reviews_tour_id_fkey";
+            columns: ["tour_id"];
+            isOneToOne: false;
+            referencedRelation: "tours";
+            referencedColumns: ["id"];
+          },
         ];
       };
       site_settings: {
@@ -1238,15 +1537,304 @@ export type Database = {
           },
         ];
       };
+      visitor_events: {
+        Row: {
+          id: number;
+          visitor_id: string;
+          session_id: string | null;
+          occurred_at: string;
+          type: string;
+          path: string | null;
+          title: string | null;
+          item_type: string | null;
+          item_slug: string | null;
+          label: string | null;
+        };
+        Insert: {
+          id: number;
+          visitor_id: string;
+          session_id?: string | null;
+          occurred_at?: string;
+          type: string;
+          path?: string | null;
+          title?: string | null;
+          item_type?: string | null;
+          item_slug?: string | null;
+          label?: string | null;
+        };
+        Update: {
+          id?: number;
+          visitor_id?: string;
+          session_id?: string | null;
+          occurred_at?: string;
+          type?: string;
+          path?: string | null;
+          title?: string | null;
+          item_type?: string | null;
+          item_slug?: string | null;
+          label?: string | null;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "visitor_events_session_id_fkey";
+            columns: ["session_id"];
+            isOneToOne: false;
+            referencedRelation: "visitor_sessions";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "visitor_events_visitor_id_fkey";
+            columns: ["visitor_id"];
+            isOneToOne: false;
+            referencedRelation: "visitors";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
+      visitor_identities: {
+        Row: {
+          id: number;
+          visitor_id: string;
+          kind: string;
+          value: string;
+          source: string;
+          created_at: string;
+        };
+        Insert: {
+          id: number;
+          visitor_id: string;
+          kind: string;
+          value: string;
+          source: string;
+          created_at?: string;
+        };
+        Update: {
+          id?: number;
+          visitor_id?: string;
+          kind?: string;
+          value?: string;
+          source?: string;
+          created_at?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "visitor_identities_visitor_id_fkey";
+            columns: ["visitor_id"];
+            isOneToOne: false;
+            referencedRelation: "visitors";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
+      visitor_sessions: {
+        Row: {
+          id: string;
+          visitor_id: string;
+          started_at: string;
+          last_seen_at: string;
+          ended_at: string | null;
+          visible: boolean;
+          landing_path: string;
+          current_path: string;
+          current_title: string | null;
+          referrer_host: string | null;
+          utm_source: string | null;
+          locale: string | null;
+          page_views: number;
+        };
+        Insert: {
+          id?: string;
+          visitor_id: string;
+          started_at?: string;
+          last_seen_at?: string;
+          ended_at?: string | null;
+          visible?: boolean;
+          landing_path: string;
+          current_path: string;
+          current_title?: string | null;
+          referrer_host?: string | null;
+          utm_source?: string | null;
+          locale?: string | null;
+          page_views?: number;
+        };
+        Update: {
+          id?: string;
+          visitor_id?: string;
+          started_at?: string;
+          last_seen_at?: string;
+          ended_at?: string | null;
+          visible?: boolean;
+          landing_path?: string;
+          current_path?: string;
+          current_title?: string | null;
+          referrer_host?: string | null;
+          utm_source?: string | null;
+          locale?: string | null;
+          page_views?: number;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "visitor_sessions_visitor_id_fkey";
+            columns: ["visitor_id"];
+            isOneToOne: false;
+            referencedRelation: "visitors";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
+      visitors: {
+        Row: {
+          id: string;
+          short_id: string | null;
+          first_seen_at: string;
+          last_seen_at: string;
+          visit_count: number;
+          page_views: number;
+          country: string | null;
+          region: string | null;
+          city: string | null;
+          device: string;
+          browser: string | null;
+          os: string | null;
+          name: string | null;
+          email: string | null;
+          phone: string | null;
+          identified_at: string | null;
+          lead_status: Database["public"]["Enums"]["lead_status"] | null;
+          lead_score: number;
+          lead_status_manual: boolean;
+          lead_updated_at: string | null;
+          assigned_to: string | null;
+        };
+        Insert: {
+          id: string;
+          short_id?: string | null;
+          first_seen_at?: string;
+          last_seen_at?: string;
+          visit_count?: number;
+          page_views?: number;
+          country?: string | null;
+          region?: string | null;
+          city?: string | null;
+          device?: string;
+          browser?: string | null;
+          os?: string | null;
+          name?: string | null;
+          email?: string | null;
+          phone?: string | null;
+          identified_at?: string | null;
+          lead_status?: Database["public"]["Enums"]["lead_status"] | null;
+          lead_score?: number;
+          lead_status_manual?: boolean;
+          lead_updated_at?: string | null;
+          assigned_to?: string | null;
+        };
+        Update: {
+          id?: string;
+          short_id?: string | null;
+          first_seen_at?: string;
+          last_seen_at?: string;
+          visit_count?: number;
+          page_views?: number;
+          country?: string | null;
+          region?: string | null;
+          city?: string | null;
+          device?: string;
+          browser?: string | null;
+          os?: string | null;
+          name?: string | null;
+          email?: string | null;
+          phone?: string | null;
+          identified_at?: string | null;
+          lead_status?: Database["public"]["Enums"]["lead_status"] | null;
+          lead_score?: number;
+          lead_status_manual?: boolean;
+          lead_updated_at?: string | null;
+          assigned_to?: string | null;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "visitors_assigned_to_fkey";
+            columns: ["assigned_to"];
+            isOneToOne: false;
+            referencedRelation: "profiles";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
     };
     Views: {
       [_ in never]: never;
     };
     Functions: {
+      get_review_invitation: {
+        Args: {
+          p_token: string;
+        };
+        Returns: {
+          first_name: string;
+          item_name: string;
+          already_reviewed: boolean;
+        }[];
+      };
+      identify_visitor: {
+        Args: {
+          p_visitor_id: string;
+          p_source: string;
+          p_email: string;
+          p_name?: string;
+          p_phone?: string;
+          p_reference?: string;
+          p_item_type?: string;
+          p_item_slug?: string;
+        };
+        Returns: boolean;
+      };
+      lead_assignees: {
+        Args: never;
+        Returns: {
+          id: string;
+          full_name: string;
+        }[];
+      };
       log_staff_event: {
         Args: {
           p_action: string;
           p_details?: Json;
+        };
+        Returns: undefined;
+      };
+      purge_visitor_data: {
+        Args: never;
+        Returns: Json;
+      };
+      record_anonymous_view: {
+        Args: {
+          p_path: string;
+          p_country: string;
+          p_device: string;
+        };
+        Returns: undefined;
+      };
+      record_consent: {
+        Args: {
+          p_visitor_id: string;
+          p_choice: string;
+          p_policy_version: string;
+          p_country?: string;
+        };
+        Returns: undefined;
+      };
+      reset_lead_status: {
+        Args: {
+          p_visitor_id: string;
+        };
+        Returns: undefined;
+      };
+      set_blog_post_tours: {
+        Args: {
+          p_post_id: string;
+          p_tour_ids: string[];
         };
         Returns: undefined;
       };
@@ -1350,6 +1938,55 @@ export type Database = {
         };
         Returns: string;
       };
+      submit_review: {
+        Args: {
+          p_token: string;
+          p_rating: number;
+          p_body: string;
+          p_display_name: string;
+          p_title?: string;
+          p_country?: string;
+          p_locale?: string;
+        };
+        Returns: undefined;
+      };
+      subscribe_newsletter: {
+        Args: {
+          p_email: string;
+          p_locale?: string;
+        };
+        Returns: undefined;
+      };
+      track_visitor_event: {
+        Args: {
+          p_visitor_id: string;
+          p_type: string;
+          p_path?: string;
+          p_title?: string;
+          p_item_type?: string;
+          p_item_slug?: string;
+          p_label?: string;
+          p_referrer_host?: string;
+          p_utm_source?: string;
+          p_locale?: string;
+          p_country?: string;
+          p_region?: string;
+          p_city?: string;
+          p_device?: string;
+          p_browser?: string;
+          p_os?: string;
+          p_visible?: boolean;
+        };
+        Returns: string;
+      };
+      visitor_analytics: {
+        Args: {
+          p_from: string;
+          p_to: string;
+          p_bucket?: string;
+        };
+        Returns: Json;
+      };
     };
     Enums: {
       accommodation_level: "budget" | "mid_range" | "luxury" | "mixed" | "not_sure";
@@ -1360,10 +1997,12 @@ export type Database = {
       difficulty_level: "easy" | "moderate" | "challenging";
       inquiry_status: "new" | "in_progress" | "closed";
       journey_status: "new" | "in_progress" | "quoted" | "closed";
+      lead_status: "new_lead" | "interested" | "high_potential" | "booking_started" | "booking_completed" | "follow_up";
       market: "resident" | "east_african" | "international";
       option_pricing: "per_person" | "per_booking";
       payment_method: "bank_transfer" | "mobile_money" | "card" | "cash" | "other";
       publish_status: "draft" | "published" | "archived";
+      review_status: "pending" | "approved" | "rejected";
       staff_role: "super_admin" | "admin" | "booking_staff" | "content_editor";
       tour_length: "hours" | "half_day" | "full_day" | "multi_day";
     };

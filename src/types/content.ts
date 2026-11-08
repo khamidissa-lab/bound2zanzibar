@@ -83,6 +83,7 @@ export type Tour = {
   faqs: Faq[];
   /** Optional priced extras, chosen on the booking form. */
   options: TourOption[];
+  rating?: RatingSummary;
   coverImage: MediaImage;
   gallery: MediaImage[];
   prices: PriceRecord[];
@@ -103,6 +104,33 @@ export type TourOption = {
   /** One per market and currency; never converted. */
   prices: { market: Market; currency: Currency; amount: number }[];
 };
+
+/** Average of approved, verified reviews; absent when there are none. */
+export type RatingSummary = { average: number; count: number };
+
+/** An approved review from a customer with a completed booking. */
+export type Review = {
+  id: string;
+  rating: number;
+  title: string;
+  body: string;
+  displayName: string;
+  country: string;
+  /** ISO date (YYYY-MM-DD) the review was written. */
+  date: string;
+  tourSlug: string | null;
+  packageSlug: string | null;
+};
+
+export const ARTICLE_CATEGORIES = [
+  "zanzibar-guide",
+  "things-to-do",
+  "safari-guides",
+  "travel-tips",
+  "culture-history",
+  "beach-islands",
+] as const;
+export type ArticleCategory = (typeof ARTICLE_CATEGORIES)[number];
 
 export type TourStep = {
   title: string;
@@ -171,6 +199,7 @@ export type TourPackage = {
   featured: boolean;
   isSafari: boolean;
   travelStyles: TravelStyle[];
+  rating?: RatingSummary;
   status: PublishStatus;
   seo: Seo;
   isSample: boolean;
@@ -193,6 +222,11 @@ export type Article = {
   publishedOn: string;
   readingMinutes: number;
   tags: string[];
+  category: ArticleCategory;
+  featured: boolean;
+  /** Byline; "" shows the team name. */
+  author: string;
+  relatedTourSlugs: string[];
   coverImage: MediaImage;
   sections: ArticleSection[];
   status: PublishStatus;

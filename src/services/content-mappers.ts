@@ -1,8 +1,14 @@
 import { toTravelStyles } from "@/lib/discovery";
 import { mediaUrl, themeForCategory } from "@/lib/media";
 import type { Tables } from "@/lib/supabase/database.types";
+import {
+  ARTICLE_CATEGORIES,
+  type Article,
+  type ArticleCategory,
+  type RatingSummary,
+  type Review,
+} from "@/types/content";
 import type {
-  Article,
   ArticleSection,
   Currency,
   Destination,
@@ -188,6 +194,45 @@ export function mapTour(row: TourRow): Tour {
   };
 }
 
+export type ReviewRow = Pick<
+  Tables<"reviews">,
+  "id" | "rating" | "title" | "body" | "display_name" | "country" | "created_at"
+> & { tour: { slug: string } | null; package: { slug: string } | null };
+
+export function mapReview(row: ReviewRow): Review {
+  return {
+    id: row.id,
+    rating: row.rating,
+    title: row.title ?? "",
+    body: row.body,
+    displayName: row.display_name,
+    country: row.country ?? "",
+    date: row.created_at.slice(0, 10),
+    tourSlug: row.tour?.slug ?? null,
+    packageSlug: row.package?.slug ?? null,
+  };
+}
+
+/** Average and count of reviews per slug, rounded to one decimal. */
+export function summariseRatings(
+  reviews: Review[],
+  key: "tourSlug" | "packageSlug",
+): Map<string, RatingSummary> {
+  const sums = new Map<string, { total: number; count: number }>();
+  for (const r of reviews) {
+    const slug = r[key];
+    if (!slug) continue;
+    const s = sums.get(slug) ?? { total: 0, count: 0 };
+    sums.set(slug, { total: s.total + r.rating, count: s.count + 1 });
+  }
+  return new Map(
+    [...sums].map(([slug, s]) => [
+      slug,
+      { average: Math.round((s.total / s.count) * 10) / 10, count: s.count },
+    ]),
+  );
+}
+
 export function mapDestination(row: Tables<"destinations">): Destination {
   const theme: SceneTheme = row.region === "mainland" ? "savanna" : "ocean";
   return {
@@ -272,7 +317,14 @@ export function parseArticleBody(body: unknown): ArticleSection[] {
   });
 }
 
-export function mapArticle(row: Tables<"blog_posts">): Article {
+export type ArticleRow = Tables<"blog_posts"> & {
+  blog_post_tours?: { sort_order: number; tour: { slug: string } | null }[];
+};
+
+const isArticleCategory = (v: string): v is ArticleCategory =>
+  (ARTICLE_CATEGORIES as readonly string[]).includes(v);
+
+export function mapArticle(row: ArticleRow): Article {
   const sections = parseArticleBody(row.body);
   const words = sections
     .flatMap((s) => s.paragraphs)
@@ -286,6 +338,12 @@ export function mapArticle(row: Tables<"blog_posts">): Article {
     publishedOn: (row.published_at ?? row.created_at).slice(0, 10),
     readingMinutes: row.reading_minutes ?? Math.max(1, Math.round(words / 200)),
     tags: row.tags,
+    category: isArticleCategory(row.category) ? row.category : "travel-tips",
+    featured: row.is_featured,
+    author: row.author_name ?? "",
+    relatedTourSlugs: [...(row.blog_post_tours ?? [])]
+      .sort((a, b) => a.sort_order - b.sort_order)
+      .flatMap((r) => (r.tour ? [r.tour.slug] : [])),
     coverImage: image(row.cover_image_path, row.cover_image_alt, row.title, "ocean"),
     sections,
     status: row.status,

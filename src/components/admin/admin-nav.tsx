@@ -4,6 +4,8 @@ import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
+  Activity,
+  BarChart3,
   BookOpen,
   CalendarCheck,
   Compass,
@@ -13,11 +15,14 @@ import {
   Inbox,
   Languages,
   LayoutDashboard,
+  Lightbulb,
   Map,
   Menu,
   MessageSquareQuote,
   Package,
+  Radio,
   Settings,
+  Target,
   UserCog,
   Users,
   type LucideIcon,
@@ -119,6 +124,41 @@ const groups: { title: string | null; items: NavItem[] }[] = [
     ],
   },
   {
+    title: "Visitors",
+    items: [
+      {
+        label: "Live visitors",
+        href: "/admin/visitors/live",
+        icon: Radio,
+        permission: "visitors.view",
+      },
+      {
+        label: "Visitor analytics",
+        href: "/admin/visitors/analytics",
+        icon: BarChart3,
+        permission: "visitors.view",
+      },
+      {
+        label: "Potential customers",
+        href: "/admin/visitors/leads",
+        icon: Target,
+        permission: "visitors.view",
+      },
+      {
+        label: "Visitor activity",
+        href: "/admin/visitors",
+        icon: Activity,
+        permission: "visitors.view",
+      },
+      {
+        label: "Customer insights",
+        href: "/admin/visitors/insights",
+        icon: Lightbulb,
+        permission: "visitors.view",
+      },
+    ],
+  },
+  {
     title: "Administration",
     items: [
       {
@@ -148,8 +188,15 @@ function isActive(pathname: string, href: string) {
   // Development previews mirror the real sections under /admin/preview.
   const path = pathname.replace(/^\/admin\/preview(?=\/|$)/, "/admin");
   if (href === "/admin") return path === "/admin";
-  return path.startsWith(href);
+  const matches = (h: string) => path === h || path.startsWith(`${h}/`);
+  if (!matches(href)) return false;
+  // The most specific section wins (/admin/visitors/live over /admin/visitors).
+  return !ALL_HREFS.some(
+    (h) => h.length > href.length && h.startsWith(href) && matches(h),
+  );
 }
+
+const ALL_HREFS = groups.flatMap((g) => g.items.map((i) => i.href));
 
 function NavList({ role, onNavigate }: { role: StaffRole; onNavigate?: () => void }) {
   const pathname = usePathname();

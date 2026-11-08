@@ -15,6 +15,7 @@ import { isSupabaseConfigured } from "@/lib/supabase/env";
 import type {
   Article,
   Destination,
+  Review,
   TourCategory,
   TourPackage,
   Tour,
@@ -25,10 +26,12 @@ import {
   loadCategories,
   loadDestinations,
   loadPackages,
+  loadReviews,
   loadTours,
   loadTranslations,
   type TranslationIndex,
 } from "./content-db";
+import { summariseRatings } from "./content-mappers";
 
 /**
  * Public content access used by every public page.
@@ -60,10 +63,23 @@ async function allCategories(locale: Locale): Promise<TourCategory[]> {
   return items.map((c) => localizeCategory(c, tr(index, "tour_categories", c.id)));
 }
 
+/** Approved reviews; none without a database (sample data has no reviews). */
+async function allReviews(): Promise<Review[]> {
+  return fromDatabase() ? loadReviews() : [];
+}
+
 async function allTours(locale: Locale): Promise<Tour[]> {
   if (!fromDatabase()) return sampleTours.filter(isPublished);
-  const [items, index] = await Promise.all([loadTours(), translations(locale)]);
-  return items.map((t) => localizeTour(t, tr(index, "tours", t.id)));
+  const [items, index, reviews] = await Promise.all([
+    loadTours(),
+    translations(locale),
+    allReviews(),
+  ]);
+  const ratings = summariseRatings(reviews, "tourSlug");
+  return items.map((t) => ({
+    ...localizeTour(t, tr(index, "tours", t.id)),
+    rating: ratings.get(t.slug),
+  }));
 }
 
 async function allDestinations(locale: Locale): Promise<Destination[]> {
@@ -74,8 +90,16 @@ async function allDestinations(locale: Locale): Promise<Destination[]> {
 
 async function allPackages(locale: Locale): Promise<TourPackage[]> {
   if (!fromDatabase()) return samplePackages.filter(isPublished);
-  const [items, index] = await Promise.all([loadPackages(), translations(locale)]);
-  return items.map((p) => localizePackage(p, tr(index, "packages", p.id)));
+  const [items, index, reviews] = await Promise.all([
+    loadPackages(),
+    translations(locale),
+    allReviews(),
+  ]);
+  const ratings = summariseRatings(reviews, "packageSlug");
+  return items.map((p) => ({
+    ...localizePackage(p, tr(index, "packages", p.id)),
+    rating: ratings.get(p.slug),
+  }));
 }
 
 async function allArticles(locale: Locale): Promise<Article[]> {
@@ -174,6 +198,16 @@ export async function getArticleBySlug(
   locale: Locale = DEFAULT_LOCALE,
 ): Promise<Article | null> {
   return (await allArticles(locale)).find((a) => a.slug === slug) ?? null;
+}
+
+/** Approved reviews, newest first, optionally for one tour or package. */
+export async function getReviews(
+  filter: { tourSlug?: string; packageSlug?: string; limit?: number } = {},
+): Promise<Review[]> {
+  return (await allReviews())
+    .filter((r) => !filter.tourSlug || r.tourSlug === filter.tourSlug)
+    .filter((r) => !filter.packageSlug || r.packageSlug === filter.packageSlug)
+    .slice(0, filter.limit ?? 50);
 }
 
 /**

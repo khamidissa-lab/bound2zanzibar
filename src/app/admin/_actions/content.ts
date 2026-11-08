@@ -388,7 +388,10 @@ export async function saveArticle(
   _prev: FormState,
   formData: FormData,
 ): Promise<FormState> {
-  const input = await prepare("content.manage", articleSchema, formValues(formData));
+  const input = await prepare("content.manage", articleSchema, {
+    ...formValues(formData),
+    tourIds: formData.getAll("tourIds").filter((v) => typeof v === "string"),
+  });
   if (!input.ok) return input.state;
   const v = input.data;
   const auth = await authorizeAction("content.manage");
@@ -398,6 +401,9 @@ export async function saveArticle(
     excerpt: v.excerpt,
     body: v.body,
     tags: v.tags,
+    category: v.category,
+    is_featured: v.isFeatured,
+    author_name: v.authorName,
     reading_minutes: v.readingMinutes,
     cover_image_path: v.coverImagePath,
     cover_image_alt: v.coverImageAlt,
@@ -408,9 +414,14 @@ export async function saveArticle(
   };
   const supabase = await createSupabaseServerClient();
   const id = idOf(formData);
+  // Related tours are replaced in one step after the article is saved.
+  const setTours = (postId: string) =>
+    supabase.rpc("set_blog_post_tours", { p_post_id: postId, p_tour_ids: v.tourIds });
   if (id) {
     const { error } = await supabase.from("blog_posts").update(row).eq("id", id);
     if (error) return dbErrorMessage(error);
+    const { error: toursError } = await setTours(id);
+    if (toursError) return dbErrorMessage(toursError);
     return saved(published(v.status) ? "Saved and live on the website." : "Saved.");
   }
   const { data, error } = await supabase
@@ -419,6 +430,8 @@ export async function saveArticle(
     .select("id")
     .single();
   if (error) return dbErrorMessage(error);
+  const { error: toursError } = await setTours(data.id);
+  if (toursError) return dbErrorMessage(toursError);
   updateTag(CONTENT_TAG);
   redirect(`/admin/travel-guide/${data.id}?created=1`);
 }

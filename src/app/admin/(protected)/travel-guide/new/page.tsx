@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { AccessDenied } from "@/components/admin/admin-states";
 import { EditorHeader } from "@/components/admin/editor-header";
 import { requireStaffPage } from "@/lib/auth/session";
-import { listMedia } from "@/services/admin-content";
+import { getOptions, listMedia } from "@/services/admin-content";
 
 import { ArticleForm } from "../article-form";
 
@@ -20,7 +20,7 @@ More text.`;
 export default async function NewArticlePage() {
   const { allowed } = await requireStaffPage("content.manage", "/admin/travel-guide/new");
   if (!allowed) return <AccessDenied />;
-  const media = await listMedia();
+  const [media, options] = await Promise.all([listMedia(), getOptions()]);
   return (
     <div className="max-w-4xl">
       <EditorHeader
@@ -32,6 +32,7 @@ export default async function NewArticlePage() {
         article={null}
         bodyMarkup={STARTER}
         mediaPaths={media.map((m) => m.path)}
+        tours={options.tours}
       />
     </div>
   );

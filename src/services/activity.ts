@@ -13,7 +13,13 @@ export const ACTIVITY_PAGE_SIZE = 50;
 export type ActivityFilters = { area?: ActivityArea; actor?: string };
 
 export type StaffEvent =
-  "signed_in" | "signed_out" | "password_changed" | "bookings_exported";
+  | "signed_in"
+  | "signed_out"
+  | "password_changed"
+  | "bookings_exported"
+  | "visitors_exported"
+  | "subscribers_exported"
+  | "visitor_erased";
 
 /** Admins only (RLS): newest first, filtered by area and staff member. */
 export async function listActivity(

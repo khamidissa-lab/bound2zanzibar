@@ -10,6 +10,7 @@ import {
 import { DiscoveryPanel } from "@/components/content/discovery-panel";
 import { WhyTravel } from "@/components/content/why-travel";
 import { AmbientVideo } from "@/components/home/ambient-video";
+import { ReviewsSection } from "@/components/reviews/reviews-section";
 import { TravellerTypes } from "@/components/home/traveller-types";
 import { LocaleLink as Link } from "@/components/i18n/locale-link";
 import { MarketSwitcher } from "@/components/pricing/market-switcher";
@@ -27,6 +28,7 @@ import {
   getDestinations,
   getNameLookups,
   getPackages,
+  getReviews,
   getTours,
 } from "@/services/content";
 
@@ -74,6 +76,7 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
     packages,
     articles,
     lookups,
+    latestReviews,
   ] = await Promise.all([
     getTours({ featured: true }, locale),
     getTours({}, locale),
@@ -83,6 +86,7 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
     getPackages({ featured: true }, locale),
     getArticles(locale),
     getNameLookups(locale),
+    getReviews({ limit: 3 }),
   ]);
 
   // The search goes to Zanzibar tours, which excludes safaris (they have their own page).
@@ -371,6 +375,12 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
 
       {/* --------------------------------------------- 06 Why us + reviews */}
       <WhyTravel index="06" locale={locale} />
+      <ReviewsSection
+        reviews={latestReviews}
+        locale={locale}
+        headingId="home-reviews"
+        title={t.reviews.homeTitle}
+      />
 
       {/* Testimonials: only genuine reviews will be published. */}
       <section aria-labelledby="reviews-heading" className="pb-20 sm:pb-28">

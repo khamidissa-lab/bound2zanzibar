@@ -80,7 +80,7 @@ export function SiteHeader({ locale }: { locale: Locale }) {
 
       {/* Solid (not translucent) so the multiplied logo stays clean. */}
       <header className="sticky top-0 z-40 border-b border-ocean-deep/10 bg-warm-white">
-        <div className="container-page flex h-[var(--header-height)] items-center justify-between gap-4">
+        <div className="container-page flex h-[var(--header-height)] items-center justify-between gap-2 sm:gap-4">
           <Logo priority homeLabel={t.nav.home} />
 
           <nav
@@ -94,7 +94,7 @@ export function SiteHeader({ locale }: { locale: Locale }) {
             </Suspense>
           </nav>
 
-          <div className="flex items-center gap-1 sm:gap-2">
+          <div className="flex shrink-0 items-center gap-0.5 sm:gap-2">
             {/* Reads the URL, so it waits for it on pages built without one. */}
             <Suspense
               fallback={
@@ -109,14 +109,15 @@ export function SiteHeader({ locale }: { locale: Locale }) {
               href={bookNowHref}
               className={buttonVariants({
                 size: "sm",
-                className: "sm:h-10 sm:px-5",
+                className: "px-2.5 sm:h-10 sm:px-5",
               })}
             >
               {t.nav.bookNow}
+              {/* The arrow is dropped on phones so the header fits 360px screens. */}
               <ArrowUpRight
                 aria-hidden="true"
                 data-icon="inline-end"
-                className="rtl:-scale-x-100"
+                className="hidden sm:inline rtl:-scale-x-100"
               />
             </Link>
             <div className={compactNav ? "xl:hidden" : "2xl:hidden"}>

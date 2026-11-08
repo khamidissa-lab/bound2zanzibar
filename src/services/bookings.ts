@@ -82,6 +82,8 @@ export type BookingDetail = BookingListRow & {
   updated_at: string;
   /** Options chosen at request time (snapshot); loaded on the detail page. */
   options?: BookingOptionSnapshot[];
+  /** Private review link key, created when the booking is completed. */
+  review_token?: string | null;
 };
 
 export type BookingOptionSnapshot = {
@@ -200,7 +202,7 @@ export async function getBooking(reference: string): Promise<{
   const { data, error } = await supabase
     .from("bookings")
     .select(
-      `${LIST_COLUMNS}, pickup_location, message, internal_notes, source, updated_at, options, events:booking_status_events(from_status, to_status, changed_by, created_at), payments:booking_payments(id, amount, currency, method, reference, paid_on, notes, recorded_by, created_at)`,
+      `${LIST_COLUMNS}, pickup_location, message, internal_notes, source, updated_at, options, review_token, events:booking_status_events(from_status, to_status, changed_by, created_at), payments:booking_payments(id, amount, currency, method, reference, paid_on, notes, recorded_by, created_at)`,
     )
     .eq("reference", reference)
     .maybeSingle();

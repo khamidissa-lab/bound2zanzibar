@@ -469,6 +469,88 @@ export const fr: Messages = {
       "Bonjour, j’ai envoyé une demande de voyage avec la référence {ref}.",
     footerLink: "Composer mon voyage",
   },
+  reviews: {
+    eyebrow: "Avis",
+    title: "Avis de nos voyageurs",
+    homeTitle: "Ce que disent nos voyageurs",
+    average: "{average} sur 5",
+    countOne: "1 avis vérifié",
+    countMany: "{n} avis vérifiés",
+    stars: "{n} étoiles sur 5",
+    verified: "Voyageur vérifié",
+    policy:
+      "Seuls les voyageurs ayant voyagé avec nous peuvent laisser un avis, et chaque avis est vérifié avant publication.",
+  },
+  reviewPage: {
+    metaTitle: "Donnez votre avis",
+    greeting: "Bonjour {name}, comment s’est passé votre voyage : {item} ?",
+    intro:
+      "Votre avis aide les autres voyageurs. Il apparaîtra sur notre site après vérification par notre équipe.",
+    ratingLegend: "Votre note",
+    titleLabel: "Titre (facultatif)",
+    bodyLabel: "Votre avis",
+    displayNameLabel: "Nom affiché",
+    displayNameHint: "Par exemple votre prénom et une initiale.",
+    countryLabel: "Pays (facultatif)",
+    consent:
+      "J’accepte que Bound to Zanzibar publie cet avis avec le nom et le pays ci-dessus.",
+    submit: "Envoyer mon avis",
+    sending: "Envoi…",
+    thanksTitle: "Merci !",
+    thanksBody:
+      "Nous avons bien reçu votre avis. Il apparaîtra sur le site après vérification par notre équipe.",
+    alreadyTitle: "Merci — vous avez déjà donné votre avis sur ce voyage",
+    invalidTitle: "Ce lien d’avis n’est pas valide",
+    invalidBody:
+      "Le lien est peut-être incomplet, ou le voyage n’est pas encore terminé. Si vous avez besoin d’aide, contactez-nous.",
+  },
+  journal: {
+    categories: {
+      "zanzibar-guide": "Guide de Zanzibar",
+      "things-to-do": "Que faire à Zanzibar",
+      "safari-guides": "Guides de safari en Tanzanie",
+      "travel-tips": "Conseils de voyage",
+      "culture-history": "Culture et histoire",
+      "beach-islands": "Plages et îles",
+    },
+    all: "Tous",
+    filter: "Filtrer les articles par catégorie",
+    featured: "À la une",
+    byline: "Par {author}",
+    team: "L’équipe Bound to Zanzibar",
+    relatedTitle: "Expériences citées dans cet article",
+    noneInCategory: "Aucun article dans cette catégorie pour le moment.",
+  },
+  consent: {
+    title: "Cookies et statistiques de visite",
+    body: "Avec votre accord, nous utilisons notre propre cookie pour savoir quelles pages et excursions intéressent nos visiteurs, afin d'améliorer nos voyages et de mieux répondre à vos demandes. Aucun cookie publicitaire, rien n'est vendu ni partagé.",
+    accept: "Accepter",
+    decline: "Refuser",
+    privacy: "Politique de confidentialité",
+    settings: "Paramètres des cookies",
+  },
+  newsletter: {
+    title: "Idées de voyage par e-mail",
+    body: "Quelques conseils de saison et nos nouvelles excursions. Pas de spam ; désinscription à tout moment.",
+    label: "Adresse e-mail",
+    consent: "J'accepte de recevoir des e-mails de Bound to Zanzibar.",
+    submit: "S'abonner",
+    success: "Merci — vous êtes inscrit(e).",
+    invalidEmail: "Saisissez une adresse e-mail valide.",
+    consentRequired: "Veuillez cocher la case pour donner votre accord.",
+    error:
+      "L'inscription n'est pas disponible pour le moment. Veuillez réessayer plus tard.",
+  },
+  tracking: {
+    title: "Cookies et statistiques de visite",
+    items: [
+      "Si vous acceptez, nous enregistrons un identifiant de visiteur aléatoire dans notre propre cookie pendant 6 mois au maximum. Il enregistre les pages et excursions consultées, la durée de votre visite et les clics sur les boutons Réserver, WhatsApp et Contact, ainsi que votre pays et votre ville approximatifs, le type d'appareil, le navigateur et le système d'exploitation. Nous ne conservons pas votre adresse IP.",
+      "Si vous nous envoyez un formulaire de réservation, de demande, de voyage sur mesure ou de newsletter, le nom, l'e-mail et le numéro de téléphone saisis sont associés à cet enregistrement afin que notre équipe comprenne vos centres d'intérêt et vous réponde mieux.",
+      "Si vous refusez, nous comptons seulement les pages vues de façon anonyme (page, pays et type d'appareil), sans aucun identifiant.",
+      "Seuls notre équipe de réservation et nos administrateurs peuvent voir ces informations. Elles ne sont jamais vendues ni utilisées à des fins publicitaires. L'historique d'activité est supprimé après 13 mois.",
+      "Vous pouvez modifier votre choix à tout moment avec « Paramètres des cookies » en bas de chaque page. Refuser après avoir accepté supprime votre enregistrement de visiteur.",
+    ],
+  },
   tours: {
     metaTitle: "Excursions et expériences à Zanzibar",
     metaDescription:
@@ -917,6 +999,15 @@ export const fr: Messages = {
     retry: "Réessayer",
   },
   errors: {
+    "This review link isn't valid.": "Ce lien d’avis n’est pas valide.",
+    "We've already received a review for this trip. Thank you!":
+      "Nous avons déjà reçu un avis pour ce voyage. Merci !",
+    "Choose a rating from 1 to 5 stars.": "Choisissez une note de 1 à 5 étoiles.",
+    "Enter the name to show with your review.":
+      "Indiquez le nom à afficher avec votre avis.",
+    "Use 60 characters or fewer.": "Utilisez 60 caractères maximum.",
+    "Please agree so we can publish your review.":
+      "Veuillez accepter pour que nous puissions publier votre avis.",
     "Enter a budget greater than zero, or leave it empty.":
       "Indiquez un budget supérieur à zéro, ou laissez vide.",
     "Use 80 characters or fewer.": "Utilisez 80 caractères maximum.",

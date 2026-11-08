@@ -9,6 +9,7 @@ import { formValues, type FormState } from "@/lib/forms";
 import { isSupabaseConfigured } from "@/lib/supabase/env";
 import { zanzibarDate } from "@/services/admin-dashboard-model";
 import { submitBookingRequest } from "@/services/bookings";
+import { identifyCurrentVisitor } from "@/services/visitor-tracking";
 
 const UNAVAILABLE = `Online booking requests aren't available right now. Please email ${contact.email} or call ${contact.phoneDisplay} and we'll help you directly.`;
 
@@ -60,5 +61,14 @@ export async function requestBooking(
     return { status: "error", message: friendly ?? UNAVAILABLE, values: echo };
   }
 
+  // Links the details to the visitor record (only with tracking consent).
+  await identifyCurrentVisitor({
+    source: "booking",
+    email: parsed.data.email,
+    name: parsed.data.customerName,
+    phone: parsed.data.phone,
+    reference: result.reference,
+    item: parsed.data.item,
+  });
   redirect(`${received}?ref=${encodeURIComponent(result.reference)}`);
 }

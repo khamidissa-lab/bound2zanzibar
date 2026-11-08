@@ -165,6 +165,8 @@ describe("articleSchema", () => {
       excerpt: "",
       body: "## When\nAny time.",
       tags: "Planning, Seasons,",
+      category: "travel-tips",
+      authorName: "",
       readingMinutes: "",
       coverImagePath: "",
       coverImageAlt: "",
@@ -176,5 +178,18 @@ describe("articleSchema", () => {
     expect(parsed.body).toEqual([{ heading: "When", paragraphs: ["Any time."] }]);
     expect(parsed.tags).toEqual(["Planning", "Seasons"]);
     expect(parsed.readingMinutes).toBeNull();
+    expect(parsed.isFeatured).toBe(false);
+    expect(parsed.authorName).toBeNull();
+    expect(parsed.tourIds).toEqual([]);
+  });
+
+  it("rejects an unknown category", () => {
+    const result = articleSchema.safeParse({
+      title: "A",
+      body: "Text",
+      category: "news",
+      status: "draft",
+    });
+    expect(result.success).toBe(false);
   });
 });
