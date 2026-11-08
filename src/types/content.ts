@@ -127,6 +127,10 @@ export type Destination = {
   summary: string;
   description: string[];
   highlights: string[];
+  /** Safari parks: animals visitors may see (never guaranteed). */
+  wildlife: string[];
+  /** Safari parks: when to go, in a sentence or two; "" when not set. */
+  bestTime: string;
   coverImage: MediaImage;
   featured: boolean;
   status: PublishStatus;

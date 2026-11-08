@@ -90,6 +90,27 @@ export function DestinationForm({
         />
       </FieldSet>
 
+      <FieldSet
+        legend="Safari details"
+        description="For safari parks. Shown with a note that sightings can't be guaranteed. Leave empty for Zanzibar destinations."
+      >
+        <TextAreaField
+          name="wildlife"
+          label="Wildlife visitors may see"
+          defaultValue={toLines(d?.wildlife)}
+          hint="One animal per line. Only list animals that genuinely live in the park."
+          error={e.wildlife}
+        />
+        <TextAreaField
+          name="bestTime"
+          label="Best time to visit"
+          defaultValue={d?.best_time ?? ""}
+          rows={4}
+          maxLength={800}
+          error={e.bestTime}
+        />
+      </FieldSet>
+
       <FieldSet legend="Image">
         <ImagePicker
           mediaPaths={mediaPaths}

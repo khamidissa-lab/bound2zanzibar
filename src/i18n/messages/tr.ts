@@ -395,6 +395,68 @@ export const tr: Messages = {
       "Fikirlerinizi, tarihlerinizi ve grubunuzu anlatın, sizin için bir plan hazırlayalım.",
     customCta: "Planlarınızı anlatın",
   },
+  journey: {
+    metaTitle: "Zanzibar Gezinizi Tasarlayın",
+    metaDescription:
+      "Zanzibar ve Tanzanya için fikirlerinizi paylaşın, ekibimizden kişiye özel bir program ve fiyat teklifi alın.",
+    eyebrow: "Size özel",
+    title: "Zanzibar gezinizi tasarlayın",
+    description:
+      "Nereye, ne zaman gitmek istediğinizi ve nasıl seyahat etmeyi sevdiğinizi anlatın. Ekibimiz size özel bir program ve fiyat teklifi hazırlasın.",
+    howTitle: "Nasıl çalışır",
+    how: [
+      "Fikirlerinizi formda paylaşın.",
+      "Önerilen bir program ve fiyat teklifiyle e-postayla yanıt veririz.",
+      "Size uygun olana kadar birlikte düzenleriz, ardından onaylarsınız.",
+    ],
+    noPayment: "Bu aşamada ödeme alınmaz ve rezervasyon yapılmaz.",
+    whereLegend: "Nereye gitmek istersiniz?",
+    whereHint: "İlginizi çekenleri seçin ya da boş bırakın, biz önerelim.",
+    zanzibar: "Zanzibar",
+    mainland: "Tanzanya anakarası",
+    whenLegend: "Ne zaman seyahat ediyorsunuz?",
+    whenHint: "Henüz karar vermediyseniz tarihleri boş bırakın.",
+    startDate: "Varış tarihi",
+    endDate: "Ayrılış tarihi",
+    flexible: "Tarihlerim esnek",
+    whoLegend: "Kimler seyahat ediyor?",
+    stayLegend: "Konaklama tercihi",
+    accommodation: {
+      budget: "Ekonomik",
+      mid_range: "Orta sınıf",
+      luxury: "Lüks",
+      mixed: "Karışık",
+      not_sure: "Henüz emin değilim",
+    },
+    budgetLegend: "Kişi başı yaklaşık bütçe",
+    budgetHint: "İsteğe bağlı. Uluslararası uçuşlar hariç.",
+    budgetAmount: "Tutar",
+    interestsLegend: "Neler yapmak istersiniz?",
+    interestsHint: "İstediklerinizi seçin.",
+    moreLegend: "Başka bir şey var mı?",
+    special: "Özel istekler",
+    specialHint:
+      "Örneğin beslenme ihtiyaçları, erişilebilirlik, çocukların yaşları ya da bir kutlama.",
+    message: "Fikirleriniz",
+    contactLegend: "Bilgileriniz",
+    name: "Ad soyad",
+    email: "E-posta",
+    phone: "Telefon veya WhatsApp (isteğe bağlı)",
+    country: "İkamet ülkesi (isteğe bağlı)",
+    consent:
+      "Bound to Zanzibar'ın bu talep hakkında benimle iletişime geçmesini kabul ediyorum.",
+    submit: "Talebimi gönder",
+    sending: "Gönderiliyor…",
+    receivedMetaTitle: "Gezi talebi alındı",
+    receivedTitle: "Teşekkürler — fikirlerinizi aldık",
+    receivedBody:
+      "Ekibimiz talebinizi inceleyip size özel bir öneriyle e-postayla yanıt verecek.",
+    reference: "Talep numaranız",
+    keep: "Bu numarayı saklayın.",
+    whatsapp: "WhatsApp'tan bize gönderin",
+    whatsappMessage: "Merhaba, {ref} numaralı bir gezi talebi gönderdim.",
+    footerLink: "Gezinizi tasarlayın",
+  },
   tours: {
     metaTitle: "Zanzibar Turları ve Deneyimleri",
     metaDescription:
@@ -515,6 +577,10 @@ export const tr: Messages = {
     note: "Talep, onaylanmış bir rezervasyon değildir. Ekibimiz herhangi bir rezervasyon yapılmadan önce uygunluğu ve kesin fiyatı teyit eder; çevrimiçi ödeme alınmaz.",
   },
   safari: {
+    combosTitle: "Ada ve parkları kendiniz mi birleştirmek istersiniz?",
+    combosBody:
+      "Tarihlerinize, bütçenize ve temponuza göre Zanzibar ve safariyi birleştiren bir gezi hazırlayabiliriz.",
+    combosCta: "Birleşik gezi tasarlayın",
     metaTitle: "Zanzibar’dan Tanzanya Safarisi",
     metaDescription:
       "Zanzibar’ı bir Tanzanya safarisiyle birleştirin: Serengeti, Ngorongoro, Tarangire, Ruaha, Nyerere, şempanze yürüyüşleri ve daha fazlası.",
@@ -608,6 +674,18 @@ export const tr: Messages = {
     safariEyebrow: "Safaride",
   },
   destination: {
+    wildlifeTitle: "Görebileceğiniz hayvanlar",
+    sightings:
+      "Vahşi yaşam vahşidir: hayvanları görmek garanti edilemez; mevsime, bölgeye ve şansa bağlıdır.",
+    bestTimeTitle: "En iyi ziyaret zamanı",
+    stayTitle: "Nerede kalacaksınız",
+    stayBody:
+      "Parkın içinde ve çevresinde, sadeden lükse lodge'lar ve çadır kamplar. Fiyat teklifimizde bütçenize uygun yerler öneririz.",
+    planTitle: "{name} için safari planlayın",
+    planBody:
+      "Tarihlerinizi ve grubunuzu söyleyin; bir rota, konaklama ve fiyat teklifi önerelim. Siz onaylayana kadar hiçbir şey ayırtılmaz.",
+    planCta: "Safarinizi tasarlayın",
+    enquire: "Soru sor",
     notFound: "Destinasyon bulunamadı",
     about: "{name} hakkında",
     highlights: "Öne çıkanlar",
@@ -824,6 +902,18 @@ export const tr: Messages = {
     retry: "Tekrar dene",
   },
   errors: {
+    "Enter a budget greater than zero, or leave it empty.":
+      "Sıfırdan büyük bir bütçe girin ya da boş bırakın.",
+    "Use 80 characters or fewer.": "En fazla 80 karakter kullanın.",
+    "Add a start date first.": "Önce bir varış tarihi ekleyin.",
+    "The end date must be on or after the start date.":
+      "Ayrılış tarihi varış tarihiyle aynı ya da sonra olmalı.",
+    "Trips can be up to 90 days long.": "Geziler en fazla 90 gün sürebilir.",
+    "Please check your travel dates.": "Lütfen seyahat tarihlerinizi kontrol edin.",
+    "Please choose destinations from the list.": "Lütfen listeden varış noktaları seçin.",
+    "Please choose interests from the list.": "Lütfen listeden ilgi alanları seçin.",
+    "Please check your budget.": "Lütfen bütçenizi kontrol edin.",
+    "Some of your answers are too long.": "Bazı yanıtlarınız çok uzun.",
     "Please check the options you chose.": "Lütfen seçtiğiniz seçenekleri kontrol edin.",
     "Please check the highlighted fields.": "Lütfen işaretli alanları kontrol edin.",
     "Choose a tour or package.": "Bir tur veya paket seçin.",

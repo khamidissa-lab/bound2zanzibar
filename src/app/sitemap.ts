@@ -18,6 +18,7 @@ const STATIC_PATHS = [
   "/contact",
   "/book",
   "/trip-finder",
+  "/design-your-journey",
 ];
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {

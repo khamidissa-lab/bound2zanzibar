@@ -198,6 +198,8 @@ export function mapDestination(row: Tables<"destinations">): Destination {
     summary: row.short_description,
     description: splitParagraphs(row.description),
     highlights: row.highlights,
+    wildlife: row.wildlife,
+    bestTime: row.best_time ?? "",
     coverImage: image(row.cover_image_path, row.cover_image_alt, row.name, theme),
     featured: row.is_featured,
     status: row.status,

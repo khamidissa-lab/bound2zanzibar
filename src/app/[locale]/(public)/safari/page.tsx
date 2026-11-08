@@ -1,11 +1,14 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import { ArrowUpRight } from "lucide-react";
 
 import { DestinationCard, PackageCard, TourCard } from "@/components/content/cards";
+import { LocaleLink as Link } from "@/components/i18n/locale-link";
 import { MarketSwitcher } from "@/components/pricing/market-switcher";
 import { Breadcrumbs } from "@/components/shared/breadcrumbs";
 import { SampleBadge } from "@/components/shared/sample-badge";
 import { SectionHeading } from "@/components/shared/section-heading";
+import { buttonVariants } from "@/components/ui/button";
 import { groupByCircuit } from "@/config/safari-circuits";
 import { localeAlternates, pageLocale } from "@/i18n/seo";
 import { getI18n } from "@/i18n/server";
@@ -150,6 +153,23 @@ export default async function SafariPage({ params }: PageProps<"/[locale]/safari
               {packages.map((pkg) => (
                 <PackageCard key={pkg.slug} pkg={pkg} variant="row" className="reveal" />
               ))}
+            </div>
+            <div className="mt-10 flex flex-wrap items-center justify-between gap-6 bg-ivory p-6 sm:p-8">
+              <div className="max-w-xl">
+                <p className="font-display text-2xl text-ocean-deep">{s.combosTitle}</p>
+                <p className="mt-1 text-muted-foreground">{s.combosBody}</p>
+              </div>
+              <Link
+                href="/design-your-journey"
+                className={buttonVariants({ size: "lg" })}
+              >
+                {s.combosCta}
+                <ArrowUpRight
+                  aria-hidden="true"
+                  data-icon="inline-end"
+                  className="rtl:-scale-x-100"
+                />
+              </Link>
             </div>
           </div>
         </section>

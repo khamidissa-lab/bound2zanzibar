@@ -105,6 +105,12 @@ const groups: { title: string | null; items: NavItem[] }[] = [
         permission: "bookings.manage",
       },
       {
+        label: "Journey requests",
+        href: "/admin/journeys",
+        icon: Compass,
+        permission: "bookings.manage",
+      },
+      {
         label: "Customers",
         href: "/admin/customers",
         icon: Contact,

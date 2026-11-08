@@ -403,6 +403,69 @@ export const it: Messages = {
     customBody: "Raccontaci idee, date e gruppo, e prepareremo un programma per te.",
     customCta: "Raccontaci i tuoi piani",
   },
+  journey: {
+    metaTitle: "Progetta il tuo viaggio a Zanzibar",
+    metaDescription:
+      "Raccontaci le tue idee per Zanzibar e la Tanzania e ricevi dal nostro team un itinerario e un preventivo personalizzati.",
+    eyebrow: "Su misura",
+    title: "Progetta il tuo viaggio a Zanzibar",
+    description:
+      "Dicci dove vorresti andare, quando e come ti piace viaggiare. Il nostro team preparerà per te un itinerario e un preventivo personalizzati.",
+    howTitle: "Come funziona",
+    how: [
+      "Condividi le tue idee nel modulo.",
+      "Ti rispondiamo via e-mail con un itinerario e un preventivo.",
+      "Lo adattiamo insieme finché è perfetto, poi confermi.",
+    ],
+    noPayment: "Non si paga nulla e non viene prenotato nulla in questa fase.",
+    whereLegend: "Dove vorresti andare?",
+    whereHint:
+      "Scegli ciò che ti interessa, oppure lascia vuoto e ti faremo dei suggerimenti.",
+    zanzibar: "Zanzibar",
+    mainland: "Tanzania continentale",
+    whenLegend: "Quando viaggi?",
+    whenHint: "Lascia vuote le date se non hai ancora deciso.",
+    startDate: "Data di arrivo",
+    endDate: "Data di partenza",
+    flexible: "Le mie date sono flessibili",
+    whoLegend: "Chi viaggia?",
+    stayLegend: "Sistemazione preferita",
+    accommodation: {
+      budget: "Economica",
+      mid_range: "Di fascia media",
+      luxury: "Di lusso",
+      mixed: "Un mix",
+      not_sure: "Non so ancora",
+    },
+    budgetLegend: "Budget indicativo a persona",
+    budgetHint: "Facoltativo. Esclusi i voli internazionali.",
+    budgetAmount: "Importo",
+    interestsLegend: "Cosa ti piacerebbe fare?",
+    interestsHint: "Scegli quello che vuoi.",
+    moreLegend: "Altro?",
+    special: "Esigenze particolari",
+    specialHint:
+      "Ad esempio esigenze alimentari, accessibilità, età dei bambini o una ricorrenza.",
+    message: "Le tue idee",
+    contactLegend: "I tuoi dati",
+    name: "Nome e cognome",
+    email: "E-mail",
+    phone: "Telefono o WhatsApp (facoltativo)",
+    country: "Paese di residenza (facoltativo)",
+    consent: "Accetto che Bound to Zanzibar mi contatti in merito a questa richiesta.",
+    submit: "Invia la richiesta",
+    sending: "Invio…",
+    receivedMetaTitle: "Richiesta di viaggio ricevuta",
+    receivedTitle: "Grazie — abbiamo ricevuto le tue idee",
+    receivedBody:
+      "Il nostro team esaminerà la tua richiesta e ti risponderà via e-mail con una proposta personalizzata.",
+    reference: "Codice della richiesta",
+    keep: "Conserva questo codice.",
+    whatsapp: "Inviacelo su WhatsApp",
+    whatsappMessage:
+      "Buongiorno, ho inviato una richiesta di viaggio con il codice {ref}.",
+    footerLink: "Progetta il tuo viaggio",
+  },
   tours: {
     metaTitle: "Escursioni ed esperienze a Zanzibar",
     metaDescription:
@@ -523,6 +586,10 @@ export const it: Messages = {
     note: "Una richiesta non è una prenotazione confermata. Il nostro team conferma disponibilità e prezzo definitivo prima di qualsiasi prenotazione, e non si effettuano pagamenti online.",
   },
   safari: {
+    combosTitle: "Preferisci un tuo mix di isole e parchi?",
+    combosBody:
+      "Possiamo creare un viaggio che unisce Zanzibar e safari in base alle tue date, al budget e al ritmo che preferisci.",
+    combosCta: "Progetta un viaggio combinato",
     metaTitle: "Safari in Tanzania da Zanzibar",
     metaDescription:
       "Unite Zanzibar a un safari in Tanzania: Serengeti, Ngorongoro, Tarangire, Ruaha, Nyerere, trekking con gli scimpanzé e molto altro.",
@@ -617,6 +684,18 @@ export const it: Messages = {
     safariEyebrow: "In safari",
   },
   destination: {
+    wildlifeTitle: "Fauna che potresti vedere",
+    sightings:
+      "La fauna è selvatica: gli avvistamenti non possono essere garantiti e dipendono dalla stagione, dalla zona e dalla fortuna.",
+    bestTimeTitle: "Periodo migliore",
+    stayTitle: "Dove alloggerai",
+    stayBody:
+      "Lodge e campi tendati nel parco e nei dintorni, dai più semplici ai più lussuosi. Nel preventivo ti proponiamo sistemazioni adatte al tuo budget.",
+    planTitle: "Organizza un safari a {name}",
+    planBody:
+      "Indicaci le date e il gruppo: ti proporremo un itinerario, gli alloggi e un preventivo. Nulla viene prenotato finché non confermi.",
+    planCta: "Progetta il tuo safari",
+    enquire: "Fai una domanda",
     notFound: "Destinazione non trovata",
     about: "Informazioni su {name}",
     highlights: "Punti salienti",
@@ -833,6 +912,18 @@ export const it: Messages = {
     retry: "Riprova",
   },
   errors: {
+    "Enter a budget greater than zero, or leave it empty.":
+      "Inserisci un budget maggiore di zero, oppure lascia vuoto.",
+    "Use 80 characters or fewer.": "Usa al massimo 80 caratteri.",
+    "Add a start date first.": "Inserisci prima la data di arrivo.",
+    "The end date must be on or after the start date.":
+      "La data di partenza deve essere uguale o successiva a quella di arrivo.",
+    "Trips can be up to 90 days long.": "I viaggi possono durare fino a 90 giorni.",
+    "Please check your travel dates.": "Controlla le date del viaggio.",
+    "Please choose destinations from the list.": "Scegli le destinazioni dall’elenco.",
+    "Please choose interests from the list.": "Scegli gli interessi dall’elenco.",
+    "Please check your budget.": "Controlla il budget.",
+    "Some of your answers are too long.": "Alcune risposte sono troppo lunghe.",
     "Please check the options you chose.": "Controlla le opzioni scelte.",
     "Please check the highlighted fields.": "Controllate i campi evidenziati.",
     "Choose a tour or package.": "Scegliete un’escursione o un pacchetto.",

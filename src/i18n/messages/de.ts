@@ -397,6 +397,69 @@ export const de: Messages = {
       "Teilen Sie uns Ihre Ideen, Reisedaten und Gruppe mit, und wir stellen einen Plan für Sie zusammen.",
     customCta: "Erzählen Sie uns von Ihren Plänen",
   },
+  journey: {
+    metaTitle: "Gestalten Sie Ihre Sansibar-Reise",
+    metaDescription:
+      "Teilen Sie uns Ihre Ideen für Sansibar und Tansania mit und erhalten Sie von unserem Team einen persönlichen Reiseplan mit Angebot.",
+    eyebrow: "Maßgeschneidert",
+    title: "Gestalten Sie Ihre Sansibar-Reise",
+    description:
+      "Sagen Sie uns, wohin Sie möchten, wann und wie Sie gern reisen. Unser Team stellt Ihnen einen persönlichen Reiseplan mit Angebot zusammen.",
+    howTitle: "So funktioniert es",
+    how: [
+      "Teilen Sie uns Ihre Ideen im Formular mit.",
+      "Wir antworten per E-Mail mit einem Reisevorschlag und Angebot.",
+      "Wir passen ihn gemeinsam mit Ihnen an, bis alles stimmt, dann bestätigen Sie.",
+    ],
+    noPayment: "Es wird nichts bezahlt und nichts gebucht.",
+    whereLegend: "Wohin möchten Sie reisen?",
+    whereHint:
+      "Wählen Sie, was Sie interessiert, oder lassen Sie es leer – wir machen Vorschläge.",
+    zanzibar: "Sansibar",
+    mainland: "Tansanisches Festland",
+    whenLegend: "Wann reisen Sie?",
+    whenHint: "Lassen Sie die Daten leer, wenn Sie noch nicht entschieden haben.",
+    startDate: "Ankunft",
+    endDate: "Abreise",
+    flexible: "Meine Reisedaten sind flexibel",
+    whoLegend: "Wer reist mit?",
+    stayLegend: "Unterkunft",
+    accommodation: {
+      budget: "Einfach",
+      mid_range: "Mittelklasse",
+      luxury: "Luxus",
+      mixed: "Eine Mischung",
+      not_sure: "Noch unsicher",
+    },
+    budgetLegend: "Ungefähres Budget pro Person",
+    budgetHint: "Optional. Ohne internationale Flüge.",
+    budgetAmount: "Betrag",
+    interestsLegend: "Was möchten Sie unternehmen?",
+    interestsHint: "Wählen Sie beliebig viele.",
+    moreLegend: "Sonst noch etwas?",
+    special: "Besondere Wünsche",
+    specialHint:
+      "Zum Beispiel Ernährung, Barrierefreiheit, Alter der Kinder oder ein Anlass zum Feiern.",
+    message: "Ihre Ideen",
+    contactLegend: "Ihre Angaben",
+    name: "Vollständiger Name",
+    email: "E-Mail",
+    phone: "Telefon oder WhatsApp (optional)",
+    country: "Wohnsitzland (optional)",
+    consent:
+      "Ich bin einverstanden, dass Bound to Zanzibar mich zu dieser Anfrage kontaktiert.",
+    submit: "Anfrage senden",
+    sending: "Wird gesendet…",
+    receivedMetaTitle: "Reiseanfrage erhalten",
+    receivedTitle: "Vielen Dank — wir haben Ihre Ideen erhalten",
+    receivedBody:
+      "Unser Team prüft Ihre Anfrage und antwortet Ihnen per E-Mail mit einem persönlichen Vorschlag.",
+    reference: "Ihre Anfragenummer",
+    keep: "Bewahren Sie diese Nummer auf.",
+    whatsapp: "Per WhatsApp an uns senden",
+    whatsappMessage: "Hallo, ich habe eine Reiseanfrage mit der Nummer {ref} gesendet.",
+    footerLink: "Reise gestalten",
+  },
   tours: {
     metaTitle: "Touren & Erlebnisse auf Sansibar",
     metaDescription:
@@ -517,6 +580,10 @@ export const de: Messages = {
     note: "Eine Anfrage ist keine bestätigte Buchung. Unser Team bestätigt Verfügbarkeit und Endpreis, bevor etwas gebucht wird, und online wird keine Zahlung entgegengenommen.",
   },
   safari: {
+    combosTitle: "Lieber Ihre eigene Kombination aus Inseln und Parks?",
+    combosBody:
+      "Wir stellen eine kombinierte Sansibar- und Safarireise nach Ihren Reisedaten, Ihrem Budget und Tempo zusammen.",
+    combosCta: "Kombinierte Reise gestalten",
     metaTitle: "Tansania-Safari ab Sansibar",
     metaDescription:
       "Verbinden Sie Sansibar mit einer Safari in Tansania: Serengeti, Ngorongoro, Tarangire, Ruaha, Nyerere, Schimpansen-Trekking und mehr.",
@@ -610,6 +677,18 @@ export const de: Messages = {
     safariEyebrow: "Auf Safari",
   },
   destination: {
+    wildlifeTitle: "Tiere, die Sie sehen können",
+    sightings:
+      "Tiere sind wild: Sichtungen können nicht garantiert werden und hängen von Jahreszeit, Gebiet und Glück ab.",
+    bestTimeTitle: "Beste Reisezeit",
+    stayTitle: "Wo Sie übernachten",
+    stayBody:
+      "Lodges und Zeltcamps im Park und in der Umgebung, von einfach bis luxuriös. In unserem Angebot schlagen wir Unterkünfte passend zu Ihrem Budget vor.",
+    planTitle: "Safari im {name} planen",
+    planBody:
+      "Nennen Sie uns Reisedaten und Gruppe, und wir schlagen Route, Unterkünfte und ein Angebot vor. Gebucht wird erst nach Ihrer Bestätigung.",
+    planCta: "Safari gestalten",
+    enquire: "Frage stellen",
     notFound: "Reiseziel nicht gefunden",
     about: "Über {name}",
     highlights: "Höhepunkte",
@@ -826,6 +905,20 @@ export const de: Messages = {
     retry: "Erneut versuchen",
   },
   errors: {
+    "Enter a budget greater than zero, or leave it empty.":
+      "Geben Sie ein Budget über null ein oder lassen Sie das Feld leer.",
+    "Use 80 characters or fewer.": "Verwenden Sie höchstens 80 Zeichen.",
+    "Add a start date first.": "Geben Sie zuerst ein Ankunftsdatum ein.",
+    "The end date must be on or after the start date.":
+      "Die Abreise muss am oder nach dem Ankunftsdatum liegen.",
+    "Trips can be up to 90 days long.": "Reisen können bis zu 90 Tage dauern.",
+    "Please check your travel dates.": "Bitte prüfen Sie Ihre Reisedaten.",
+    "Please choose destinations from the list.":
+      "Bitte wählen Sie Reiseziele aus der Liste.",
+    "Please choose interests from the list.":
+      "Bitte wählen Sie Interessen aus der Liste.",
+    "Please check your budget.": "Bitte prüfen Sie Ihr Budget.",
+    "Some of your answers are too long.": "Einige Ihrer Antworten sind zu lang.",
     "Please check the options you chose.": "Bitte prüfen Sie die gewählten Optionen.",
     "Please check the highlighted fields.": "Bitte prüfen Sie die markierten Felder.",
     "Choose a tour or package.": "Bitte wählen Sie eine Tour oder ein Paket.",

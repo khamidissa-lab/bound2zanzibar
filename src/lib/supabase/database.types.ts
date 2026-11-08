@@ -391,6 +391,8 @@ export type Database = {
           sort_order: number;
           created_at: string;
           updated_at: string;
+          wildlife: string[];
+          best_time: string | null;
         };
         Insert: {
           id?: string;
@@ -411,6 +413,8 @@ export type Database = {
           sort_order?: number;
           created_at?: string;
           updated_at?: string;
+          wildlife?: string[];
+          best_time?: string | null;
         };
         Update: {
           id?: string;
@@ -431,6 +435,8 @@ export type Database = {
           sort_order?: number;
           created_at?: string;
           updated_at?: string;
+          wildlife?: string[];
+          best_time?: string | null;
         };
         Relationships: [
         ];
@@ -473,6 +479,92 @@ export type Database = {
           updated_at?: string;
         };
         Relationships: [
+        ];
+      };
+      journey_requests: {
+        Row: {
+          id: string;
+          reference: string;
+          customer_name: string;
+          email: string;
+          phone: string | null;
+          country: string | null;
+          destinations: string[];
+          start_date: string | null;
+          end_date: string | null;
+          flexible_dates: boolean;
+          adults: number;
+          children: number;
+          accommodation: Database["public"]["Enums"]["accommodation_level"];
+          budget_amount: number | null;
+          budget_currency: string | null;
+          interests: string[];
+          special_requirements: string | null;
+          message: string | null;
+          locale: string;
+          status: Database["public"]["Enums"]["journey_status"];
+          internal_notes: string | null;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          reference?: string;
+          customer_name: string;
+          email: string;
+          phone?: string | null;
+          country?: string | null;
+          destinations?: string[];
+          start_date?: string | null;
+          end_date?: string | null;
+          flexible_dates?: boolean;
+          adults: number;
+          children?: number;
+          accommodation?: Database["public"]["Enums"]["accommodation_level"];
+          budget_amount?: number | null;
+          budget_currency?: string | null;
+          interests?: string[];
+          special_requirements?: string | null;
+          message?: string | null;
+          locale?: string;
+          status?: Database["public"]["Enums"]["journey_status"];
+          internal_notes?: string | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          id?: string;
+          reference?: string;
+          customer_name?: string;
+          email?: string;
+          phone?: string | null;
+          country?: string | null;
+          destinations?: string[];
+          start_date?: string | null;
+          end_date?: string | null;
+          flexible_dates?: boolean;
+          adults?: number;
+          children?: number;
+          accommodation?: Database["public"]["Enums"]["accommodation_level"];
+          budget_amount?: number | null;
+          budget_currency?: string | null;
+          interests?: string[];
+          special_requirements?: string | null;
+          message?: string | null;
+          locale?: string;
+          status?: Database["public"]["Enums"]["journey_status"];
+          internal_notes?: string | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "journey_requests_budget_currency_fkey";
+            columns: ["budget_currency"];
+            isOneToOne: false;
+            referencedRelation: "currencies";
+            referencedColumns: ["code"];
+          },
         ];
       };
       package_destinations: {
@@ -1236,14 +1328,38 @@ export type Database = {
         };
         Returns: undefined;
       };
+      submit_journey_request: {
+        Args: {
+          p_customer_name: string;
+          p_email: string;
+          p_adults: number;
+          p_children?: number;
+          p_phone?: string;
+          p_country?: string;
+          p_destinations?: string[];
+          p_start_date?: string;
+          p_end_date?: string;
+          p_flexible_dates?: boolean;
+          p_accommodation?: Database["public"]["Enums"]["accommodation_level"];
+          p_budget_amount?: number;
+          p_budget_currency?: string;
+          p_interests?: string[];
+          p_special_requirements?: string;
+          p_message?: string;
+          p_locale?: string;
+        };
+        Returns: string;
+      };
     };
     Enums: {
+      accommodation_level: "budget" | "mid_range" | "luxury" | "mixed" | "not_sure";
       booking_item_type: "tour" | "package";
       booking_status: "pending" | "confirmed" | "paid" | "rejected" | "cancelled" | "completed";
       customer_type: "adult" | "child" | "group";
       destination_region: "zanzibar" | "mainland";
       difficulty_level: "easy" | "moderate" | "challenging";
       inquiry_status: "new" | "in_progress" | "closed";
+      journey_status: "new" | "in_progress" | "quoted" | "closed";
       market: "resident" | "east_african" | "international";
       option_pricing: "per_person" | "per_booking";
       payment_method: "bank_transfer" | "mobile_money" | "card" | "cash" | "other";

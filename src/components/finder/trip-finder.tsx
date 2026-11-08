@@ -188,7 +188,7 @@ export function TripFinder({
             <p className="mt-2 text-white/80">{f.customBody}</p>
           </div>
           <Link
-            href="/contact"
+            href="/design-your-journey"
             className={buttonVariants({ variant: "light", size: "lg" })}
           >
             {f.customCta}

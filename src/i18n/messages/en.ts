@@ -405,6 +405,67 @@ export const en = {
       "Tell us your ideas, dates and group, and we'll put a plan together for you.",
     customCta: "Tell us your plans",
   },
+  journey: {
+    metaTitle: "Design Your Zanzibar Journey",
+    metaDescription:
+      "Tell us your ideas for Zanzibar and Tanzania and receive a personalised itinerary and quotation from our team.",
+    eyebrow: "Tailor-made",
+    title: "Design your Zanzibar journey",
+    description:
+      "Tell us where you'd like to go, when, and how you like to travel. Our team will put together a personalised itinerary and quotation for you.",
+    howTitle: "How it works",
+    how: [
+      "Share your ideas in the form.",
+      "We reply by email with a suggested itinerary and quotation.",
+      "We adjust it with you until it's right, then you confirm.",
+    ],
+    noPayment: "No payment is taken and nothing is booked at this stage.",
+    whereLegend: "Where would you like to go?",
+    whereHint: "Choose any that interest you, or leave this blank and we'll suggest.",
+    zanzibar: "Zanzibar",
+    mainland: "Mainland Tanzania",
+    whenLegend: "When are you travelling?",
+    whenHint: "Leave the dates empty if you haven't decided yet.",
+    startDate: "Arrival date",
+    endDate: "Departure date",
+    flexible: "My dates are flexible",
+    whoLegend: "Who's travelling?",
+    stayLegend: "Accommodation preference",
+    accommodation: {
+      budget: "Budget",
+      mid_range: "Mid-range",
+      luxury: "Luxury",
+      mixed: "A mix",
+      not_sure: "Not sure yet",
+    },
+    budgetLegend: "Approximate budget per person",
+    budgetHint: "Optional. Not including international flights.",
+    budgetAmount: "Amount",
+    interestsLegend: "What would you like to do?",
+    interestsHint: "Choose any.",
+    moreLegend: "Anything else?",
+    special: "Special requirements",
+    specialHint:
+      "For example dietary needs, accessibility, children's ages or a celebration.",
+    message: "Your ideas",
+    contactLegend: "Your details",
+    name: "Full name",
+    email: "Email",
+    phone: "Phone or WhatsApp (optional)",
+    country: "Country of residence (optional)",
+    consent: "I agree that Bound to Zanzibar may contact me about this request.",
+    submit: "Send my request",
+    sending: "Sending…",
+    receivedMetaTitle: "Journey request received",
+    receivedTitle: "Thank you — we have your ideas",
+    receivedBody:
+      "Our team will review your request and reply by email with a personalised proposal.",
+    reference: "Your request reference",
+    keep: "Keep this reference for your records.",
+    whatsapp: "Send it to us on WhatsApp",
+    whatsappMessage: "Hello, I've sent a journey request with reference {ref}.",
+    footerLink: "Design your journey",
+  },
   tours: {
     metaTitle: "Zanzibar Tours & Experiences",
     metaDescription:
@@ -524,6 +585,10 @@ export const en = {
     note: "A request isn't a confirmed booking. Our team confirms availability and the final price before anything is booked, and no payment is taken online.",
   },
   safari: {
+    combosTitle: "Prefer your own mix of islands and parks?",
+    combosBody:
+      "We can build a combined Zanzibar and safari trip around your dates, budget and pace.",
+    combosCta: "Design a combined trip",
     metaTitle: "Tanzania Safari from Zanzibar",
     metaDescription:
       "Combine Zanzibar with a Tanzania safari: the Serengeti, Ngorongoro, Tarangire, Ruaha, Nyerere, chimpanzee trekking and more.",
@@ -617,6 +682,18 @@ export const en = {
     safariEyebrow: "On safari",
   },
   destination: {
+    wildlifeTitle: "Wildlife you may see",
+    sightings:
+      "Wildlife is wild: sightings can't be guaranteed and depend on the season, the area and luck.",
+    bestTimeTitle: "Best time to visit",
+    stayTitle: "Where you'll stay",
+    stayBody:
+      "Lodges and tented camps in and around the park, from simple to luxurious. We suggest places to match your budget in your quote.",
+    planTitle: "Plan a safari to {name}",
+    planBody:
+      "Tell us your dates and group and we'll suggest a route, places to stay and a quote. Nothing is booked until you confirm.",
+    planCta: "Design your safari",
+    enquire: "Ask a question",
     notFound: "Destination not found",
     about: "About {name}",
     highlights: "Highlights",
@@ -834,6 +911,19 @@ export const en = {
    * server returns, so they can be shown in the visitor's language.
    */
   errors: {
+    "Enter a budget greater than zero, or leave it empty.":
+      "Enter a budget greater than zero, or leave it empty.",
+    "Use 80 characters or fewer.": "Use 80 characters or fewer.",
+    "Add a start date first.": "Add a start date first.",
+    "The end date must be on or after the start date.":
+      "The end date must be on or after the start date.",
+    "Trips can be up to 90 days long.": "Trips can be up to 90 days long.",
+    "Please check your travel dates.": "Please check your travel dates.",
+    "Please choose destinations from the list.":
+      "Please choose destinations from the list.",
+    "Please choose interests from the list.": "Please choose interests from the list.",
+    "Please check your budget.": "Please check your budget.",
+    "Some of your answers are too long.": "Some of your answers are too long.",
     "Please check the options you chose.": "Please check the options you chose.",
     "Please check the highlighted fields.": "Please check the highlighted fields.",
     "Choose a tour or package.": "Choose a tour or package.",

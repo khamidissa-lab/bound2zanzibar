@@ -406,6 +406,69 @@ export const fr: Messages = {
       "Partagez vos idées, vos dates et votre groupe, et nous préparerons un programme pour vous.",
     customCta: "Parlez-nous de vos projets",
   },
+  journey: {
+    metaTitle: "Composez votre voyage à Zanzibar",
+    metaDescription:
+      "Partagez vos idées pour Zanzibar et la Tanzanie et recevez un itinéraire et un devis personnalisés de notre équipe.",
+    eyebrow: "Sur mesure",
+    title: "Composez votre voyage à Zanzibar",
+    description:
+      "Dites-nous où vous aimeriez aller, quand, et comment vous aimez voyager. Notre équipe préparera pour vous un itinéraire et un devis personnalisés.",
+    howTitle: "Comment ça marche",
+    how: [
+      "Partagez vos idées dans le formulaire.",
+      "Nous répondons par e-mail avec un itinéraire et un devis.",
+      "Nous l’ajustons avec vous jusqu’à ce qu’il vous convienne, puis vous confirmez.",
+    ],
+    noPayment: "Aucun paiement n’est demandé et rien n’est réservé à ce stade.",
+    whereLegend: "Où aimeriez-vous aller ?",
+    whereHint:
+      "Choisissez ce qui vous intéresse, ou laissez vide et nous vous ferons des suggestions.",
+    zanzibar: "Zanzibar",
+    mainland: "Tanzanie continentale",
+    whenLegend: "Quand voyagez-vous ?",
+    whenHint: "Laissez les dates vides si vous n’avez pas encore décidé.",
+    startDate: "Date d’arrivée",
+    endDate: "Date de départ",
+    flexible: "Mes dates sont flexibles",
+    whoLegend: "Qui voyage ?",
+    stayLegend: "Type d’hébergement",
+    accommodation: {
+      budget: "Économique",
+      mid_range: "Milieu de gamme",
+      luxury: "Luxe",
+      mixed: "Un mélange",
+      not_sure: "Je ne sais pas encore",
+    },
+    budgetLegend: "Budget approximatif par personne",
+    budgetHint: "Facultatif. Hors vols internationaux.",
+    budgetAmount: "Montant",
+    interestsLegend: "Qu’aimeriez-vous faire ?",
+    interestsHint: "Choisissez ce qui vous plaît.",
+    moreLegend: "Autre chose ?",
+    special: "Besoins particuliers",
+    specialHint:
+      "Par exemple régime alimentaire, accessibilité, âge des enfants ou une occasion à fêter.",
+    message: "Vos idées",
+    contactLegend: "Vos coordonnées",
+    name: "Nom complet",
+    email: "E-mail",
+    phone: "Téléphone ou WhatsApp (facultatif)",
+    country: "Pays de résidence (facultatif)",
+    consent: "J’accepte que Bound to Zanzibar me contacte au sujet de cette demande.",
+    submit: "Envoyer ma demande",
+    sending: "Envoi…",
+    receivedMetaTitle: "Demande de voyage reçue",
+    receivedTitle: "Merci — nous avons bien reçu vos idées",
+    receivedBody:
+      "Notre équipe étudiera votre demande et vous répondra par e-mail avec une proposition personnalisée.",
+    reference: "Référence de votre demande",
+    keep: "Conservez cette référence.",
+    whatsapp: "Envoyez-la-nous sur WhatsApp",
+    whatsappMessage:
+      "Bonjour, j’ai envoyé une demande de voyage avec la référence {ref}.",
+    footerLink: "Composer mon voyage",
+  },
   tours: {
     metaTitle: "Excursions et expériences à Zanzibar",
     metaDescription:
@@ -526,6 +589,10 @@ export const fr: Messages = {
     note: "Une demande n’est pas une réservation confirmée. Notre équipe confirme les disponibilités et le prix définitif avant toute réservation, et aucun paiement n’est pris en ligne.",
   },
   safari: {
+    combosTitle: "Vous préférez votre propre combinaison d’îles et de parcs ?",
+    combosBody:
+      "Nous pouvons créer un voyage combinant Zanzibar et safari selon vos dates, votre budget et votre rythme.",
+    combosCta: "Composer un voyage combiné",
     metaTitle: "Safari en Tanzanie depuis Zanzibar",
     metaDescription:
       "Associez Zanzibar à un safari en Tanzanie : Serengeti, Ngorongoro, Tarangire, Ruaha, Nyerere, randonnée à la rencontre des chimpanzés et plus encore.",
@@ -620,6 +687,18 @@ export const fr: Messages = {
     safariEyebrow: "En safari",
   },
   destination: {
+    wildlifeTitle: "Faune que vous pourriez voir",
+    sightings:
+      "La faune est sauvage : les observations ne peuvent pas être garanties et dépendent de la saison, de la zone et de la chance.",
+    bestTimeTitle: "Meilleure période",
+    stayTitle: "Où vous logerez",
+    stayBody:
+      "Lodges et camps sous tente dans le parc et aux alentours, du plus simple au plus luxueux. Nous vous proposons des hébergements adaptés à votre budget dans notre devis.",
+    planTitle: "Organiser un safari à {name}",
+    planBody:
+      "Indiquez-nous vos dates et votre groupe : nous vous proposerons un itinéraire, des hébergements et un devis. Rien n’est réservé avant votre confirmation.",
+    planCta: "Composer mon safari",
+    enquire: "Poser une question",
     notFound: "Destination introuvable",
     about: "À propos de {name}",
     highlights: "Points forts",
@@ -838,6 +917,20 @@ export const fr: Messages = {
     retry: "Réessayer",
   },
   errors: {
+    "Enter a budget greater than zero, or leave it empty.":
+      "Indiquez un budget supérieur à zéro, ou laissez vide.",
+    "Use 80 characters or fewer.": "Utilisez 80 caractères maximum.",
+    "Add a start date first.": "Ajoutez d’abord une date d’arrivée.",
+    "The end date must be on or after the start date.":
+      "La date de départ doit être identique ou postérieure à la date d’arrivée.",
+    "Trips can be up to 90 days long.": "Les voyages peuvent durer jusqu’à 90 jours.",
+    "Please check your travel dates.": "Veuillez vérifier vos dates de voyage.",
+    "Please choose destinations from the list.":
+      "Veuillez choisir des destinations dans la liste.",
+    "Please choose interests from the list.":
+      "Veuillez choisir des centres d’intérêt dans la liste.",
+    "Please check your budget.": "Veuillez vérifier votre budget.",
+    "Some of your answers are too long.": "Certaines de vos réponses sont trop longues.",
     "Please check the options you chose.": "Veuillez vérifier les options choisies.",
     "Please check the highlighted fields.": "Veuillez vérifier les champs signalés.",
     "Choose a tour or package.": "Choisissez une excursion ou un séjour.",

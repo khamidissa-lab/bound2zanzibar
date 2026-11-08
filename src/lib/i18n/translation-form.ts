@@ -16,6 +16,8 @@ export const FIELD_LABELS: Record<string, string> = {
   description: "Description",
   duration: "Duration",
   highlights: "Highlights",
+  wildlife: "Wildlife you may see",
+  bestTime: "Best time to visit",
   included: "Included",
   excluded: "Not included",
   whatToBring: "What to bring",

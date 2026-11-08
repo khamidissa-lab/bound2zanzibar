@@ -50,10 +50,10 @@ sampleCategories.forEach((c, i) => {
 out("\n-- Destinations");
 sampleDestinations.forEach((d, i) => {
   out(`insert into public.destinations
-  (name, slug, region, short_description, description, highlights, cover_image_alt,
+  (name, slug, region, short_description, description, highlights, wildlife, best_time, cover_image_alt,
    is_featured, status, seo_title, seo_description, is_sample, sort_order)
 values (${q(d.name)}, ${q(d.slug)}, ${q(d.region)}, ${q(d.summary)}, ${paragraphs(d.description)},
-  ${arr(d.highlights)}, ${q(d.coverImage.alt)}, ${d.featured}, ${q(d.status)},
+  ${arr(d.highlights)}, ${arr(d.wildlife)}, ${q(d.bestTime || null)}, ${q(d.coverImage.alt)}, ${d.featured}, ${q(d.status)},
   ${q(d.seo.title)}, ${q(d.seo.description)}, ${d.isSample}, ${i});`);
 });
 

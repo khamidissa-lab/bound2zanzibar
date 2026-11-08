@@ -1,5 +1,6 @@
 import type { Tour } from "@/types/content";
 
+import { parkTourDestinations } from "./parks";
 import { standardExclusions, type TourBase } from "./shared";
 
 /*
@@ -44,7 +45,8 @@ function safari(
 ): TourBase {
   return {
     categorySlug: "safari",
-    destinationSlug: "",
+    // Park safaris belong to their park's page (drafts until published).
+    destinationSlug: parkTourDestinations[fields.slug] ?? "",
     duration: "Multi-day — tailored to your plans",
     included: [],
     excluded: standardExclusions,

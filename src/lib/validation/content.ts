@@ -195,6 +195,8 @@ export const destinationSchema = z
     shortDescription: text(300),
     description: text(10000),
     highlights: lines(),
+    wildlife: lines(30, 100),
+    bestTime: optionalText(800),
     coverImagePath: mediaPath,
     coverImageAlt: optionalText(200),
     isFeatured: checkbox,

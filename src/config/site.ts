@@ -49,6 +49,7 @@ export function localizedFooterNav(t: Messages): { title: string; items: NavItem
         { label: t.nav.packages, href: "/packages" },
         { label: t.nav.destinations, href: "/destinations" },
         { label: t.finder.metaTitle, href: "/trip-finder" },
+        { label: t.journey.footerLink, href: "/design-your-journey" },
       ],
     },
     {

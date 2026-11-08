@@ -245,6 +245,8 @@ export async function saveDestination(
     short_description: v.shortDescription,
     description: v.description,
     highlights: v.highlights,
+    wildlife: v.wildlife,
+    best_time: v.bestTime,
     cover_image_path: v.coverImagePath,
     cover_image_alt: v.coverImageAlt,
     is_featured: v.isFeatured,

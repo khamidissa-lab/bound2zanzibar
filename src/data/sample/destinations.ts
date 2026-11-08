@@ -1,6 +1,8 @@
 import type { Destination } from "@/types/content";
 
-export const sampleDestinations: Destination[] = [
+import { existingParkDetails, newParks } from "./parks";
+
+const baseDestinations: Omit<Destination, "wildlife" | "bestTime">[] = [
   {
     slug: "stone-town",
     name: "Stone Town",
@@ -246,4 +248,13 @@ export const sampleDestinations: Destination[] = [
     },
     isSample: true,
   },
+];
+
+/** Zanzibar destinations have no safari details; parks get theirs from parks.ts. */
+export const sampleDestinations: Destination[] = [
+  ...baseDestinations.map((d) => ({
+    ...d,
+    ...(existingParkDetails[d.slug] ?? { wildlife: [], bestTime: "" }),
+  })),
+  ...newParks,
 ];

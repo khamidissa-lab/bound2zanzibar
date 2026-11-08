@@ -17,77 +17,133 @@ insert into public.tour_categories (name, slug, description, sort_order) values 
 
 -- Destinations
 insert into public.destinations
-  (name, slug, region, short_description, description, highlights, cover_image_alt,
+  (name, slug, region, short_description, description, highlights, wildlife, best_time, cover_image_alt,
    is_featured, status, seo_title, seo_description, is_sample, sort_order)
 values ('Stone Town', 'stone-town', 'zanzibar', 'The historic heart of Zanzibar City — winding lanes, carved doors and a lively waterfront.', 'Stone Town is the old quarter of Zanzibar City and a UNESCO World Heritage Site. Its narrow streets reflect centuries of Swahili, Arab, Indian and European influence.
 
 Most visitors spend at least a day here exploring markets, historic buildings and the seafront, and many island boat trips depart from nearby beaches.',
-  array['Carved wooden doors and coral-stone architecture', 'Darajani market and local street food', 'Forodhani Gardens waterfront in the evening', 'Departure point for Prison Island and sandbank trips']::text[], 'Aerial view of Stone Town''s rooftops beside the turquoise sea', true, 'published',
+  array['Carved wooden doors and coral-stone architecture', 'Darajani market and local street food', 'Forodhani Gardens waterfront in the evening', 'Departure point for Prison Island and sandbank trips']::text[], '{}'::text[], null, 'Aerial view of Stone Town''s rooftops beside the turquoise sea', true, 'published',
   'Stone Town, Zanzibar', 'Explore Stone Town''s history, markets and waterfront with local guides.', true, 0);
 insert into public.destinations
-  (name, slug, region, short_description, description, highlights, cover_image_alt,
+  (name, slug, region, short_description, description, highlights, wildlife, best_time, cover_image_alt,
    is_featured, status, seo_title, seo_description, is_sample, sort_order)
 values ('Nungwi & Kendwa', 'nungwi-kendwa', 'zanzibar', 'Zanzibar''s northern tip, known for swimmable beaches and long sunsets.', 'On the northern tip of Unguja, Nungwi and neighbouring Kendwa are popular for their beaches, which are generally less affected by tides than the east coast.
 
 Nungwi also has a long tradition of dhow building, and the area is a common base for boat trips towards Mnemba.',
-  array['Beaches suited to swimming at most tides', 'Traditional dhow-building yards', 'Sunset views over the Indian Ocean']::text[], 'Aerial view of a white-sand beach and turquoise water in Zanzibar', true, 'published',
+  array['Beaches suited to swimming at most tides', 'Traditional dhow-building yards', 'Sunset views over the Indian Ocean']::text[], '{}'::text[], null, 'Aerial view of a white-sand beach and turquoise water in Zanzibar', true, 'published',
   'Nungwi & Kendwa, Zanzibar', 'Beach days, sunsets and dhow culture on Zanzibar''s northern coast.', true, 1);
 insert into public.destinations
-  (name, slug, region, short_description, description, highlights, cover_image_alt,
+  (name, slug, region, short_description, description, highlights, wildlife, best_time, cover_image_alt,
    is_featured, status, seo_title, seo_description, is_sample, sort_order)
 values ('Mnemba Atoll', 'mnemba', 'zanzibar', 'A protected reef off the north-east coast, popular for snorkelling.', 'Mnemba Atoll lies off Zanzibar''s north-east coast and is part of a marine conservation area. The reef is popular for snorkelling and diving.
 
 The island itself is private, so trips focus on the waters around the atoll. Marine life sightings vary by day and season.',
-  array['Clear water and coral reef', 'Snorkelling from a boat', 'Marine conservation area']::text[], 'Fish swimming over a colourful coral reef', true, 'published',
+  array['Clear water and coral reef', 'Snorkelling from a boat', 'Marine conservation area']::text[], '{}'::text[], null, 'Fish swimming over a colourful coral reef', true, 'published',
   'Mnemba Atoll, Zanzibar', 'Snorkelling trips to the protected reef around Mnemba Atoll.', true, 2);
 insert into public.destinations
-  (name, slug, region, short_description, description, highlights, cover_image_alt,
+  (name, slug, region, short_description, description, highlights, wildlife, best_time, cover_image_alt,
    is_featured, status, seo_title, seo_description, is_sample, sort_order)
 values ('Menai Bay & Kizimkazi', 'menai-bay-kizimkazi', 'zanzibar', 'The south-west coast: sandbanks, lagoons and the village of Kizimkazi.', 'Menai Bay is a conservation area on Zanzibar''s south-west coast, with sandbanks, mangrove lagoons and small islands.
 
 Kizimkazi, a fishing village at the southern tip, is known for dolphin-watching boat trips. Responsible operators keep a respectful distance from wildlife.',
-  array['Sandbanks and lagoons', 'Traditional dhow day trips', 'Dolphin watching from Kizimkazi']::text[], 'Aerial view of a narrow white sandbank in turquoise water off Zanzibar', false, 'published',
+  array['Sandbanks and lagoons', 'Traditional dhow day trips', 'Dolphin watching from Kizimkazi']::text[], '{}'::text[], null, 'Aerial view of a narrow white sandbank in turquoise water off Zanzibar', false, 'published',
   'Menai Bay & Kizimkazi, Zanzibar', 'Sandbanks, lagoons and dolphin watching on Zanzibar''s south coast.', true, 3);
 insert into public.destinations
-  (name, slug, region, short_description, description, highlights, cover_image_alt,
+  (name, slug, region, short_description, description, highlights, wildlife, best_time, cover_image_alt,
    is_featured, status, seo_title, seo_description, is_sample, sort_order)
 values ('Jozani Forest', 'jozani-forest', 'zanzibar', 'Zanzibar''s main remaining natural forest and home of the red colobus monkey.', 'Jozani Forest is part of Jozani Chwaka Bay National Park, the only national park on Zanzibar.
 
 It is best known for the Zanzibar red colobus, a monkey found only on the island, and for a mangrove boardwalk.',
-  array['Zanzibar red colobus monkeys', 'Forest walking trails', 'Mangrove boardwalk']::text[], 'Zanzibar red colobus monkey climbing through the trees', true, 'published',
+  array['Zanzibar red colobus monkeys', 'Forest walking trails', 'Mangrove boardwalk']::text[], '{}'::text[], null, 'Zanzibar red colobus monkey climbing through the trees', true, 'published',
   'Jozani Forest, Zanzibar', 'Visit Jozani Forest to see the endemic Zanzibar red colobus monkey.', true, 4);
 insert into public.destinations
-  (name, slug, region, short_description, description, highlights, cover_image_alt,
+  (name, slug, region, short_description, description, highlights, wildlife, best_time, cover_image_alt,
    is_featured, status, seo_title, seo_description, is_sample, sort_order)
 values ('Mikumi National Park', 'mikumi', 'mainland', 'An accessible mainland park, often combined with a Zanzibar stay.', 'Mikumi National Park is in southern-central Tanzania. Its open plains make it a practical choice for a short safari.
 
 Travellers based in Zanzibar can reach it by a combination of flights and road transfers, depending on schedules.',
-  array['Open plains suited to game drives', 'Short safari option', 'Combine with island time']::text[], 'Safari vehicles on the grassy plains of Mikumi National Park', false, 'published',
+  array['Open plains suited to game drives', 'Short safari option', 'Combine with island time']::text[], array['Elephant', 'Lion', 'Giraffe', 'Zebra', 'Buffalo', 'Wildebeest', 'Hippo']::text[], 'Game viewing is usually easiest in the dry season, roughly June to October, when animals gather near water. The park is open all year.', 'Safari vehicles on the grassy plains of Mikumi National Park', false, 'published',
   'Mikumi National Park, Tanzania', 'Short safaris to Mikumi National Park, combined with Zanzibar.', true, 5);
 insert into public.destinations
-  (name, slug, region, short_description, description, highlights, cover_image_alt,
+  (name, slug, region, short_description, description, highlights, wildlife, best_time, cover_image_alt,
    is_featured, status, seo_title, seo_description, is_sample, sort_order)
 values ('Serengeti & Ngorongoro', 'serengeti-ngorongoro', 'mainland', 'Tanzania''s northern circuit: vast plains and the Ngorongoro Crater.', 'The northern circuit includes Serengeti National Park and the Ngorongoro Conservation Area, two of Tanzania''s best-known wildlife areas.
 
 Trips usually start from Arusha or Kilimanjaro, which can be reached by flight from Zanzibar.',
-  array['Serengeti plains', 'Ngorongoro Crater', 'Multi-day game drives']::text[], 'Zebras grazing in the Ngorongoro Crater under shafts of light', true, 'published',
+  array['Serengeti plains', 'Ngorongoro Crater', 'Multi-day game drives']::text[], array['Wildebeest and zebra (the migration)', 'Lion', 'Leopard', 'Cheetah', 'Elephant', 'Buffalo', 'Giraffe', 'Hippo']::text[], 'Good all year. The migration moves with the rains: the herds are often in the southern Serengeti for calving early in the year and further north in the middle of the year. Tell us your dates and we''ll suggest where to go.', 'Zebras grazing in the Ngorongoro Crater under shafts of light', true, 'published',
   'Serengeti & Ngorongoro, Tanzania', 'Safaris to the Serengeti and Ngorongoro, combined with Zanzibar.', true, 6);
 insert into public.destinations
-  (name, slug, region, short_description, description, highlights, cover_image_alt,
+  (name, slug, region, short_description, description, highlights, wildlife, best_time, cover_image_alt,
    is_featured, status, seo_title, seo_description, is_sample, sort_order)
 values ('Paje, Jambiani & Michamvi', 'south-east-coast', 'zanzibar', 'The south-east coast: long white beaches, village life, lagoons and kitesurfing.', 'Zanzibar’s south-east coast stretches from Michamvi through Paje to Jambiani. Wide beaches, a reef-protected lagoon and big tides shape life along the shore.
 
 It is home to fishing and seaweed-farming villages, the Michamvi peninsula, and places like Kuza Cave and the Blue Lagoon. Paje is also known for kitesurfing.',
-  array['Long white-sand beaches', 'Village life and seaweed farming', 'Blue Lagoon and Kuza Cave', 'Sunset from the Michamvi peninsula']::text[], 'Coconut palms leaning over a thatched roof on a Zanzibar beach', false, 'published',
+  array['Long white-sand beaches', 'Village life and seaweed farming', 'Blue Lagoon and Kuza Cave', 'Sunset from the Michamvi peninsula']::text[], '{}'::text[], null, 'Coconut palms leaning over a thatched roof on a Zanzibar beach', false, 'published',
   'Paje, Jambiani & Michamvi, Zanzibar', 'Beaches, villages and lagoons on Zanzibar’s south-east coast.', true, 7);
 insert into public.destinations
-  (name, slug, region, short_description, description, highlights, cover_image_alt,
+  (name, slug, region, short_description, description, highlights, wildlife, best_time, cover_image_alt,
    is_featured, status, seo_title, seo_description, is_sample, sort_order)
 values ('Nyerere National Park (Selous)', 'nyerere', 'mainland', 'One of Africa’s largest protected areas, known for river and lake safaris.', 'Nyerere National Park was created from the northern part of the Selous Game Reserve in southern Tanzania. Its rivers and lakes make boat safaris possible alongside game drives.
 
 Short flights from Zanzibar make it practical for day trips and short safaris, depending on schedules.',
-  array['Game drives', 'Boat safaris on the river', 'Short flight from Zanzibar']::text[], 'Young giraffe among the trees in Nyerere National Park', false, 'published',
+  array['Game drives', 'Boat safaris on the river', 'Short flight from Zanzibar']::text[], array['Elephant', 'Hippo', 'Crocodile', 'Giraffe', 'Lion', 'Buffalo', 'Wild dog']::text[], 'The dry season, roughly June to October, is the most popular time for game drives and boat safaris. Some areas can be hard to reach in the heaviest rains.', 'Young giraffe among the trees in Nyerere National Park', false, 'published',
   'Nyerere National Park (Selous), Tanzania', 'Day trips and safaris to Nyerere National Park from Zanzibar.', true, 8);
+insert into public.destinations
+  (name, slug, region, short_description, description, highlights, wildlife, best_time, cover_image_alt,
+   is_featured, status, seo_title, seo_description, is_sample, sort_order)
+values ('Ngorongoro Crater', 'ngorongoro-crater', 'mainland', 'A vast volcanic caldera with wildlife on its grassy floor.', 'The Ngorongoro Crater is part of the Ngorongoro Conservation Area in northern Tanzania, a UNESCO World Heritage Site. The crater is a huge, unbroken volcanic caldera whose floor holds grassland, swamps and a soda lake.
+
+Game drives descend to the crater floor for the day. Visits are usually combined with the Serengeti, Tarangire or Lake Manyara on a northern-circuit safari.',
+  array['Game drives on the crater floor', 'Views from the crater rim', 'Soda lake and swamps']::text[], array['Lion', 'Elephant', 'Buffalo', 'Zebra', 'Wildebeest', 'Hippo', 'Flamingo', 'Black rhino (rarely seen)']::text[], 'Wildlife lives in the crater all year, so you can visit in any season. The dry months, roughly June to October, are the most popular.', 'Plains on the floor of the Ngorongoro Crater with the crater wall behind', false, 'draft',
+  'Ngorongoro Crater, Tanzania', 'Safaris to the Ngorongoro Crater, combined with the northern parks and Zanzibar.', true, 9);
+insert into public.destinations
+  (name, slug, region, short_description, description, highlights, wildlife, best_time, cover_image_alt,
+   is_featured, status, seo_title, seo_description, is_sample, sort_order)
+values ('Tarangire National Park', 'tarangire', 'mainland', 'Baobab-studded country known for its elephant herds.', 'Tarangire National Park lies in northern Tanzania, named after the Tarangire River that runs through it. Ancient baobab trees dot the landscape.
+
+In the dry season the river draws wildlife from the surrounding area, and the park is known for its large elephant herds. It is often combined with Lake Manyara, Ngorongoro and the Serengeti.',
+  array['Large elephant herds', 'Baobab trees', 'The Tarangire River', 'Rich birdlife']::text[], array['Elephant', 'Giraffe', 'Zebra', 'Wildebeest', 'Buffalo', 'Lion', 'Many bird species']::text[], 'The dry season, roughly June to October, is the best time for game viewing, when animals gather along the river.', 'A large baobab tree in the Tanzanian bush', false, 'draft',
+  'Tarangire National Park, Tanzania', 'Safaris to Tarangire National Park, known for elephants and baobabs.', true, 10);
+insert into public.destinations
+  (name, slug, region, short_description, description, highlights, wildlife, best_time, cover_image_alt,
+   is_featured, status, seo_title, seo_description, is_sample, sort_order)
+values ('Lake Manyara National Park', 'lake-manyara', 'mainland', 'A lake at the foot of the Rift Valley escarpment, with forest and birdlife.', 'Lake Manyara National Park sits at the base of the Great Rift Valley escarpment in northern Tanzania. Groundwater forest, open grassland and a shallow alkaline lake make for varied scenery in a compact park.
+
+It fits easily into a northern-circuit safari alongside Tarangire and Ngorongoro.',
+  array['Rift Valley escarpment', 'Groundwater forest', 'Alkaline lake and birdlife', 'Compact, varied park']::text[], array['Elephant', 'Baboon', 'Giraffe', 'Buffalo', 'Hippo', 'Flamingo (seasonal)', 'Lion (known to climb trees here, rarely seen)']::text[], 'The dry season, roughly June to October, is best for game viewing. The wetter months bring more water birds.', 'An elephant among acacia trees in Lake Manyara National Park', false, 'draft',
+  'Lake Manyara National Park, Tanzania', 'Safaris to Lake Manyara National Park on Tanzania''s northern circuit.', true, 11);
+insert into public.destinations
+  (name, slug, region, short_description, description, highlights, wildlife, best_time, cover_image_alt,
+   is_featured, status, seo_title, seo_description, is_sample, sort_order)
+values ('Arusha National Park', 'arusha-national-park', 'mainland', 'Mount Meru, forest and lakes, close to Arusha town.', 'Arusha National Park is close to Arusha town in northern Tanzania. It covers the slopes of Mount Meru, the Ngurdoto Crater and the Momella Lakes.
+
+Its forests and lakes make a contrast to the open plains of other parks, and its location makes it a convenient start or end to a northern-circuit safari.',
+  array['Mount Meru', 'Momella Lakes', 'Ngurdoto Crater', 'Forest scenery']::text[], array['Giraffe', 'Buffalo', 'Zebra', 'Black-and-white colobus monkey', 'Flamingo (seasonal)', 'Many bird species']::text[], 'The park can be visited all year. The drier months, roughly June to February, usually make trails and roads easier.', 'Sunrise over Kilimanjaro, seen from the slopes of Mount Meru', false, 'draft',
+  'Arusha National Park, Tanzania', 'Visits to Arusha National Park and Mount Meru in northern Tanzania.', true, 12);
+insert into public.destinations
+  (name, slug, region, short_description, description, highlights, wildlife, best_time, cover_image_alt,
+   is_featured, status, seo_title, seo_description, is_sample, sort_order)
+values ('Ruaha National Park', 'ruaha', 'mainland', 'A large, remote park in central Tanzania along the Great Ruaha River.', 'Ruaha National Park is one of Tanzania''s largest national parks, in the centre of the country. The Great Ruaha River runs along its eastern side.
+
+It is remote and receives fewer visitors than the northern parks. It is known for elephants and predators, and is part of the southern circuit with Mikumi and Nyerere.',
+  array['The Great Ruaha River', 'Remote wilderness', 'Southern circuit']::text[], array['Elephant', 'Lion', 'Leopard', 'Buffalo', 'Giraffe', 'Greater kudu', 'Wild dog (rarely seen)']::text[], 'The dry season, roughly June to October, is best, when animals gather near the river.', 'A lion resting in the grass in Ruaha National Park', false, 'draft',
+  'Ruaha National Park, Tanzania', 'Safaris to Ruaha National Park in central Tanzania.', true, 13);
+insert into public.destinations
+  (name, slug, region, short_description, description, highlights, wildlife, best_time, cover_image_alt,
+   is_featured, status, seo_title, seo_description, is_sample, sort_order)
+values ('Gombe Stream National Park', 'gombe-stream', 'mainland', 'Forest on the shore of Lake Tanganyika, home to wild chimpanzees.', 'Gombe Stream National Park lies on the shore of Lake Tanganyika in western Tanzania, near Kigoma. It is one of the country''s smallest national parks.
+
+Chimpanzee research began here in 1960 with Jane Goodall. Visitors trek through the forest with a park guide, and the park is usually reached by boat from Kigoma.',
+  array['Chimpanzee trekking', 'Lake Tanganyika shore', 'Forest trails']::text[], array['Chimpanzee', 'Olive baboon', 'Red colobus monkey', 'Red-tailed monkey', 'Forest birds']::text[], 'Treks run all year. The drier months, roughly July to October, make trails easier, though the chimpanzees'' whereabouts change from day to day.', 'A wild chimpanzee sitting on a fallen tree in the forest', false, 'draft',
+  'Gombe Stream National Park, Tanzania', 'Chimpanzee trekking at Gombe Stream National Park on Lake Tanganyika.', true, 14);
+insert into public.destinations
+  (name, slug, region, short_description, description, highlights, wildlife, best_time, cover_image_alt,
+   is_featured, status, seo_title, seo_description, is_sample, sort_order)
+values ('Mahale Mountains National Park', 'mahale-mountains', 'mainland', 'Remote, forested mountains on Lake Tanganyika, home to wild chimpanzees.', 'Mahale Mountains National Park rises from the shore of Lake Tanganyika in western Tanzania. It is very remote and is usually reached by light aircraft and boat.
+
+Visitors trek through the forest with a park guide to find the chimpanzees, and there are white-sand beaches along the lake.',
+  array['Chimpanzee trekking', 'Forested mountains', 'Lake Tanganyika beaches']::text[], array['Chimpanzee', 'Red colobus monkey', 'Blue monkey', 'Forest birds']::text[], 'The drier months, roughly July to October, are the usual time to visit. Some lodges and flights operate only part of the year, so check when you plan.', 'A chimpanzee mother and baby in the forest of Mahale Mountains National Park (black and white)', false, 'draft',
+  'Mahale Mountains National Park, Tanzania', 'Chimpanzee trekking in the Mahale Mountains on Lake Tanganyika.', true, 15);
 
 -- Tours
 insert into public.tours
@@ -702,7 +758,7 @@ insert into public.tours
    cover_image_alt, is_featured, status, seo_title, seo_description, is_sample, sort_order)
 values (
   (select id from public.tour_categories where slug = 'safari'),
-  (select id from public.destinations where slug = ''),
+  (select id from public.destinations where slug = 'tarangire'),
   'Tarangire National Park Safari', 'tarangire-national-park-safari', 'Discover large elephant herds, ancient baobab trees and diverse wildlife.', 'Discover large elephant herds, ancient baobab trees and diverse wildlife in Tarangire National Park.
 
 Tarangire is part of Tanzania''s northern circuit and is often combined with Lake Manyara, Ngorongoro and the Serengeti.', 'Multi-day — tailored to your plans',
@@ -717,7 +773,7 @@ insert into public.tours
    cover_image_alt, is_featured, status, seo_title, seo_description, is_sample, sort_order)
 values (
   (select id from public.tour_categories where slug = 'safari'),
-  (select id from public.destinations where slug = ''),
+  (select id from public.destinations where slug = 'lake-manyara'),
   'Lake Manyara National Park Safari', 'lake-manyara-national-park-safari', 'Experience beautiful landscapes, flamingos, elephants and tree-climbing lions.', 'Experience beautiful landscapes, flamingos, elephants and tree-climbing lions at Lake Manyara National Park.
 
 Lake Manyara is part of Tanzania''s northern circuit and fits easily alongside Tarangire and Ngorongoro.', 'Multi-day — tailored to your plans',
@@ -732,7 +788,7 @@ insert into public.tours
    cover_image_alt, is_featured, status, seo_title, seo_description, is_sample, sort_order)
 values (
   (select id from public.tour_categories where slug = 'safari'),
-  (select id from public.destinations where slug = ''),
+  (select id from public.destinations where slug = 'arusha-national-park'),
   'Arusha National Park Safari', 'arusha-national-park-safari', 'Explore Mount Meru, beautiful forests, lakes and diverse wildlife.', 'Explore Mount Meru, beautiful forests, lakes and diverse wildlife in Arusha National Park.
 
 The park is close to Arusha town, making it a convenient start or end to a northern-circuit safari.', 'Multi-day — tailored to your plans',
@@ -747,7 +803,7 @@ insert into public.tours
    cover_image_alt, is_featured, status, seo_title, seo_description, is_sample, sort_order)
 values (
   (select id from public.tour_categories where slug = 'safari'),
-  (select id from public.destinations where slug = ''),
+  (select id from public.destinations where slug = 'ruaha'),
   'Ruaha National Park Safari', 'ruaha-national-park-safari', 'Discover Tanzania''s wilderness, famous for elephants, lions and spectacular landscapes.', 'Discover Tanzania''s wilderness in Ruaha National Park, famous for elephants, lions and spectacular landscapes.
 
 Ruaha is part of the southern circuit, with Mikumi and Nyerere.', 'Multi-day — tailored to your plans',
@@ -762,7 +818,7 @@ insert into public.tours
    cover_image_alt, is_featured, status, seo_title, seo_description, is_sample, sort_order)
 values (
   (select id from public.tour_categories where slug = 'safari'),
-  (select id from public.destinations where slug = ''),
+  (select id from public.destinations where slug = 'gombe-stream'),
   'Gombe Stream National Park', 'gombe-stream-national-park', 'Experience chimpanzee trekking in the forests along Lake Tanganyika.', 'Experience chimpanzee trekking in the forests along Lake Tanganyika at Gombe Stream National Park.
 
 Gombe is in western Tanzania. It is remote, so travel time is part of the plan.', 'Multi-day — tailored to your plans',
@@ -777,7 +833,7 @@ insert into public.tours
    cover_image_alt, is_featured, status, seo_title, seo_description, is_sample, sort_order)
 values (
   (select id from public.tour_categories where slug = 'safari'),
-  (select id from public.destinations where slug = ''),
+  (select id from public.destinations where slug = 'mahale-mountains'),
   'Mahale Mountains National Park', 'mahale-mountains-national-park', 'Discover wild chimpanzees, tropical forests and beautiful Lake Tanganyika.', 'Discover wild chimpanzees, tropical forests and beautiful Lake Tanganyika at Mahale Mountains National Park.
 
 Mahale is in western Tanzania. It is remote, so travel time is part of the plan.', 'Multi-day — tailored to your plans',
