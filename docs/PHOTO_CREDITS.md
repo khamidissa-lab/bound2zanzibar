@@ -73,12 +73,13 @@ Some pages reuse photos listed above: the Stone Town photos appear on the food t
 
 ## Horse Riding & Swimming tour (`public/images/tours/`)
 
-Both **supplied by the owner** on 2026-11-02. Source and licence not yet recorded: confirm each is your own photo or properly licensed, and note the source here.
+The first two were **supplied by the owner** on 2026-11-02, the third on 2026-11-09. Source and licence not yet recorded: confirm each is your own photo or properly licensed, and note the source here.
 
 | File | Use | Notes |
 | --- | --- | --- |
 | `horse-riding-sea.jpg` | Main image | Rider wading through turquoise water; original 5833×3889, optimised to 2400px wide |
 | `horse-riding-beach.jpg` | Gallery | Group of riders on a white-sand beach; only 474×316, so kept to the small gallery slot |
+| `horse-riding-field.jpg` | Gallery (first) | Supplied 2026-11-09. Two riders on a green field, seen from above; 1080×1350 portrait, re-saved without metadata |
 
 The Unsplash photo `/images/photos/horse.jpg` (Uran Wang) remains as the second gallery image.
 

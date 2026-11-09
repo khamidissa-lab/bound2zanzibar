@@ -739,6 +739,11 @@ export const moreTours: TourBase[] = [
     },
     gallery: [
       {
+        src: "/images/tours/horse-riding-field.jpg",
+        alt: "Two riders, one on a spotted white horse and one on a bay horse, seen from above on a sunny green field",
+        theme: "forest",
+      },
+      {
         src: "/images/tours/horse-riding-beach.jpg",
         alt: "A group of riders on horseback crossing a white-sand beach beside turquoise water",
         theme: "sunset",
