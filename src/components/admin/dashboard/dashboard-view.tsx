@@ -3,6 +3,7 @@ import Link from "next/link";
 import {
   ArrowRight,
   CalendarCheck,
+  CircleCheck,
   Images,
   Clock,
   Compass,
@@ -16,7 +17,7 @@ import {
 
 import { SceneImage } from "@/components/media/scene-image";
 import { can, type StaffRole } from "@/lib/auth/permissions";
-import { formatPrice } from "@/lib/format";
+import { formatMoney, formatPrice } from "@/lib/format";
 import { cn } from "@/lib/utils";
 import {
   STATUS_LABELS,
@@ -155,7 +156,7 @@ function RankedBars({
         <li key={row.label}>
           <div className="mb-1 flex justify-between gap-3 text-sm">
             <span className="text-ocean-deep">{row.label}</span>
-            <span className="text-muted-foreground tabular-nums">
+            <span className="shrink-0 whitespace-nowrap text-muted-foreground tabular-nums">
               {row.value.toLocaleString("en-US")} {unit}
             </span>
           </div>
@@ -233,36 +234,36 @@ export function DashboardView({
             {bookingsAccess ? (
               <>
                 <StatTile
-                  icon={Inbox}
+                  icon={Users}
                   tone="navy"
-                  label="Pending requests"
+                  label="Total bookings"
+                  value={view.totals.bookings}
+                  hint={`${view.totals.requestsThisMonth.toLocaleString("en-US")} received this month`}
+                  href="/admin/bookings"
+                />
+                <StatTile
+                  icon={Inbox}
+                  tone="gold"
+                  label="Pending bookings"
                   value={view.totals.pending}
                   hint="Waiting for confirmation"
-                  href="/admin/bookings"
+                  href="/admin/bookings?status=pending"
                 />
                 <StatTile
                   icon={CalendarCheck}
                   tone="sea"
-                  label="Upcoming confirmed"
-                  value={view.totals.upcomingConfirmed}
-                  hint="Trips from today"
-                  href="/admin/bookings"
+                  label="Confirmed bookings"
+                  value={view.totals.confirmed}
+                  hint={`Incl. paid · ${view.totals.upcomingConfirmed.toLocaleString("en-US")} still to travel`}
+                  href="/admin/bookings?status=confirmed"
                 />
                 <StatTile
-                  icon={Users}
-                  tone="gold"
-                  label="Travellers upcoming"
-                  value={view.totals.travellersUpcoming}
-                  hint="Adults + children, next requests"
-                  href="/admin/bookings"
-                />
-                <StatTile
-                  icon={Inbox}
+                  icon={CircleCheck}
                   tone="white"
-                  label="New enquiries"
-                  value={view.totals.newInquiries}
-                  hint="Not yet answered"
-                  href="/admin/enquiries"
+                  label="Completed bookings"
+                  value={view.totals.completed}
+                  hint="Trips that have taken place"
+                  href="/admin/bookings?status=completed"
                 />
               </>
             ) : (
@@ -302,6 +303,69 @@ export function DashboardView({
               </>
             )}
           </div>
+
+          {bookingsAccess ? (
+            <div className="grid gap-6 lg:grid-cols-2">
+              <Card
+                title="Revenue from verified payments"
+                action={{ href: "/admin/reports", label: "Reports" }}
+              >
+                {view.revenue.length === 0 ? (
+                  <Empty>
+                    No payments recorded yet. Record a payment on a booking once the money
+                    has arrived.
+                  </Empty>
+                ) : (
+                  <ul className="divide-y">
+                    {view.revenue.map((r) => (
+                      <li
+                        key={r.currency}
+                        className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 py-3 first:pt-0 last:pb-0"
+                      >
+                        <span>
+                          <span className="block font-display text-3xl text-ocean-deep tabular-nums">
+                            {formatMoney(r.total, r.currency)}
+                          </span>
+                          <span className="text-xs text-muted-foreground">
+                            All time · {r.payments.toLocaleString("en-US")}{" "}
+                            {r.payments === 1 ? "payment" : "payments"}
+                          </span>
+                        </span>
+                        <span className="text-right">
+                          <span className="block font-semibold text-ocean-deep tabular-nums">
+                            {formatMoney(r.month, r.currency)}
+                          </span>
+                          <span className="text-xs text-muted-foreground">
+                            This month
+                          </span>
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+                <p className="mt-3 text-xs text-muted-foreground">
+                  Each currency is totalled separately; amounts are never converted.
+                </p>
+              </Card>
+
+              <Card title="Most popular tours">
+                {view.popularTours.length === 0 ? (
+                  <Empty>Tours will be ranked here once booking requests arrive.</Empty>
+                ) : (
+                  <RankedBars
+                    unit="requests"
+                    rows={view.popularTours.map((t) => ({
+                      label: t.name,
+                      value: t.count,
+                    }))}
+                  />
+                )}
+                <p className="mt-3 text-xs text-muted-foreground">
+                  Booking requests per tour, not counting cancelled or rejected ones.
+                </p>
+              </Card>
+            </div>
+          ) : null}
 
           {contentAccess || bookingsAccess ? (
             <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_20rem]">

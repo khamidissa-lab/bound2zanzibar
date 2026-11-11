@@ -17,6 +17,7 @@ const booking = (over: Partial<BookingLite>): BookingLite => ({
   adults: 2,
   children: 0,
   customerName: "Guest",
+  itemKind: "tour",
   itemName: "Stone Town City Tour",
   destinationName: "Stone Town",
   ...over,
@@ -26,6 +27,7 @@ const base: DashboardInput = {
   bookings: [],
   events: [],
   inquiries: [],
+  payments: [],
   publishedTours: [
     { destinationName: "Stone Town" },
     { destinationName: "Stone Town" },
@@ -111,5 +113,47 @@ describe("buildDashboard", () => {
     expect(view.recent[0].reference).toBe("A");
     expect(view.topDestinations.basis).toBe("bookings");
     expect(view.topDestinations.rows[0]).toMatchObject({ name: "Stone Town", count: 3 });
+    expect(view.totals).toMatchObject({ confirmed: 2, completed: 0 });
+  });
+
+  it("ranks popular tours without cancelled, rejected or package requests", () => {
+    const view = buildDashboard(
+      {
+        ...base,
+        bookings: [
+          booking({ reference: "A", itemName: "Safari Blue" }),
+          booking({ reference: "B", itemName: "Safari Blue", status: "completed" }),
+          booking({ reference: "C", itemName: "Spice Farm", status: "paid" }),
+          booking({ reference: "D", itemName: "Spice Farm", status: "cancelled" }),
+          booking({ reference: "E", itemName: "Spice Farm", status: "rejected" }),
+          booking({ reference: "F", itemName: "Honeymoon Escape", itemKind: "package" }),
+        ],
+      },
+      NOW,
+    );
+    expect(view.popularTours.map((t) => [t.name, t.count])).toEqual([
+      ["Safari Blue", 2],
+      ["Spice Farm", 1],
+    ]);
+    // A paid booking counts as confirmed.
+    expect(view.totals).toMatchObject({ confirmed: 1, completed: 1 });
+  });
+
+  it("sums verified payments per currency without converting", () => {
+    const view = buildDashboard(
+      {
+        ...base,
+        payments: [
+          { amount: 120, currency: "USD", paidOn: "2026-11-01" },
+          { amount: 80.5, currency: "USD", paidOn: "2026-10-20" },
+          { amount: 250000, currency: "TZS", paidOn: "2026-11-02" },
+        ],
+      },
+      NOW,
+    );
+    expect(view.revenue).toEqual([
+      { currency: "USD", total: 200.5, month: 120, payments: 2 },
+      { currency: "TZS", total: 250000, month: 250000, payments: 1 },
+    ]);
   });
 });

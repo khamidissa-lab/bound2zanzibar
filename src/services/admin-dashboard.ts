@@ -52,6 +52,7 @@ type BookingRow = {
   adults: number;
   children: number;
   customer_name: string;
+  item_type: Enums<"booking_item_type">;
   tour: { name: string; destination: { name: string } | null } | null;
   package: { name: string } | null;
 };
@@ -90,6 +91,7 @@ export async function loadDashboardInput(role: StaffRole): Promise<DashboardInpu
     bookings: [],
     events: [],
     inquiries: [],
+    payments: [],
     publishedTours: (
       tourRows.data as unknown as { destination: { name: string } | null }[]
     ).map((t) => ({ destinationName: t.destination?.name ?? null })),
@@ -104,11 +106,11 @@ export async function loadDashboardInput(role: StaffRole): Promise<DashboardInpu
 
   if (!can(role, "bookings.manage")) return input;
 
-  const [bookings, events, inquiries, profiles] = await Promise.all([
+  const [bookings, events, inquiries, profiles, payments] = await Promise.all([
     supabase
       .from("bookings")
       .select(
-        "reference, status, preferred_date, created_at, adults, children, customer_name, tour:tours(name, destination:destinations(name)), package:packages(name)",
+        "reference, status, preferred_date, created_at, adults, children, customer_name, item_type, tour:tours(name, destination:destinations(name)), package:packages(name)",
       )
       .order("created_at", { ascending: false })
       .limit(2000),
@@ -125,8 +127,11 @@ export async function loadDashboardInput(role: StaffRole): Promise<DashboardInpu
       .order("created_at", { ascending: false })
       .limit(200),
     supabase.from("profiles").select("id, full_name"),
+    // Only payments staff recorded after checking they arrived.
+    supabase.from("booking_payments").select("amount, currency, paid_on").limit(5000),
   ]);
   if (bookings.error) failed("bookings", bookings.error);
+  if (payments.error) failed("payments", payments.error);
   if (events.error) failed("activity", events.error);
   if (inquiries.error) failed("enquiries", inquiries.error);
 
@@ -140,8 +145,14 @@ export async function loadDashboardInput(role: StaffRole): Promise<DashboardInpu
     adults: b.adults,
     children: b.children,
     customerName: b.customer_name,
+    itemKind: b.item_type,
     itemName: b.tour?.name ?? b.package?.name ?? "—",
     destinationName: b.tour?.destination?.name ?? null,
+  }));
+  input.payments = payments.data.map((p) => ({
+    amount: Number(p.amount),
+    currency: p.currency,
+    paidOn: p.paid_on,
   }));
   input.events = (events.data as unknown as EventRow[]).map((e): StatusEventLite => ({
     reference: e.booking?.reference ?? "—",

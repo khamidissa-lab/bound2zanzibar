@@ -10,6 +10,24 @@ export function formatPrice(amount: number, currency: Currency): string {
   }).format(amount);
 }
 
+/**
+ * Money in its own currency, for any ISO code (including currencies added
+ * later in the admin). Cents are shown only when there are any.
+ */
+export function formatMoney(amount: number, currency: string): string {
+  try {
+    return new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency,
+      currencyDisplay: "code",
+      minimumFractionDigits: Number.isInteger(amount) ? 0 : 2,
+      maximumFractionDigits: Number.isInteger(amount) ? 0 : 2,
+    }).format(amount);
+  } catch {
+    return `${currency} ${amount.toLocaleString("en-US")}`;
+  }
+}
+
 export function formatDate(isoDate: string): string {
   return new Intl.DateTimeFormat("en-GB", {
     day: "numeric",

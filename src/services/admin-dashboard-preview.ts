@@ -16,6 +16,7 @@ import type {
 } from "./admin-dashboard-model";
 import { zanzibarDate } from "./admin-dashboard-model";
 import { loadFeatured } from "./admin-dashboard";
+import type { ReportBooking, ReportInput } from "./reports-model";
 
 /*
  * DEVELOPMENT PREVIEW ONLY. Content figures come from the real (sample)
@@ -73,6 +74,7 @@ function exampleBookings(
       adults: 1 + Math.floor(rand() * 4),
       children: rand() < 0.3 ? 1 + Math.floor(rand() * 2) : 0,
       customerName: `Example Guest ${String.fromCharCode(65 + (i % 26))}${i >= 26 ? Math.floor(i / 26) : ""}`,
+      itemKind: "tour",
       itemName: item.name,
       destinationName: item.destinationName,
     });
@@ -99,6 +101,7 @@ export async function loadPreviewDashboardInput(
     bookings: [],
     events: [],
     inquiries: [],
+    payments: [],
     publishedTours,
     content: {
       publishedTours: tours.length,
@@ -115,6 +118,14 @@ export async function loadPreviewDashboardInput(
     destinationName: lookups.destinations[t.destinationSlug] ?? null,
   }));
   input.bookings = exampleBookings(now, items);
+  // EXAMPLE payments: one per completed example booking, in US dollars.
+  input.payments = input.bookings
+    .filter((b) => b.status === "completed")
+    .map((b, i) => ({
+      amount: 60 + ((i * 37) % 9) * 25,
+      currency: "USD",
+      paidOn: b.preferredDate,
+    }));
   input.events = input.bookings
     .filter((b) => b.status !== "pending")
     .slice(0, 8)
@@ -136,4 +147,33 @@ export async function loadPreviewDashboardInput(
     createdAt: new Date(now.getTime() - (i + 1) * 7 * 3600_000).toISOString(),
   }));
   return input;
+}
+
+/**
+ * DEVELOPMENT PREVIEW ONLY: report input built from the same EXAMPLE
+ * bookings and payments as the dashboard preview.
+ */
+export async function loadPreviewReportInput(now: Date): Promise<ReportInput> {
+  const input = await loadPreviewDashboardInput(now, true);
+  const markets = ["international", "east_african", "resident"] as const;
+  return {
+    bookings: input.bookings.map((b, i): ReportBooking => {
+      const market = markets[i % 3];
+      const travellers = b.adults + b.children;
+      return {
+        status: b.status,
+        createdAt: b.createdAt,
+        market,
+        currency: market === "resident" ? "TZS" : "USD",
+        quotedTotal: market === "resident" ? travellers * 150000 : travellers * 90,
+        itemKind: b.itemKind,
+        itemName: b.itemName,
+        destinationName: b.destinationName,
+        travellers,
+      };
+    }),
+    payments: input.payments,
+    inquiries: input.inquiries.map((q) => ({ createdAt: q.createdAt })),
+    journeys: [],
+  };
 }

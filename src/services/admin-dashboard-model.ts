@@ -17,8 +17,16 @@ export type BookingLite = {
   adults: number;
   children: number;
   customerName: string;
+  itemKind: "tour" | "package";
   itemName: string;
   destinationName: string | null;
+};
+
+/** A payment staff recorded after checking it arrived (never converted). */
+export type PaymentLite = {
+  amount: number;
+  currency: string;
+  paidOn: string; // YYYY-MM-DD
 };
 
 export type StatusEventLite = {
@@ -49,6 +57,7 @@ export type DashboardInput = {
   bookings: BookingLite[];
   events: StatusEventLite[];
   inquiries: InquiryLite[];
+  payments: PaymentLite[];
   /** Published tours with their destination, for the content view. */
   publishedTours: { destinationName: string | null }[];
   content: {
@@ -98,6 +107,40 @@ function ranked(counts: Map<string, number>, limit: number) {
 }
 
 const ACTIVE: BookingStatus[] = ["pending", "confirmed", "paid"];
+
+/**
+ * Verified payments summed per currency (currencies are never mixed or
+ * converted), all time and for one month (YYYY-MM). Most-used currency first.
+ */
+export function revenueByCurrency(payments: PaymentLite[], month: string) {
+  const totals = new Map<string, { total: number; month: number; count: number }>();
+  for (const p of payments) {
+    const row = totals.get(p.currency) ?? { total: 0, month: 0, count: 0 };
+    row.total += p.amount;
+    row.count += 1;
+    if (p.paidOn.slice(0, 7) === month) row.month += p.amount;
+    totals.set(p.currency, row);
+  }
+  return [...totals.entries()]
+    .map(([currency, row]) => ({
+      currency,
+      total: Math.round(row.total * 100) / 100,
+      month: Math.round(row.month * 100) / 100,
+      payments: row.count,
+    }))
+    .sort((a, b) => b.payments - a.payments || a.currency.localeCompare(b.currency));
+}
+
+/** Tours ranked by booking requests (cancelled and rejected ones excluded). */
+export function popularTours(bookings: BookingLite[], limit: number) {
+  const counts = new Map<string, number>();
+  for (const b of bookings) {
+    if (b.itemKind !== "tour" || b.status === "cancelled" || b.status === "rejected")
+      continue;
+    counts.set(b.itemName, (counts.get(b.itemName) ?? 0) + 1);
+  }
+  return ranked(counts, limit);
+}
 
 export function buildDashboard(input: DashboardInput, now: Date) {
   const today = zanzibarDate(now);
@@ -159,6 +202,9 @@ export function buildDashboard(input: DashboardInput, now: Date) {
     totals: {
       bookings: bookings.length,
       pending: statusCounts.get("pending") ?? 0,
+      // "Paid" bookings are confirmed bookings whose payment has arrived.
+      confirmed: (statusCounts.get("confirmed") ?? 0) + (statusCounts.get("paid") ?? 0),
+      completed: statusCounts.get("completed") ?? 0,
       upcomingConfirmed: bookings.filter(
         (b) =>
           (b.status === "confirmed" || b.status === "paid") && b.preferredDate >= today,
@@ -175,6 +221,8 @@ export function buildDashboard(input: DashboardInput, now: Date) {
     upcoming,
     recent,
     topDestinations,
+    popularTours: popularTours(bookings, 5),
+    revenue: revenueByCurrency(input.payments, thisMonth),
     activity: [...input.events]
       .sort((a, b) => b.createdAt.localeCompare(a.createdAt))
       .slice(0, 6),
