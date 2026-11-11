@@ -204,7 +204,7 @@ export const it: Messages = {
         honeymoon: {
           title: "Lune di miele",
           body: "Tramonti a piedi nudi, tempo solo per voi due e un safari indimenticabile.",
-          alt: "Un picnic al tramonto sulla sabbia con cuscini e vino, davanti a barche tradizionali a Zanzibar",
+          alt: "Una coppia cammina mano nella mano su un banco di sabbia bianca verso l’acqua turchese, oltre un tavolo per due sotto un arco fiorito",
         },
         solo: {
           title: "Viaggiatori solitari",

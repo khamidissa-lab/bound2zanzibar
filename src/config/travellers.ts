@@ -39,8 +39,8 @@ export const TRAVELLERS: Record<TravellerType, TravellerConfig> = {
     styles: ["adventure", "relaxation"],
   },
   honeymoon: {
-    photo: "/images/travellers/honeymoon.jpg",
-    position: "object-[42%_50%]",
+    photo: "/images/travellers/honeymoon-sandbank.jpg",
+    position: "object-[50%_55%]",
     styles: ["romantic"],
   },
   solo: {

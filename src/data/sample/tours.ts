@@ -148,11 +148,37 @@ const coreTours: TourBase[] = [
     difficulty: "easy",
     suitability: "Suitable for all ages.",
     coverImage: {
-      src: "/images/tours/spice-farm.jpg",
-      alt: "Two women wearing woven leaf crowns hold fresh coconuts while taking a photo",
+      src: "/images/tours/spice-farm-guests.jpg",
+      alt: "Three smiling women on a wooden bench wearing leaf crowns with red flowers, holding woven leaf baskets, under a jackfruit tree",
       theme: "spice",
     },
-    gallery: [],
+    gallery: [
+      {
+        src: "/images/tours/spice-farm-nutmeg.jpg",
+        alt: "Hands holding an opened nutmeg fruit, showing three seeds wrapped in bright red mace",
+        theme: "spice",
+      },
+      {
+        src: "/images/tours/spice-farm-vanilla.jpg",
+        alt: "A hand holding a bunch of long green vanilla pods growing on the vine",
+        theme: "spice",
+      },
+      {
+        src: "/images/tours/spice-farm-jackfruit.jpg",
+        alt: "A cluster of large jackfruits hanging from a tree trunk, two of them split open to show yellow flesh",
+        theme: "spice",
+      },
+      {
+        src: "/images/tours/spice-farm-papaya.jpg",
+        alt: "A papaya tree seen from below, heavy with green and ripening orange fruit",
+        theme: "spice",
+      },
+      {
+        src: "/images/tours/spice-farm-bananas.jpg",
+        alt: "A bunch of green bananas hanging under large sunlit banana leaves",
+        theme: "spice",
+      },
+    ],
     prices: illustrativePrices({ adult: 30, child: 15 }, { adult: 45000, child: 25000 }),
     featured: false,
     status: "published",
@@ -231,12 +257,24 @@ const coreTours: TourBase[] = [
       "Departure from the north-east coast. Pickup options confirmed on booking.",
     difficulty: "moderate",
     suitability: "Best for confident swimmers. Life jackets available on request.",
+    // Main and first two gallery photos supplied by the owner (2026-11-09);
+    // see docs/PHOTO_CREDITS.md.
     coverImage: {
-      src: "/images/tours/mnemba-island.jpg",
-      alt: "A dhow sailing past a small forested island in deep blue water",
+      src: "/images/tours/mnemba-atoll-boats.jpg",
+      alt: "Aerial view of a small forested island with a white sandbank, and boats anchored in the shallow turquoise water in front",
       theme: "ocean",
     },
     gallery: [
+      {
+        src: "/images/tours/mnemba-reef-boats.jpg",
+        alt: "Boats with striped canopies anchored in clear turquoise water, with swimmers around them and an island beach in the distance",
+        theme: "ocean",
+      },
+      {
+        src: "/images/tours/mnemba-island-reef.jpg",
+        alt: "Turquoise water with darker reef patches, traditional dhows and boats anchored off a forested island",
+        theme: "ocean",
+      },
       {
         src: "/images/photos/aerial-shore.jpg",
         alt: "Aerial view of waves breaking over turquoise water off the Zanzibar coast",
@@ -318,11 +356,32 @@ const coreTours: TourBase[] = [
     difficulty: "easy",
     suitability: "Suitable for families.",
     coverImage: {
-      src: "/images/tours/nakupenda-sandbank.jpg",
-      alt: "Aerial view of a white sandbank with boats moored in turquoise water",
+      src: "/images/tours/nakupenda-sandbank-empty.jpg",
+      alt: "A long white sandbank curving out to sea between calm turquoise water and breaking waves, with a few people walking in the distance",
       theme: "ocean",
     },
-    gallery: [],
+    gallery: [
+      {
+        src: "/images/tours/nakupenda-lunch-shades.jpg",
+        alt: "Tables and red and white chairs set up for lunch under blue shade cloths on the white sand, next to the sea",
+        theme: "ocean",
+      },
+      {
+        src: "/images/tours/nakupenda-guests-walking.jpg",
+        alt: "Guests walking along the white sandbank beside turquoise water, one carrying a child on his shoulders",
+        theme: "ocean",
+      },
+      {
+        src: "/images/tours/nakupenda-guests-relaxing.jpg",
+        alt: "A group of guests sitting and lying on towels on the sand, with small boats in the turquoise water beyond",
+        theme: "ocean",
+      },
+      {
+        src: "/images/tours/nakupenda-shades-couple.jpg",
+        alt: "A couple standing on the sand near blue shade cloths where lunch is being set up",
+        theme: "ocean",
+      },
+    ],
     prices: illustrativePrices({ adult: 45, child: 25 }, { adult: 70000, child: 40000 }),
     featured: false,
     status: "published",

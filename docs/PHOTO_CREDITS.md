@@ -77,9 +77,9 @@ The first two were **supplied by the owner** on 2026-11-02, the third on 2026-11
 
 | File | Use | Notes |
 | --- | --- | --- |
-| `horse-riding-sea.jpg` | Main image | Rider wading through turquoise water; original 5833×3889, optimised to 2400px wide |
+| `horse-riding-sea.jpg` | Gallery (first; main image until 2026-11-09) | Rider wading through turquoise water; original 5833×3889, optimised to 2400px wide |
 | `horse-riding-beach.jpg` | Gallery | Group of riders on a white-sand beach; only 474×316, so kept to the small gallery slot |
-| `horse-riding-field.jpg` | Gallery (first) | Supplied 2026-11-09. Two riders on a green field, seen from above; 1080×1350 portrait, re-saved without metadata |
+| `horse-riding-field.jpg` | Main image | Supplied 2026-11-09; made the main image the same day at the owner's request. Two riders on a green field, seen from above; 1080×1350 portrait, re-saved without metadata |
 
 The Unsplash photo `/images/photos/horse.jpg` (Uran Wang) remains as the second gallery image.
 
@@ -104,18 +104,38 @@ Under the [Unsplash License](https://unsplash.com/license). Each photo page was 
 | File | Tour | Size |
 | --- | --- | --- |
 | `mnarani-turtles.jpg` | Mnarani Turtle Aquarium | 474px |
-| `jet-ski.jpg` | Jet Ski Experience | 474px |
-| `salaam-cave.jpg` | Salaam Cave Experience | 474px |
+| `jet-ski.jpg` | Jet Ski Experience (gallery, last, since 2026-11-09) | 474px |
+| `jet-ski-front.jpg` | Jet Ski Experience, main photo. Supplied 2026-11-09 with the four below: a professional-looking shoot of one woman on a jet ski. Confirm who took them, that you may use them, and that the woman agreed to appear on the site | 1600px (from 2160px) |
+| `jet-ski-cheer.jpg` | Jet Ski gallery: arms raised | 1200px (from 2160px) |
+| `jet-ski-smile.jpg` | Jet Ski gallery: smiling, hand on headscarf | 1200px (from 2160px) |
+| `jet-ski-shallows.jpg` | Jet Ski gallery: shallow water near the shore | 1200px (from 2160px) |
+| `jet-ski-above.jpg` | Jet Ski gallery: seen from directly above | 1200px (from 2160px) |
+| `salaam-cave-seaweed.jpg` | Salaam Cave Experience, main photo. Supplied 2026-11-09 with the three below; replaces the earlier 474px `salaam-cave.jpg` (removed at the owner's request). Shows identifiable guests: confirm they agreed to their photos being used | 1200px (from 1440px) |
+| `salaam-cave-sign.jpg` | Salaam Cave gallery: the cave sign and turtles from above | 1080px |
+| `salaam-cave-family.jpg` | Salaam Cave gallery: mother and son with turtles (a child is shown; confirm the parent agreed) | 1200px (from 1440px) |
+| `salaam-cave-turtles.jpg` | Salaam Cave gallery: woman touching a turtle | 1200px (from 1440px) |
 | `cooking-class.jpg` | Zanzibar Cooking Class | 474px |
 | `blue-lagoon-snorkel.jpg` | Blue Lagoon Snorkelling | 2000px (from a 3200px original) |
 | `kuza-cave.jpg` | Kuza Cave & Jambiani Village | 474px |
 | `mangapwani-cave.jpg` | Mangapwani Slave Caves | 474px |
 | `kizimkazi-dolphins.jpg` | Kizimkazi Dolphin Experience | 474px |
-| `nakupenda-sandbank.jpg` | Nakupenda Sandbank | 474px |
+| `nakupenda-sandbank-empty.jpg` | Nakupenda Sandbank, main photo. Supplied 2026-11-09 with the four below; replaces the earlier 474px `nakupenda-sandbank.jpg` (removed at the owner's request). A sixth photo supplied the same day was not used: boats on the shore show other operators' names and phone numbers | 2000px (from 2880px) |
+| `nakupenda-lunch-shades.jpg` | Nakupenda gallery: lunch tables under blue shades | 1400px (from 2880px) |
+| `nakupenda-guests-walking.jpg` | Nakupenda gallery: guests walking on the sandbank. Identifiable guests, including a child: confirm they (and the parent) agreed | 1400px (from 2880px) |
+| `nakupenda-guests-relaxing.jpg` | Nakupenda gallery: guests relaxing on towels. Identifiable guests: confirm they agreed | 1400px (from 2880px) |
+| `nakupenda-shades-couple.jpg` | Nakupenda gallery: couple by the shades. Identifiable guests: confirm they agreed | 1400px (from 2880px) |
 | `sunset-dhows.jpg` | Sunset Dhow Cruise | 474px |
-| `pungume-sandbank.jpg` | Pungume Island & Sandbank | 474px |
-| `spice-farm.jpg` | Spice Farm Tour | 474px |
-| `mnemba-island.jpg` | Mnemba Island Snorkelling | 474px |
+| `pungume-sandbank.jpg` | Pungume Island & Sandbank (gallery since 2026-11-09) | 474px |
+| `pungume-sandbank-boats.jpg` | Pungume Island & Sandbank, main photo. Supplied 2026-11-09 (1080×1350); aerial view of the sandbank and boats; bottom trimmed so the sandbank shows in the wide main slot, re-saved without metadata | 1080×960 |
+| `spice-farm-nutmeg.jpg` | Spice Farm Tour (main photo until it moved to the gallery, first, later on 2026-11-09). Supplied 2026-11-09 with the five below; replaces the earlier 474px `spice-farm.jpg` (removed at the owner's request). Black border bars trimmed off | 1800px (from 2640px) |
+| `spice-farm-guests.jpg` | Spice Farm Tour, main photo (owner's choice, 2026-11-09): three guests with leaf crowns. Identifiable people: confirm they agreed to their photo being used | 1200px (from 1932px) |
+| `spice-farm-vanilla.jpg` | Spice Farm gallery: vanilla pods in hand. Coloured border edges trimmed off | 1200px (from 2112px) |
+| `spice-farm-jackfruit.jpg` | Spice Farm gallery: jackfruit on the tree. Looks like a re-shared social media image; confirm the source | 1200px (from 1580px) |
+| `spice-farm-papaya.jpg` | Spice Farm gallery: papaya tree. Looks like a re-shared social media image; confirm the source | 1200px (from 1728px) |
+| `spice-farm-bananas.jpg` | Spice Farm gallery: banana plant | 1200px (from 1732px) |
+| `mnemba-atoll-boats.jpg` | Mnemba Island Snorkelling, main photo. Supplied 2026-11-09 with the two below; replaces the earlier 474px `mnemba-island.jpg` (removed at the owner's request). A fourth photo supplied the same day was not used: it carries a "LUCAS" photographer watermark and another operator's name and phone number on a boat | 2400px (from 3368px) |
+| `mnemba-reef-boats.jpg` | Mnemba gallery: boats and swimmers, island in the distance | 1200px (from 1684px) |
+| `mnemba-island-reef.jpg` | Mnemba gallery: reef patches, dhows and the island | 1200px (from 1684px) |
 
 ## Home page "A trip for every traveller" boxes (`public/images/travellers/`)
 
@@ -126,7 +146,7 @@ All under the [Unsplash License](https://unsplash.com/license). Each photo page 
 | `family.jpg` | Families | Twende Africa Tours | Tanzania | [oLrY_JjulI0](https://unsplash.com/photos/oLrY_JjulI0) |
 | `couples.jpg` | Couples | Antony (@antonyvisuals) | Zanzibar | [ItE2sfUUTSM](https://unsplash.com/photos/ItE2sfUUTSM) |
 | `groups.jpg` | Groups | Twende Africa Tours | Tanzania | [QkftoMBGJNU](https://unsplash.com/photos/QkftoMBGJNU) |
-| `honeymoon.jpg` | Honeymoons | Morgan Nott | Zanzibar | [XYnqQtOcw78](https://unsplash.com/photos/XYnqQtOcw78) |
+| `honeymoon-sandbank.jpg` | Honeymoons | Supplied by the owner on 2026-11-09 (photographer not yet recorded) | Sandbank, Zanzibar | Not yet recorded. Replaced the Unsplash photo by Morgan Nott. The couple can be recognised from behind, so record their consent and the photographer's permission. Kept at its full 1080x1350 size. |
 | `solo.jpg` | Solo travellers | Majkl Velner | Paje, Zanzibar | [2hoNJQWF03Q](https://unsplash.com/photos/2hoNJQWF03Q) |
 
 ## Notes

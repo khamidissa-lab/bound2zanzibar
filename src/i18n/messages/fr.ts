@@ -203,7 +203,7 @@ export const fr: Messages = {
         honeymoon: {
           title: "Lunes de miel",
           body: "Couchers de soleil pieds nus, des moments rien qu’à deux et un safari inoubliable.",
-          alt: "Un pique-nique au coucher du soleil sur le sable avec des coussins et du vin, face à des bateaux traditionnels à Zanzibar",
+          alt: "Un couple marchant main dans la main sur un banc de sable blanc vers une eau turquoise, après une table pour deux sous une arche fleurie",
         },
         solo: {
           title: "Voyageurs solo",

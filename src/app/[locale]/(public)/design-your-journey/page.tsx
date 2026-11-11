@@ -38,7 +38,7 @@ export default async function DesignYourJourneyPage({
         description={j.description}
         crumbs={[{ label: t.nav.home, href: "/" }, { label: j.title }]}
         image={{
-          src: "/images/travellers/honeymoon.jpg",
+          src: "/images/travellers/honeymoon-sandbank.jpg",
           alt: t.home.travellers.items.honeymoon.alt,
           theme: "sunset",
         }}

@@ -195,7 +195,7 @@ export const tr: Messages = {
         honeymoon: {
           title: "Balayı",
           body: "Çıplak ayakla gün batımları, yalnızca ikinize ait zaman ve unutulmaz bir safari.",
-          alt: "Zanzibar’da geleneksel teknelere bakan, minderler ve şarapla kumda gün batımı pikniği",
+          alt: "Çiçekli bir kemerin altındaki iki kişilik masanın yanından, beyaz bir kum adasında el ele turkuaz suya yürüyen bir çift",
         },
         solo: {
           title: "Yalnız gezginler",

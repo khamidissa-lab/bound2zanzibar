@@ -197,7 +197,7 @@ export const de: Messages = {
         honeymoon: {
           title: "Flitterwochen",
           body: "Sonnenuntergänge barfuß, Zeit nur für Sie beide und eine unvergessliche Safari.",
-          alt: "Ein Picknick bei Sonnenuntergang im Sand mit Kissen und Wein, mit Blick auf traditionelle Boote auf Sansibar",
+          alt: "Ein Paar geht Hand in Hand über eine weiße Sandbank ins türkisfarbene Wasser, vorbei an einem Tisch für zwei unter einem Blumenbogen",
         },
         solo: {
           title: "Alleinreisende",

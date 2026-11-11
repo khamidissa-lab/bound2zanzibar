@@ -205,7 +205,7 @@ export const en = {
         honeymoon: {
           title: "Honeymoons",
           body: "Barefoot sunsets, time for just the two of you and a safari to remember.",
-          alt: "A sunset picnic on the sand with cushions and wine, facing traditional boats in Zanzibar",
+          alt: "A couple walking hand in hand along a white sandbank into turquoise water, past a table for two under a flower-decked arch",
         },
         solo: {
           title: "Solo travellers",

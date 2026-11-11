@@ -514,12 +514,19 @@ export const moreTours: TourBase[] = [
       "Departure from the south-west coast (Fumba or Kizimkazi area). Transfer options confirmed on booking.",
     difficulty: "easy",
     suitability: "Suitable for families. Long day on the water and in the sun.",
+    // Main image supplied by the owner (2026-11-09); see docs/PHOTO_CREDITS.md.
     coverImage: {
-      src: "/images/tours/pungume-sandbank.jpg",
-      alt: "A curved white sandbank in turquoise water, with boats moored nearby",
+      src: "/images/tours/pungume-sandbank-boats.jpg",
+      alt: "Aerial view of a white sandbank in turquoise water, with visitors on the sand and blue-canopied boats anchored around it",
       theme: "ocean",
     },
-    gallery: [],
+    gallery: [
+      {
+        src: "/images/tours/pungume-sandbank.jpg",
+        alt: "A curved white sandbank in turquoise water, with boats moored nearby",
+        theme: "ocean",
+      },
+    ],
     prices: illustrativePrices({ adult: 70, child: 40 }, { adult: 120000, child: 70000 }),
     featured: false,
     status: "published",
@@ -571,11 +578,37 @@ export const moreTours: TourBase[] = [
     suitability:
       "Age and health requirements apply for drivers — we'll confirm them when you book.",
     coverImage: {
-      src: "/images/tours/jet-ski.jpg",
-      alt: "Two riders on a yellow jet ski near a beach lined with traditional boats",
+      src: "/images/tours/jet-ski-front.jpg",
+      alt: "A woman in a colourful headscarf and sunglasses seated on a red, white and black jet ski in clear turquoise water, seen from above",
       theme: "ocean",
     },
-    gallery: [],
+    gallery: [
+      {
+        src: "/images/tours/jet-ski-cheer.jpg",
+        alt: "A woman raising both arms and smiling on a red and black jet ski in shallow turquoise water",
+        theme: "ocean",
+      },
+      {
+        src: "/images/tours/jet-ski-smile.jpg",
+        alt: "A smiling woman holding her headscarf while seated on a red jet ski in bright turquoise water",
+        theme: "ocean",
+      },
+      {
+        src: "/images/tours/jet-ski-shallows.jpg",
+        alt: "Aerial view of a woman on a red and white jet ski in pale green shallow water near a sandy shore",
+        theme: "ocean",
+      },
+      {
+        src: "/images/tours/jet-ski-above.jpg",
+        alt: "A woman on a jet ski seen from directly above, with sunlight patterns in the clear water around her",
+        theme: "ocean",
+      },
+      {
+        src: "/images/tours/jet-ski.jpg",
+        alt: "Two riders on a yellow jet ski near a beach lined with traditional boats",
+        theme: "ocean",
+      },
+    ],
     prices: illustrativePrices(
       { adult: 60, child: null },
       { adult: 110000, child: null },
@@ -679,12 +712,29 @@ export const moreTours: TourBase[] = [
       "Kizimkazi, or hotel pickup on request. Exact time confirmed on booking.",
     difficulty: "easy",
     suitability: "Suitable for families. The cave has steps and can be slippery.",
+    // Photos supplied by the owner (2026-11-09); see docs/PHOTO_CREDITS.md.
     coverImage: {
-      src: "/images/tours/salaam-cave.jpg",
-      alt: "Visitors with sea turtles in the clear water of Salaam Cave",
+      src: "/images/tours/salaam-cave-seaweed.jpg",
+      alt: "A woman standing waist-deep in the cave's clear green pool, holding seaweed, with sea turtles swimming beside her",
       theme: "ocean",
     },
-    gallery: [],
+    gallery: [
+      {
+        src: "/images/tours/salaam-cave-sign.jpg",
+        alt: "The Salaam Cave sign hanging under green foliage above a clear pool with sea turtles swimming",
+        theme: "ocean",
+      },
+      {
+        src: "/images/tours/salaam-cave-family.jpg",
+        alt: "A mother and her son smiling in the cave pool beneath the rock overhang, with two large sea turtles in front of them",
+        theme: "ocean",
+      },
+      {
+        src: "/images/tours/salaam-cave-turtles.jpg",
+        alt: "A smiling woman in the pool gently touching a sea turtle, surrounded by several more turtles",
+        theme: "ocean",
+      },
+    ],
     prices: illustrativePrices({ adult: 35, child: 20 }, { adult: 55000, child: 30000 }),
     featured: false,
     status: "published",
@@ -733,15 +783,15 @@ export const moreTours: TourBase[] = [
     // Main and first gallery images supplied by the owner (2026-11-02); see
     // docs/PHOTO_CREDITS.md.
     coverImage: {
-      src: "/images/tours/horse-riding-sea.jpg",
-      alt: "A rider on a bay horse wading through clear turquoise water under a blue sky",
-      theme: "ocean",
+      src: "/images/tours/horse-riding-field.jpg",
+      alt: "Two riders, one on a spotted white horse and one on a bay horse, seen from above on a sunny green field",
+      theme: "forest",
     },
     gallery: [
       {
-        src: "/images/tours/horse-riding-field.jpg",
-        alt: "Two riders, one on a spotted white horse and one on a bay horse, seen from above on a sunny green field",
-        theme: "forest",
+        src: "/images/tours/horse-riding-sea.jpg",
+        alt: "A rider on a bay horse wading through clear turquoise water under a blue sky",
+        theme: "ocean",
       },
       {
         src: "/images/tours/horse-riding-beach.jpg",
