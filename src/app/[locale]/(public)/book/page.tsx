@@ -73,11 +73,11 @@ export default async function BookPage({
             <ul className="mt-3 space-y-2">
               <li>
                 <a
-                  href={enquiryMailto(b.emailSubject)}
+                  href={enquiryMailto(b.emailSubject, contact.bookingEmail)}
                   className="inline-flex items-center gap-2 text-turquoise-deep hover:underline"
                 >
                   <Mail className="size-4" aria-hidden="true" />
-                  {contact.email}
+                  {contact.bookingEmail}
                 </a>
               </li>
               <li>
@@ -161,7 +161,10 @@ async function BookingSection({
           className="mb-6 flex items-start gap-2 border-s-2 border-gold bg-gold/10 px-4 py-3 text-sm text-ocean-deep"
         >
           <Info className="mt-0.5 size-4 shrink-0 text-gold-deep" aria-hidden="true" />
-          {fmt(t.book.unavailable, { email: contact.email, phone: contact.phoneDisplay })}
+          {fmt(t.book.unavailable, {
+            email: contact.bookingEmail,
+            phone: contact.phoneDisplay,
+          })}
         </p>
       ) : null}
       <BookingForm

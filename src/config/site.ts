@@ -73,10 +73,13 @@ export function localizedFooterNav(t: Messages): { title: string; items: NavItem
 
 /**
  * Owner-supplied contact details (provided 2026-10-31). The owner confirmed on
- * 2026-11-02 that the phone number is also the business WhatsApp number.
+ * 2026-11-02 that the phone number is also the business WhatsApp number. The
+ * business mailbox on Zoho Mail went live on 2026-11-10 (owner tested delivery).
  */
 export const contact = {
-  email: "khamidissa@gmail.com",
+  email: "info@bound2zanzibar.co.tz",
+  /** Where booking-related mail should go (an alias of the same Zoho mailbox). */
+  bookingEmail: "booking@bound2zanzibar.co.tz",
   phone: "+255622341233",
   phoneDisplay: "+255 622 341 233",
   /** International format without "+", as wa.me expects. */
@@ -126,6 +129,6 @@ export const socialLinks: readonly SocialLink[] = [
 ];
 
 /** Pre-filled email enquiry link, used until online booking requests launch. */
-export function enquiryMailto(subject: string): string {
-  return `mailto:${contact.email}?subject=${encodeURIComponent(subject)}`;
+export function enquiryMailto(subject: string, address: string = contact.email): string {
+  return `mailto:${address}?subject=${encodeURIComponent(subject)}`;
 }

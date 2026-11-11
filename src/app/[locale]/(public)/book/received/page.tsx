@@ -56,11 +56,11 @@ export default async function BookingReceivedPage({
 
         <div className="mt-6 flex flex-col justify-center gap-2 text-sm sm:flex-row sm:gap-6">
           <a
-            href={`mailto:${contact.email}`}
+            href={`mailto:${contact.bookingEmail}`}
             className="inline-flex items-center justify-center gap-2 text-turquoise-deep hover:underline"
           >
             <Mail className="size-4" aria-hidden="true" />
-            {contact.email}
+            {contact.bookingEmail}
           </a>
           <a
             href={`tel:${contact.phone}`}

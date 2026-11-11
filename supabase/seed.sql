@@ -1079,7 +1079,7 @@ values ((select id from public.blog_posts where slug = 'what-to-pack-for-zanziba
   (select id from public.tours where slug = 'prison-island-tour'), 2);
 
 -- Public site settings (owner-supplied contact details)
-insert into public.site_settings (key, value, is_public, description) values ('contact.email', '"khamidissa@gmail.com"'::jsonb, true, 'Public contact email');
+insert into public.site_settings (key, value, is_public, description) values ('contact.email', '"info@bound2zanzibar.co.tz"'::jsonb, true, 'Public contact email');
 insert into public.site_settings (key, value, is_public, description) values ('contact.phone', '"+255622341233"'::jsonb, true, 'Public phone number (E.164)');
 insert into public.site_settings (key, value, is_public, description) values ('contact.address', 'null'::jsonb, true, 'Office address — awaiting owner');
 insert into public.site_settings (key, value, is_public, description) values ('social.links', '[{"label":"Instagram","handle":"@bound2zanzibar","href":"https://www.instagram.com/bound2zanzibar/"},{"label":"Facebook","handle":null,"href":null},{"label":"TikTok","handle":null,"href":null}]'::jsonb, true, 'Social profiles');

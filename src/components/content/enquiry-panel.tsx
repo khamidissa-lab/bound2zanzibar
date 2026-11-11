@@ -65,7 +65,10 @@ export function EnquiryPanel({
             <span className="sr-only">{t.nav.opensWhatsApp}</span>
           </a>
           <a
-            href={enquiryMailto(fmt(t.enquiry.emailSubject, { item: itemName }))}
+            href={enquiryMailto(
+              fmt(t.enquiry.emailSubject, { item: itemName }),
+              contact.bookingEmail,
+            )}
             className={secondary}
           >
             <Mail className="size-4 text-turquoise-deep" aria-hidden="true" />
