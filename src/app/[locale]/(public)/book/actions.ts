@@ -1,6 +1,7 @@
 "use server";
 
 import { redirect } from "next/navigation";
+import { after } from "next/server";
 
 import { contact } from "@/config/site";
 import { isLocale, localizePath } from "@/i18n/config";
@@ -8,6 +9,7 @@ import { bookingErrorMessage, bookingRequestSchema } from "@/lib/booking/request
 import { formValues, type FormState } from "@/lib/forms";
 import { isSupabaseConfigured } from "@/lib/supabase/env";
 import { zanzibarDate } from "@/services/admin-dashboard-model";
+import { notifyTeamOfBooking } from "@/services/booking-notifications";
 import { submitBookingRequest } from "@/services/bookings";
 import { identifyCurrentVisitor } from "@/services/visitor-tracking";
 
@@ -60,6 +62,12 @@ export async function requestBooking(
     if (!friendly) console.error("[booking] request failed:", result.dbMessage);
     return { status: "error", message: friendly ?? UNAVAILABLE, values: echo };
   }
+
+  // Tell the team by email once the response has gone out; the visitor never
+  // waits for the mail server, and the request is saved whatever happens.
+  const saved = parsed.data;
+  const reference = result.reference;
+  after(() => notifyTeamOfBooking(saved, reference));
 
   // Links the details to the visitor record (only with tracking consent).
   await identifyCurrentVisitor({

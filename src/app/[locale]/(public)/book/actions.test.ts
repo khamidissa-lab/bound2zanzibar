@@ -9,6 +9,10 @@ vi.mock("next/navigation", () => ({
     throw new Error(`REDIRECT:${url}`);
   },
 }));
+const notify = vi.fn();
+vi.mock("@/services/booking-notifications", () => ({ notifyTeamOfBooking: notify }));
+// Run work scheduled with after() straight away so the test can see it.
+vi.mock("next/server", () => ({ after: (task: () => unknown) => void task() }));
 vi.mock("@/services/admin-dashboard-model", () => ({ zanzibarDate: () => "2026-11-02" }));
 
 const { requestBooking } = await import("./actions");
@@ -41,6 +45,7 @@ describe("requestBooking", () => {
     vi.stubEnv("NEXT_PUBLIC_SUPABASE_URL", "https://example.supabase.co");
     vi.stubEnv("NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY", "sb_publishable_test");
     submit.mockReset();
+    notify.mockReset();
   });
   afterEach(() => vi.unstubAllEnvs());
 
@@ -65,6 +70,11 @@ describe("requestBooking", () => {
       reference: "BTZ-2611-ABCDEF12",
       item: { type: "package", slug: "zanzibar-highlights-4-days" },
     });
+    // The team is emailed about the saved request.
+    expect(notify).toHaveBeenCalledWith(
+      expect.objectContaining({ email: "amina@example.com", adults: 2 }),
+      "BTZ-2611-ABCDEF12",
+    );
   });
 
   it("returns field errors and keeps the typed values", async () => {
@@ -82,6 +92,7 @@ describe("requestBooking", () => {
     submit.mockResolvedValue({ ok: false, dbMessage: "booking_item_unavailable" });
     const state = await run(form());
     expect(state.message).toMatch(/no longer available/);
+    expect(notify).not.toHaveBeenCalled();
   });
 
   it("silently drops bot submissions caught by the honeypot", async () => {
