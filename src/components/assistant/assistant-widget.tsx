@@ -9,9 +9,10 @@ import {
   type ReactNode,
 } from "react";
 import { usePathname } from "next/navigation";
-import { ArrowUp, RotateCcw, Sparkles, Square } from "lucide-react";
+import { ArrowUp, Mail, RotateCcw, Sparkles, Square } from "lucide-react";
 
 import { LocaleLink as Link } from "@/components/i18n/locale-link";
+import { InstagramIcon, WhatsAppIcon } from "@/components/icons/brand-icons";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -21,7 +22,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { contact } from "@/config/site";
+import { contact, socialLinks, whatsappLink } from "@/config/site";
 import { useI18n } from "@/i18n/client";
 import { splitLocale } from "@/i18n/config";
 import type { Messages } from "@/i18n/messages/en";
@@ -80,24 +81,86 @@ function errorText(
   return fmt(t.assistant.failed, values);
 }
 
-// Site paths the assistant cites (e.g. /tours/prison-island-tour) become links.
-const PATH_RE =
-  /(\/(?:tours|packages|destinations|travel-guide)(?:\/[a-z0-9-]+)?|\/(?:book|contact|safari|about))(?![\w/-])/g;
+// Site paths the assistant cites (e.g. /tours/prison-island-tour), email
+// addresses and Tanzanian phone numbers become links.
+const PATH_PART = String.raw`\/(?:tours|packages|destinations|travel-guide)(?:\/[a-z0-9-]+)?(?![\w/-])|\/(?:book|contact|safari|about)(?![\w/-])`;
+const EMAIL_PART = String.raw`[\w.+-]+@[\w-]+(?:\.[\w-]+)*\.[a-z]{2,}`;
+const PHONE_PART = String.raw`\+255(?:[ -]?\d){9}`;
+const LINK_RE = new RegExp(`(${PATH_PART}|${EMAIL_PART}|${PHONE_PART})`, "g");
+const linkClass =
+  "font-medium text-turquoise-deep underline underline-offset-2 hover:text-ocean-deep";
 
 function linkify(text: string, onNavigate: () => void): ReactNode[] {
-  return text.split(PATH_RE).map((part, i) =>
-    i % 2 === 1 ? (
-      <Link
-        key={i}
-        href={part}
-        onClick={onNavigate}
-        className="font-medium text-turquoise-deep underline underline-offset-2 hover:text-ocean-deep"
-      >
+  return text.split(LINK_RE).map((part, i) => {
+    if (i % 2 === 0) return <Fragment key={i}>{part}</Fragment>;
+    if (part.startsWith("/")) {
+      return (
+        <Link key={i} href={part} onClick={onNavigate} className={linkClass}>
+          {part}
+        </Link>
+      );
+    }
+    const href = part.includes("@")
+      ? `mailto:${part}`
+      : `tel:+${part.replace(/\D/g, "")}`;
+    return (
+      <a key={i} href={href} dir="ltr" className={`${linkClass} break-all`}>
         {part}
-      </Link>
-    ) : (
-      <Fragment key={i}>{part}</Fragment>
-    ),
+      </a>
+    );
+  });
+}
+
+const instagram = socialLinks.find((s) => s.label === "Instagram" && s.href);
+
+/** Direct routes to the team, shown under the panel title. */
+function ContactRow({ t }: { t: Messages }) {
+  const items = [
+    {
+      key: "whatsapp",
+      label: t.nav.whatsapp,
+      href: whatsappLink(),
+      icon: WhatsAppIcon,
+      external: t.nav.opensWhatsApp,
+    },
+    {
+      key: "email",
+      label: t.footer.email,
+      href: `mailto:${contact.email}`,
+      icon: Mail,
+      external: null,
+    },
+    ...(instagram?.href
+      ? [
+          {
+            key: "instagram",
+            label: "Instagram",
+            href: instagram.href,
+            icon: InstagramIcon,
+            external: t.nav.instagramNewTab,
+          },
+        ]
+      : []),
+  ];
+  return (
+    <div className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-2">
+      <span className="text-xs text-muted-foreground">{t.assistant.talkToTeam}</span>
+      <ul className="flex flex-wrap gap-2">
+        {items.map(({ key, label, href, icon: Icon, external }) => (
+          <li key={key}>
+            <a
+              href={href}
+              {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+              className="inline-flex items-center gap-1.5 rounded-full border border-turquoise/40 bg-white px-3 py-1.5 text-xs font-medium text-ocean-deep transition hover:border-turquoise-deep hover:bg-turquoise-deep hover:text-white"
+            >
+              <Icon className="size-3.5" aria-hidden="true" />
+              {label}
+              {external ? <span className="sr-only"> {external}</span> : null}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }
 
@@ -246,6 +309,7 @@ export function AssistantWidget() {
           <SheetDescription className="text-xs leading-relaxed">
             {a.description}
           </SheetDescription>
+          <ContactRow t={t} />
         </SheetHeader>
 
         <div

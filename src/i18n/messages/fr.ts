@@ -1119,6 +1119,7 @@ export const fr: Messages = {
     stop: "Arrêter la réponse",
     send: "Envoyer la question",
     newChat: "Nouvelle conversation",
+    talkToTeam: "Vous préférez parler à notre équipe ?",
     notConfigured:
       "Notre assistant IA n’est pas encore activé. Veuillez contacter notre équipe à {email} ou au {phone}.",
     rateLimited:

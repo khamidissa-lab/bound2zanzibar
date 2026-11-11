@@ -1,7 +1,8 @@
 import { cacheLife } from "next/cache";
-import { ArrowUpRight, MessageCircle } from "lucide-react";
+import { ArrowUpRight, Mail, MapPin, Phone } from "lucide-react";
 
 import { LocaleLink as Link } from "@/components/i18n/locale-link";
+import { InstagramIcon, WhatsAppIcon } from "@/components/icons/brand-icons";
 import { buttonVariants } from "@/components/ui/button";
 import { NewsletterForm } from "@/components/visitors/newsletter-form";
 import { CookieSettingsButton } from "@/components/visitors/visitor-tracker";
@@ -17,6 +18,13 @@ import type { Locale } from "@/i18n/config";
 import { getI18n } from "@/i18n/server";
 
 import { Logo } from "./logo";
+
+const contactIcons = {
+  phone: Phone,
+  whatsapp: WhatsAppIcon,
+  email: Mail,
+  address: MapPin,
+} as const;
 
 async function getCopyrightYear() {
   "use cache";
@@ -57,7 +65,7 @@ export async function SiteFooter({ locale }: { locale: Locale }) {
                 rel="noopener noreferrer"
                 className={buttonVariants({ variant: "outline-light", size: "lg" })}
               >
-                <MessageCircle aria-hidden="true" data-icon="inline-start" />
+                <WhatsAppIcon aria-hidden="true" data-icon="inline-start" />
                 {t.footer.whatsappUs}
                 <span className="sr-only">{t.nav.opensWhatsApp}</span>
               </a>
@@ -95,28 +103,36 @@ export async function SiteFooter({ locale }: { locale: Locale }) {
         <div>
           <h2 className="eyebrow mb-5 text-gold-light">{t.footer.getInTouch}</h2>
           <dl className="space-y-3.5 text-sm">
-            {localizedContactDetails(t).map((field) => (
-              <div key={field.label}>
-                <dt className="text-xs text-white/50">{field.label}</dt>
-                <dd className="mt-0.5 text-white/90">
-                  {field.value && field.href ? (
-                    <a
-                      href={field.href}
-                      dir="ltr"
-                      className="link-underline break-all hover:text-white"
-                    >
-                      {field.value}
-                    </a>
-                  ) : (
-                    (field.value ?? (
-                      <span className="inline-flex items-center border border-dashed border-white/30 px-2 py-0.5 text-xs text-white/70">
-                        {t.footer.pending}
-                      </span>
-                    ))
-                  )}
-                </dd>
-              </div>
-            ))}
+            {localizedContactDetails(t).map((field) => {
+              const Icon = contactIcons[field.kind];
+              return (
+                <div key={field.label} className="flex gap-3">
+                  <span className="mt-0.5 flex size-8 shrink-0 items-center justify-center rounded-full bg-white/10 text-gold-light">
+                    <Icon className="size-4" aria-hidden="true" />
+                  </span>
+                  <div className="min-w-0">
+                    <dt className="text-xs text-white/50">{field.label}</dt>
+                    <dd className="mt-0.5 text-white/90">
+                      {field.value && field.href ? (
+                        <a
+                          href={field.href}
+                          dir="ltr"
+                          className="link-underline break-all hover:text-white"
+                        >
+                          {field.value}
+                        </a>
+                      ) : (
+                        (field.value ?? (
+                          <span className="inline-flex items-center border border-dashed border-white/30 px-2 py-0.5 text-xs text-white/70">
+                            {t.footer.pending}
+                          </span>
+                        ))
+                      )}
+                    </dd>
+                  </div>
+                </div>
+              );
+            })}
           </dl>
           <h3 className="eyebrow mt-7 mb-3 text-white/50">{t.footer.followUs}</h3>
           <ul className="flex flex-wrap gap-2 text-sm">
@@ -127,8 +143,11 @@ export async function SiteFooter({ locale }: { locale: Locale }) {
                     href={social.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1 border border-white/25 px-3 py-1 text-white/85 hover:border-white/70 hover:text-white"
+                    className="inline-flex items-center gap-1.5 border border-white/25 px-3 py-1 text-white/85 hover:border-white/70 hover:text-white"
                   >
+                    {social.label === "Instagram" ? (
+                      <InstagramIcon className="size-3.5" aria-hidden="true" />
+                    ) : null}
                     {social.label}
                     <ArrowUpRight className="size-3" aria-hidden="true" />
                   </a>

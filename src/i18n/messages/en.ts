@@ -1107,6 +1107,7 @@ export const en = {
     stop: "Stop answer",
     send: "Send question",
     newChat: "New chat",
+    talkToTeam: "Prefer to talk to our team?",
     notConfigured:
       "Our AI assistant isn't switched on yet. Please contact our team at {email} or {phone}.",
     rateLimited:

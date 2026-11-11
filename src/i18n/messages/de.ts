@@ -1108,6 +1108,7 @@ export const de: Messages = {
     stop: "Antwort stoppen",
     send: "Frage senden",
     newChat: "Neuer Chat",
+    talkToTeam: "Lieber direkt mit unserem Team sprechen?",
     notConfigured:
       "Unser KI-Assistent ist noch nicht aktiviert. Bitte kontaktieren Sie unser Team unter {email} oder {phone}.",
     rateLimited:

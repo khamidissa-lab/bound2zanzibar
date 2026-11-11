@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
-import { ArrowUpRight, AtSign, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
+import { ArrowUpRight, Mail, MapPin, Phone } from "lucide-react";
 
 import { EnquiryForm } from "@/components/contact/enquiry-form";
+import { InstagramIcon, WhatsAppIcon } from "@/components/icons/brand-icons";
 import { LocaleLink as Link } from "@/components/i18n/locale-link";
 import { PageHeader } from "@/components/shared/page-header";
 import { contact, enquiryMailto, socialLinks, whatsappLink } from "@/config/site";
@@ -44,7 +45,7 @@ export default async function ContactPage({ params }: PageProps<"/[locale]/conta
       note: ch.phoneNote,
     },
     {
-      icon: MessageCircle,
+      icon: WhatsAppIcon,
       title: ch.whatsapp,
       detail: contact.phoneDisplay,
       href: whatsappLink(ch.whatsappMessage),
@@ -53,7 +54,7 @@ export default async function ContactPage({ params }: PageProps<"/[locale]/conta
     ...(instagram?.href && instagram.handle
       ? [
           {
-            icon: AtSign,
+            icon: InstagramIcon,
             title: ch.instagram,
             detail: instagram.handle,
             href: instagram.href,
@@ -86,10 +87,9 @@ export default async function ContactPage({ params }: PageProps<"/[locale]/conta
                     : {})}
                   className="group flex gap-5 py-6"
                 >
-                  <Icon
-                    className="mt-1.5 size-5 shrink-0 text-turquoise-deep"
-                    aria-hidden="true"
-                  />
+                  <span className="flex size-12 shrink-0 items-center justify-center rounded-full bg-turquoise-deep/10 text-turquoise-deep transition-colors group-hover:bg-turquoise-deep group-hover:text-white">
+                    <Icon className="size-5" aria-hidden="true" />
+                  </span>
                   <span className="min-w-0 flex-1">
                     <span className="eyebrow block text-muted-foreground">{title}</span>
                     <span

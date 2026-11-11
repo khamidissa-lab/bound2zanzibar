@@ -1073,6 +1073,7 @@ export const ar: Messages = {
     stop: "إيقاف الإجابة",
     send: "إرسال السؤال",
     newChat: "محادثة جديدة",
+    talkToTeam: "تفضّل التحدث مع فريقنا؟",
     notConfigured:
       "مساعدنا الذكي غير مفعّل بعد. يُرجى التواصل مع فريقنا على {email} أو {phone}.",
     rateLimited:

@@ -96,6 +96,8 @@ export function whatsappLink(
 }
 
 export type ContactField = {
+  /** Which channel this is, so components can pick a matching icon. */
+  kind: "phone" | "whatsapp" | "email" | "address";
   label: string;
   value: string | null;
   href: string | null;
@@ -104,10 +106,25 @@ export type ContactField = {
 /** `null` values are still awaiting verified details from the owner. */
 export function localizedContactDetails(t: Messages): ContactField[] {
   return [
-    { label: t.footer.phone, value: contact.phoneDisplay, href: `tel:${contact.phone}` },
-    { label: t.nav.whatsapp, value: contact.phoneDisplay, href: whatsappLink() },
-    { label: t.footer.email, value: contact.email, href: `mailto:${contact.email}` },
-    { label: t.footer.officeAddress, value: null, href: null },
+    {
+      kind: "phone",
+      label: t.footer.phone,
+      value: contact.phoneDisplay,
+      href: `tel:${contact.phone}`,
+    },
+    {
+      kind: "whatsapp",
+      label: t.nav.whatsapp,
+      value: contact.phoneDisplay,
+      href: whatsappLink(),
+    },
+    {
+      kind: "email",
+      label: t.footer.email,
+      value: contact.email,
+      href: `mailto:${contact.email}`,
+    },
+    { kind: "address", label: t.footer.officeAddress, value: null, href: null },
   ];
 }
 

@@ -1,7 +1,8 @@
 import { Suspense } from "react";
-import { ArrowUpRight, MessageCircle, Phone } from "lucide-react";
+import { ArrowUpRight, Mail, Phone } from "lucide-react";
 
 import { LanguageSwitcher } from "@/components/i18n/language-switcher";
+import { InstagramIcon, WhatsAppIcon } from "@/components/icons/brand-icons";
 import { LocaleLink as Link } from "@/components/i18n/locale-link";
 import { buttonVariants } from "@/components/ui/button";
 import {
@@ -47,6 +48,16 @@ export function SiteHeader({ locale }: { locale: Locale }) {
                 {contact.phoneDisplay}
               </a>
             </li>
+            <li className="hidden lg:block">
+              <a
+                href={`mailto:${contact.email}`}
+                dir="ltr"
+                className="inline-flex items-center gap-1.5 hover:text-white"
+              >
+                <Mail className="size-3" aria-hidden="true" />
+                {contact.email}
+              </a>
+            </li>
             <li>
               <a
                 href={whatsappLink()}
@@ -54,7 +65,7 @@ export function SiteHeader({ locale }: { locale: Locale }) {
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-1.5 hover:text-white"
               >
-                <MessageCircle className="size-3" aria-hidden="true" />
+                <WhatsAppIcon className="size-3" aria-hidden="true" />
                 {t.nav.whatsapp}
                 <span className="sr-only">{t.nav.opensWhatsApp}</span>
               </a>
@@ -66,8 +77,9 @@ export function SiteHeader({ locale }: { locale: Locale }) {
                   target="_blank"
                   rel="noopener noreferrer"
                   dir="ltr"
-                  className="inline-flex items-center gap-1 hover:text-white"
+                  className="inline-flex items-center gap-1.5 hover:text-white"
                 >
+                  <InstagramIcon className="size-3" aria-hidden="true" />
                   {instagram.handle}
                   <ArrowUpRight className="size-3" aria-hidden="true" />
                   <span className="sr-only">{t.nav.instagramNewTab}</span>

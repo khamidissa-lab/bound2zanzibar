@@ -1098,6 +1098,7 @@ export const tr: Messages = {
     stop: "Yanıtı durdur",
     send: "Soruyu gönder",
     newChat: "Yeni sohbet",
+    talkToTeam: "Ekibimizle konuşmayı mı tercih edersiniz?",
     notConfigured:
       "Yapay zekâ asistanımız henüz etkin değil. Lütfen ekibimize {email} veya {phone} üzerinden ulaşın.",
     rateLimited:

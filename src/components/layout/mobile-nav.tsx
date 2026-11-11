@@ -2,8 +2,9 @@
 
 import { useState } from "react";
 import { usePathname } from "next/navigation";
-import { Menu, MessageCircle, Phone } from "lucide-react";
+import { Menu, Phone } from "lucide-react";
 
+import { WhatsAppIcon } from "@/components/icons/brand-icons";
 import { LanguageSwitcher } from "@/components/i18n/language-switcher";
 import { LocaleLink as Link } from "@/components/i18n/locale-link";
 import { Button, buttonVariants } from "@/components/ui/button";
@@ -83,7 +84,7 @@ export function MobileNav({ items }: { items: readonly NavItem[] }) {
                 className: "w-full",
               })}
             >
-              <MessageCircle aria-hidden="true" data-icon="inline-start" />
+              <WhatsAppIcon aria-hidden="true" data-icon="inline-start" />
               {t.nav.whatsapp}
               <span className="sr-only">{t.nav.opensWhatsApp}</span>
             </a>
