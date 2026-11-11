@@ -75,8 +75,8 @@ const baseDestinations: Omit<Destination, "wildlife" | "bestTime">[] = [
       "Marine conservation area",
     ],
     coverImage: {
-      src: "/images/photos/reef.jpg",
-      alt: "Fish swimming over a colourful coral reef",
+      src: "/images/tours/mnemba-atoll-boats.jpg",
+      alt: "Aerial view of a small forested island with a white sandbank, and boats anchored in the shallow turquoise water in front",
       theme: "ocean",
     },
     featured: true,
