@@ -10,6 +10,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useI18n } from "@/i18n/client";
 import { initialFormState } from "@/lib/forms";
+import { useFocusFirstError } from "@/lib/use-focus-first-error";
 import { cn } from "@/lib/utils";
 
 function SubmitButton() {
@@ -36,6 +37,7 @@ export function ReviewForm({
   defaultName: string;
 }) {
   const [state, action] = useActionState(sendReview, initialFormState);
+  const formRef = useFocusFirstError(state);
   const { t, fmt, locale } = useI18n();
   const p = t.reviewPage;
   const tr = (msg?: string) => (msg ? (t.errors[msg] ?? msg) : msg);
@@ -56,7 +58,7 @@ export function ReviewForm({
   }
 
   return (
-    <form action={action} noValidate className="space-y-6">
+    <form ref={formRef} action={action} noValidate className="space-y-6">
       {state.status === "error" && state.message ? (
         <p
           role="alert"

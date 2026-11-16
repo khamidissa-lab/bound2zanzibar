@@ -46,16 +46,17 @@ export function Logo({
           <Image
             src="/brand/emblem.png"
             alt=""
-            width={480}
-            height={327}
+            // Displayed size at its largest (44px tall); the 2x file covers sharp screens.
+            width={65}
+            height={44}
             priority={priority}
             className="h-9 w-auto mix-blend-multiply max-[400px]:h-7 sm:h-11"
           />
           <Image
             src="/brand/wordmark.png"
             alt=""
-            width={555}
-            height={176}
+            width={126}
+            height={40}
             priority={priority}
             className="h-8 w-auto mix-blend-multiply max-[400px]:h-6 sm:h-10"
           />
@@ -64,8 +65,8 @@ export function Logo({
         <Image
           src="/brand/logo.png"
           alt=""
-          width={900}
-          height={900}
+          width={size}
+          height={size}
           priority={priority}
           style={{ width: size, height: size }}
           className="rounded-2xl bg-white"

@@ -54,6 +54,8 @@ export default async function LocaleRootLayout({
       lang={locale}
       dir={LOCALE_INFO[locale].dir}
       className={`${fontVariables} h-full antialiased`}
+      // The consent gate script may add data-consent-stored before hydration.
+      suppressHydrationWarning
     >
       <body className="flex min-h-full flex-col">
         <I18nProvider locale={locale} messages={getMessages(locale)}>

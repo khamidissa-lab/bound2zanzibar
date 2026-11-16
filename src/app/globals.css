@@ -200,6 +200,10 @@
   ::selection {
     @apply bg-turquoise-soft text-ocean-deep;
   }
+  /* Returning visitors: hide the server-rendered consent banner at once. */
+  html[data-consent-stored] [data-consent-pending] {
+    display: none;
+  }
 }
 
 @layer utilities {

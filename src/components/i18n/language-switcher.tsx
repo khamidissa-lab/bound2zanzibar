@@ -94,7 +94,8 @@ export function LanguageSwitcher({
         type="button"
         aria-expanded={open}
         aria-controls={menuId}
-        aria-label={`${t.language.choose}: ${LOCALE_INFO[locale].native}`}
+        // Starts with the visible code ("EN") so voice-control users can say it.
+        aria-label={`${locale.toUpperCase()}, ${t.language.choose}: ${LOCALE_INFO[locale].native}`}
         onClick={() => setOpen((o) => !o)}
         className="flex h-9 items-center gap-1.5 px-2 text-[0.75rem] font-semibold tracking-[0.12em] text-ocean-deep uppercase hover:text-turquoise-deep sm:h-10"
       >

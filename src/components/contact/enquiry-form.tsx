@@ -11,6 +11,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useI18n } from "@/i18n/client";
 import { initialFormState } from "@/lib/forms";
+import { useFocusFirstError } from "@/lib/use-focus-first-error";
 
 function Field({
   id,
@@ -76,6 +77,7 @@ function SubmitButton({ disabled }: { disabled: boolean }) {
 
 export function EnquiryForm({ available }: { available: boolean }) {
   const [state, action] = useActionState(sendEnquiry, initialFormState);
+  const formRef = useFocusFirstError(state);
   const [dismissedSuccess, setDismissed] = useState<typeof state | null>(null);
   const { t } = useI18n();
   const f = t.enquiryForm;
@@ -105,7 +107,7 @@ export function EnquiryForm({ available }: { available: boolean }) {
   const fieldClass = "h-11 bg-background";
 
   return (
-    <form action={action} noValidate className="space-y-5">
+    <form ref={formRef} action={action} noValidate className="space-y-5">
       {state.status === "error" && state.message ? (
         <p
           role="alert"

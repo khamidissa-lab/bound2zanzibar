@@ -106,30 +106,35 @@ export async function SiteFooter({ locale }: { locale: Locale }) {
             {localizedContactDetails(t).map((field) => {
               const Icon = contactIcons[field.kind];
               return (
-                <div key={field.label} className="flex gap-3">
-                  <span className="mt-0.5 flex size-8 shrink-0 items-center justify-center rounded-full bg-white/10 text-gold-light">
-                    <Icon className="size-4" aria-hidden="true" />
-                  </span>
-                  <div className="min-w-0">
-                    <dt className="text-xs text-white/50">{field.label}</dt>
-                    <dd className="mt-0.5 text-white/90">
-                      {field.value && field.href ? (
-                        <a
-                          href={field.href}
-                          dir="ltr"
-                          className="link-underline break-all hover:text-white"
-                        >
-                          {field.value}
-                        </a>
-                      ) : (
-                        (field.value ?? (
-                          <span className="inline-flex items-center border border-dashed border-white/30 px-2 py-0.5 text-xs text-white/70">
-                            {t.footer.pending}
-                          </span>
-                        ))
-                      )}
-                    </dd>
-                  </div>
+                // A <dl> group may only hold <dt>/<dd>, so the icon sits inside
+                // the <dt> and is positioned into the left gutter.
+                <div key={field.label} className="relative min-w-0 ps-11">
+                  <dt className="text-xs text-white/50">
+                    <span
+                      aria-hidden="true"
+                      className="absolute start-0 top-0.5 flex size-8 items-center justify-center rounded-full bg-white/10 text-gold-light"
+                    >
+                      <Icon className="size-4" />
+                    </span>
+                    {field.label}
+                  </dt>
+                  <dd className="mt-0.5 text-white/90">
+                    {field.value && field.href ? (
+                      <a
+                        href={field.href}
+                        dir="ltr"
+                        className="link-underline break-all hover:text-white"
+                      >
+                        {field.value}
+                      </a>
+                    ) : (
+                      (field.value ?? (
+                        <span className="inline-flex items-center border border-dashed border-white/30 px-2 py-0.5 text-xs text-white/70">
+                          {t.footer.pending}
+                        </span>
+                      ))
+                    )}
+                  </dd>
                 </div>
               );
             })}

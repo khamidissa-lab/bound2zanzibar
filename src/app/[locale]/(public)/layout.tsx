@@ -4,7 +4,10 @@ import { notFound } from "next/navigation";
 import { AssistantWidget } from "@/components/assistant/assistant-widget";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
-import { VisitorTracker } from "@/components/visitors/visitor-tracker";
+import {
+  CONSENT_GATE_SCRIPT,
+  VisitorTracker,
+} from "@/components/visitors/visitor-tracker";
 import { isLocale } from "@/i18n/config";
 import { getMessages } from "@/i18n/messages";
 
@@ -32,6 +35,8 @@ export default async function PublicLayout({
       <Suspense fallback={null}>
         <AssistantWidget />
       </Suspense>
+      {/* Hides the consent banner before it paints when a choice is stored. */}
+      <script dangerouslySetInnerHTML={{ __html: CONSENT_GATE_SCRIPT }} />
       {/* Reads the URL, so it streams in after the static shell. */}
       <Suspense fallback={null}>
         <VisitorTracker strings={t.consent} />

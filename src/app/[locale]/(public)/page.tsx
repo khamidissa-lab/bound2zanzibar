@@ -115,6 +115,7 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
           poster="/hero/home-video-poster.jpg"
           label={h.video.label}
           quietControls
+          priority
           className="absolute inset-0 -z-10"
           controlsClassName="end-4 top-4 sm:end-8 sm:top-8"
         />

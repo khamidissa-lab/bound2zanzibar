@@ -61,6 +61,8 @@ const nextConfig: NextConfig = {
     ];
   },
   images: {
+    // AVIF first (smaller), WebP for browsers without it.
+    formats: ["image/avif", "image/webp"],
     remotePatterns: supabaseImagePatterns(),
   },
   turbopack: {

@@ -11,6 +11,7 @@ import { Label } from "@/components/ui/label";
 import { useI18n } from "@/i18n/client";
 import { CURRENCIES, MAX_TRAVELLERS } from "@/lib/booking/request";
 import { initialFormState } from "@/lib/forms";
+import { useFocusFirstError } from "@/lib/use-focus-first-error";
 import { ACCOMMODATION_LEVELS } from "@/lib/journey/request";
 import { useMarket } from "@/lib/market-store";
 import { cn } from "@/lib/utils";
@@ -120,6 +121,7 @@ export function JourneyForm({
   today: string;
 }) {
   const [state, action] = useActionState(requestJourney, initialFormState);
+  const formRef = useFocusFirstError(state);
   const { t, locale } = useI18n();
   const j = t.journey;
   const market = useMarket();
@@ -138,7 +140,7 @@ export function JourneyForm({
   ];
 
   return (
-    <form action={action} noValidate className="space-y-8">
+    <form ref={formRef} action={action} noValidate className="space-y-8">
       {state.status === "error" && state.message ? (
         <p
           role="alert"

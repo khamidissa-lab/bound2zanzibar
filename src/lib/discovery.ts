@@ -169,3 +169,26 @@ export function filterTours(tours: Tour[], f: TourFilters, market: Market): Tour
       matchesQuery(tour, f.query),
   );
 }
+
+/**
+ * A tour with only what cards and the tour filters use. Long text (itinerary,
+ * FAQs, inclusions) and the gallery are emptied, so listing pages don't send
+ * every tour's full details to the browser.
+ */
+export function listingTour(tour: Tour): Tour {
+  return {
+    ...tour,
+    description: [],
+    included: [],
+    excluded: [],
+    whatToBring: [],
+    meetingPoint: "",
+    suitability: "",
+    whatToExpect: [],
+    goodToKnow: [],
+    faqs: [],
+    options: [],
+    gallery: [],
+    seo: { title: "", description: "" },
+  };
+}

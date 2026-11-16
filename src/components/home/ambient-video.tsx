@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
+import Image from "next/image";
 import { Pause, Play } from "lucide-react";
 
 import { useI18n } from "@/i18n/client";
@@ -24,6 +25,10 @@ const prefersReducedMotion = () => window.matchMedia(reducedMotionQuery).matches
  *
  * `quietControls`: the pause button stays hidden until the video is hovered
  * or the button is focused; clicking or tapping the video also toggles it.
+ *
+ * `priority`: for a video at the top of the page. The poster is drawn as an
+ * optimised, early-loading image behind the video (instead of the video's own
+ * poster), so the first view appears quickly on slow connections.
  */
 export function AmbientVideo({
   src,
@@ -31,6 +36,7 @@ export function AmbientVideo({
   label,
   whenVisible = false,
   quietControls = false,
+  priority = false,
   className,
   controlsClassName = "end-3 top-3 sm:end-5 sm:top-5",
 }: {
@@ -40,6 +46,7 @@ export function AmbientVideo({
   label: string;
   whenVisible?: boolean;
   quietControls?: boolean;
+  priority?: boolean;
   className?: string;
   /** Where the pause button sits (logical start/end, top/bottom). */
   controlsClassName?: string;
@@ -65,9 +72,30 @@ export function AmbientVideo({
       video.pause();
       return;
     }
+    // Visitors in data-saver mode keep the still image (they can press play).
+    const saveData = (navigator as Navigator & { connection?: { saveData?: boolean } })
+      .connection?.saveData;
+    if (saveData) return;
     if (!whenVisible) {
-      play();
-      return;
+      // Start only after the page itself has loaded, so the video never
+      // competes with the text and photos for a slow connection.
+      let idle: number | undefined;
+      const start = () => {
+        idle =
+          typeof window.requestIdleCallback === "function"
+            ? window.requestIdleCallback(play, { timeout: 2000 })
+            : window.setTimeout(play, 300);
+      };
+      if (document.readyState === "complete") start();
+      else window.addEventListener("load", start, { once: true });
+      return () => {
+        window.removeEventListener("load", start);
+        if (idle !== undefined) {
+          if (typeof window.cancelIdleCallback === "function")
+            window.cancelIdleCallback(idle);
+          window.clearTimeout(idle);
+        }
+      };
     }
     const observer = new IntersectionObserver(
       ([entry]) => (entry.isIntersecting ? play() : video.pause()),
@@ -91,14 +119,19 @@ export function AmbientVideo({
 
   return (
     <div className={cn("group relative overflow-hidden bg-ocean-deep", className)}>
+      {priority ? (
+        <Image src={poster} alt="" fill priority sizes="100vw" className="object-cover" />
+      ) : null}
       <video
         ref={ref}
         onClick={quietControls ? toggle : undefined}
         muted
         loop
         playsInline
-        preload={whenVisible ? "none" : "auto"}
-        poster={poster}
+        // Nothing downloads until play() is called (after page load or when
+        // scrolled into view); the poster shows until then.
+        preload="none"
+        poster={priority ? undefined : poster}
         aria-label={label}
         onPlay={() => setPlaying(true)}
         onPause={() => setPlaying(false)}

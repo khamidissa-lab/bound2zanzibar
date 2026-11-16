@@ -29,6 +29,13 @@ function readChoice(): Choice {
 // The cookie only changes through this component, which tracks that itself.
 const subscribeNoop = () => () => {};
 
+/**
+ * Runs before the page paints: marks <html> when a consent choice is stored,
+ * so CSS hides the server-rendered banner (see globals.css) until React takes
+ * over and removes it. Keep the cookie pattern in step with readChoice().
+ */
+export const CONSENT_GATE_SCRIPT = `if(/(?:^|;\\s*)b2z_consent=(accepted|declined)/.test(document.cookie))document.documentElement.setAttribute("data-consent-stored","")`;
+
 function send(payload: Record<string, unknown> & { type: ClientEventType }) {
   const body = JSON.stringify({
     path: window.location.pathname + window.location.search,
@@ -61,13 +68,16 @@ function bookItem(url: URL): string | undefined {
  */
 export function VisitorTracker({ strings }: { strings: Strings }) {
   const pathname = usePathname();
-  // The stored cookie choice; "server" while rendering on the server, where
-  // the banner stays hidden (it appears right after hydration if needed).
+  // The stored cookie choice; "server" while rendering on the server and
+  // during hydration. The banner is part of that first HTML so it paints with
+  // the page instead of after the scripts load; for visitors who already
+  // chose, CONSENT_GATE_SCRIPT hides it before it is ever shown.
   const stored = useSyncExternalStore(subscribeNoop, readChoice, () => "server" as const);
+  const pending = stored === "server";
   const [decided, setDecided] = useState<Choice>(null);
   const [reopened, setReopened] = useState(false);
-  const choice: Choice = decided ?? (stored === "server" ? null : stored);
-  const open = stored !== "server" && (reopened || choice === null);
+  const choice: Choice = decided ?? (pending ? null : stored);
+  const open = reopened || choice === null;
   const accepted = choice === "accepted";
   const firstView = useRef(true);
   const startedForms = useRef(new Set<string>());
@@ -175,6 +185,7 @@ export function VisitorTracker({ strings }: { strings: Strings }) {
   return (
     <section
       aria-labelledby="consent-title"
+      data-consent-pending={pending ? "" : undefined}
       className="fixed inset-x-3 bottom-3 z-50 border border-ocean-deep/15 bg-ivory p-5 text-ocean-deep shadow-card sm:inset-x-auto sm:start-4 sm:bottom-4 sm:max-w-md"
     >
       <h2

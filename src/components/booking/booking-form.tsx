@@ -18,6 +18,7 @@ import {
 } from "@/lib/booking/request";
 import { useI18n } from "@/i18n/client";
 import { initialFormState } from "@/lib/forms";
+import { useFocusFirstError } from "@/lib/use-focus-first-error";
 import { buildQuote } from "@/lib/booking/quote";
 import { useMarket } from "@/lib/market-store";
 import type { TripPlan } from "@/lib/trip-plan";
@@ -124,6 +125,7 @@ export function BookingForm({
   available: boolean;
 }) {
   const [state, action] = useActionState(requestBooking, initialFormState);
+  const formRef = useFocusFirstError(state);
   const { t, fmt, price: formatPrice, locale } = useI18n();
   const f = t.bookingForm;
   // Server messages come back in English; show them in the visitor's language.
@@ -173,7 +175,13 @@ export function BookingForm({
     o.prices.find((p) => p.market === market && p.currency === currency);
 
   return (
-    <form action={action} noValidate data-track-form="booking" className="space-y-8">
+    <form
+      ref={formRef}
+      action={action}
+      noValidate
+      data-track-form="booking"
+      className="space-y-8"
+    >
       {state.status === "error" && state.message ? (
         <p
           role="alert"

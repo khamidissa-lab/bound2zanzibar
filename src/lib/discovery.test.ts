@@ -9,6 +9,7 @@ import {
   filtersFromParams,
   fromPrice,
   inBudget,
+  listingTour,
   marketCurrency,
   toTravelStyles,
 } from "./discovery";
@@ -121,5 +122,24 @@ describe("sample data", () => {
       expect(t.travelStyles.length, t.slug).toBeGreaterThan(0);
       expect(toTravelStyles(t.travelStyles)).toEqual(t.travelStyles);
     }
+  });
+});
+
+describe("listingTour", () => {
+  it("keeps what cards and filters need and drops the long details", () => {
+    const full = sampleTours[0];
+    const slim = listingTour(full);
+    expect(slim).toMatchObject({
+      slug: full.slug,
+      name: full.name,
+      shortDescription: full.shortDescription,
+      highlights: full.highlights,
+      prices: full.prices,
+      coverImage: full.coverImage,
+      travelStyles: full.travelStyles,
+    });
+    expect(slim.faqs).toEqual([]);
+    expect(slim.whatToExpect).toEqual([]);
+    expect(slim.gallery).toEqual([]);
   });
 });

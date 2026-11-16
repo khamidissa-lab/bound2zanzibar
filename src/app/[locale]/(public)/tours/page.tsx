@@ -9,7 +9,7 @@ import { PageHeader } from "@/components/shared/page-header";
 import { SampleBadge } from "@/components/shared/sample-badge";
 import { getMessages } from "@/i18n/messages";
 import { localeAlternates, pageLocale } from "@/i18n/seo";
-import { SAFARI_CATEGORY, isSafariTour } from "@/lib/discovery";
+import { SAFARI_CATEGORY, isSafariTour, listingTour } from "@/lib/discovery";
 import {
   getCategories,
   getDestinations,
@@ -39,7 +39,7 @@ export default async function ToursPage({ params }: PageProps<"/[locale]/tours">
     getNameLookups(locale),
   ]);
   // Tanzania safaris are listed on the Safari page, not here.
-  const tours = allTours.filter((tour) => !isSafariTour(tour));
+  const tours = allTours.filter((tour) => !isSafariTour(tour)).map(listingTour);
   const categories = allCategories.filter((c) => c.slug !== SAFARI_CATEGORY);
   const usedDestinations = destinations.filter((d) =>
     tours.some((tour) => tour.destinationSlug === d.slug),
