@@ -79,9 +79,16 @@ export async function requestPasswordReset(
   }
 
   const supabase = await createSupabaseServerClient();
-  await supabase.auth.resetPasswordForEmail(parsed.data.email, {
+  const { error } = await supabase.auth.resetPasswordForEmail(parsed.data.email, {
     redirectTo: new URL("/admin/account", getSiteUrl()).toString(),
   });
+  // Logged for staff (e.g. rate limit or mail server refusal), never shown to
+  // the visitor, and without the email address.
+  if (error) {
+    console.error(
+      `[auth] password reset email not sent: ${error.status ?? ""} ${error.code ?? ""} ${error.message}`.trim(),
+    );
+  }
 
   // Always the same response, whether or not the account exists.
   return {

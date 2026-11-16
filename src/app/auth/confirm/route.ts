@@ -2,6 +2,7 @@ import type { EmailOtpType } from "@supabase/supabase-js";
 import { NextResponse, type NextRequest } from "next/server";
 
 import { safeAdminPath } from "@/lib/auth/redirects";
+import { getSiteUrl } from "@/lib/site-url";
 import { isSupabaseConfigured } from "@/lib/supabase/env";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 
@@ -21,12 +22,10 @@ export async function GET(request: NextRequest) {
   const type = searchParams.get("type") as EmailOtpType | null;
   const next = safeAdminPath(searchParams.get("next"), "/admin/account");
 
-  const fail = (reason: string) => {
-    const url = request.nextUrl.clone();
-    url.pathname = "/admin/login";
-    url.search = `?error=${reason}`;
-    return NextResponse.redirect(url);
-  };
+  // Redirects are built on the public site address: behind a hosting proxy
+  // (Railway) the request's own URL carries the internal host (localhost:8080).
+  const fail = (reason: string) =>
+    NextResponse.redirect(new URL(`/admin/login?error=${reason}`, getSiteUrl()));
 
   if (!isSupabaseConfigured()) return fail("unconfigured");
   if (!tokenHash || !type || !ALLOWED_TYPES.has(type)) return fail("invalid_link");
@@ -35,8 +34,7 @@ export async function GET(request: NextRequest) {
   const { error } = await supabase.auth.verifyOtp({ token_hash: tokenHash, type });
   if (error) return fail("expired_link");
 
-  const url = request.nextUrl.clone();
-  url.pathname = next.split("?")[0];
-  url.search = type === "invite" || type === "recovery" ? "?set_password=1" : "";
+  const url = new URL(next.split("?")[0], getSiteUrl());
+  if (type === "invite" || type === "recovery") url.search = "?set_password=1";
   return NextResponse.redirect(url);
 }
