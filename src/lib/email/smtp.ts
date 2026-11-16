@@ -2,6 +2,13 @@ import "server-only";
 
 import nodemailer, { type Transporter } from "nodemailer";
 
+import {
+  parseMailbox,
+  ZEPTOMAIL_DEFAULT_URL,
+  zeptoAuthHeader,
+  zeptoPayload,
+} from "./zeptomail";
+
 /**
  * Outgoing email through the business mailbox's SMTP server (Zoho Mail).
  *
@@ -73,8 +80,52 @@ export type OutgoingEmail = {
 
 export type SendResult = "sent" | "not_configured" | "failed";
 
-/** Sends one plain-text email. Never throws; failures are logged without secrets. */
+/** Sends through ZeptoMail's HTTPS API (for hosts that block SMTP). */
+async function sendWithZeptoMail(
+  email: OutgoingEmail,
+  token: string,
+): Promise<SendResult> {
+  const from = parseMailbox(process.env.EMAIL_FROM ?? "");
+  if (!from) {
+    console.error("[email] EMAIL_FROM is missing or not an email address");
+    return "not_configured";
+  }
+  try {
+    const response = await fetch(
+      process.env.ZEPTOMAIL_API_URL?.trim() || ZEPTOMAIL_DEFAULT_URL,
+      {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          Authorization: zeptoAuthHeader(token),
+        },
+        body: JSON.stringify(zeptoPayload({ from, ...email })),
+        signal: AbortSignal.timeout(20_000),
+      },
+    );
+    if (response.ok) return "sent";
+    // The error body names the problem (e.g. unverified sender); it holds no secrets.
+    const detail = (await response.text().catch(() => "")).slice(0, 300);
+    console.error(
+      `[email] ZeptoMail refused "${email.subject}": ${response.status} ${detail}`,
+    );
+    return "failed";
+  } catch (error) {
+    console.error(
+      `[email] ZeptoMail request for "${email.subject}" failed: ${(error as Error).message}`,
+    );
+    return "failed";
+  }
+}
+
+/**
+ * Sends one plain-text email: through ZeptoMail when ZEPTOMAIL_TOKEN is set,
+ * otherwise through SMTP. Never throws; failures are logged without secrets.
+ */
 export async function sendEmail(email: OutgoingEmail): Promise<SendResult> {
+  const zeptoToken = process.env.ZEPTOMAIL_TOKEN?.trim();
+  if (zeptoToken) return sendWithZeptoMail(email, zeptoToken);
   const settings = smtpSettings();
   if (!settings) return "not_configured";
   try {
