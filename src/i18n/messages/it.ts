@@ -152,6 +152,30 @@ export const it: Messages = {
       safaris: "safari",
     },
     insetAlt: "I tetti di Stone Town accanto al mare turchese",
+    slides: {
+      label: "Foto di Zanzibar e della Tanzania",
+      play: "Avvia la presentazione",
+      pause: "Metti in pausa la presentazione",
+      show: "Mostra la foto {n}: {caption}",
+      items: {
+        mnemba: {
+          caption: "Atollo di Mnemba, Zanzibar",
+          alt: "Veduta aerea delle acque turchesi dell’atollo di Mnemba, con barche ancorate sulla barriera corallina e l’isola in lontananza",
+        },
+        stoneTown: {
+          caption: "Stone Town, Zanzibar",
+          alt: "Veduta aerea dei tetti di Stone Town lungo una spiaggia bianca accanto al mare turchese",
+        },
+        elephants: {
+          caption: "Parco nazionale del Serengeti, Tanzania",
+          alt: "Una famiglia di elefanti con un piccolo che attraversa una prateria verde nel Serengeti",
+        },
+        migration: {
+          caption: "La Grande Migrazione, Serengeti",
+          alt: "Mandrie di gnu attraversano il fiume Mara durante la Grande Migrazione nel Serengeti",
+        },
+      },
+    },
     video: {
       label:
         "Video: viste aeree delle spiagge di Zanzibar, lagune turchesi, resort tra le palme e un tramonto sul mare",

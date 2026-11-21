@@ -151,6 +151,30 @@ export const fr: Messages = {
       safaris: "safaris",
     },
     insetAlt: "Les toits de Stone Town au bord de la mer turquoise",
+    slides: {
+      label: "Photos de Zanzibar et de la Tanzanie",
+      play: "Lancer le diaporama",
+      pause: "Mettre le diaporama en pause",
+      show: "Afficher la photo {n} : {caption}",
+      items: {
+        mnemba: {
+          caption: "Atoll de Mnemba, Zanzibar",
+          alt: "Vue aérienne des eaux turquoise de l’atoll de Mnemba, avec des bateaux ancrés au-dessus du récif et l’île au loin",
+        },
+        stoneTown: {
+          caption: "Stone Town, Zanzibar",
+          alt: "Vue aérienne des toits de Stone Town qui longent une plage blanche au bord de la mer turquoise",
+        },
+        elephants: {
+          caption: "Parc national du Serengeti, Tanzanie",
+          alt: "Une famille d’éléphants avec un éléphanteau traversant une prairie verte dans le Serengeti",
+        },
+        migration: {
+          caption: "La Grande Migration, Serengeti",
+          alt: "Des troupeaux de gnous traversent la rivière Mara pendant la Grande Migration dans le Serengeti",
+        },
+      },
+    },
     video: {
       label:
         "Vidéo : vues aériennes des plages de Zanzibar, de lagons turquoise, de complexes bordés de palmiers et d’un coucher de soleil sur la mer",

@@ -10,6 +10,7 @@ import {
 import { DiscoveryPanel } from "@/components/content/discovery-panel";
 import { WhyTravel } from "@/components/content/why-travel";
 import { AmbientVideo } from "@/components/home/ambient-video";
+import { HeroSlideshow } from "@/components/home/hero-slideshow";
 import { ReviewsSection } from "@/components/reviews/reviews-section";
 import { TravellerTypes } from "@/components/home/traveller-types";
 import { LocaleLink as Link } from "@/components/i18n/locale-link";
@@ -108,17 +109,9 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
       <OrganizationJsonLd />
 
       {/* ------------------------------------------------------------ Hero */}
-      {/* Full-screen video with the introduction laid over its start side. */}
+      {/* Full-screen photos of Zanzibar and Tanzania, introduction over the start side. */}
       <section className="relative isolate flex min-h-[calc(100svh-var(--header-height))] items-end overflow-hidden bg-ocean-deep text-ivory md:min-h-[calc(100svh-var(--header-height)-2.25rem)]">
-        <AmbientVideo
-          src="/hero/home-video.mp4"
-          poster="/hero/home-video-poster.jpg"
-          label={h.video.label}
-          quietControls
-          priority
-          className="absolute inset-0 -z-10"
-          controlsClassName="end-4 top-4 sm:end-8 sm:top-8"
-        />
+        <HeroSlideshow className="absolute inset-0 -z-10" />
         {/* Legibility: a deep fade behind the text side and along the bottom. */}
         <div
           aria-hidden="true"
@@ -129,7 +122,7 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
           className="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-2/3 bg-gradient-to-t from-ocean-deep/85 to-transparent"
         />
 
-        {/* Clicks pass through the empty area to the video controls. */}
+        {/* Clicks pass through the empty area to the slideshow controls. */}
         <div className="container-page pointer-events-none w-full pt-24 pb-14 sm:pb-16 lg:pb-20">
           <div className="pointer-events-auto max-w-2xl">
             <p className="eyebrow mb-6 flex items-center gap-3 text-gold-light">

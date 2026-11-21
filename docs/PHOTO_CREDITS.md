@@ -13,11 +13,16 @@ All four are free to use, including commercially, under the [Unsplash License](h
 | `nungwi-golden-hour-dhow.jpg` | Humphrey M | Nungwi, Zanzibar | [unsplash.com/photos/e5hzQubIb68](https://unsplash.com/photos/e5hzQubIb68) |
 | `kilimanjaro-elephant-herd.jpg` | Matt Cramblett | Mount Kilimanjaro area, Tanzania | [unsplash.com/photos/NZHU5vfPo3M](https://unsplash.com/photos/elephants-on-grass-during-daytime-NZHU5vfPo3M) |
 
-## Home page video (`public/hero/home-video.mp4`)
+## Home page hero photos
 
-Aerial and beach footage of Zanzibar, **supplied by the owner** on 2026-11-04 as `homevideo.mp4`. It was re-encoded for the web: sound removed, compressed to about 4 MB, 576×1024, 26 seconds. `home-video-poster.jpg` is a still from the same video. Source and licence not yet recorded: confirm it is your own footage or properly licensed (for example, that any resort and people shown agree to its use), and note the source here.
+Since 2026-11-21 the home hero is a slow slideshow of four photos (`src/components/home/hero-slideshow.tsx`). It replaces the owner's aerial video, which was removed at the owner's request:
 
-The four hero photos above are no longer shown on the home page. `serengeti-elephant-family.jpg` and `nungwi-golden-hour-dhow.jpg` are still used elsewhere (see their notes).
+1. `images/tours/mnemba-atoll-boats.jpg`: Mnemba Atoll, Zanzibar (owner's photo, see Tours below)
+2. `hero/serengeti-elephant-family.jpg`: Serengeti, Tanzania (Michael Wilcox, Unsplash, listed above)
+3. `images/tours/stone-town-aerial.jpg`: Stone Town, Zanzibar (Javi Lorbada, Unsplash, see Tours below)
+4. `images/safari/migration.jpg`: Mara River, Serengeti (Jorge Tung, Unsplash, see Safari below)
+
+The other hero photos above (`nungwi-dhow-sunset.jpg`, `nungwi-golden-hour-dhow.jpg`, `kilimanjaro-elephant-herd.jpg`) are not on the home page. `serengeti-elephant-family.jpg` and `nungwi-golden-hour-dhow.jpg` are still used elsewhere (see their notes).
 
 ## Home page safari video (`public/hero/safari-video.mp4`)
 

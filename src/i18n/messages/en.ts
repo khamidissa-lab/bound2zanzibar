@@ -156,6 +156,30 @@ export const en = {
       safaris: "safaris",
     },
     insetAlt: "Stone Town rooftops beside the turquoise sea",
+    slides: {
+      label: "Photos of Zanzibar and Tanzania",
+      play: "Play slideshow",
+      pause: "Pause slideshow",
+      show: "Show photo {n}: {caption}",
+      items: {
+        mnemba: {
+          caption: "Mnemba Atoll, Zanzibar",
+          alt: "Aerial view of turquoise water off Mnemba Atoll, with boats anchored over the reef and the island in the distance",
+        },
+        stoneTown: {
+          caption: "Stone Town, Zanzibar",
+          alt: "Aerial view of Stone Town's rooftops curving along a white beach beside the turquoise sea",
+        },
+        elephants: {
+          caption: "Serengeti National Park, Tanzania",
+          alt: "An elephant family with a young calf walking across green grassland in the Serengeti",
+        },
+        migration: {
+          caption: "The Great Migration, Serengeti",
+          alt: "Wildebeest herds crossing the Mara River during the Great Migration in the Serengeti",
+        },
+      },
+    },
     video: {
       label:
         "Video: aerial views of Zanzibar's beaches, turquoise lagoons, palm-fringed resorts and a sunset over the sea",

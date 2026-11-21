@@ -148,6 +148,30 @@ export const de: Messages = {
     planJourney: "Reise planen",
     counts: { experiences: "Erlebnisse", destinations: "Reiseziele", safaris: "Safaris" },
     insetAlt: "Die Dächer von Stone Town am türkisfarbenen Meer",
+    slides: {
+      label: "Fotos von Sansibar und Tansania",
+      play: "Diashow abspielen",
+      pause: "Diashow pausieren",
+      show: "Foto {n} anzeigen: {caption}",
+      items: {
+        mnemba: {
+          caption: "Mnemba-Atoll, Sansibar",
+          alt: "Luftaufnahme des türkisfarbenen Wassers am Mnemba-Atoll mit über dem Riff ankernden Booten und der Insel in der Ferne",
+        },
+        stoneTown: {
+          caption: "Stone Town, Sansibar",
+          alt: "Luftaufnahme der Dächer von Stone Town entlang eines weißen Strandes am türkisfarbenen Meer",
+        },
+        elephants: {
+          caption: "Serengeti-Nationalpark, Tansania",
+          alt: "Eine Elefantenfamilie mit einem Jungtier zieht durch grünes Grasland in der Serengeti",
+        },
+        migration: {
+          caption: "Die Große Migration, Serengeti",
+          alt: "Gnuherden durchqueren während der Großen Migration in der Serengeti den Mara-Fluss",
+        },
+      },
+    },
     video: {
       label:
         "Video: Luftaufnahmen von Sansibars Stränden, türkisfarbenen Lagunen, palmengesäumten Resorts und einem Sonnenuntergang über dem Meer",

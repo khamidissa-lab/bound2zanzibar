@@ -146,6 +146,30 @@ export const tr: Messages = {
     planJourney: "Seyahatinizi planlayın",
     counts: { experiences: "deneyim", destinations: "destinasyon", safaris: "safari" },
     insetAlt: "Turkuaz denizin yanında Stone Town’un çatıları",
+    slides: {
+      label: "Zanzibar ve Tanzanya fotoğrafları",
+      play: "Slayt gösterisini başlat",
+      pause: "Slayt gösterisini duraklat",
+      show: "{n}. fotoğrafı göster: {caption}",
+      items: {
+        mnemba: {
+          caption: "Mnemba Atolü, Zanzibar",
+          alt: "Mnemba Atolü açıklarında turkuaz su, resif üzerinde demirli tekneler ve uzakta ada; havadan görünüm",
+        },
+        stoneTown: {
+          caption: "Stone Town, Zanzibar",
+          alt: "Turkuaz denizin yanında beyaz bir kumsal boyunca uzanan Stone Town çatıları; havadan görünüm",
+        },
+        elephants: {
+          caption: "Serengeti Ulusal Parkı, Tanzanya",
+          alt: "Serengeti’de yeşil çayırlıkta yürüyen yavrulu bir fil ailesi",
+        },
+        migration: {
+          caption: "Büyük Göç, Serengeti",
+          alt: "Serengeti’deki Büyük Göç sırasında Mara Nehri’ni geçen yaban öküzü sürüleri",
+        },
+      },
+    },
     video: {
       label:
         "Video: Zanzibar’ın plajları, turkuaz lagünleri, palmiyelerle çevrili tatil köyleri ve deniz üzerinde gün batımının havadan görüntüleri",
