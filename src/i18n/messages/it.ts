@@ -244,6 +244,27 @@ export const it: Messages = {
       cta: "Scopri i safari",
       elephantAlt: "Un elefante nel parco nazionale di Nyerere",
       caption: "In safari · Tanzania",
+      photos: {
+        label: "Foto di safari in Tanzania",
+        items: {
+          zebras: {
+            caption: "Cratere di Ngorongoro",
+            alt: "Zebre al pascolo nel cratere di Ngorongoro sotto fasci di luce",
+          },
+          giraffe: {
+            caption: "Parco nazionale di Nyerere",
+            alt: "Una giovane giraffa tra gli alberi del parco nazionale di Nyerere",
+          },
+          elephant: {
+            caption: "Parco nazionale del lago Manyara",
+            alt: "Un elefante tra le acacie del parco nazionale del lago Manyara",
+          },
+          lion: {
+            caption: "Parco nazionale di Ruaha",
+            alt: "Un leone che riposa nell’erba nel parco nazionale di Ruaha",
+          },
+        },
+      },
       videoLabel:
         "Video: un veicolo da safari al tramonto con giraffe, mongolfiere sopra le pianure, un bufalo, un elefante, una zebra e un leone in Tanzania",
     },

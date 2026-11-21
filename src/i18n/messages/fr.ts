@@ -243,6 +243,27 @@ export const fr: Messages = {
       cta: "Découvrir les safaris",
       elephantAlt: "Un éléphant dans le parc national de Nyerere",
       caption: "En safari · Tanzanie",
+      photos: {
+        label: "Photos de safari en Tanzanie",
+        items: {
+          zebras: {
+            caption: "Cratère du Ngorongoro",
+            alt: "Des zèbres paissent dans le cratère du Ngorongoro sous des rayons de lumière",
+          },
+          giraffe: {
+            caption: "Parc national de Nyerere",
+            alt: "Une jeune girafe parmi les arbres du parc national de Nyerere",
+          },
+          elephant: {
+            caption: "Parc national du lac Manyara",
+            alt: "Un éléphant parmi les acacias du parc national du lac Manyara",
+          },
+          lion: {
+            caption: "Parc national de Ruaha",
+            alt: "Un lion se reposant dans l’herbe du parc national de Ruaha",
+          },
+        },
+      },
       videoLabel:
         "Vidéo : un véhicule de safari au coucher du soleil avec des girafes, des montgolfières au-dessus des plaines, un buffle, un éléphant, un zèbre et un lion en Tanzanie",
     },

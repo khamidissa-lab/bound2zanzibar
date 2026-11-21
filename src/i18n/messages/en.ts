@@ -245,6 +245,27 @@ export const en = {
       cta: "Explore safaris",
       elephantAlt: "An elephant in Nyerere National Park",
       caption: "On safari · Tanzania",
+      photos: {
+        label: "Safari photos from Tanzania",
+        items: {
+          zebras: {
+            caption: "Ngorongoro Crater",
+            alt: "Zebras grazing in the Ngorongoro Crater under shafts of light",
+          },
+          giraffe: {
+            caption: "Nyerere National Park",
+            alt: "Young giraffe among the trees in Nyerere National Park",
+          },
+          elephant: {
+            caption: "Lake Manyara National Park",
+            alt: "An elephant among acacia trees in Lake Manyara National Park",
+          },
+          lion: {
+            caption: "Ruaha National Park",
+            alt: "A lion resting in the grass in Ruaha National Park",
+          },
+        },
+      },
       videoLabel:
         "Video: a safari vehicle at sunset with giraffes, hot-air balloons over the plains, a buffalo, an elephant, a zebra and a lion in Tanzania",
     },

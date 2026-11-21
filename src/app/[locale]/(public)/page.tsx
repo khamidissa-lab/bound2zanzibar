@@ -9,8 +9,7 @@ import {
 } from "@/components/content/cards";
 import { DiscoveryPanel } from "@/components/content/discovery-panel";
 import { WhyTravel } from "@/components/content/why-travel";
-import { AmbientVideo } from "@/components/home/ambient-video";
-import { HeroSlideshow } from "@/components/home/hero-slideshow";
+import { PhotoSlideshow, type Slide } from "@/components/home/photo-slideshow";
 import { ReviewsSection } from "@/components/reviews/reviews-section";
 import { TravellerTypes } from "@/components/home/traveller-types";
 import { LocaleLink as Link } from "@/components/i18n/locale-link";
@@ -104,6 +103,59 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
     { value: safaris.length, label: h.counts.safaris },
   ].filter((c) => c.value > 0);
 
+  const slideStrings = {
+    label: h.slides.label,
+    play: h.slides.play,
+    pause: h.slides.pause,
+    show: h.slides.show,
+  };
+  // Hero: two Zanzibar and two safari photos (credits in docs/PHOTO_CREDITS.md).
+  const heroSlides: Slide[] = [
+    {
+      src: "/images/tours/mnemba-atoll-boats.jpg",
+      position: "object-[60%_50%]",
+      ...h.slides.items.mnemba,
+    },
+    {
+      src: "/hero/serengeti-elephant-family.jpg",
+      position: "object-[70%_55%]",
+      ...h.slides.items.elephants,
+    },
+    {
+      src: "/images/tours/stone-town-aerial.jpg",
+      position: "object-[65%_50%]",
+      ...h.slides.items.stoneTown,
+    },
+    {
+      src: "/images/safari/migration.jpg",
+      position: "object-[55%_60%]",
+      ...h.slides.items.migration,
+    },
+  ];
+  // Safari section: four other Tanzanian parks, in a tall frame.
+  const safariSlides: Slide[] = [
+    {
+      src: "/images/photos/zebras.jpg",
+      position: "object-[40%_50%]",
+      ...h.safari.photos.items.zebras,
+    },
+    {
+      src: "/images/photos/selous-giraffe.jpg",
+      position: "object-[35%_50%]",
+      ...h.safari.photos.items.giraffe,
+    },
+    {
+      src: "/images/safari/manyara.jpg",
+      position: "object-[30%_50%]",
+      ...h.safari.photos.items.elephant,
+    },
+    {
+      src: "/images/safari/ruaha.jpg",
+      position: "object-[45%_50%]",
+      ...h.safari.photos.items.lion,
+    },
+  ];
+
   return (
     <>
       <OrganizationJsonLd />
@@ -111,7 +163,15 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
       {/* ------------------------------------------------------------ Hero */}
       {/* Full-screen photos of Zanzibar and Tanzania, introduction over the start side. */}
       <section className="relative isolate flex min-h-[calc(100svh-var(--header-height))] items-end overflow-hidden bg-ocean-deep text-ivory md:min-h-[calc(100svh-var(--header-height)-2.25rem)]">
-        <HeroSlideshow className="absolute inset-0 -z-10" />
+        <PhotoSlideshow
+          slides={heroSlides}
+          strings={slideStrings}
+          sizes="100vw"
+          priority
+          className="absolute inset-0 -z-10"
+          controlsClassName="end-4 top-4 sm:end-8 sm:top-8"
+          captionClassName="hidden sm:block"
+        />
         {/* Legibility: a deep fade behind the text side and along the bottom. */}
         <div
           aria-hidden="true"
@@ -323,17 +383,17 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
             </Link>
           </div>
 
-          {/* Safari video; it plays only while on screen. */}
+          {/* Safari photos; they change only while on screen. */}
           <div className="relative lg:col-span-7 lg:flex lg:items-center lg:justify-end">
             <div className="relative w-full lg:w-[92%]">
-              <AmbientVideo
-                src="/hero/safari-video.mp4"
-                poster="/hero/safari-video-poster.jpg"
-                label={h.safari.videoLabel}
+              <PhotoSlideshow
+                slides={safariSlides}
+                strings={{ ...slideStrings, label: h.safari.photos.label }}
+                sizes="(min-width: 1024px) 50vw, 100vw"
                 whenVisible
-                quietControls
-                className="aspect-[4/5] border-[6px] border-ocean shadow-card"
-                controlsClassName="end-3 top-3"
+                className="relative aspect-[4/5] border-[6px] border-ocean shadow-card"
+                controlsClassName="inset-x-3 bottom-3 justify-between"
+                captionClassName="min-w-0 truncate"
               />
               <p className="eyebrow absolute start-4 top-4 bg-ocean-deep/70 px-3 py-1.5 text-white/85 backdrop-blur-sm">
                 {h.safari.caption}

@@ -161,7 +161,7 @@ export const tr: Messages = {
           alt: "Turkuaz denizin yanında beyaz bir kumsal boyunca uzanan Stone Town çatıları; havadan görünüm",
         },
         elephants: {
-          caption: "Serengeti Ulusal Parkı, Tanzanya",
+          caption: "Serengeti Milli Parkı, Tanzanya",
           alt: "Serengeti’de yeşil çayırlıkta yürüyen yavrulu bir fil ailesi",
         },
         migration: {
@@ -235,6 +235,27 @@ export const tr: Messages = {
       cta: "Safarileri keşfedin",
       elephantAlt: "Nyerere Milli Parkı’nda bir fil",
       caption: "Safaride · Tanzanya",
+      photos: {
+        label: "Tanzanya’dan safari fotoğrafları",
+        items: {
+          zebras: {
+            caption: "Ngorongoro Krateri",
+            alt: "Ngorongoro Krateri’nde ışık huzmeleri altında otlayan zebralar",
+          },
+          giraffe: {
+            caption: "Nyerere Milli Parkı",
+            alt: "Nyerere Milli Parkı’nda ağaçların arasında genç bir zürafa",
+          },
+          elephant: {
+            caption: "Manyara Gölü Milli Parkı",
+            alt: "Manyara Gölü Milli Parkı’nda akasya ağaçları arasında bir fil",
+          },
+          lion: {
+            caption: "Ruaha Milli Parkı",
+            alt: "Ruaha Milli Parkı’nda çimenlerde dinlenen bir aslan",
+          },
+        },
+      },
       videoLabel:
         "Video: gün batımında zürafalarla bir safari aracı, ovaların üzerinde sıcak hava balonları, bir manda, bir fil, bir zebra ve bir aslan, Tanzanya",
     },

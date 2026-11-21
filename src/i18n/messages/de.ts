@@ -237,6 +237,27 @@ export const de: Messages = {
       cta: "Safaris entdecken",
       elephantAlt: "Ein Elefant im Nyerere-Nationalpark",
       caption: "Auf Safari · Tansania",
+      photos: {
+        label: "Safarifotos aus Tansania",
+        items: {
+          zebras: {
+            caption: "Ngorongoro-Krater",
+            alt: "Zebras grasen im Ngorongoro-Krater unter Lichtstrahlen",
+          },
+          giraffe: {
+            caption: "Nyerere-Nationalpark",
+            alt: "Eine junge Giraffe zwischen den Bäumen im Nyerere-Nationalpark",
+          },
+          elephant: {
+            caption: "Lake-Manyara-Nationalpark",
+            alt: "Ein Elefant zwischen Akazien im Lake-Manyara-Nationalpark",
+          },
+          lion: {
+            caption: "Ruaha-Nationalpark",
+            alt: "Ein Löwe ruht im Gras im Ruaha-Nationalpark",
+          },
+        },
+      },
       videoLabel:
         "Video: ein Safarifahrzeug bei Sonnenuntergang mit Giraffen, Heißluftballons über der Ebene, ein Büffel, ein Elefant, ein Zebra und ein Löwe in Tansania",
     },

@@ -24,9 +24,16 @@ Since 2026-11-21 the home hero is a slow slideshow of four photos (`src/componen
 
 The other hero photos above (`nungwi-dhow-sunset.jpg`, `nungwi-golden-hour-dhow.jpg`, `kilimanjaro-elephant-herd.jpg`) are not on the home page. `serengeti-elephant-family.jpg` and `nungwi-golden-hour-dhow.jpg` are still used elsewhere (see their notes).
 
-## Home page safari video (`public/hero/safari-video.mp4`)
+## Home page safari photos
 
-Tanzania safari footage (game drive at sunset, hot-air balloons, buffalo, elephant, zebra, lion), **supplied by the owner** on 2026-11-04 as `tanzaniasafari.mp4`. It was re-encoded for the web: sound removed, about 4.8 MB, 576×1024, 32 seconds. `safari-video-poster.jpg` is a still from the same video. It is shown in the homepage safari section and only loads when scrolled into view. Source and licence not yet recorded: confirm it is your own footage or properly licensed, and note the source here.
+Since 2026-11-21 the home page safari section shows a slideshow of four photos in place of the owner's safari video, which was removed at the owner's request:
+
+1. `images/photos/zebras.jpg`: Ngorongoro Crater (Hendrik Cornelissen, Unsplash)
+2. `images/photos/selous-giraffe.jpg`: Nyerere National Park (Leila Boujnane, Unsplash)
+3. `images/safari/manyara.jpg`: Lake Manyara National Park (Raissa Lara Lütolf, Unsplash)
+4. `images/safari/ruaha.jpg`: Ruaha National Park (Bob Brewer, Unsplash)
+
+All four are listed with their source links further down.
 
 ## Stone Town City Tour (`public/images/tours/`)
 

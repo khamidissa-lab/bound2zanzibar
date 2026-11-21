@@ -1,34 +1,28 @@
 "use client";
 
-import { useEffect, useState, useSyncExternalStore } from "react";
+import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import Image from "next/image";
 import { Pause, Play } from "lucide-react";
 
-import { useI18n } from "@/i18n/client";
-import type { Messages } from "@/i18n/messages/en";
+import { fmt } from "@/i18n/format";
 import { cn } from "@/lib/utils";
 
-type SlideKey = keyof Messages["home"]["slides"]["items"];
+export type Slide = {
+  src: string;
+  alt: string;
+  caption: string;
+  /** Tailwind object-position class for the crop, e.g. "object-[60%_50%]". */
+  position?: string;
+};
 
-/** The home hero photos, two Zanzibar and two safari (see docs/PHOTO_CREDITS.md). */
-const SLIDES: { key: SlideKey; src: string; position?: string }[] = [
-  {
-    key: "mnemba",
-    src: "/images/tours/mnemba-atoll-boats.jpg",
-    position: "object-[60%_50%]",
-  },
-  {
-    key: "elephants",
-    src: "/hero/serengeti-elephant-family.jpg",
-    position: "object-[70%_55%]",
-  },
-  {
-    key: "stoneTown",
-    src: "/images/tours/stone-town-aerial.jpg",
-    position: "object-[65%_50%]",
-  },
-  { key: "migration", src: "/images/safari/migration.jpg", position: "object-[55%_60%]" },
-];
+export type SlideshowStrings = {
+  /** Name of the photo set, for the controls group. */
+  label: string;
+  play: string;
+  pause: string;
+  /** "Show photo {n}: {caption}" */
+  show: string;
+};
 
 const INTERVAL_MS = 7000;
 
@@ -41,23 +35,37 @@ function subscribeReducedMotion(callback: () => void) {
 const prefersReducedMotion = () => window.matchMedia(reducedMotionQuery).matches;
 
 /**
- * Full-bleed background photos for the home hero that cross-fade slowly.
- * Auto-advance can always be paused (WCAG 2.2.2) and never starts for
- * visitors who prefer reduced motion; the dots pick a photo directly.
- * Only the first photo loads with high priority.
+ * Photos that cross-fade slowly, with a caption, a dot per photo and a pause
+ * button. Auto-advance can always be paused (WCAG 2.2.2), never starts for
+ * visitors who prefer reduced motion, and (with `whenVisible`) only runs
+ * while the slideshow is on screen. Only a `priority` slideshow loads its
+ * first photo eagerly; the rest load lazily.
  */
-export function HeroSlideshow({
+export function PhotoSlideshow({
+  slides,
+  strings,
+  sizes,
+  priority = false,
+  whenVisible = false,
   className,
-  controlsClassName = "end-4 top-4 sm:end-8 sm:top-8",
+  controlsClassName,
+  captionClassName,
 }: {
+  slides: Slide[];
+  strings: SlideshowStrings;
+  sizes: string;
+  priority?: boolean;
+  whenVisible?: boolean;
   className?: string;
-  /** Where the caption and controls sit (logical start/end, top/bottom). */
+  /** Position of the caption + controls row (absolute, logical start/end). */
   controlsClassName?: string;
+  /** Extra classes for the caption, e.g. "hidden sm:block". */
+  captionClassName?: string;
 }) {
-  const { t, fmt } = useI18n();
-  const s = t.home.slides;
+  const rootRef = useRef<HTMLDivElement>(null);
   const [index, setIndex] = useState(0);
   const [pausedByUser, setPausedByUser] = useState(false);
+  const [onScreen, setOnScreen] = useState(!whenVisible);
   const reducedMotion = useSyncExternalStore(
     subscribeReducedMotion,
     prefersReducedMotion,
@@ -66,29 +74,39 @@ export function HeroSlideshow({
   const playing = !pausedByUser && !reducedMotion;
 
   useEffect(() => {
-    if (!playing) return;
+    if (!whenVisible || !rootRef.current) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => setOnScreen(entry.isIntersecting),
+      { threshold: 0.25 },
+    );
+    observer.observe(rootRef.current);
+    return () => observer.disconnect();
+  }, [whenVisible]);
+
+  useEffect(() => {
+    if (!playing || !onScreen) return;
     const timer = window.setInterval(() => {
       // Don't advance unseen (background tab), so the visitor never misses a photo.
       if (document.visibilityState === "visible") {
-        setIndex((i) => (i + 1) % SLIDES.length);
+        setIndex((i) => (i + 1) % slides.length);
       }
     }, INTERVAL_MS);
     return () => window.clearInterval(timer);
-  }, [playing]);
+  }, [playing, onScreen, slides.length]);
 
-  const current = SLIDES[index];
+  const current = slides[index] ?? slides[0];
 
   return (
-    <div className={cn("overflow-hidden bg-ocean-deep", className)}>
-      {SLIDES.map((slide, i) => (
+    <div ref={rootRef} className={cn("overflow-hidden bg-ocean-deep", className)}>
+      {slides.map((slide, i) => (
         <Image
-          key={slide.key}
+          key={slide.src}
           src={slide.src}
-          alt={s.items[slide.key].alt}
+          alt={slide.alt}
           aria-hidden={i === index ? undefined : true}
           fill
-          priority={i === 0}
-          sizes="100vw"
+          priority={priority && i === 0}
+          sizes={sizes}
           className={cn(
             "object-cover transition-[opacity,transform] ease-out motion-safe:duration-[1600ms,9000ms] motion-reduce:transition-none",
             slide.position,
@@ -103,23 +121,25 @@ export function HeroSlideshow({
           controlsClassName,
         )}
       >
-        <p className="eyebrow hidden bg-ocean-deep/65 px-3 py-1.5 text-white backdrop-blur-sm sm:block">
-          {s.items[current.key].caption}
+        <p
+          className={cn(
+            "eyebrow bg-ocean-deep/65 px-3 py-1.5 text-white backdrop-blur-sm",
+            captionClassName,
+          )}
+        >
+          {current.caption}
         </p>
         <div
           role="group"
-          aria-label={s.label}
-          className="flex items-center gap-0.5 bg-ocean-deep/65 px-1 backdrop-blur-sm"
+          aria-label={strings.label}
+          className="flex shrink-0 items-center gap-0.5 bg-ocean-deep/65 px-1 backdrop-blur-sm"
         >
-          {SLIDES.map((slide, i) => (
+          {slides.map((slide, i) => (
             <button
-              key={slide.key}
+              key={slide.src}
               type="button"
               onClick={() => setIndex(i)}
-              aria-label={fmt(s.show, {
-                n: String(i + 1),
-                caption: s.items[slide.key].caption,
-              })}
+              aria-label={fmt(strings.show, { n: i + 1, caption: slide.caption })}
               aria-current={i === index ? "true" : undefined}
               className="flex size-8 items-center justify-center"
             >
@@ -136,7 +156,7 @@ export function HeroSlideshow({
             <button
               type="button"
               onClick={() => setPausedByUser((p) => !p)}
-              aria-label={playing ? s.pause : s.play}
+              aria-label={playing ? strings.pause : strings.play}
               className="flex size-8 items-center justify-center hover:bg-white/15"
             >
               {playing ? (
