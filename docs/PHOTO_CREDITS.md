@@ -116,6 +116,8 @@ Under the [Unsplash License](https://unsplash.com/license). Each photo page was 
 | File | Tour | Size |
 | --- | --- | --- |
 | `mnarani-turtles.jpg` | Mnarani Turtle Aquarium | 474px |
+| `prison-island-tortoise-feeding.jpg` | Prison Island Tour gallery (2nd). Supplied 2026-11-23: a girl stroking a giant tortoise. **Shows a child: confirm a parent or guardian agreed to its use on the website**, and who took it | 720px |
+| `prison-island-tortoise-path.jpg` | Prison Island Tour gallery (3rd). Supplied 2026-11-23: a woman crouching beside a tortoise on the path; other visitors seen from behind. Bottom cropped to remove another visitor's phone. Confirm she agreed to appear on the site | 720px (cropped from 720×1280) |
 | `jet-ski.jpg` | Jet Ski Experience (gallery, last, since 2026-11-09) | 474px |
 | `jet-ski-front.jpg` | Jet Ski Experience, main photo. Supplied 2026-11-09 with the four below: a professional-looking shoot of one woman on a jet ski. Confirm who took them, that you may use them, and that the woman agreed to appear on the site | 1600px (from 2160px) |
 | `jet-ski-cheer.jpg` | Jet Ski gallery: arms raised | 1200px (from 2160px) |

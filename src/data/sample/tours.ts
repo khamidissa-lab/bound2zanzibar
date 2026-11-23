@@ -110,6 +110,16 @@ const coreTours: TourBase[] = [
         alt: "Aerial view of waves breaking over turquoise water off the Zanzibar coast",
         theme: "ocean",
       },
+      {
+        src: "/images/tours/prison-island-tortoise-feeding.jpg",
+        alt: "A young visitor crouches to stroke a giant Aldabra tortoise in the shaded sanctuary on Prison Island",
+        theme: "forest",
+      },
+      {
+        src: "/images/tours/prison-island-tortoise-path.jpg",
+        alt: "A visitor crouches beside a giant tortoise on the path through the Prison Island tortoise sanctuary",
+        theme: "forest",
+      },
     ],
     prices: illustrativePrices({ adult: 35, child: 20 }, { adult: 60000, child: 35000 }),
     featured: true,
