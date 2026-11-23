@@ -445,11 +445,16 @@ const coreTours: TourBase[] = [
     difficulty: "easy",
     suitability: "Suitable for all ages, couples and groups.",
     coverImage: {
-      src: "/hero/nungwi-dhow-sunset.jpg",
-      alt: "A dhow with its sail raised, silhouetted against the setting sun on a calm sea in Zanzibar",
+      src: "/images/tours/sunset-dhow-guests.jpg",
+      alt: "Guests on a traditional dhow silhouetted against the setting sun off Zanzibar, with a sailing dhow in the distance",
       theme: "sunset",
     },
     gallery: [
+      {
+        src: "/hero/nungwi-dhow-sunset.jpg",
+        alt: "A dhow with its sail raised, silhouetted against the setting sun on a calm sea in Zanzibar",
+        theme: "sunset",
+      },
       {
         src: "/images/tours/dhows-sandbank-aerial.jpg",
         alt: "Aerial view of traditional dhows anchored around a white sandbank in turquoise water off Zanzibar, with visitors on the sand",

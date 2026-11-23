@@ -22,7 +22,7 @@ Since 2026-11-21 the home hero is a slow slideshow of four photos (`src/componen
 3. `images/tours/stone-town-aerial.jpg`: Stone Town, Zanzibar (Javi Lorbada, Unsplash, see Tours below)
 4. `images/safari/migration.jpg`: Mara River, Serengeti (Jorge Tung, Unsplash, see Safari below)
 
-The other hero photos above (`nungwi-dhow-sunset.jpg`, `nungwi-golden-hour-dhow.jpg`, `kilimanjaro-elephant-herd.jpg`) are not on the home page. Since 2026-11-23 `nungwi-dhow-sunset.jpg` is also the Sunset Dhow Cruise main photo. `serengeti-elephant-family.jpg` and `nungwi-golden-hour-dhow.jpg` are still used elsewhere (see their notes).
+The other hero photos above (`nungwi-dhow-sunset.jpg`, `nungwi-golden-hour-dhow.jpg`, `kilimanjaro-elephant-herd.jpg`) are not on the home page. Since 2026-11-23 `nungwi-dhow-sunset.jpg` is also in the Sunset Dhow Cruise gallery. `serengeti-elephant-family.jpg` and `nungwi-golden-hour-dhow.jpg` are still used elsewhere (see their notes).
 
 ## Home page safari photos
 
@@ -123,6 +123,7 @@ Under the [Unsplash License](https://unsplash.com/license). Each photo page was 
 | `kuza-cave-pool.jpg` | Kuza Cave & Jambiani Village gallery (1st). Supplied 2026-11-23 (appears to come from the web); owner confirmed they may use it and that people shown agreed. Saved as a near-lossless JPEG | 800px |
 | `cooking-class-baskets.jpg` | Zanzibar Cooking Class gallery (1st); converted from WebP. Supplied 2026-11-23 (appears to come from the web); owner confirmed they may use it and that people shown agreed. Saved as a near-lossless JPEG | 2000px |
 | `the-rock-aerial.jpg` | The Rock (Michamvi) Sunset gallery (1st). Looks like the restaurant's own promotional photo. Supplied 2026-11-23 (appears to come from the web); owner confirmed they may use it and that people shown agreed. Saved as a near-lossless JPEG | 1500px |
+| `sunset-dhow-guests.jpg` | Sunset Dhow Cruise, main photo (since 2026-11-23; the Nungwi dhow photo moved to the gallery). Supplied as a 1600×1250 PNG; saved as a near-lossless JPEG. The dhow's hull reads "MALAIKA". Owner confirmed they may use it | 1600px |
 | `dhows-sandbank-aerial.jpg` | Sunset Dhow Cruise gallery (1st). Supplied 2026-11-23 as a 1440×947 PNG; saved as a near-lossless JPEG. A midday drone photo of dhows around a sandbank, placed on the sunset cruise at the owner's request. Owner confirmed they may use it | 1440px |
 | `mnemba-island-sandbank-aerial.jpg` | Mnemba Island Snorkelling gallery (3rd). Supplied 2026-11-23 as a 1000×667 PNG; saved as a near-lossless JPEG (quality 95, no chroma subsampling). A professional-looking drone photo; owner confirmed they may use it | 1000px |
 | `prison-island-tortoise-feeding.jpg` | Prison Island Tour gallery (2nd). Supplied 2026-11-23: a girl stroking a giant tortoise. **Shows a child: confirm a parent or guardian agreed to its use on the website**, and who took it | 720px |
