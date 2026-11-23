@@ -116,7 +116,8 @@ Under the [Unsplash License](https://unsplash.com/license). Each photo page was 
 | File | Tour | Size |
 | --- | --- | --- |
 | `mnarani-turtles.jpg` | Mnarani Turtle Aquarium | 474px |
-| `mnemba-island-sandbank-aerial.jpg` | Mnemba Island Snorkelling gallery (3rd). Supplied 2026-11-23 as a 1000×667 PNG; saved as a near-lossless JPEG (quality 95, no chroma subsampling). Looks like a professional drone photo: confirm who took it and that you may use it | 1000px |
+| `dhows-sandbank-aerial.jpg` | Sunset Dhow Cruise gallery (1st). Supplied 2026-11-23 as a 1440×947 PNG; saved as a near-lossless JPEG. A midday drone photo of dhows around a sandbank, placed on the sunset cruise at the owner's request. Owner confirmed they may use it | 1440px |
+| `mnemba-island-sandbank-aerial.jpg` | Mnemba Island Snorkelling gallery (3rd). Supplied 2026-11-23 as a 1000×667 PNG; saved as a near-lossless JPEG (quality 95, no chroma subsampling). A professional-looking drone photo; owner confirmed they may use it | 1000px |
 | `prison-island-tortoise-feeding.jpg` | Prison Island Tour gallery (2nd). Supplied 2026-11-23: a girl stroking a giant tortoise. **Shows a child: confirm a parent or guardian agreed to its use on the website**, and who took it | 720px |
 | `prison-island-tortoise-path.jpg` | Prison Island Tour gallery (3rd). Supplied 2026-11-23: a woman crouching beside a tortoise on the path; other visitors seen from behind. Bottom cropped to remove another visitor's phone. Confirm she agreed to appear on the site | 720px (cropped from 720×1280) |
 | `jet-ski.jpg` | Jet Ski Experience (gallery, last, since 2026-11-09) | 474px |

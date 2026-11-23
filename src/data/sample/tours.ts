@@ -434,7 +434,13 @@ const coreTours: TourBase[] = [
       alt: "Two dhows sailing on the sea at sunset",
       theme: "sunset",
     },
-    gallery: [],
+    gallery: [
+      {
+        src: "/images/tours/dhows-sandbank-aerial.jpg",
+        alt: "Aerial view of traditional dhows anchored around a white sandbank in turquoise water off Zanzibar, with visitors on the sand",
+        theme: "ocean",
+      },
+    ],
     prices: illustrativePrices({ adult: 35, child: 20 }, { adult: 55000, child: 30000 }),
     featured: true,
     status: "published",
