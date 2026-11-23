@@ -100,15 +100,15 @@ const coreTours: TourBase[] = [
     difficulty: "easy",
     suitability: "Suitable for families. Boat trips depend on sea conditions.",
     coverImage: {
-      src: "/images/photos/tortoise.jpg",
-      alt: "Giant Aldabra tortoise on Prison Island",
-      theme: "forest",
+      src: "/images/tours/prison-island-jetty-aerial.jpg",
+      alt: "Aerial view of Prison Island with its long wooden jetty, white sandbank and boats anchored in the turquoise sea",
+      theme: "ocean",
     },
     gallery: [
       {
-        src: "/images/tours/prison-island-aerial.jpg",
-        alt: "Aerial view of Prison Island's forest and white beach, with dhows anchored in the turquoise shallows",
-        theme: "ocean",
+        src: "/images/photos/tortoise.jpg",
+        alt: "Giant Aldabra tortoise on Prison Island",
+        theme: "forest",
       },
       {
         src: "/images/tours/prison-island-tortoise-feeding.jpg",
@@ -119,6 +119,11 @@ const coreTours: TourBase[] = [
         src: "/images/tours/prison-island-tortoise-path.jpg",
         alt: "A visitor crouches beside a giant tortoise on the path through the Prison Island tortoise sanctuary",
         theme: "forest",
+      },
+      {
+        src: "/images/tours/prison-island-aerial.jpg",
+        alt: "Aerial view of Prison Island's forest and white beach, with dhows anchored in the turquoise shallows",
+        theme: "ocean",
       },
       {
         src: "/images/photos/aerial-shore.jpg",

@@ -116,6 +116,7 @@ Under the [Unsplash License](https://unsplash.com/license). Each photo page was 
 | File | Tour | Size |
 | --- | --- | --- |
 | `mnarani-turtles.jpg` | Removed 2026-11-23 (was Mnarani Turtle Aquarium); replaced at the owner's request | 474px |
+| `prison-island-jetty-aerial.jpg` | Prison Island Tour, main photo (since 2026-11-23; the Unsplash tortoise photo moved to the gallery). Supplied as a 1600×1106 PNG; saved as a near-lossless JPEG. Owner confirmed they may use it | 1600px |
 | `prison-island-aerial.jpg` | Prison Island Tour gallery (1st). Supplied 2026-11-23 (appears to come from the web); owner confirmed they may use it and that people shown agreed. Saved as a near-lossless JPEG | 736px |
 | `mnarani-turtles-pool.jpg` | Removed 2026-11-23 (was Mnarani Turtle Aquarium gallery); replaced at the owner's request | 720px |
 | `mnemba-snorkellers.jpg` | Mnemba Island Snorkelling gallery (2nd). Supplied 2026-11-23 (appears to come from the web); owner confirmed they may use it and that people shown agreed. Saved as a near-lossless JPEG | 635px |
