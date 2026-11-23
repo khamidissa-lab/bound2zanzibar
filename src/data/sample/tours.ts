@@ -106,8 +106,8 @@ const coreTours: TourBase[] = [
     },
     gallery: [
       {
-        src: "/images/photos/aerial-shore.jpg",
-        alt: "Aerial view of waves breaking over turquoise water off the Zanzibar coast",
+        src: "/images/tours/prison-island-aerial.jpg",
+        alt: "Aerial view of Prison Island's forest and white beach, with dhows anchored in the turquoise shallows",
         theme: "ocean",
       },
       {
@@ -119,6 +119,11 @@ const coreTours: TourBase[] = [
         src: "/images/tours/prison-island-tortoise-path.jpg",
         alt: "A visitor crouches beside a giant tortoise on the path through the Prison Island tortoise sanctuary",
         theme: "forest",
+      },
+      {
+        src: "/images/photos/aerial-shore.jpg",
+        alt: "Aerial view of waves breaking over turquoise water off the Zanzibar coast",
+        theme: "ocean",
       },
     ],
     prices: illustrativePrices({ adult: 35, child: 20 }, { adult: 60000, child: 35000 }),
@@ -281,13 +286,18 @@ const coreTours: TourBase[] = [
         theme: "ocean",
       },
       {
-        src: "/images/tours/mnemba-island-reef.jpg",
-        alt: "Turquoise water with darker reef patches, traditional dhows and boats anchored off a forested island",
+        src: "/images/tours/mnemba-snorkellers.jpg",
+        alt: "Three snorkellers swimming in clear turquoise water off a white beach near Mnemba",
         theme: "ocean",
       },
       {
         src: "/images/tours/mnemba-island-sandbank-aerial.jpg",
         alt: "Aerial view of Mnemba Island's forest and long white sandbank, with snorkelling boats anchored over the coral reef in turquoise water",
+        theme: "ocean",
+      },
+      {
+        src: "/images/tours/mnemba-island-reef.jpg",
+        alt: "Turquoise water with darker reef patches, traditional dhows and boats anchored off a forested island",
         theme: "ocean",
       },
       {

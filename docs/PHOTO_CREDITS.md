@@ -116,6 +116,12 @@ Under the [Unsplash License](https://unsplash.com/license). Each photo page was 
 | File | Tour | Size |
 | --- | --- | --- |
 | `mnarani-turtles.jpg` | Mnarani Turtle Aquarium | 474px |
+| `prison-island-aerial.jpg` | Prison Island Tour gallery (1st). Supplied 2026-11-23 (appears to come from the web); owner confirmed they may use it and that people shown agreed. Saved as a near-lossless JPEG | 736px |
+| `mnarani-turtles-pool.jpg` | Mnarani Turtle Aquarium gallery (1st). Supplied 2026-11-23 (appears to come from the web); owner confirmed they may use it and that people shown agreed. Saved as a near-lossless JPEG | 720px |
+| `mnemba-snorkellers.jpg` | Mnemba Island Snorkelling gallery (2nd). Supplied 2026-11-23 (appears to come from the web); owner confirmed they may use it and that people shown agreed. Saved as a near-lossless JPEG | 635px |
+| `kuza-cave-pool.jpg` | Kuza Cave & Jambiani Village gallery (1st). Supplied 2026-11-23 (appears to come from the web); owner confirmed they may use it and that people shown agreed. Saved as a near-lossless JPEG | 800px |
+| `cooking-class-baskets.jpg` | Zanzibar Cooking Class gallery (1st); converted from WebP. Supplied 2026-11-23 (appears to come from the web); owner confirmed they may use it and that people shown agreed. Saved as a near-lossless JPEG | 2000px |
+| `the-rock-aerial.jpg` | The Rock (Michamvi) Sunset gallery (1st). Looks like the restaurant's own promotional photo. Supplied 2026-11-23 (appears to come from the web); owner confirmed they may use it and that people shown agreed. Saved as a near-lossless JPEG | 1500px |
 | `dhows-sandbank-aerial.jpg` | Sunset Dhow Cruise gallery (1st). Supplied 2026-11-23 as a 1440×947 PNG; saved as a near-lossless JPEG. A midday drone photo of dhows around a sandbank, placed on the sunset cruise at the owner's request. Owner confirmed they may use it | 1440px |
 | `mnemba-island-sandbank-aerial.jpg` | Mnemba Island Snorkelling gallery (3rd). Supplied 2026-11-23 as a 1000×667 PNG; saved as a near-lossless JPEG (quality 95, no chroma subsampling). A professional-looking drone photo; owner confirmed they may use it | 1000px |
 | `prison-island-tortoise-feeding.jpg` | Prison Island Tour gallery (2nd). Supplied 2026-11-23: a girl stroking a giant tortoise. **Shows a child: confirm a parent or guardian agreed to its use on the website**, and who took it | 720px |
@@ -168,3 +174,5 @@ All under the [Unsplash License](https://unsplash.com/license). Each photo page 
 ## Notes
 
 These are stock photos, not photos of Bound 2 Zanzibar's own tours, so don't present them as the company's own trips. Replace them with your own photography when it's available.
+
+Eight more photos supplied on 2026-11-23 (474px wide or smaller: Blue Lagoon snorkellers, two dolphin photos, a Nungwi resort aerial, a sandbank, a ngalawa, parasailing and a coconut-grating cooking scene) were **not added**: they are too small to look sharp. Send the full-size originals to add them.

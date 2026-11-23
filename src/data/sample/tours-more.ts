@@ -130,7 +130,13 @@ export const moreTours: TourBase[] = [
       alt: "A swimmer floating in the clear turquoise water of a limestone cave",
       theme: "sunset",
     },
-    gallery: [],
+    gallery: [
+      {
+        src: "/images/tours/kuza-cave-pool.jpg",
+        alt: "Two visitors swimming in the turquoise pool inside a limestone cave",
+        theme: "forest",
+      },
+    ],
     prices: illustrativePrices({ adult: 40, child: 25 }, { adult: 60000, child: 35000 }),
     featured: false,
     status: "published",
@@ -213,7 +219,13 @@ export const moreTours: TourBase[] = [
       alt: "A swimmer surrounded by sea turtles in a turquoise natural pool",
       theme: "ocean",
     },
-    gallery: [],
+    gallery: [
+      {
+        src: "/images/tours/mnarani-turtles-pool.jpg",
+        alt: "A visitor sits on a rock in the lagoon pool at Mnarani as green sea turtles swim around her",
+        theme: "ocean",
+      },
+    ],
     prices: illustrativePrices({ adult: 20, child: 10 }, { adult: 30000, child: 15000 }),
     featured: false,
     status: "published",
@@ -253,7 +265,13 @@ export const moreTours: TourBase[] = [
       alt: "Visitors preparing food by hand with local women, seated on a woven mat",
       theme: "spice",
     },
-    gallery: [],
+    gallery: [
+      {
+        src: "/images/tours/cooking-class-baskets.jpg",
+        alt: "Three guests preparing ingredients with woven baskets and wooden mortars at a cooking class",
+        theme: "spice",
+      },
+    ],
     prices: illustrativePrices({ adult: 45, child: 25 }, { adult: 70000, child: 40000 }),
     featured: false,
     status: "published",
@@ -341,7 +359,13 @@ export const moreTours: TourBase[] = [
       alt: "The Rock restaurant on its coral outcrop off Michamvi beach",
       theme: "sunset",
     },
-    gallery: [],
+    gallery: [
+      {
+        src: "/images/tours/the-rock-aerial.jpg",
+        alt: "Aerial view of The Rock restaurant, a thatched restaurant on a coral rock surrounded by turquoise sea at Michamvi",
+        theme: "ocean",
+      },
+    ],
     prices: illustrativePrices({ adult: 40, child: 20 }, { adult: 60000, child: 30000 }),
     featured: false,
     status: "published",
