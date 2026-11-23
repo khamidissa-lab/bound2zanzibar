@@ -215,11 +215,17 @@ export const moreTours: TourBase[] = [
     difficulty: "easy",
     suitability: "Great for families with children.",
     coverImage: {
-      src: "/images/tours/mnarani-green-turtle.jpg",
-      alt: "A green sea turtle swimming close to the surface of clear turquoise water",
+      src: "/images/tours/mnarani-turtles-rock.jpg",
+      alt: "A visitor sits on a mossy rock in a clear natural pool, stroking a green sea turtle as others swim around her",
       theme: "ocean",
     },
-    gallery: [],
+    gallery: [
+      {
+        src: "/images/tours/mnarani-green-turtle.jpg",
+        alt: "A green sea turtle swimming close to the surface of clear turquoise water",
+        theme: "ocean",
+      },
+    ],
     prices: illustrativePrices({ adult: 20, child: 10 }, { adult: 30000, child: 15000 }),
     featured: false,
     status: "published",
