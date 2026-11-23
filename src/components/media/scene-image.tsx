@@ -16,6 +16,8 @@ type SceneImageProps = {
   showPlaceholderTag?: boolean;
   /** Slowly zoom the picture when an ancestor with `group` is hovered. */
   hoverZoom?: boolean;
+  /** Encoding quality; must be listed in `images.qualities` in next.config.ts. */
+  quality?: 75 | 90;
 };
 
 const zoomClass =
@@ -33,6 +35,7 @@ export function SceneImage({
   priority = false,
   showPlaceholderTag = true,
   hoverZoom = false,
+  quality,
 }: SceneImageProps) {
   const t = useMessagesOrEnglish();
   if (image.src) {
@@ -44,6 +47,7 @@ export function SceneImage({
           fill
           sizes={sizes}
           priority={priority}
+          quality={quality}
           className={cn("object-cover", hoverZoom && zoomClass)}
         />
       </div>

@@ -286,6 +286,11 @@ const coreTours: TourBase[] = [
         theme: "ocean",
       },
       {
+        src: "/images/tours/mnemba-island-sandbank-aerial.jpg",
+        alt: "Aerial view of Mnemba Island's forest and long white sandbank, with snorkelling boats anchored over the coral reef in turquoise water",
+        theme: "ocean",
+      },
+      {
         src: "/images/photos/aerial-shore.jpg",
         alt: "Aerial view of waves breaking over turquoise water off the Zanzibar coast",
         theme: "ocean",

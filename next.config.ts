@@ -63,6 +63,8 @@ const nextConfig: NextConfig = {
   images: {
     // AVIF first (smaller), WebP for browsers without it.
     formats: ["image/avif", "image/webp"],
+    // 75 for cards; 90 for large tour gallery photos (SceneImage `quality`).
+    qualities: [75, 90],
     remotePatterns: supabaseImagePatterns(),
   },
   turbopack: {

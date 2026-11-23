@@ -168,6 +168,8 @@ export default async function TourDetailPage({
                 key={`${i}-${image.alt}`}
                 image={image}
                 priority={i === 0}
+                // Large gallery photos: higher quality than cards.
+                quality={90}
                 sizes={
                   i === 0
                     ? "(min-width: 1024px) 50vw, 100vw"
