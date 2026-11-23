@@ -640,6 +640,7 @@ export const en = {
     bookNow: "Book now",
   },
   tour: {
+    photosLabel: "Tour photos",
     optionsTitle: "Available options",
     optionsIntro:
       "Add any of these when you book. Our team confirms the final price with you.",

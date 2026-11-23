@@ -641,6 +641,7 @@ export const it: Messages = {
     bookNow: "Prenota",
   },
   tour: {
+    photosLabel: "Foto del tour",
     optionsTitle: "Opzioni disponibili",
     optionsIntro:
       "Aggiungile al momento della prenotazione. Il nostro team conferma il prezzo finale con te.",

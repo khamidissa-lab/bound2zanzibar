@@ -645,6 +645,7 @@ export const fr: Messages = {
     bookNow: "Réserver",
   },
   tour: {
+    photosLabel: "Photos de l’excursion",
     optionsTitle: "Options disponibles",
     optionsIntro:
       "Ajoutez-les lors de votre réservation. Notre équipe confirme le prix final avec vous.",

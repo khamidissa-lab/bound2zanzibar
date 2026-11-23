@@ -622,6 +622,7 @@ export const ar: Messages = {
     bookNow: "احجز الآن",
   },
   tour: {
+    photosLabel: "صور الجولة",
     optionsTitle: "الخيارات المتاحة",
     optionsIntro: "أضف ما تشاء منها عند الحجز. يؤكد فريقنا السعر النهائي معك.",
     perPerson: "للشخص",

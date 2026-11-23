@@ -631,6 +631,7 @@ export const tr: Messages = {
     bookNow: "Rezervasyon",
   },
   tour: {
+    photosLabel: "Tur fotoğrafları",
     optionsTitle: "Mevcut seçenekler",
     optionsIntro:
       "Rezervasyon yaparken bunları ekleyebilirsiniz. Son fiyatı ekibimiz sizinle onaylar.",

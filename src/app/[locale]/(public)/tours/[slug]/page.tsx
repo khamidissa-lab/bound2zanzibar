@@ -56,7 +56,7 @@ const mosaicFor = (count: number) =>
     : count === 3
       ? ["lg:col-span-2 lg:row-span-2", "lg:col-span-2", "lg:col-span-2"]
       : count === 2
-        ? ["lg:col-span-3 lg:row-span-2", "lg:row-span-2"]
+        ? ["lg:col-span-2 lg:row-span-2", "lg:col-span-2 lg:row-span-2"]
         : ["lg:col-span-4 lg:row-span-2"];
 
 export default async function TourDetailPage({
@@ -160,9 +160,14 @@ export default async function TourDetailPage({
           </div>
         </header>
 
-        {/* Gallery mosaic */}
+        {/* Gallery: a swipeable row on phones, a mosaic from tablet width up. */}
         <div className="container-page">
-          <div className="grid gap-2 sm:grid-cols-2 lg:h-[34rem] lg:grid-cols-4 lg:grid-rows-2">
+          <div
+            role="region"
+            aria-label={t.tour.photosLabel}
+            tabIndex={photos.length > 1 ? 0 : undefined}
+            className="flex snap-x snap-mandatory gap-2 overflow-x-auto sm:grid sm:grid-cols-2 sm:overflow-visible lg:h-[34rem] lg:grid-cols-4 lg:grid-rows-2"
+          >
             {photos.map((image, i) => (
               <SceneImage
                 key={`${i}-${image.alt}`}
@@ -171,13 +176,14 @@ export default async function TourDetailPage({
                 // Large gallery photos: higher quality than cards.
                 quality={90}
                 sizes={
-                  i === 0
+                  i === 0 || photos.length === 2
                     ? "(min-width: 1024px) 50vw, 100vw"
-                    : "(min-width: 1024px) 25vw, 50vw"
+                    : "(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 90vw"
                 }
                 className={cn(
-                  "aspect-[4/3] lg:aspect-auto",
-                  i === 0 ? "sm:col-span-2" : "hidden sm:block",
+                  "aspect-[4/3] shrink-0 snap-center sm:w-auto lg:aspect-auto",
+                  photos.length > 1 ? "w-[86%]" : "w-full",
+                  i === 0 && "sm:col-span-2",
                   layout[i],
                 )}
               />
