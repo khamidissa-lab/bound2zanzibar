@@ -6,6 +6,7 @@ import { MarketSwitcher } from "@/components/pricing/market-switcher";
 import { EmptyState } from "@/components/shared/empty-state";
 import { PageHeader } from "@/components/shared/page-header";
 import { SampleBadge } from "@/components/shared/sample-badge";
+import { hasExampleContent } from "@/lib/sample-content";
 import { SectionHeading } from "@/components/shared/section-heading";
 import { getMessages } from "@/i18n/messages";
 import { localeAlternates, pageLocale } from "@/i18n/seo";
@@ -47,7 +48,9 @@ export default async function PackagesPage({ params }: PageProps<"/[locale]/pack
       >
         <div className="flex flex-wrap items-center gap-3">
           <MarketSwitcher />
-          <SampleBadge label={t.price.samplePackages} />
+          {hasExampleContent(packages) ? (
+            <SampleBadge label={t.price.samplePackages} />
+          ) : null}
         </div>
       </PageHeader>
 

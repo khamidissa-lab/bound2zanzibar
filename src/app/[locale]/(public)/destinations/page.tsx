@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { DestinationCard } from "@/components/content/cards";
 import { PageHeader } from "@/components/shared/page-header";
 import { SampleBadge } from "@/components/shared/sample-badge";
+import { hasExampleContent } from "@/lib/sample-content";
 import { SectionHeading } from "@/components/shared/section-heading";
 import { getMessages } from "@/i18n/messages";
 import { localeAlternates, pageLocale } from "@/i18n/seo";
@@ -79,7 +80,7 @@ export default async function DestinationsPage({
           theme: "ocean",
         }}
       >
-        <SampleBadge label={d.sample} />
+        {hasExampleContent(destinations) ? <SampleBadge label={d.sample} /> : null}
       </PageHeader>
 
       <div className="container-page space-y-24 py-16 sm:py-24">

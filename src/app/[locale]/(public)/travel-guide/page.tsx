@@ -7,6 +7,7 @@ import { LocaleLink as Link } from "@/components/i18n/locale-link";
 import { EmptyState } from "@/components/shared/empty-state";
 import { PageHeader } from "@/components/shared/page-header";
 import { SampleBadge } from "@/components/shared/sample-badge";
+import { hasExampleContent } from "@/lib/sample-content";
 import type { Locale } from "@/i18n/config";
 import { getMessages } from "@/i18n/messages";
 import { localeAlternates, pageLocale } from "@/i18n/seo";
@@ -44,7 +45,7 @@ export default async function TravelGuidePage({
         crumbs={[{ label: t.nav.home, href: "/" }, { label: t.nav.travelGuide }]}
         tone="sand"
       >
-        <SampleBadge label={g.sample} />
+        {hasExampleContent(articles) ? <SampleBadge label={g.sample} /> : null}
       </PageHeader>
 
       <section aria-labelledby="all-articles" className="container-page py-16 sm:py-24">

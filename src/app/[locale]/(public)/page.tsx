@@ -16,6 +16,7 @@ import { LocaleLink as Link } from "@/components/i18n/locale-link";
 import { MarketSwitcher } from "@/components/pricing/market-switcher";
 import { OrganizationJsonLd } from "@/components/seo/organization-json-ld";
 import { SampleBadge } from "@/components/shared/sample-badge";
+import { hasExampleContent } from "@/lib/sample-content";
 import { SectionHeading } from "@/components/shared/section-heading";
 import { buttonVariants } from "@/components/ui/button";
 import { localeAlternates, pageLocale } from "@/i18n/seo";
@@ -284,7 +285,9 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
             />
             <div className="mb-8 flex flex-wrap items-center gap-3">
               <MarketSwitcher />
-              <SampleBadge label={t.price.samplePrices} />
+              {hasExampleContent(featuredTours.slice(0, 7)) ? (
+                <SampleBadge label={t.price.samplePrices} />
+              ) : null}
             </div>
             <TourCard
               tour={leadTour}

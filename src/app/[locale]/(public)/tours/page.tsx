@@ -7,6 +7,7 @@ import { TourGrid } from "@/components/content/tour-grid";
 import { MarketSwitcher } from "@/components/pricing/market-switcher";
 import { PageHeader } from "@/components/shared/page-header";
 import { SampleBadge } from "@/components/shared/sample-badge";
+import { hasExampleContent } from "@/lib/sample-content";
 import { getMessages } from "@/i18n/messages";
 import { localeAlternates, pageLocale } from "@/i18n/seo";
 import { SAFARI_CATEGORY, isSafariTour, listingTour } from "@/lib/discovery";
@@ -60,7 +61,7 @@ export default async function ToursPage({ params }: PageProps<"/[locale]/tours">
       >
         <div className="flex flex-wrap items-center gap-3">
           <MarketSwitcher />
-          <SampleBadge label={t.price.samplePrices} />
+          {hasExampleContent(tours) ? <SampleBadge label={t.price.samplePrices} /> : null}
         </div>
       </PageHeader>
 

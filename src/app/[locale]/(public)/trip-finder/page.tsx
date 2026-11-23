@@ -4,6 +4,7 @@ import { TripFinder } from "@/components/finder/trip-finder";
 import { MarketSwitcher } from "@/components/pricing/market-switcher";
 import { PageHeader } from "@/components/shared/page-header";
 import { SampleBadge } from "@/components/shared/sample-badge";
+import { hasExampleContent } from "@/lib/sample-content";
 import { getMessages } from "@/i18n/messages";
 import { localeAlternates, pageLocale } from "@/i18n/seo";
 import {
@@ -54,7 +55,9 @@ export default async function TripFinderPage({
       >
         <div className="flex flex-wrap items-center gap-3">
           <MarketSwitcher />
-          <SampleBadge label={t.price.samplePrices} />
+          {hasExampleContent([...tours, ...packages]) ? (
+            <SampleBadge label={t.price.samplePrices} />
+          ) : null}
         </div>
       </PageHeader>
       <section className="container-page py-14 sm:py-20">
