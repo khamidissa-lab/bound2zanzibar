@@ -58,6 +58,7 @@ export const it: Messages = {
     bookATrip: "Prenota un viaggio",
     privacy: "Informativa sulla privacy",
     terms: "Termini e condizioni",
+    photoCredits: "Crediti fotografici",
     getInTouch: "Contattaci",
     phone: "Telefono",
     email: "E-mail",
@@ -1019,6 +1020,13 @@ export const it: Messages = {
   },
   legal: {
     eyebrow: "Note legali",
+    photoCreditsTitle: "Crediti fotografici",
+    photoCreditsIntro:
+      "Alcune foto di questo sito sono condivise da fotografi con licenze libere che richiedono di citarli. Li ringraziamo. Le foto non elencate qui sono nostre o usate con la licenza Unsplash.",
+    photoCreditsBy: "Di",
+    photoCreditsLicence: "Licenza",
+    photoCreditsUsedOn: "Mostrata in",
+    photoCreditsChanges: "Ridimensionata e compressa per il web.",
     privacyTitle: "Informativa sulla privacy",
     privacyBody:
       "Come raccogliamo, utilizziamo e proteggiamo i dati personali. L’informativa completa sarà pubblicata una volta approvata dal titolare.",

@@ -115,9 +115,9 @@ Under the [Unsplash License](https://unsplash.com/license). Each photo page was 
 
 | File | Tour | Size |
 | --- | --- | --- |
-| `mnarani-turtles.jpg` | Mnarani Turtle Aquarium | 474px |
+| `mnarani-turtles.jpg` | Removed 2026-11-23 (was Mnarani Turtle Aquarium); replaced at the owner's request | 474px |
 | `prison-island-aerial.jpg` | Prison Island Tour gallery (1st). Supplied 2026-11-23 (appears to come from the web); owner confirmed they may use it and that people shown agreed. Saved as a near-lossless JPEG | 736px |
-| `mnarani-turtles-pool.jpg` | Mnarani Turtle Aquarium gallery (1st). Supplied 2026-11-23 (appears to come from the web); owner confirmed they may use it and that people shown agreed. Saved as a near-lossless JPEG | 720px |
+| `mnarani-turtles-pool.jpg` | Removed 2026-11-23 (was Mnarani Turtle Aquarium gallery); replaced at the owner's request | 720px |
 | `mnemba-snorkellers.jpg` | Mnemba Island Snorkelling gallery (2nd). Supplied 2026-11-23 (appears to come from the web); owner confirmed they may use it and that people shown agreed. Saved as a near-lossless JPEG | 635px |
 | `kuza-cave-pool.jpg` | Kuza Cave & Jambiani Village gallery (1st). Supplied 2026-11-23 (appears to come from the web); owner confirmed they may use it and that people shown agreed. Saved as a near-lossless JPEG | 800px |
 | `cooking-class-baskets.jpg` | Zanzibar Cooking Class gallery (1st); converted from WebP. Supplied 2026-11-23 (appears to come from the web); owner confirmed they may use it and that people shown agreed. Saved as a near-lossless JPEG | 2000px |
@@ -140,7 +140,7 @@ Under the [Unsplash License](https://unsplash.com/license). Each photo page was 
 | `blue-lagoon-snorkel.jpg` | Blue Lagoon Snorkelling | 2000px (from a 3200px original) |
 | `kuza-cave.jpg` | Kuza Cave & Jambiani Village | 474px |
 | `mangapwani-cave.jpg` | Mangapwani Slave Caves | 474px |
-| `kizimkazi-dolphins.jpg` | Kizimkazi Dolphin Experience | 474px |
+| `kizimkazi-dolphins.jpg` | Removed 2026-11-23 (was Kizimkazi Dolphin Experience); replaced at the owner's request | 474px |
 | `nakupenda-sandbank-empty.jpg` | Nakupenda Sandbank, main photo. Supplied 2026-11-09 with the four below; replaces the earlier 474px `nakupenda-sandbank.jpg` (removed at the owner's request). A sixth photo supplied the same day was not used: boats on the shore show other operators' names and phone numbers | 2000px (from 2880px) |
 | `nakupenda-lunch-shades.jpg` | Nakupenda gallery: lunch tables under blue shades | 1400px (from 2880px) |
 | `nakupenda-guests-walking.jpg` | Nakupenda gallery: guests walking on the sandbank. Identifiable guests, including a child: confirm they (and the parent) agreed | 1400px (from 2880px) |
@@ -176,3 +176,12 @@ All under the [Unsplash License](https://unsplash.com/license). Each photo page 
 These are stock photos, not photos of Bound 2 Zanzibar's own tours, so don't present them as the company's own trips. Replace them with your own photography when it's available.
 
 Eight more photos supplied on 2026-11-23 (474px wide or smaller: Blue Lagoon snorkellers, two dolphin photos, a Nungwi resort aerial, a sandbank, a ngalawa, parasailing and a coconut-grating cooking scene) were **not added**: they are too small to look sharp. Send the full-size originals to add them.
+
+## Kizimkazi and Mnarani photos (since 2026-11-23)
+
+Both tours' photos were replaced completely at the owner's request.
+
+| File | Tour | Photographer | Source and licence |
+| --- | --- | --- | --- |
+| `kizimkazi-dolphin-tour.jpg` | Kizimkazi Dolphin Experience, main photo | Prof. Chen Hualin | [Wikimedia Commons: Dolphin tour in Zanzibar](https://commons.wikimedia.org/wiki/File:Dolphin_tour_in_Zanzibar.jpg), **CC BY-SA 4.0**: credit is required and is shown on the public **/photo-credits** page (`src/config/photo-credits.ts`). Resized to 2400px. Taken near Zanzibar, 2015 |
+| `mnarani-green-turtle.jpg` | Mnarani Turtle Aquarium, main photo | Nikola Tasic | [Unsplash d9KrO_fxNLs](https://unsplash.com/photos/sea-turtle-swimming-in-blue-water-d9KrO_fxNLs), Unsplash License (free, no credit needed). Location not stated: a green sea turtle, not necessarily at Mnarani. Resized to 2400px |

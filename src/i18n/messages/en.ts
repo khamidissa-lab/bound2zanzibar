@@ -62,6 +62,7 @@ export const en = {
     bookATrip: "Book a trip",
     privacy: "Privacy policy",
     terms: "Terms & conditions",
+    photoCredits: "Photo credits",
     getInTouch: "Get in touch",
     phone: "Phone",
     email: "Email",
@@ -1014,6 +1015,13 @@ export const en = {
   },
   legal: {
     eyebrow: "Legal",
+    photoCreditsTitle: "Photo credits",
+    photoCreditsIntro:
+      "Some photos on this website are shared by photographers under open licences that ask for a credit. Thank you to them. Photos not listed here are our own or used under the Unsplash licence.",
+    photoCreditsBy: "By",
+    photoCreditsLicence: "Licence",
+    photoCreditsUsedOn: "Shown on",
+    photoCreditsChanges: "Resized and compressed for the web.",
     privacyTitle: "Privacy Policy",
     privacyBody:
       "How we collect, use and protect personal information. The full policy will be published once approved by the business owner.",

@@ -57,6 +57,7 @@ export const ar: Messages = {
     bookATrip: "احجز رحلة",
     privacy: "سياسة الخصوصية",
     terms: "الشروط والأحكام",
+    photoCredits: "حقوق الصور",
     getInTouch: "تواصل معنا",
     phone: "الهاتف",
     email: "البريد الإلكتروني",
@@ -987,6 +988,13 @@ export const ar: Messages = {
   },
   legal: {
     eyebrow: "معلومات قانونية",
+    photoCreditsTitle: "حقوق الصور",
+    photoCreditsIntro:
+      "بعض الصور في هذا الموقع يشاركها مصورون بموجب تراخيص مفتوحة تطلب ذكر أسمائهم. نشكرهم على ذلك. الصور غير المدرجة هنا ملك لنا أو مستخدمة بموجب ترخيص Unsplash.",
+    photoCreditsBy: "تصوير",
+    photoCreditsLicence: "الترخيص",
+    photoCreditsUsedOn: "تظهر في",
+    photoCreditsChanges: "تم تغيير حجمها وضغطها للويب.",
     privacyTitle: "سياسة الخصوصية",
     privacyBody:
       "كيف نجمع البيانات الشخصية ونستخدمها ونحميها. ستُنشر السياسة الكاملة بعد اعتمادها من مالك الشركة.",

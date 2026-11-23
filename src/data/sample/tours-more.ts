@@ -215,17 +215,11 @@ export const moreTours: TourBase[] = [
     difficulty: "easy",
     suitability: "Great for families with children.",
     coverImage: {
-      src: "/images/tours/mnarani-turtles.jpg",
-      alt: "A swimmer surrounded by sea turtles in a turquoise natural pool",
+      src: "/images/tours/mnarani-green-turtle.jpg",
+      alt: "A green sea turtle swimming close to the surface of clear turquoise water",
       theme: "ocean",
     },
-    gallery: [
-      {
-        src: "/images/tours/mnarani-turtles-pool.jpg",
-        alt: "A visitor sits on a rock in the lagoon pool at Mnarani as green sea turtles swim around her",
-        theme: "ocean",
-      },
-    ],
+    gallery: [],
     prices: illustrativePrices({ adult: 20, child: 10 }, { adult: 30000, child: 15000 }),
     featured: false,
     status: "published",

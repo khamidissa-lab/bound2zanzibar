@@ -66,6 +66,7 @@ export function localizedFooterNav(t: Messages): { title: string; items: NavItem
       items: [
         { label: t.footer.privacy, href: "/privacy" },
         { label: t.footer.terms, href: "/terms" },
+        { label: t.footer.photoCredits, href: "/photo-credits" },
       ],
     },
   ];

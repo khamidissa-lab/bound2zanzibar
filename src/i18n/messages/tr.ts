@@ -57,6 +57,7 @@ export const tr: Messages = {
     bookATrip: "Seyahat rezervasyonu",
     privacy: "Gizlilik politikası",
     terms: "Şartlar ve koşullar",
+    photoCredits: "Fotoğraf kaynakları",
     getInTouch: "Bize ulaşın",
     phone: "Telefon",
     email: "E-posta",
@@ -1008,6 +1009,13 @@ export const tr: Messages = {
   },
   legal: {
     eyebrow: "Yasal",
+    photoCreditsTitle: "Fotoğraf kaynakları",
+    photoCreditsIntro:
+      "Bu sitedeki bazı fotoğraflar, fotoğrafçılar tarafından isim belirtilmesini isteyen açık lisanslarla paylaşılmıştır. Kendilerine teşekkür ederiz. Burada listelenmeyen fotoğraflar bize aittir ya da Unsplash lisansıyla kullanılmaktadır.",
+    photoCreditsBy: "Çeken",
+    photoCreditsLicence: "Lisans",
+    photoCreditsUsedOn: "Kullanıldığı yer",
+    photoCreditsChanges: "Web için yeniden boyutlandırılıp sıkıştırıldı.",
     privacyTitle: "Gizlilik Politikası",
     privacyBody:
       "Kişisel bilgileri nasıl topladığımız, kullandığımız ve koruduğumuz. Politikanın tamamı işletme sahibi tarafından onaylandıktan sonra yayımlanacaktır.",

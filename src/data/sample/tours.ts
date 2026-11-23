@@ -528,8 +528,8 @@ const coreTours: TourBase[] = [
     difficulty: "easy",
     suitability: "Suitable for families. Wildlife sightings cannot be guaranteed.",
     coverImage: {
-      src: "/images/tours/kizimkazi-dolphins.jpg",
-      alt: "Dolphins swimming in clear blue water",
+      src: "/images/tours/kizimkazi-dolphin-tour.jpg",
+      alt: "Dolphins surfacing beside a small boat of visitors in life jackets on the Indian Ocean off Zanzibar",
       theme: "ocean",
     },
     gallery: [],
