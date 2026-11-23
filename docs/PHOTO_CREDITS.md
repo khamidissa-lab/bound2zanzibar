@@ -22,7 +22,7 @@ Since 2026-11-21 the home hero is a slow slideshow of four photos (`src/componen
 3. `images/tours/stone-town-aerial.jpg`: Stone Town, Zanzibar (Javi Lorbada, Unsplash, see Tours below)
 4. `images/safari/migration.jpg`: Mara River, Serengeti (Jorge Tung, Unsplash, see Safari below)
 
-The other hero photos above (`nungwi-dhow-sunset.jpg`, `nungwi-golden-hour-dhow.jpg`, `kilimanjaro-elephant-herd.jpg`) are not on the home page. `serengeti-elephant-family.jpg` and `nungwi-golden-hour-dhow.jpg` are still used elsewhere (see their notes).
+The other hero photos above (`nungwi-dhow-sunset.jpg`, `nungwi-golden-hour-dhow.jpg`, `kilimanjaro-elephant-herd.jpg`) are not on the home page. Since 2026-11-23 `nungwi-dhow-sunset.jpg` is also the Sunset Dhow Cruise main photo. `serengeti-elephant-family.jpg` and `nungwi-golden-hour-dhow.jpg` are still used elsewhere (see their notes).
 
 ## Home page safari photos
 
@@ -146,7 +146,7 @@ Under the [Unsplash License](https://unsplash.com/license). Each photo page was 
 | `nakupenda-guests-walking.jpg` | Nakupenda gallery: guests walking on the sandbank. Identifiable guests, including a child: confirm they (and the parent) agreed | 1400px (from 2880px) |
 | `nakupenda-guests-relaxing.jpg` | Nakupenda gallery: guests relaxing on towels. Identifiable guests: confirm they agreed | 1400px (from 2880px) |
 | `nakupenda-shades-couple.jpg` | Nakupenda gallery: couple by the shades. Identifiable guests: confirm they agreed | 1400px (from 2880px) |
-| `sunset-dhows.jpg` | Sunset Dhow Cruise | 474px |
+| `sunset-dhows.jpg` | No longer used (was the Sunset Dhow Cruise main photo until 2026-11-23; replaced by the sharper `hero/nungwi-dhow-sunset.jpg`) | 474px |
 | `pungume-sandbank.jpg` | Pungume Island & Sandbank (gallery since 2026-11-09) | 474px |
 | `pungume-sandbank-boats.jpg` | Pungume Island & Sandbank, main photo. Supplied 2026-11-09 (1080×1350); aerial view of the sandbank and boats; bottom trimmed so the sandbank shows in the wide main slot, re-saved without metadata | 1080×960 |
 | `spice-farm-nutmeg.jpg` | Spice Farm Tour (main photo until it moved to the gallery, first, later on 2026-11-09). Supplied 2026-11-09 with the five below; replaces the earlier 474px `spice-farm.jpg` (removed at the owner's request). Black border bars trimmed off | 1800px (from 2640px) |

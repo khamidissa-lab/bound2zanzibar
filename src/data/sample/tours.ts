@@ -440,8 +440,8 @@ const coreTours: TourBase[] = [
     difficulty: "easy",
     suitability: "Suitable for all ages, couples and groups.",
     coverImage: {
-      src: "/images/tours/sunset-dhows.jpg",
-      alt: "Two dhows sailing on the sea at sunset",
+      src: "/hero/nungwi-dhow-sunset.jpg",
+      alt: "A dhow with its sail raised, silhouetted against the setting sun on a calm sea in Zanzibar",
       theme: "sunset",
     },
     gallery: [
