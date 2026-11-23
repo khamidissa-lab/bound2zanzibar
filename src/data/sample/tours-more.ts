@@ -126,9 +126,9 @@ export const moreTours: TourBase[] = [
     suitability:
       "Suitable for confident swimmers in the cave pool; non-swimmers can watch.",
     coverImage: {
-      src: "/images/tours/kuza-cave.jpg",
-      alt: "A swimmer floating in the clear turquoise water of a limestone cave",
-      theme: "sunset",
+      src: "/images/tours/kuza-cave-floating.jpg",
+      alt: "A woman floats on her back in the clear turquoise pool beneath the rock walls of Kuza Cave",
+      theme: "ocean",
     },
     gallery: [
       {
