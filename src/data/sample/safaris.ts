@@ -185,10 +185,17 @@ export const safariTours: TourBase[] = [
     difficulty: "challenging",
     suitability: "Trekking on steep, forested trails. Sightings cannot be guaranteed.",
     coverImage: {
-      src: "/images/safari/mahale.jpg",
-      alt: "A chimpanzee mother and baby in the forest of Mahale Mountains National Park (black and white)",
+      src: "/images/safari/mahale-forest-trek.jpg",
+      alt: "A ranger leads a small group of trekkers up a steep, leafy forest trail",
       theme: "forest",
     },
+    gallery: [
+      {
+        src: "/images/safari/mahale.jpg",
+        alt: "A chimpanzee mother and baby in the forest of Mahale Mountains National Park (black and white)",
+        theme: "forest",
+      },
+    ],
   }),
   safari({
     slug: "great-wildebeest-migration-safari",

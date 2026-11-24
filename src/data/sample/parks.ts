@@ -269,8 +269,8 @@ export const newParks: Destination[] = [
     bestTime:
       "The drier months, roughly July to October, are the usual time to visit. Some lodges and flights operate only part of the year, so check when you plan.",
     coverImage: {
-      src: "/images/safari/mahale.jpg",
-      alt: "A chimpanzee mother and baby in the forest of Mahale Mountains National Park (black and white)",
+      src: "/images/safari/mahale-forest-trek.jpg",
+      alt: "A ranger leads a small group of trekkers up a steep, leafy forest trail",
       theme: "forest",
     },
     seo: {

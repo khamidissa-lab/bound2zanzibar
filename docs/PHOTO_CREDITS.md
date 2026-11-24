@@ -105,7 +105,8 @@ Under the [Unsplash License](https://unsplash.com/license). Each photo page was 
 | `arusha.jpg` | Arusha National Park Safari | Wilson Stratton | Mt. Meru high camp, Tanzania (view of Kilimanjaro); cropped to the mountain | [sQzurq8xD4c](https://unsplash.com/photos/sQzurq8xD4c) |
 | `ruaha.jpg` | Ruaha National Park Safari | Bob Brewer | Ruaha National Park, Iringa, Tanzania | [6v_qfXndV64](https://unsplash.com/photos/6v_qfXndV64) |
 | `gombe.jpg` | Gombe Stream National Park | Simone Dinoia | **Kibale National Park, Uganda** (no free Gombe photo found; alt text names no place) | [zIZUrCRQjkM](https://unsplash.com/photos/zIZUrCRQjkM) |
-| `mahale.jpg` | Mahale Mountains National Park | Ryan Al Bishri | Mahale Mountain National Park, Tanzania | [reXwAuEdkVM](https://unsplash.com/photos/reXwAuEdkVM) |
+| `mahale-forest-trek.jpg` | Mahale Mountains tour and park page, main photo (since 2026-11-24). Supplied by the owner as a 790×800 PNG; saved as a near-lossless JPEG. Owner confirmed they may use it and that the people shown agreed or it has a model release | — | — | — |
+| `mahale.jpg` | Mahale Mountains National Park tour gallery (was the main photo of the tour and park page until 2026-11-24) | Ryan Al Bishri | Mahale Mountain National Park, Tanzania | [reXwAuEdkVM](https://unsplash.com/photos/reXwAuEdkVM) |
 | `migration.jpg` | Great Wildebeest Migration Safari | Jorge Tung | Mara River, Serengeti National Park, Tanzania | [1pZJqQlgpsY](https://unsplash.com/photos/1pZJqQlgpsY) |
 | `balloon.jpg` | Hot Air Balloon Safari – Serengeti | Ryan Al Bishri | Serengeti, Tanzania | [HZrraBFLS20](https://unsplash.com/photos/HZrraBFLS20) |
 
