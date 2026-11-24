@@ -70,15 +70,32 @@ export async function getOptions(): Promise<{
 
 export type TourListItem = Pick<
   Tables<"tours">,
-  "id" | "name" | "slug" | "status" | "updated_at" | "is_featured" | "is_sample"
-> & { category: { name: string } | null; destination: { name: string } | null };
+  | "id"
+  | "name"
+  | "slug"
+  | "status"
+  | "updated_at"
+  | "is_featured"
+  | "is_sample"
+  | "short_description"
+  | "duration_text"
+  | "cover_image_path"
+  | "cover_image_alt"
+> & {
+  category: { name: string } | null;
+  destination: { name: string } | null;
+  tour_prices: Pick<
+    Tables<"tour_prices">,
+    "market" | "customer_type" | "currency" | "amount" | "is_active" | "is_illustrative"
+  >[];
+};
 
 export async function listTours(filter: ListFilter): Promise<TourListItem[]> {
   const supabase = await createSupabaseServerClient();
   let query = supabase
     .from("tours")
     .select(
-      "id, name, slug, status, updated_at, is_featured, is_sample, category:tour_categories(name), destination:destinations(name)",
+      "id, name, slug, status, updated_at, is_featured, is_sample, short_description, duration_text, cover_image_path, cover_image_alt, category:tour_categories(name), destination:destinations(name), tour_prices(market, customer_type, currency, amount, is_active, is_illustrative)",
     )
     .order("updated_at", { ascending: false });
   const status = asStatus(filter.status);

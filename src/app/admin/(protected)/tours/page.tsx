@@ -8,9 +8,14 @@ import {
   ListFilters,
   ListHeader,
   ListNotice,
-  StatusBadge,
 } from "@/components/admin/content-list";
 import { AccessDenied } from "@/components/admin/admin-states";
+import {
+  TourCardGrid,
+  type AdminTourCard,
+} from "@/components/admin/tours/tour-card-grid";
+import { adminFromPrice } from "@/lib/admin-tour-price";
+import { mediaUrl } from "@/lib/media";
 import { requireStaffPage } from "@/lib/auth/session";
 import { listTours } from "@/services/admin-content";
 
@@ -28,7 +33,7 @@ export default async function AdminToursPage({
   const tours = await listTours({ q, status });
 
   return (
-    <div className="max-w-5xl">
+    <div className="max-w-7xl">
       <ListHeader
         title="Tours"
         description="Day tours and experiences. Only published tours appear on the website."
@@ -57,50 +62,29 @@ export default async function AdminToursPage({
             : "No tours yet. Create your first tour."}
         </EmptyList>
       ) : (
-        <div className="mt-6 overflow-x-auto rounded-2xl border bg-card">
-          <table className="w-full min-w-[40rem] text-sm">
-            <thead className="border-b text-left text-xs text-muted-foreground">
-              <tr>
-                <th className="px-4 py-3 font-medium">Tour</th>
-                <th className="px-4 py-3 font-medium">Category</th>
-                <th className="px-4 py-3 font-medium">Destination</th>
-                <th className="px-4 py-3 font-medium">Status</th>
-                <th className="px-4 py-3 font-medium">Updated</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y">
-              {tours.map((tour) => (
-                <tr key={tour.id} className="hover:bg-sand-soft/60">
-                  <td className="px-4 py-3">
-                    <Link
-                      href={`/admin/tours/${tour.id}`}
-                      className="font-medium text-ocean-deep hover:underline"
-                    >
-                      {tour.name}
-                    </Link>
-                    <p className="text-xs text-muted-foreground">
-                      /tours/{tour.slug}
-                      {tour.is_featured ? " · Featured" : ""}
-                      {tour.is_sample ? " · Sample" : ""}
-                    </p>
-                  </td>
-                  <td className="px-4 py-3 text-muted-foreground">
-                    {tour.category?.name ?? "—"}
-                  </td>
-                  <td className="px-4 py-3 text-muted-foreground">
-                    {tour.destination?.name ?? "—"}
-                  </td>
-                  <td className="px-4 py-3">
-                    <StatusBadge status={tour.status} />
-                  </td>
-                  <td className="px-4 py-3 text-muted-foreground">
-                    {formatUpdated(tour.updated_at)}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+        <TourCardGrid
+          tours={tours.map((tour): AdminTourCard => ({
+            id: tour.id,
+            name: tour.name,
+            slug: tour.slug,
+            status: tour.status,
+            isFeatured: tour.is_featured,
+            isSample: tour.is_sample,
+            category: tour.category?.name ?? null,
+            destination: tour.destination?.name ?? null,
+            duration: tour.duration_text || null,
+            shortDescription: tour.short_description || null,
+            image: mediaUrl(tour.cover_image_path)
+              ? {
+                  src: mediaUrl(tour.cover_image_path) as string,
+                  alt: tour.cover_image_alt || tour.name,
+                }
+              : null,
+            fromPrice: adminFromPrice(tour.tour_prices),
+            editHref: `/admin/tours/${tour.id}`,
+            updatedLabel: formatUpdated(tour.updated_at),
+          }))}
+        />
       )}
     </div>
   );
