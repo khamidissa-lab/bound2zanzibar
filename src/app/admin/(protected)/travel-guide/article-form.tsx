@@ -8,6 +8,7 @@ import {
   EditorForm,
   FieldSet,
   SaveButton,
+  StickySaveBar,
   CheckboxField,
   SelectField,
   TextAreaField,
@@ -196,10 +197,10 @@ export function ArticleForm({
         />
       </FieldSet>
 
-      <div className="flex flex-wrap items-center gap-3">
+      <StickySaveBar>
         <SaveButton pending={pending}>{a ? "Save article" : "Create article"}</SaveButton>
         <FormMessage state={state} />
-      </div>
+      </StickySaveBar>
     </EditorForm>
   );
 }

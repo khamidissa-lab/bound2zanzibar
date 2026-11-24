@@ -1,11 +1,11 @@
 import type { ReactNode } from "react";
 import Link from "next/link";
-import { ExternalLink, LogOut, Search } from "lucide-react";
+import { ExternalLink, Search } from "lucide-react";
 
-import { signOut } from "@/app/admin/_actions/auth";
 import { Logo } from "@/components/layout/logo";
 import { can, ROLE_LABELS, type StaffRole } from "@/lib/auth/permissions";
 
+import { AccountMenu, type AccountLink } from "./account-menu";
 import { AdminNotifications, type NotificationCounts } from "./admin-notifications";
 import { AdminMobileNav, AdminSidebarNav } from "./admin-nav";
 
@@ -44,39 +44,28 @@ export function AdminFrame({
       ? { action: "/admin/tours", label: "Search tours" }
       : null;
 
+  // Account and administration links, shown in the account menu.
+  const accountLinks: AccountLink[] = [
+    { label: "My account", href: "/admin/account" },
+    ...(can(staff.role, "settings.manage")
+      ? [{ label: "Site settings", href: "/admin/settings" }]
+      : []),
+    ...(can(staff.role, "staff.manage")
+      ? [{ label: "Staff", href: "/admin/staff" }]
+      : []),
+    ...(can(staff.role, "activity.view")
+      ? [{ label: "Activity log", href: `${base}/activity` }]
+      : []),
+  ];
+
   return (
     <div className="admin-scope flex flex-1 bg-background font-sans">
       <aside className="sticky top-0 hidden h-dvh w-64 shrink-0 flex-col bg-ocean-deep px-3 py-5 text-white lg:flex">
-        <div className="mx-2 mb-7 rounded-lg bg-white px-3 py-2">
+        <div className="mx-2 mb-6 rounded-lg bg-white px-3 py-2">
           <Logo />
         </div>
         <div className="flex-1 overflow-y-auto pr-1">
           <AdminSidebarNav role={staff.role} />
-        </div>
-        <div className="mt-4 border-t border-white/10 pt-4">
-          <div className="flex items-center gap-3 px-3 py-2">
-            <span
-              aria-hidden="true"
-              className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-turquoise text-sm font-semibold text-ocean-deep"
-            >
-              {initials(staff.fullName)}
-            </span>
-            <div className="min-w-0">
-              <p className="truncate text-sm font-medium text-white">{staff.fullName}</p>
-              <p className="truncate text-xs text-white/60">{ROLE_LABELS[staff.role]}</p>
-            </div>
-          </div>
-          {preview ? null : (
-            <form action={signOut}>
-              <button
-                type="submit"
-                className="mt-1 flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-sm text-white/70 hover:bg-white/10 hover:text-white"
-              >
-                <LogOut className="size-4" aria-hidden="true" />
-                Log out
-              </button>
-            </form>
-          )}
         </div>
       </aside>
 
@@ -123,23 +112,13 @@ export function AdminFrame({
             {notifications ? (
               <AdminNotifications counts={notifications} basePath={base} />
             ) : null}
-            <span
-              aria-hidden="true"
-              className="flex size-10 items-center justify-center rounded-lg bg-ocean-deep text-sm font-semibold text-white lg:hidden"
-            >
-              {initials(staff.fullName)}
-            </span>
-            {preview ? null : (
-              <form action={signOut} className="lg:hidden">
-                <button
-                  type="submit"
-                  aria-label="Log out"
-                  className="flex size-10 items-center justify-center rounded-lg text-ocean-deep hover:bg-muted"
-                >
-                  <LogOut className="size-4" aria-hidden="true" />
-                </button>
-              </form>
-            )}
+            <AccountMenu
+              name={staff.fullName}
+              role={ROLE_LABELS[staff.role]}
+              initials={initials(staff.fullName)}
+              links={accountLinks}
+              canSignOut={!preview}
+            />
           </div>
         </header>
         <main id="main-content" className="flex-1 px-4 py-6 sm:px-8 sm:py-8">

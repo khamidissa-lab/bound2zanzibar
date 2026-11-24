@@ -11,6 +11,8 @@ import {
   MapPin,
   Package,
   Pencil,
+  Plus,
+  Tags,
   Users,
   type LucideIcon,
 } from "lucide-react";
@@ -98,11 +100,11 @@ function StatTile({
   return (
     <Link
       href={href}
-      className="flex items-center gap-4 rounded-xl border bg-card p-4 text-ocean-deep transition-[box-shadow,transform] hover:-translate-y-0.5 hover:shadow-card"
+      className="flex flex-col gap-3 rounded-xl border bg-card p-4 text-ocean-deep transition-[box-shadow,transform] hover:-translate-y-0.5 hover:shadow-card sm:flex-row sm:items-center sm:gap-4"
     >
       <span
         className={cn(
-          "flex size-12 shrink-0 items-center justify-center rounded-lg",
+          "flex size-10 shrink-0 items-center justify-center rounded-lg sm:size-12",
           TILE_STYLES[tone],
         )}
       >
@@ -115,6 +117,33 @@ function StatTile({
         </span>
         <span className="block text-xs text-muted-foreground">{hint}</span>
       </span>
+    </Link>
+  );
+}
+
+function QuickAction({
+  href,
+  icon: Icon,
+  primary = false,
+  children,
+}: {
+  href: string;
+  icon: LucideIcon;
+  primary?: boolean;
+  children: ReactNode;
+}) {
+  return (
+    <Link
+      href={href}
+      className={cn(
+        "inline-flex h-10 items-center gap-2 rounded-lg px-3.5 text-sm font-medium transition-colors",
+        primary
+          ? "bg-ocean-deep text-white hover:bg-ocean"
+          : "border bg-card text-ocean-deep hover:bg-muted",
+      )}
+    >
+      <Icon className="size-4" aria-hidden="true" />
+      {children}
     </Link>
   );
 }
@@ -220,17 +249,43 @@ export function DashboardView({
 
   return (
     <div className="space-y-6">
-      <div>
-        <h1 className="font-display text-3xl">Dashboard</h1>
-        <p className="text-muted-foreground">
-          Karibu, {firstName} · {prettyToday}
-        </p>
+      <div className="flex flex-wrap items-end justify-between gap-4">
+        <div>
+          <h1 className="font-display text-3xl">Dashboard</h1>
+          <p className="text-muted-foreground">
+            Karibu, {firstName} · {prettyToday}
+          </p>
+        </div>
+        {bookingsAccess || contentAccess ? (
+          <nav aria-label="Quick actions" className="flex flex-wrap gap-2">
+            {bookingsAccess ? (
+              <QuickAction href="/admin/bookings?status=pending" icon={Inbox}>
+                Pending bookings
+                {view.totals.pending > 0 ? (
+                  <span className="rounded-full bg-gold px-1.5 text-xs font-semibold text-ocean-deep tabular-nums">
+                    {view.totals.pending}
+                  </span>
+                ) : null}
+              </QuickAction>
+            ) : null}
+            {contentAccess ? (
+              <>
+                <QuickAction href="/admin/pricing" icon={Tags}>
+                  Pricing
+                </QuickAction>
+                <QuickAction href="/admin/tours/new" icon={Plus} primary>
+                  Add tour
+                </QuickAction>
+              </>
+            ) : null}
+          </nav>
+        ) : null}
       </div>
 
       <div className="grid gap-6 2xl:grid-cols-[minmax(0,1fr)_22rem]">
         {/* ---------------- Main column ---------------- */}
         <div className="min-w-0 space-y-6">
-          <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+          <div className="grid grid-cols-2 gap-3 sm:gap-4 xl:grid-cols-4">
             {bookingsAccess ? (
               <>
                 <StatTile

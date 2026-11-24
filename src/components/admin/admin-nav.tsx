@@ -212,17 +212,27 @@ function isActive(pathname: string, href: string) {
 
 const ALL_HREFS = groups.flatMap((g) => g.items.map((i) => i.href));
 
-function NavList({ role, onNavigate }: { role: StaffRole; onNavigate?: () => void }) {
+function NavList({
+  role,
+  onNavigate,
+  exclude = [],
+}: {
+  role: StaffRole;
+  onNavigate?: () => void;
+  /** Group titles to leave out (the desktop sidebar keeps them in the account menu). */
+  exclude?: string[];
+}) {
   const pathname = usePathname();
   return (
-    <div className="space-y-6">
+    <div className="space-y-5">
       {groups.map((group) => {
+        if (group.title && exclude.includes(group.title)) return null;
         const items = group.items.filter((item) => can(role, item.permission));
         if (items.length === 0) return null;
         return (
           <div key={group.title ?? "main"}>
             {group.title ? (
-              <p className="mb-2 px-3 text-[0.68rem] font-semibold tracking-[0.12em] text-white/60 uppercase">
+              <p className="mb-1.5 px-3 text-[0.68rem] font-semibold tracking-[0.12em] text-white/50 uppercase">
                 {group.title}
               </p>
             ) : null}
@@ -236,7 +246,7 @@ function NavList({ role, onNavigate }: { role: StaffRole; onNavigate?: () => voi
                       onClick={onNavigate}
                       aria-current={active ? "page" : undefined}
                       className={cn(
-                        "relative flex items-center gap-3 rounded-lg px-3 py-2 text-sm text-white/70 transition-colors hover:bg-white/8 hover:text-white",
+                        "relative flex items-center gap-3 rounded-lg px-3 py-1.5 text-sm text-white/70 transition-colors hover:bg-white/8 hover:text-white",
                         active &&
                           "bg-white/12 font-medium text-white before:absolute before:inset-y-2 before:-left-3 before:w-1 before:rounded-r-full before:bg-turquoise hover:bg-white/12",
                       )}
@@ -258,7 +268,8 @@ function NavList({ role, onNavigate }: { role: StaffRole; onNavigate?: () => voi
 export function AdminSidebarNav({ role }: { role: StaffRole }) {
   return (
     <nav aria-label="Admin">
-      <NavList role={role} />
+      {/* Administration links live in the account menu at the top right. */}
+      <NavList role={role} exclude={["Administration"]} />
     </nav>
   );
 }

@@ -51,13 +51,22 @@ export function BookingCalendar({
     });
 
   return (
-    <div className="rounded-2xl bg-ocean-deep p-4 text-white">
+    <section
+      aria-labelledby="travel-calendar-title"
+      className="rounded-xl border bg-card p-5 text-ocean-deep"
+    >
+      <h2
+        id="travel-calendar-title"
+        className="mb-4 font-sans text-base font-semibold text-ocean-deep"
+      >
+        Travel calendar
+      </h2>
       <div className="mb-3 flex items-center justify-between">
         <button
           type="button"
           onClick={() => shift(-1)}
           aria-label="Previous month"
-          className="flex size-8 items-center justify-center rounded-lg bg-white/10 hover:bg-white/20"
+          className="flex size-8 items-center justify-center rounded-lg border bg-card text-ocean-deep hover:bg-muted"
         >
           <ChevronLeft className="size-4" aria-hidden="true" />
         </button>
@@ -68,7 +77,7 @@ export function BookingCalendar({
           type="button"
           onClick={() => shift(1)}
           aria-label="Next month"
-          className="flex size-8 items-center justify-center rounded-lg bg-white/10 hover:bg-white/20"
+          className="flex size-8 items-center justify-center rounded-lg border bg-card text-ocean-deep hover:bg-muted"
         >
           <ChevronRight className="size-4" aria-hidden="true" />
         </button>
@@ -79,7 +88,7 @@ export function BookingCalendar({
           {monthTotal === 1 ? "" : "s"}
         </caption>
         <thead>
-          <tr className="text-white/60">
+          <tr className="text-muted-foreground">
             {WEEKDAYS.map((d) => (
               <th key={d} scope="col" className="pb-2 font-medium">
                 {d}
@@ -102,11 +111,11 @@ export function BookingCalendar({
                       aria-label={`${cell.day}${count ? `, ${count} booking request${count === 1 ? "" : "s"}` : ""}${isToday ? ", today" : ""}`}
                       className={cn(
                         "mx-auto flex size-8 items-center justify-center rounded-full tabular-nums",
-                        !cell.inMonth && "text-white/60",
+                        !cell.inMonth && "text-muted-foreground/60",
                         count > 0 &&
                           cell.inMonth &&
                           "bg-gold font-semibold text-ocean-deep",
-                        isToday && "ring-2 ring-white",
+                        isToday && "ring-2 ring-turquoise-deep",
                       )}
                     >
                       {cell.day}
@@ -118,10 +127,10 @@ export function BookingCalendar({
           ))}
         </tbody>
       </table>
-      <p className="mt-3 flex items-center gap-2 text-xs text-white/70">
+      <p className="mt-3 flex items-center gap-2 text-xs text-muted-foreground">
         <span className="inline-block size-3 rounded-full bg-gold" aria-hidden="true" />
         Requested travel date · {monthTotal} this month
       </p>
-    </div>
+    </section>
   );
 }

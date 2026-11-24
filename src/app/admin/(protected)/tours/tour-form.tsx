@@ -9,6 +9,7 @@ import {
   EditorForm,
   FieldSet,
   SaveButton,
+  StickySaveBar,
   SelectField,
   TextAreaField,
   TextField,
@@ -267,10 +268,10 @@ export function TourForm({
         />
       </FieldSet>
 
-      <div className="flex flex-wrap items-center gap-3">
+      <StickySaveBar>
         <SaveButton pending={pending}>{tour ? "Save tour" : "Create tour"}</SaveButton>
         <FormMessage state={state} />
-      </div>
+      </StickySaveBar>
     </EditorForm>
   );
 }

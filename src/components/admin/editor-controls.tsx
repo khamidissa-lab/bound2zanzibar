@@ -38,6 +38,18 @@ export function EditorForm({
   );
 }
 
+/**
+ * The save row of a long editor. It sticks to the bottom of the screen while
+ * the form is in view, so the Save button and its message are always at hand.
+ */
+export function StickySaveBar({ children }: { children: ReactNode }) {
+  return (
+    <div className="sticky bottom-3 z-20 flex flex-wrap items-center gap-3 rounded-xl border bg-card/95 px-4 py-3 shadow-card backdrop-blur">
+      {children}
+    </div>
+  );
+}
+
 export function SaveButton({
   pending,
   children = "Save",

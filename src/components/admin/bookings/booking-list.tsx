@@ -13,6 +13,7 @@ import { STATUS_LABELS } from "@/services/admin-dashboard-model";
 import type { BookingListRow } from "@/services/bookings";
 import type { Currency } from "@/types/content";
 
+import { CollapsibleFilters } from "../collapsible-filters";
 import { BookingStatusBadge } from "./booking-badge";
 
 const selectClass =
@@ -115,39 +116,43 @@ export function BookingList({
             className="h-10 bg-background"
           />
         </div>
-        <div className="space-y-1.5">
-          <Label htmlFor="booking-type">Type</Label>
-          <select
-            id="booking-type"
-            name="type"
-            defaultValue={filters.type ?? ""}
-            className={selectClass}
-          >
-            <option value="">Tours and packages</option>
-            <option value="tour">Tours</option>
-            <option value="package">Packages</option>
-          </select>
-        </div>
-        <div className="space-y-1.5">
-          <Label htmlFor="booking-from">Travel date from</Label>
-          <Input
-            id="booking-from"
-            name="from"
-            type="date"
-            defaultValue={filters.from}
-            className="h-10 bg-background"
-          />
-        </div>
-        <div className="space-y-1.5">
-          <Label htmlFor="booking-to">Travel date to</Label>
-          <Input
-            id="booking-to"
-            name="to"
-            type="date"
-            defaultValue={filters.to}
-            className="h-10 bg-background"
-          />
-        </div>
+        <CollapsibleFilters
+          activeCount={[filters.type, filters.from, filters.to].filter(Boolean).length}
+        >
+          <div className="space-y-1.5">
+            <Label htmlFor="booking-type">Type</Label>
+            <select
+              id="booking-type"
+              name="type"
+              defaultValue={filters.type ?? ""}
+              className={selectClass}
+            >
+              <option value="">Tours and packages</option>
+              <option value="tour">Tours</option>
+              <option value="package">Packages</option>
+            </select>
+          </div>
+          <div className="space-y-1.5">
+            <Label htmlFor="booking-from">Travel date from</Label>
+            <Input
+              id="booking-from"
+              name="from"
+              type="date"
+              defaultValue={filters.from}
+              className="h-10 bg-background"
+            />
+          </div>
+          <div className="space-y-1.5">
+            <Label htmlFor="booking-to">Travel date to</Label>
+            <Input
+              id="booking-to"
+              name="to"
+              type="date"
+              defaultValue={filters.to}
+              className="h-10 bg-background"
+            />
+          </div>
+        </CollapsibleFilters>
         <div className="flex gap-2">
           <button type="submit" className={buttonVariants({ className: "h-10" })}>
             <Search aria-hidden="true" data-icon="inline-start" />
@@ -179,7 +184,42 @@ export function BookingList({
         </div>
       ) : (
         <>
-          <div className="mt-6 overflow-x-auto rounded-2xl border bg-card">
+          <ul className="mt-6 space-y-3 md:hidden">
+            {rows.map((row) => (
+              <li key={row.id}>
+                <Link
+                  href={`${basePath}/${row.reference}`}
+                  className="block rounded-2xl border bg-card p-4 hover:bg-sand-soft/60"
+                >
+                  <div className="flex items-start justify-between gap-3">
+                    <div className="min-w-0">
+                      <p className="truncate font-medium text-ocean-deep">
+                        {row.customer_name}
+                      </p>
+                      <p className="font-mono text-xs text-muted-foreground">
+                        {row.reference}
+                      </p>
+                    </div>
+                    <BookingStatusBadge status={row.status} />
+                  </div>
+                  <p className="mt-3 text-sm text-ocean-deep">{itemName(row)}</p>
+                  <div className="mt-1 flex flex-wrap items-baseline justify-between gap-x-3 text-sm text-muted-foreground">
+                    <span>
+                      {formatDate(row.preferred_date)} ·{" "}
+                      {guestsLabel(row.adults, row.children)}
+                    </span>
+                    {row.quoted_total !== null ? (
+                      <span className="font-medium text-ocean-deep tabular-nums">
+                        {formatPrice(row.quoted_total, row.currency as Currency)}
+                      </span>
+                    ) : null}
+                  </div>
+                </Link>
+              </li>
+            ))}
+          </ul>
+
+          <div className="mt-6 hidden overflow-x-auto rounded-2xl border bg-card md:block">
             <table className="w-full min-w-[52rem] text-sm">
               <caption className="sr-only">
                 Booking requests, newest first. Page {page} of {pages}.

@@ -9,6 +9,7 @@ import {
   EditorForm,
   FieldSet,
   SaveButton,
+  StickySaveBar,
   SelectField,
   TextAreaField,
   TextField,
@@ -160,12 +161,12 @@ export function DestinationForm({
         />
       </FieldSet>
 
-      <div className="flex flex-wrap items-center gap-3">
+      <StickySaveBar>
         <SaveButton pending={pending}>
           {d ? "Save destination" : "Create destination"}
         </SaveButton>
         <FormMessage state={state} />
-      </div>
+      </StickySaveBar>
     </EditorForm>
   );
 }

@@ -9,6 +9,7 @@ import {
   EditorForm,
   FieldSet,
   SaveButton,
+  StickySaveBar,
   SelectField,
   TextAreaField,
   TextField,
@@ -257,10 +258,10 @@ export function PackageForm({
         />
       </FieldSet>
 
-      <div className="flex flex-wrap items-center gap-3">
+      <StickySaveBar>
         <SaveButton pending={pending}>{p ? "Save package" : "Create package"}</SaveButton>
         <FormMessage state={state} />
-      </div>
+      </StickySaveBar>
     </EditorForm>
   );
 }
