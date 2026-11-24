@@ -139,7 +139,8 @@ Under the [Unsplash License](https://unsplash.com/license). Each photo page was 
 | `salaam-cave-family.jpg` | Salaam Cave gallery: mother and son with turtles (a child is shown; confirm the parent agreed) | 1200px (from 1440px) |
 | `salaam-cave-turtles.jpg` | Salaam Cave gallery: woman touching a turtle | 1200px (from 1440px) |
 | `cooking-class.jpg` | Zanzibar Cooking Class | 474px |
-| `blue-lagoon-snorkel.jpg` | Blue Lagoon Snorkelling | 2000px (from a 3200px original) |
+| `blue-lagoon-snorkel.jpg` | Removed 2026-11-24 (was Blue Lagoon Snorkelling main photo); replaced at the owner's request | 2000px (from a 3200px original) |
+| `blue-lagoon-snorkeller-fish.jpg` | Blue Lagoon Snorkelling, main and only photo (since 2026-11-24). Supplied as a 790×800 PNG (looks like a professional stock photo); saved as a near-lossless JPEG. Owner confirmed they may use it and that the person shown agreed or it has a model release | 790px |
 | `kuza-cave.jpg` | Removed 2026-11-23 (was Kuza Cave & Jambiani Village main photo); replaced by `kuza-cave-floating.jpg` | 474px |
 | `kuza-cave-floating.jpg` | Kuza Cave & Jambiani Village, main photo. Supplied 2026-11-23 as a 736×981 PNG (possibly saved from Pinterest); saved as a near-lossless JPEG. Owner confirmed they may use it and that the woman shown agreed | 736px |
 | `mangapwani-cave.jpg` | Mangapwani Slave Caves | 474px |

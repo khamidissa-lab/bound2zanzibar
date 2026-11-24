@@ -173,8 +173,8 @@ export const moreTours: TourBase[] = [
     difficulty: "easy",
     suitability: "Good for beginner snorkellers. Life jackets available on request.",
     coverImage: {
-      src: "/images/tours/blue-lagoon-snorkel.jpg",
-      alt: "A woman and a child snorkelling among batfish in clear blue water",
+      src: "/images/tours/blue-lagoon-snorkeller-fish.jpg",
+      alt: "A snorkeller swimming among striped sergeant major fish in clear blue water",
       theme: "ocean",
     },
     gallery: [],
