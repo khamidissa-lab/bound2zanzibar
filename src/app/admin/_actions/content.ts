@@ -9,7 +9,7 @@ import { authorizeAction } from "@/lib/auth/session";
 import { formValues, type FormState } from "@/lib/forms";
 import { MEDIA_BUCKET } from "@/lib/media";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
-import { fieldErrors } from "@/lib/validation/auth";
+import { describeError, fieldErrors } from "@/lib/validation/auth";
 import {
   articleSchema,
   categorySchema,
@@ -62,7 +62,7 @@ async function prepare<S extends z.ZodType>(
       ok: false,
       state: {
         status: "error",
-        message: "Please fix the highlighted fields.",
+        message: describeError(parsed.error),
         fieldErrors: fieldErrors(parsed.error),
       },
     };

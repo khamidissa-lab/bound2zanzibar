@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { fieldErrors } from "./auth";
+import { describeError, fieldErrors } from "./auth";
 import { articleSchema, packageSchema, pricesSchema, tourSchema } from "./content";
 
 const baseTour = {
@@ -154,6 +154,31 @@ describe("pricesSchema", () => {
       pricesSchema.safeParse({ prices: JSON.stringify([{ ...row, market: "vip" }]) })
         .success,
     ).toBe(false);
+  });
+  it("accepts thousands separators like 40,000 and 40 000", () => {
+    for (const amount of ["40,000", "40 000", " 40000 "]) {
+      const parsed = pricesSchema.parse({ prices: JSON.stringify([{ ...row, amount }]) });
+      expect(parsed.prices[0].amount).toBe(40000);
+    }
+  });
+
+  it("names the row and the problem instead of a generic message", () => {
+    const second = { ...row, market: "international", currency: "USD" };
+    const empty = pricesSchema.safeParse({
+      prices: JSON.stringify([row, { ...second, amount: "" }]),
+    });
+    expect(empty.success).toBe(false);
+    if (!empty.success)
+      expect(describeError(empty.error)).toBe("Row 2: Enter an amount.");
+    const words = pricesSchema.safeParse({
+      prices: JSON.stringify([{ ...row, amount: "forty" }]),
+    });
+    if (!words.success) {
+      expect(describeError(words.error)).toBe(
+        "Row 1: Enter the amount as a number, for example 40000.",
+      );
+    }
+    expect(words.success).toBe(false);
   });
 });
 

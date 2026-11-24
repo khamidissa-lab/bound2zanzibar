@@ -56,3 +56,20 @@ export function fieldErrors(error: z.ZodError): Record<string, string> {
   }
   return out;
 }
+
+/** Lists edited as a table (prices, options, itinerary) have no single field to highlight. */
+const TABLE_FIELDS = new Set(["prices", "options", "itinerary"]);
+
+/**
+ * The message above the form. For table editors, name the row and the
+ * problem (e.g. "Row 2: Enter the amount as a number…"), since there is no
+ * highlighted field to point at.
+ */
+export function describeError(error: z.ZodError): string {
+  const first = error.issues[0];
+  if (!first || !TABLE_FIELDS.has(String(first.path[0]))) {
+    return "Please fix the highlighted fields.";
+  }
+  const row = first.path.find((part) => typeof part === "number");
+  return `${typeof row === "number" ? `Row ${row + 1}: ` : ""}${first.message}`;
+}

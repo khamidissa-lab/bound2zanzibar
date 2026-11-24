@@ -298,6 +298,27 @@ export const articleSchema = z
   .transform(withSlug)
   .refine(slugRefinement.check, slugRefinement.params);
 
+/**
+ * A price as typed by staff. Thousands separators are allowed ("40,000",
+ * "40 000"); an empty box is an error rather than a silent 0.
+ */
+export const moneyAmount = z.preprocess(
+  (value) => {
+    if (typeof value !== "string") return value;
+    const cleaned = value.replace(/[\s,'_]/g, "");
+    return cleaned === "" ? undefined : Number(cleaned);
+  },
+  z
+    .number({
+      error: (issue) =>
+        issue.input === undefined
+          ? "Enter an amount."
+          : "Enter the amount as a number, for example 40000.",
+    })
+    .min(0, { error: "Amounts can't be negative." })
+    .max(1_000_000_000, { error: "That amount is too large." }),
+);
+
 export const priceRowSchema = z.object({
   market: z.enum(["resident", "east_african", "international"]),
   customerType: z.enum(["adult", "child", "group"]),
@@ -306,10 +327,7 @@ export const priceRowSchema = z.object({
     .trim()
     .toUpperCase()
     .regex(/^[A-Z]{3}$/, { error: "Use a 3-letter currency code." }),
-  amount: z.coerce
-    .number({ error: "Enter an amount." })
-    .min(0, { error: "Amounts can't be negative." })
-    .max(1_000_000_000),
+  amount: moneyAmount,
   unitLabel: z.string().trim().max(60),
   isIllustrative: z.boolean(),
   isActive: z.boolean(),
@@ -343,10 +361,7 @@ export const tourOptionSchema = z.object({
           .trim()
           .toUpperCase()
           .regex(/^[A-Z]{3}$/, { error: "Use a 3-letter currency code." }),
-        amount: z.coerce
-          .number({ error: "Enter an amount." })
-          .min(0, { error: "Amounts can't be negative." })
-          .max(1_000_000_000),
+        amount: moneyAmount,
       }),
     )
     .max(9)
