@@ -173,9 +173,8 @@ export function TourCard({
               {categoryName}
             </span>
           ) : null}
-          {tour.isSample ? (
-            <SampleBadge label={t.common.sample} className="bg-ivory/95" />
-          ) : null}
+          {/* No "Sample" tag on the photo: it read as if the photo were a
+              sample. Unconfirmed prices are marked under the price instead. */}
         </div>
       </div>
       <div className="flex flex-1 flex-col pt-5">
