@@ -56,6 +56,8 @@ export function PriceEditor({
   const [state, dispatch, pending] = useActionState(action, initialFormState);
   const [rows, setRows] = useState<PriceRowValue[]>(initialRows);
 
+  const exampleCount = rows.filter((r) => r.isIllustrative).length;
+
   const update = (index: number, patch: Partial<PriceRowValue>) =>
     setRows((current) =>
       current.map((row, i) => (i === index ? { ...row, ...patch } : row)),
@@ -94,6 +96,36 @@ export function PriceEditor({
         <input type="hidden" name="prices" value={JSON.stringify(rows)} />
         <FormMessage state={state} />
 
+        {exampleCount > 0 ? (
+          <div
+            role="note"
+            className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-[#E8C46A] bg-[#FFF8E6] px-4 py-3 text-sm text-[#5C4100]"
+          >
+            <p>
+              <strong>
+                {exampleCount} of {rows.length}{" "}
+                {exampleCount === 1 ? "price is" : "prices are"} still marked as example
+                prices.
+              </strong>{" "}
+              The website labels them “Illustrative price” and keeps the Sample notice.
+              Untick “Example price” (or type a new amount) once a price is real, then
+              save.
+            </p>
+            {canEdit ? (
+              <Button
+                type="button"
+                variant="outline"
+                size="sm"
+                onClick={() =>
+                  setRows((r) => r.map((row) => ({ ...row, isIllustrative: false })))
+                }
+              >
+                Mark all as real prices
+              </Button>
+            ) : null}
+          </div>
+        ) : null}
+
         {rows.length === 0 ? (
           <p className="rounded-xl border border-dashed p-4 text-sm text-muted-foreground">
             No prices yet. The website will show “Price on request”.
@@ -108,7 +140,7 @@ export function PriceEditor({
                   <th className="pb-2 font-medium">Currency</th>
                   <th className="pb-2 font-medium">Amount</th>
                   <th className="pb-2 font-medium">Unit</th>
-                  <th className="pb-2 font-medium">Sample?</th>
+                  <th className="pb-2 font-medium">Example price</th>
                   <th className="pb-2 font-medium">Active</th>
                   <th className="pb-2">
                     <span className="sr-only">Remove</span>
@@ -176,7 +208,10 @@ export function PriceEditor({
                         disabled={!canEdit}
                         inputMode="decimal"
                         value={row.amount}
-                        onChange={(e) => update(i, { amount: e.target.value })}
+                        // Typing a price means it is real: clear the example flag.
+                        onChange={(e) =>
+                          update(i, { amount: e.target.value, isIllustrative: false })
+                        }
                       />
                     </td>
                     <td className="py-1.5 pr-2">
@@ -191,7 +226,7 @@ export function PriceEditor({
                     <td className="py-1.5 pr-2 text-center">
                       <input
                         type="checkbox"
-                        aria-label={`Row ${i + 1} is an illustrative sample price`}
+                        aria-label={`Row ${i + 1} is an example price, not a real one`}
                         disabled={!canEdit}
                         checked={row.isIllustrative}
                         onChange={(e) => update(i, { isIllustrative: e.target.checked })}
@@ -238,8 +273,8 @@ export function PriceEditor({
           </div>
         ) : null}
         <p className="text-xs text-muted-foreground">
-          Tick “Sample?” for placeholder prices — the website then labels them as
-          illustrative.
+          Tick “Example price” only for placeholder prices: the website then labels them
+          “Illustrative price”. Leave it unticked for your real prices.
         </p>
       </EditorForm>
     </section>

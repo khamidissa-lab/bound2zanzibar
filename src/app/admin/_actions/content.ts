@@ -76,6 +76,15 @@ const idOf = (formData: FormData) => {
   return typeof id === "string" && /^[0-9a-f-]{36}$/i.test(id) ? id : null;
 };
 
+/** "Prices saved." plus a reminder while any price is still an example. */
+function pricesSavedMessage(prices: { isIllustrative: boolean }[], item: string): string {
+  const examples = prices.filter((p) => p.isIllustrative).length;
+  if (examples === 0) {
+    return `Prices saved and live. To remove the ${item}'s "Sample" tag too, check the details above and click Save.`;
+  }
+  return `Prices saved, but ${examples} of ${prices.length} ${examples === 1 ? "is" : "are"} still marked as example prices, so the website shows them as "Illustrative". Untick "Example price" for your real prices and save again.`;
+}
+
 /** Expires public content caches and re-renders the current admin page. */
 function saved(message = "Saved."): FormState {
   updateTag(CONTENT_TAG);
@@ -183,7 +192,7 @@ export async function saveTourPrices(
     })),
   });
   if (error) return dbErrorMessage(error);
-  return saved("Prices saved.");
+  return saved(pricesSavedMessage(input.data.prices, "tour"));
 }
 
 export async function saveTourOptions(
@@ -379,7 +388,7 @@ export async function savePackagePrices(
     })),
   });
   if (error) return dbErrorMessage(error);
-  return saved("Prices saved.");
+  return saved(pricesSavedMessage(input.data.prices, "package"));
 }
 
 // --- Travel guide articles -----------------------------------------------------
