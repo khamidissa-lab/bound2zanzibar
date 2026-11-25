@@ -102,7 +102,8 @@ Under the [Unsplash License](https://unsplash.com/license). Each photo page was 
 | File | Tour | Photographer | Location (per Unsplash) | Source |
 | --- | --- | --- | --- | --- |
 | `manyara.jpg` | Lake Manyara National Park Safari | Raissa Lara Lütolf | Lake Manyara, Tanzania | [aeQdJyuyGco](https://unsplash.com/photos/aeQdJyuyGco) |
-| `arusha.jpg` | Arusha National Park Safari | Wilson Stratton | Mt. Meru high camp, Tanzania (view of Kilimanjaro); cropped to the mountain | [sQzurq8xD4c](https://unsplash.com/photos/sQzurq8xD4c) |
+| `arusha-walking-safari.jpg` | Arusha National Park Safari, main photo (since 2026-11-25). Supplied by the owner as a 790×800 PNG; saved as a near-lossless JPEG. Looks like a professional stock photo of a Maasai-guided walking safari (open grassland, elephants), not necessarily taken in Arusha National Park. Owner confirmed they may use it and that the people shown, including the child, agreed or it has a model release | — | — | — |
+| `arusha.jpg` | Arusha National Park Safari gallery (was the tour's main photo until 2026-11-25; still the park page photo) | Wilson Stratton | Mt. Meru high camp, Tanzania (view of Kilimanjaro); cropped to the mountain | [sQzurq8xD4c](https://unsplash.com/photos/sQzurq8xD4c) |
 | `ruaha.jpg` | Ruaha National Park Safari | Bob Brewer | Ruaha National Park, Iringa, Tanzania | [6v_qfXndV64](https://unsplash.com/photos/6v_qfXndV64) |
 | `gombe.jpg` | Gombe Stream National Park | Simone Dinoia | **Kibale National Park, Uganda** (no free Gombe photo found; alt text names no place) | [zIZUrCRQjkM](https://unsplash.com/photos/zIZUrCRQjkM) |
 | `mahale-forest-trek.jpg` | Mahale Mountains tour and park page, main photo (since 2026-11-24). Supplied by the owner as a 790×800 PNG; saved as a near-lossless JPEG. Owner confirmed they may use it and that the people shown agreed or it has a model release | — | — | — |

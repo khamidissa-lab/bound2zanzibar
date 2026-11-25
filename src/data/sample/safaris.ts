@@ -133,10 +133,17 @@ export const safariTours: TourBase[] = [
     ],
     highlights: ["Mount Meru", "Beautiful forests", "Lakes", "Diverse wildlife"],
     coverImage: {
-      src: "/images/safari/arusha.jpg",
-      alt: "Sunrise over Kilimanjaro, seen from the slopes of Mount Meru",
-      theme: "sunset",
+      src: "/images/safari/arusha-walking-safari.jpg",
+      alt: "A Maasai guide leads a family on a walking safari across open grassland, with elephants grazing in the distance",
+      theme: "savanna",
     },
+    gallery: [
+      {
+        src: "/images/safari/arusha.jpg",
+        alt: "Sunrise over Kilimanjaro, seen from the slopes of Mount Meru",
+        theme: "sunset",
+      },
+    ],
   }),
   safari({
     slug: "ruaha-national-park-safari",
